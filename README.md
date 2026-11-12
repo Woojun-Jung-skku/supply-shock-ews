@@ -1,5 +1,7 @@
 # Early warning of supply shocks with a hierarchical gamma–Poisson model: code, results and supplementary material
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24151137.svg)](https://doi.org/10.5281/zenodo.24151137)
+
 This repository holds the code, the results and the supplementary material of a manuscript on a hierarchical gamma–Poisson early-warning model of supply shocks with cost-based alarms (Sungjin Jeon and Woojun Jung, equal contribution; under review, 2026).
 
 Everything the manuscript reports in Section 5, its figures and the supplementary material can be regenerated from this repository. The archived result files are the ones the manuscript uses.
@@ -144,7 +146,7 @@ The simulation code keeps its working names, so some names and numbers differ fr
 
 ## Citation
 
-See `CITATION.cff`. Please cite the paper once it is published; until then cite this repository by its Zenodo DOI.
+See `CITATION.cff`. Please cite the paper once it is published. Until then, cite this repository by its Zenodo DOI, [10.5281/zenodo.24151137](https://doi.org/10.5281/zenodo.24151137). This DOI covers every version of the repository and resolves to the latest one.
 
 ## Licence
 

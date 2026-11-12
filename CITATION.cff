@@ -20,4 +20,5 @@ keywords:
 version: "1.0.0"
 date-released: "2026-11-12"
 license: MIT
+doi: 10.5281/zenodo.24151137
 repository-code: "https://github.com/Woojun-Jung-skku/supply-shock-ews"
