@@ -1,0 +1,18 @@
+Quantity,β = 0 (5 replications),"Reference (β = (0.4, 0.3, 0.2))"
+β posterior median (truth 0),"(+0.025, -0.013, -0.004)","(0.405, 0.302, 0.190) for a truth of (0.4, 0.3, 0.2)"
+90% intervals of β covering the truth,0.93,0.93
+"w posterior median (truth (0.5, 0.3))","(0.49, 0.33)","(0.53, 0.31)"
+κ_w posterior median (truth 0.8),0.81,0.84
+Recovery fits failed,0 of 5,0 of 5
+AUC-PR,0.804 (0.010),0.810 (0.007)
+Brier score,0.203 (0.004),0.201 (0.002)
+ECE,0.039 (0.003),0.041 (0.003)
+Event share,0.583 (0.005),0.579 (0.005)
+Detected ≤ 1 month (level 2),0.98 (0.00),0.98 (0.00)
+Detected ≤ 3 months,1.00 (0.00),0.99 (0.00)
+False alarms per item-year,0.31 (0.04),0.39 (0.03)
+"Lead time (median, months)",4.5 (0.7),4.7 (0.3)
+"ARL₀ of the q channel (pooled, 90% interval)",180 (90–360),51 (31–120)
+ARL₁ of the q channel,29.5 (2.7),25.5 (3.3)
+EWMA: detected ≤ 1 month / false alarms / ARL₀,0.30 / 0.21 / 12.2,0.39 / 0.24 / 7.9
+CUSUM: detected ≤ 1 month / false alarms / ARL₀,0.29 / 0.01 / 109.1,0.39 / 0.02 / 32.0

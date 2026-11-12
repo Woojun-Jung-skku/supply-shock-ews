@@ -1,0 +1,5 @@
+variant,ewma,cusum
+parameters estimated in phase I (as in Table S14),9.6 (8.9-10.5),16.0 (13.0-20.8)
+oracle in-control mean,15.8 (14.6-17.2),33.5 (24.9-50.5)
+oracle mean and dispersion,15.7 (14.4-17.1),34.2 (25.7-52.2)
+"no indicator effects in the truth (β = 0), estimated",12.0 (10.8-13.2),23.6 (17.3-35.6)

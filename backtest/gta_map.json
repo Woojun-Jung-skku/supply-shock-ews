@@ -1,0 +1,21 @@
+{
+ "jurisdiction": "implementing_jurisdiction",
+ "iso3": "implementing_iso",
+ "type": "intervention_type",
+ "announced": "date_announced",
+ "implemented": "date_implemented",
+ "products": "affected_products_in_items",
+ "title": "state_act_title",
+ "export_types": [
+  "Export ban",
+  "Export licensing requirement",
+  "Export quota",
+  "Export tax",
+  "Export-related non-tariff measure, nes"
+ ],
+ "affected": "affected_jurisdictions",
+ "affected_match": "Republic of Korea",
+ "n_products": "n_affected_products",
+ "max_products": 100,
+ "exclude_title": "sanction|Entity List|catch-all|Export Control Law|national emergency|Economic Security Strategy|align dual-use|US companies"
+}

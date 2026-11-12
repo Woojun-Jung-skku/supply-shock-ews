@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code or these results, please cite the paper and this repository."
+title: "Code and results for a hierarchical gamma–Poisson early-warning model of supply shocks with cost-based alarms"
+type: software
+authors:
+  - family-names: "Jeon"
+    given-names: "Sungjin"
+    affiliation: "Graduate School of Management of Technology, Sungkyunkwan University"
+  - family-names: "Jung"
+    given-names: "Woojun"
+    affiliation: "Graduate School of Management of Technology, Sungkyunkwan University"
+abstract: "Simulator and Bayesian inference code, replication-level results of the simulation studies (parameter recovery, alarm performance, robustness, a rare arm), the expected-cost evaluation of twelve alarm policies, the backtest on public trade data (extraction scripts, restriction table, assembled monthly panel, result files), and the scripts that produce the tables, figures and supplementary material of the manuscript. Raw UN Comtrade records are not redistributed; the extract of the Global Trade Alert database is distributed under CC BY-NC 4.0."
+keywords:
+  - supply chain risk
+  - early warning
+  - disruption prediction
+  - negative binomial
+  - cost-sensitive decision
+  - Bayesian hierarchical model
+version: "1.0.0"
+date-released: "2026-11-12"
+license: MIT
+repository-code: "https://github.com/Woojun-Jung-skku/supply-shock-ews"

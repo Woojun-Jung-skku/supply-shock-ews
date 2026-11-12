@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+.venv/
+_tmp/
+jax_cache/
+.DS_Store
+
+# LaTeX build products
+*.aux
+*.log
+supplementary/supplementary.pdf
+supplementary/supplementary.out
+
+# written by the scripts, not archived (paths from the repository root)
+/out/
+/figures/out/
+/results_new/
+/results_rare_new/
+
+# UN Comtrade records (backtest/pull_comtrade_multi.py); not redistributed
+/data_bt/

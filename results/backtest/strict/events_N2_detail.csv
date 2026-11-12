@@ -1,0 +1,32 @@
+group,item,measure,month,M0_level_at,M0_level_tm1,M0_max_level_tm2_t,M0_months_alert_before,M0_p_at,M0_q_alarm_at,M2_level_at,M2_level_tm1,M2_max_level_tm2_t,M2_months_alert_before,M2_p_at,M2_q_alarm_at,cusum_alarm_at,cusum_alarm_tm1,ewma_alarm_at,ewma_alarm_tm1,farr_alarm_at,farr_alarm_tm1,sigma_level_at,sigma_level_tm1,xgb_level_at,xgb_level_tm1,xgb_max_level_tm2_t,xgb_months_alert_before,xgbcal_level_at,xgbcal_level_tm1,xgbcal_max_level_tm2_t,xgbcal_months_alert_before
+battery_materials,250410,156:Export controls on graphite items,202312,0,0,0,,0.037,False,0,0,0,,0.036,False,False,False,False,False,False,False,0,0,1,1,1,,0,0,0,
+refractory_minor_metals,280450,"156:Export controls on tungsten, tellurium, ",202502,3,3,3,95,0.855,False,3,3,3,95,0.855,False,False,False,False,False,False,False,3,1,3,3,3,95,3,3,3,95
+semiconductor_chemicals,280461,392:Japan: Government tightens the restricti,202505,3,3,3,98,0.599,False,2,3,3,98,0.499,False,False,False,False,False,False,False,0,1,1,1,1,98,1,1,2,98
+rare_earths_magnets,280530,156:Export controls on seven rare-earth elem,202504,3,3,3,97,0.778,False,3,3,3,97,0.82,False,False,False,False,False,False,False,0,0,3,3,3,97,3,3,3,97
+rare_earths_magnets,280530,156:China: Government announces export contr,202510,3,3,3,103,0.709,False,3,3,3,103,0.59,False,False,False,False,False,False,False,0,0,2,2,2,103,2,2,2,103
+rare_earths_magnets,280530,156:Expanded rare-earth export controls (Oct,202511,3,3,3,104,0.625,False,2,3,3,104,0.492,False,False,False,False,False,False,False,0,0,2,2,2,104,2,2,2,104
+semiconductor_chemicals,281111,392:Export licensing of HF / photoresists / ,201907,1,1,1,,0.069,False,0,0,0,,0.042,False,False,False,False,False,False,False,0,0,1,1,1,,1,1,1,
+semiconductor_chemicals,281290,392:Japan: Government tightens the restricti,202505,2,2,2,98,0.389,False,2,2,2,98,0.286,False,True,True,False,False,False,False,0,0,1,1,1,98,2,2,2,98
+refractory_minor_metals,282560,156:Export controls on gallium and germanium,202308,2,2,2,77,0.299,False,2,2,2,77,0.252,False,False,False,False,False,False,False,0,0,2,2,2,77,1,2,2,77
+refractory_minor_metals,282580,156:Export controls on antimony and superhar,202409,1,1,1,90,0.153,False,1,1,1,90,0.157,False,False,False,False,False,False,False,0,0,1,1,1,84,1,1,1,84
+semiconductor_chemicals,282619,392:Japan: Government tightens the restricti,202505,1,1,1,,0.113,False,1,1,1,20,0.078,False,False,False,False,False,False,False,0,0,1,1,1,62,1,1,1,62
+refractory_minor_metals,284180,"156:Export controls on tungsten, tellurium, ",202502,3,3,3,95,0.787,False,3,3,3,95,0.779,False,False,False,False,False,False,False,0,0,1,1,2,95,1,1,1,95
+rare_earths_magnets,284690,156:Export controls on seven rare-earth elem,202504,3,2,3,97,0.535,False,3,3,3,97,0.627,False,True,True,True,True,False,False,3,3,3,3,3,97,3,3,3,97
+rare_earths_magnets,284690,156:China: Government announces export contr,202510,2,2,2,103,0.462,False,2,2,2,103,0.37,False,True,True,False,False,False,False,0,2,2,2,2,103,2,2,2,103
+rare_earths_magnets,284690,156:Expanded rare-earth export controls (Oct,202511,2,2,2,104,0.482,False,2,2,2,104,0.355,False,True,True,False,False,False,False,0,0,2,2,2,104,2,2,2,104
+semiconductor_chemicals,285000,156:China: Government announces export contr,202308,2,2,2,77,0.432,False,2,2,2,77,0.495,False,True,True,False,False,False,False,0,0,2,2,3,68,1,2,3,68
+semiconductor_chemicals,285000,156:China: Government announces export contr;842:United States of America: Introduction o,202409,2,2,2,90,0.338,False,2,1,2,90,0.213,False,True,True,False,False,False,False,0,0,1,1,1,81,1,1,1,81
+semiconductor_chemicals,370790,392:Export licensing of HF / photoresists / ,201907,2,2,2,28,0.312,False,2,2,2,28,0.346,False,False,False,False,False,False,False,0,0,1,2,2,6,2,2,2,22
+battery_materials,380110,156:Export controls on graphite items,202312,0,0,0,,0.045,False,1,1,1,,0.068,False,False,False,False,False,False,False,0,0,0,0,0,,0,0,0,
+semiconductor_chemicals,381800,156:China: Government announces export contr,202308,1,1,1,,0.055,False,1,1,1,,0.071,False,False,False,False,False,False,False,0,0,1,1,1,,1,1,1,
+semiconductor_chemicals,381800,156:China: Government announces export contr,202502,0,0,0,,0.044,False,0,0,0,,0.039,False,False,False,False,False,False,False,0,0,0,0,0,,1,1,1,
+semiconductor_chemicals,381800,156:China: Ministry of Commerce issues expor,202510,1,1,1,,0.093,False,1,0,1,,0.087,False,False,False,True,True,False,True,3,3,3,2,3,1,3,2,3,1
+ferroalloys,720260,360:Indonesia: Introduced export and import ,202111,3,3,3,56,0.789,False,3,3,3,56,0.604,False,False,False,False,False,False,False,0,0,3,3,3,56,3,3,3,56
+refractory_minor_metals,810194,"156:Export controls on tungsten, tellurium, ",202502,2,2,2,95,0.249,False,2,2,2,92,0.268,False,False,False,False,False,False,False,0,0,1,1,1,91,1,1,1,91
+battery_materials,810520,180:Cobalt export suspension,202502,3,3,3,95,0.525,False,3,3,3,95,0.583,False,False,False,False,False,False,False,3,3,3,3,3,95,3,3,3,95
+refractory_minor_metals,811010,156:Export controls on antimony and superhar,202409,3,3,3,90,0.816,False,3,3,3,90,0.805,False,True,True,True,True,False,False,0,0,3,3,3,90,3,3,3,90
+battery_materials,811100,360:Indonesia: Introduced export and import ,202306,1,1,1,,0.067,False,0,0,0,,0.039,False,False,False,False,False,False,False,0,0,1,1,2,7,0,1,2,12
+refractory_minor_metals,811292,156:Export controls on gallium and germanium,202308,3,3,3,77,0.573,False,2,3,3,77,0.494,False,False,False,False,False,False,False,0,0,1,1,1,77,1,1,1,77
+refractory_minor_metals,811292,"156:Export controls on tungsten, tellurium, ",202502,3,3,3,95,0.502,False,2,2,2,95,0.504,False,False,False,False,False,False,False,0,0,1,1,1,95,1,1,1,95
+rare_earths_magnets,850511,156:Export controls on seven rare-earth elem,202504,1,1,1,97,0.087,False,1,1,1,97,0.124,False,False,False,False,False,False,False,0,0,1,1,1,72,1,1,1,91
+rare_earths_magnets,850511,156:Expanded rare-earth export controls (Oct,202511,1,1,1,104,0.1,False,1,1,1,104,0.072,False,False,False,False,True,False,False,2,3,1,2,2,79,1,2,2,98

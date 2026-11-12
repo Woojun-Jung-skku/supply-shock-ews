@@ -1,0 +1,81 @@
+## per-replication metrics
+
+### stable: E per rep [0.347, 0.318, 0.325, 0.364, 0.367], prevalence per rep [0.084, 0.076, 0.077, 0.088, 0.087]
+rep | AUC-PR M2     M0    XGB |  ECE M2      M0     XGB | Brier M2      M0     XGB | L2dr M2 M0 XGB | q M2 cal/boot/arl0/arl1 | q M0 cal/boot/arl0/arl1 | refit
+  0 |     0.149  0.152  0.130 |  0.0131  0.0063  0.0101 |   0.0748  0.0745  0.0754 | 0.17 0.16 0.05 |            1/37/15/nan |             1/26/4/nan | 7
+  1 |     0.141  0.139  0.121 |  0.0165  0.0171  0.0046 |   0.0689  0.0686  0.0690 | 0.16 0.14 0.06 |            1/30/31/nan |            1/25/12/nan | 9
+  2 |     0.138  0.143  0.110 |  0.0106  0.0063  0.0083 |   0.0698  0.0695  0.0712 | 0.13 0.12 0.05 |             1/25/7/nan |           1/28/246/nan | 10
+  3 |     0.190  0.194  0.163 |  0.0050  0.0067  0.0121 |   0.0771  0.0770  0.0784 | 0.26 0.29 0.08 |           1/36/246/nan |           0/14/246/nan | 5
+  4 |     0.202  0.209  0.163 |  0.0096  0.0116  0.0157 |   0.0754  0.0753  0.0775 | 0.28 0.31 0.10 |            1/32/13/nan |             1/29/8/nan | 4
+  paired aucpr: M2-M0 mean -0.0035 sd 0.0031 (M2 better in 1/5) | M2-XGB mean +0.0265 sd 0.0083 (M2 better in 5/5)
+  paired ece  : M2-M0 mean +0.0013 sd 0.0039 (M2 better in 3/5) | M2-XGB mean +0.0008 sd 0.0078 (M2 better in 2/5)
+  paired brier: M2-M0 mean +0.0002 sd 0.0001 (M2 better in 0/5) | M2-XGB mean -0.0011 sd 0.0007 (M2 better in 5/5)
+  M2  AUC-PR mean 0.164 sd 0.030 | ECE mean 0.0110 sd 0.0043
+  M0  AUC-PR mean 0.168 sd 0.032 | ECE mean 0.0096 sd 0.0048
+  xgb AUC-PR mean 0.138 sd 0.024 | ECE mean 0.0101 sd 0.0041
+  sigma L1 dr 0.34 AM 2.5; L3 dr 0.15 AM 1.1
+  ewma  dr1 0.11 AM 0.9 | realised ARL0 14 (per rep [13, 17, 15, 14, 12]) ARL1 nan
+  cusum dr1 0.03 AM 0.2 | realised ARL0 79 (per rep [76, 93, 117, 52, 59]) ARL1 nan
+  q M2: thr [0.95, 0.95, 0.95, 0.95, 0.975] persist [2, 2, 2, 2, 2] boot ARL0 [37, 30, 25, 36, 32] calibrated [1, 1, 1, 1, 1] | realised ARL0 [15, 31, 7, 246, 13] stable-alarm units [0.667, 0.333, 0.667, 0.0, 0.667] ARL1 [None, None, None, None, None] censored [None, None, None, None, None]
+  q M0: thr [0.9, 0.85, 0.99, 0.99, 0.99] persist [2, 2, 2, 4, 2] boot ARL0 [26, 25, 28, 14, 29] calibrated [1, 1, 1, 0, 1] | realised ARL0 [4, 12, 246, 246, 8] stable-alarm units [0.667, 0.333, 0.0, 0.0, 0.667] ARL1 [None, None, None, None, None] censored [None, None, None, None, None]
+  triage M2 : L1 dr 0.79 AM 6.8 FA/iy 0.58 lead 17 | L2 dr 0.20 AM 0.9 FA/iy 0.18 lead 9 | L3 dr 0.00 AM 0.0 FA/iy 0.00 lead 10
+  triage M0 : L1 dr 0.79 AM 6.8 FA/iy 0.58 lead 16 | L2 dr 0.20 AM 0.8 FA/iy 0.16 lead 9 | L3 dr 0.00 AM 0.0 FA/iy 0.00 lead 18
+  triage xgb: L1 dr 0.81 AM 8.0 FA/iy 0.52 lead 16 | L2 dr 0.07 AM 0.3 FA/iy 0.09 lead 11 | L3 dr 0.00 AM 0.0 FA/iy 0.00 lead 22
+  conformal cover 0.928 size 1.01; severity CQR cover 0.904 width 0.357 n_losses 235; phi q50 10.41
+  M2 fits: refit 35/70 failed 0 rhat_max 1.0099; M0 failed 0
+
+### gradual: E per rep [0.522, 0.574, 0.528, 0.521, 0.505], prevalence per rep [0.123, 0.135, 0.123, 0.123, 0.118]
+rep | AUC-PR M2     M0    XGB |  ECE M2      M0     XGB | Brier M2      M0     XGB | L2dr M2 M0 XGB | q M2 cal/boot/arl0/arl1 | q M0 cal/boot/arl0/arl1 | refit
+  0 |     0.232  0.230  0.192 |  0.0172  0.0221  0.0479 |   0.1033  0.1035  0.1077 | 0.37 0.35 0.06 |             1/28/72/31 |             0/19/72/35 | 6
+  1 |     0.266  0.270  0.196 |  0.0208  0.0254  0.0548 |   0.1106  0.1103  0.1175 | 0.43 0.39 0.05 |             1/31/72/28 |             1/25/72/38 | 2
+  2 |     0.302  0.311  0.241 |  0.0072  0.0161  0.0470 |   0.0978  0.0975  0.1054 | 0.50 0.41 0.07 |             1/28/72/29 |             0/15/72/47 | 7
+  3 |     0.306  0.303  0.242 |  0.0093  0.0141  0.0335 |   0.0978  0.0980  0.1036 | 0.40 0.38 0.19 |             1/35/72/49 |             0/15/72/57 | 9
+  4 |     0.282  0.288  0.243 |  0.0075  0.0090  0.0400 |   0.0958  0.0954  0.1003 | 0.40 0.38 0.15 |             1/27/72/30 |             0/17/72/41 | 7
+  paired aucpr: M2-M0 mean -0.0028 sd 0.0050 (M2 better in 2/5) | M2-XGB mean +0.0549 sd 0.0142 (M2 better in 5/5)
+  paired ece  : M2-M0 mean -0.0050 sd 0.0026 (M2 better in 5/5) | M2-XGB mean -0.0323 sd 0.0056 (M2 better in 5/5)
+  paired brier: M2-M0 mean +0.0001 sd 0.0003 (M2 better in 2/5) | M2-XGB mean -0.0059 sd 0.0014 (M2 better in 5/5)
+  M2  AUC-PR mean 0.278 sd 0.030 | ECE mean 0.0124 sd 0.0062
+  M0  AUC-PR mean 0.281 sd 0.032 | ECE mean 0.0173 sd 0.0065
+  xgb AUC-PR mean 0.223 sd 0.026 | ECE mean 0.0446 sd 0.0081
+  sigma L1 dr 0.44 AM 3.4; L3 dr 0.23 AM 1.6
+  ewma  dr1 0.19 AM 1.3 | realised ARL0 18 (per rep [16, 14, 23, 17, 18]) ARL1 32
+  cusum dr1 0.06 AM 0.2 | realised ARL0 2400 (per rep [2400, 2400, 2400, 2400, 2400]) ARL1 56
+  q M2: thr [0.95, 0.95, 0.95, 0.95, 0.95] persist [2, 2, 2, 2, 2] boot ARL0 [28, 31, 28, 35, 27] calibrated [1, 1, 1, 1, 1] | realised ARL0 [72, 72, 72, 72, 72] stable-alarm units [0.0, 0.0, 0.0, 0.0, 0.0] ARL1 [31.0, 28.0, 29.33, 48.67, 30.33] censored [0, 0, 0, 0, 1]
+  q M0: thr [0.99, 0.99, 0.99, 0.99, 0.99] persist [4, 3, 4, 4, 4] boot ARL0 [19, 25, 15, 15, 17] calibrated [0, 1, 0, 0, 0] | realised ARL0 [72, 72, 72, 72, 72] stable-alarm units [0.0, 0.0, 0.0, 0.0, 0.0] ARL1 [35.33, 37.67, 47.33, 57.33, 40.67] censored [0, 0, 0, 2, 1]
+  triage M2 : L1 dr 0.89 AM 8.4 FA/iy 0.51 lead 19 | L2 dr 0.42 AM 2.1 FA/iy 0.29 lead 7 | L3 dr 0.04 AM 0.1 FA/iy 0.01 lead 4
+  triage M0 : L1 dr 0.88 AM 8.2 FA/iy 0.52 lead 17 | L2 dr 0.38 AM 1.8 FA/iy 0.26 lead 7 | L3 dr 0.03 AM 0.1 FA/iy 0.01 lead 4
+  triage xgb: L1 dr 0.85 AM 8.4 FA/iy 0.47 lead 18 | L2 dr 0.10 AM 0.4 FA/iy 0.09 lead 7 | L3 dr 0.00 AM 0.0 FA/iy 0.00 lead nan
+  conformal cover 0.937 size 1.09; severity CQR cover 0.913 width 0.360 n_losses 362; phi q50 9.88
+  M2 fits: refit 31/70 failed 0 rhat_max 1.0098; M0 failed 0
+
+### abrupt: E per rep [0.723, 0.79, 0.729, 0.692, 0.76], prevalence per rep [0.166, 0.176, 0.162, 0.161, 0.169]
+rep | AUC-PR M2     M0    XGB |  ECE M2      M0     XGB | Brier M2      M0     XGB | L2dr M2 M0 XGB | q M2 cal/boot/arl0/arl1 | q M0 cal/boot/arl0/arl1 | refit
+  0 |     0.317  0.311  0.278 |  0.0205  0.0231  0.0629 |   0.1288  0.1300  0.1363 | 0.62 0.58 0.18 |             1/33/72/10 |             1/27/72/14 | 8
+  1 |     0.354  0.339  0.322 |  0.0187  0.0315  0.0713 |   0.1322  0.1351  0.1409 | 0.63 0.58 0.28 |              1/33/72/5 |             1/25/72/13 | 8
+  2 |     0.361  0.338  0.315 |  0.0168  0.0200  0.0502 |   0.1230  0.1255  0.1295 | 0.63 0.62 0.34 |             1/28/72/22 |             0/13/72/36 | 10
+  3 |     0.304  0.300  0.270 |  0.0174  0.0287  0.0705 |   0.1266  0.1271  0.1346 | 0.62 0.50 0.15 |              1/27/72/6 |             1/25/72/11 | 6
+  4 |     0.365  0.341  0.311 |  0.0214  0.0330  0.0603 |   0.1272  0.1300  0.1353 | 0.65 0.58 0.31 |              1/24/72/4 |             1/26/72/15 | 8
+  paired aucpr: M2-M0 mean +0.0143 sd 0.0097 (M2 better in 5/5) | M2-XGB mean +0.0412 sd 0.0092 (M2 better in 5/5)
+  paired ece  : M2-M0 mean -0.0083 sd 0.0050 (M2 better in 5/5) | M2-XGB mean -0.0441 sd 0.0086 (M2 better in 5/5)
+  paired brier: M2-M0 mean -0.0020 sd 0.0011 (M2 better in 5/5) | M2-XGB mean -0.0077 sd 0.0009 (M2 better in 5/5)
+  M2  AUC-PR mean 0.340 sd 0.028 | ECE mean 0.0190 sd 0.0020
+  M0  AUC-PR mean 0.326 sd 0.019 | ECE mean 0.0272 sd 0.0056
+  xgb AUC-PR mean 0.299 sd 0.023 | ECE mean 0.0630 sd 0.0086
+  sigma L1 dr 0.41 AM 3.4; L3 dr 0.21 AM 1.6
+  ewma  dr1 0.25 AM 1.8 | realised ARL0 17 (per rep [15, 15, 16, 23, 16]) ARL1 22
+  cusum dr1 0.12 AM 0.5 | realised ARL0 2400 (per rep [2400, 2400, 2400, 2400, 2400]) ARL1 54
+  q M2: thr [0.95, 0.95, 0.95, 0.9, 0.9] persist [2, 2, 2, 2, 2] boot ARL0 [33, 33, 28, 27, 24] calibrated [1, 1, 1, 1, 1] | realised ARL0 [72, 72, 72, 72, 72] stable-alarm units [0.0, 0.0, 0.0, 0.0, 0.0] ARL1 [10.33, 4.67, 21.67, 6.33, 4.33] censored [0, 0, 0, 0, 0]
+  q M0: thr [0.99, 0.99, 0.99, 0.975, 0.975] persist [2, 3, 4, 2, 2] boot ARL0 [27, 25, 13, 25, 26] calibrated [1, 1, 0, 1, 1] | realised ARL0 [72, 72, 72, 72, 72] stable-alarm units [0.0, 0.0, 0.0, 0.0, 0.0] ARL1 [14.33, 12.67, 36.33, 11.0, 14.67] censored [0, 0, 0, 0, 0]
+  triage M2 : L1 dr 0.95 AM 9.8 FA/iy 0.35 lead 16 | L2 dr 0.63 AM 4.0 FA/iy 0.38 lead 7 | L3 dr 0.09 AM 0.3 FA/iy 0.03 lead 3
+  triage M0 : L1 dr 0.94 AM 9.6 FA/iy 0.37 lead 16 | L2 dr 0.57 AM 3.7 FA/iy 0.36 lead 7 | L3 dr 0.08 AM 0.3 FA/iy 0.04 lead 3
+  triage xgb: L1 dr 0.93 AM 9.6 FA/iy 0.43 lead 16 | L2 dr 0.25 AM 1.2 FA/iy 0.16 lead 5 | L3 dr 0.01 AM 0.0 FA/iy 0.00 lead 3
+  conformal cover 0.943 size 1.19; severity CQR cover 0.915 width 0.384 n_losses 505; phi q50 9.11
+  M2 fits: refit 40/70 failed 0 rhat_max 1.0099; M0 failed 0
+
+## pooled over 15 replications (three cells)
+  M2       AUC-PR 0.261 Brier 0.1006 ECE 0.0141
+  Poisson  AUC-PR 0.258 Brier 0.1011 ECE 0.0181
+  XGBoost  AUC-PR 0.220 Brier 0.1055 ECE 0.0393
+  paired aucpr: M2-M0 +0.0027 (M2 better 8/15) | M2-XGB +0.0409 (M2 better 15/15)
+  paired ece: M2-M0 -0.0040 (M2 better 13/15) | M2-XGB -0.0252 (M2 better 12/15)
+  change regimes ECE M2-M0 -0.0066 sd 0.0041 M2 better 10/10; per rep [-0.0048, -0.0046, -0.0089, -0.0048, -0.0016, -0.0026, -0.0128, -0.0032, -0.0113, -0.0116]

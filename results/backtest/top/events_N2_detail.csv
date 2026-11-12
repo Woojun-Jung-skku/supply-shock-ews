@@ -1,0 +1,65 @@
+group,item,measure,month,M0_level_at,M0_level_tm1,M0_max_level_tm2_t,M0_months_alert_before,M0_p_at,M0_q_alarm_at,M2_level_at,M2_level_tm1,M2_max_level_tm2_t,M2_months_alert_before,M2_p_at,M2_q_alarm_at,cusum_alarm_at,cusum_alarm_tm1,ewma_alarm_at,ewma_alarm_tm1,farr_alarm_at,farr_alarm_tm1,sigma_level_at,sigma_level_tm1,xgb_level_at,xgb_level_tm1,xgb_max_level_tm2_t,xgb_months_alert_before,xgbcal_level_at,xgbcal_level_tm1,xgbcal_max_level_tm2_t,xgbcal_months_alert_before
+battery_materials,250410,156:Export controls on graphite items,202312,0,0,0,,0.028,False,0,0,0,,0.024,False,False,False,False,False,False,False,0,0,1,1,1,,1,1,1,
+refractory_minor_metals,261100,643:Export tax (Resolution of the Government,201706,2,2,2,3,0.396,False,2,2,2,3,0.334,False,False,False,False,False,False,False,2,2,2,2,2,3,2,2,2,3
+refractory_minor_metals,261590,108:Fiscal tax on exports (Loi No.1/28 du 31,201801,1,1,1,10,0.138,False,1,1,1,10,0.103,False,False,False,False,False,False,False,0,0,2,2,2,2,1,2,2,2
+refractory_minor_metals,280450,156:China: 2025 dual-use catalogue for expor,202501,3,3,3,94,0.719,False,3,3,3,94,0.638,False,False,False,False,False,False,False,0,0,3,3,3,94,3,3,3,94
+refractory_minor_metals,280450,"156:Export controls on tungsten, tellurium, ",202502,3,3,3,95,0.703,False,3,3,3,95,0.685,False,False,False,False,False,False,False,1,0,3,3,3,95,3,3,3,95
+semiconductor_chemicals,280461,392:Japan: Government tightens the restricti,202505,2,2,2,98,0.373,False,2,2,2,98,0.299,False,False,False,False,False,False,False,0,1,2,2,2,98,2,2,2,98
+rare_earths_magnets,280530,156:China: 2022 export licensing goods catal,202201,2,2,3,58,0.533,False,2,2,2,58,0.333,False,False,False,False,False,False,False,0,0,2,2,2,58,2,2,2,58
+rare_earths_magnets,280530,156:Export controls on seven rare-earth elem,202504,3,3,3,97,0.735,False,3,3,3,97,0.826,False,False,False,False,False,False,False,0,0,3,3,3,97,3,3,3,97
+rare_earths_magnets,280530,156:China: Government announces export contr,202510,3,3,3,103,0.67,False,3,3,3,103,0.591,False,False,False,False,False,False,False,0,0,2,2,2,103,2,2,2,103
+rare_earths_magnets,280530,156:Expanded rare-earth export controls (Oct,202511,3,3,3,104,0.576,False,2,3,3,104,0.498,False,False,False,False,False,False,False,0,0,2,2,2,104,2,2,2,104
+semiconductor_chemicals,281111,156:China: 2019 catalogue of 'dual-use' good,201901,1,1,1,,0.057,False,0,0,0,,0.038,False,False,False,False,False,False,False,0,0,0,1,1,,1,1,1,
+semiconductor_chemicals,281111,392:Export licensing of HF / photoresists / ,201907,0,0,0,,0.037,False,0,0,0,,0.058,False,False,False,False,False,False,False,0,0,1,1,1,,0,0,0,
+semiconductor_chemicals,281290,392:Japan: Government tightens the restricti,202505,1,1,1,28,0.143,False,1,1,1,33,0.1,False,False,False,False,False,False,False,0,0,1,1,1,98,1,1,1,98
+battery_materials,282200,180:Other export measures (Loi n°18/001 du 0,201803,1,1,1,,0.06,False,0,0,0,,0.039,False,False,False,False,False,False,False,0,0,0,0,0,,1,1,1,
+battery_materials,282520,156:China: Government revises catalogue cont,202507,1,1,1,,0.135,False,1,2,2,3,0.159,False,False,False,True,True,False,False,3,3,2,3,3,4,3,3,3,4
+refractory_minor_metals,282560,156:Export controls on gallium and germanium,202308,2,2,2,77,0.28,False,2,2,2,77,0.205,False,False,False,False,False,False,False,0,0,2,2,2,77,2,2,2,77
+refractory_minor_metals,282580,156:Export controls on antimony and superhar,202409,1,1,1,90,0.13,False,1,1,1,90,0.117,False,False,False,False,False,False,False,0,0,1,1,1,84,1,1,1,84
+refractory_minor_metals,282580,156:China: 2025 export licensing goods catal,202501,2,1,2,94,0.167,False,1,1,1,94,0.167,False,False,False,True,False,False,True,3,0,2,1,2,88,3,1,3,88
+semiconductor_chemicals,282619,156:China: 2025 dual-use catalogue for expor,202501,0,0,0,,0.047,False,0,0,0,,0.05,False,False,False,False,False,False,False,0,0,0,0,0,58,1,1,1,58
+semiconductor_chemicals,282619,392:Japan: Government tightens the restricti,202505,1,1,1,,0.059,False,0,0,0,,0.027,False,False,False,False,False,False,False,0,0,1,1,1,62,1,1,1,62
+battery_materials,283691,32:Export tax (Decreto 793/2018),201809,0,0,0,,0.044,False,0,0,0,,0.039,False,False,False,False,False,False,False,0,0,0,0,0,,0,0,1,
+refractory_minor_metals,284180,"156:Export controls on tungsten, tellurium, ",202502,3,3,3,95,0.61,False,3,3,3,95,0.589,False,False,False,False,False,False,False,0,0,2,2,2,95,2,2,2,95
+rare_earths_magnets,284690,156:China: 2022 export licensing goods catal,202201,2,2,2,58,0.297,False,1,2,2,58,0.162,False,False,False,False,False,False,False,0,0,1,1,1,58,1,1,1,58
+rare_earths_magnets,284690,156:Export controls on seven rare-earth elem,202504,2,2,2,97,0.481,False,3,2,3,97,0.616,False,True,False,True,True,False,False,3,3,3,3,3,97,3,3,3,97
+rare_earths_magnets,284690,156:China: Government announces export contr,202510,2,2,2,103,0.42,False,2,2,2,103,0.374,False,False,True,False,False,False,False,0,2,2,2,2,103,2,2,2,103
+rare_earths_magnets,284690,156:Expanded rare-earth export controls (Oct,202511,2,2,2,104,0.434,False,2,2,2,104,0.353,False,False,False,False,False,False,False,0,0,2,2,2,104,2,2,2,104
+semiconductor_chemicals,284700,156:China: 2025 dual-use catalogue for expor,202501,3,3,3,94,0.583,False,3,3,3,94,0.578,False,False,False,False,False,False,False,0,0,2,2,2,94,2,3,3,94
+semiconductor_chemicals,285000,156:China: Government announces export contr,202308,2,2,2,68,0.393,False,2,2,2,68,0.414,False,True,True,False,False,False,False,0,0,2,3,3,68,2,3,3,68
+semiconductor_chemicals,285000,156:China: Government announces export contr;842:United States of America: Introduction o,202409,2,2,2,81,0.301,False,2,2,2,81,0.176,False,True,True,False,False,False,False,0,0,1,1,1,81,1,1,1,81
+semiconductor_chemicals,370790,392:Export licensing of HF / photoresists / ,201907,2,2,2,28,0.302,False,2,2,2,28,0.343,False,False,False,False,False,False,False,0,0,1,1,1,,1,1,1,
+battery_materials,380110,156:Export controls on graphite items,202312,0,0,0,,0.033,False,0,0,0,54,0.032,False,False,False,False,False,False,False,0,0,0,0,0,,0,0,0,
+battery_materials,380110,156:China: 2025 dual-use catalogue for expor,202501,0,0,0,,0.045,False,1,1,1,67,0.074,False,False,False,False,False,False,False,0,0,1,0,1,,0,0,0,
+semiconductor_chemicals,381800,156:China: Government announces export contr,202308,0,0,0,,0.042,False,1,1,1,,0.049,False,False,False,False,False,False,False,0,0,1,1,1,,1,1,1,
+semiconductor_chemicals,381800,156:China: 2025 dual-use catalogue for expor,202501,0,0,0,,0.035,False,0,0,0,,0.035,False,False,False,False,False,False,False,0,0,0,0,0,,1,1,1,
+semiconductor_chemicals,381800,156:China: Government announces export contr,202502,0,0,0,,0.033,False,0,0,0,,0.029,False,False,False,False,False,False,False,0,0,0,0,0,,1,1,1,
+semiconductor_chemicals,381800,156:China: Ministry of Commerce issues expor,202510,1,1,1,,0.075,False,0,0,0,,0.061,False,False,False,True,True,False,True,3,3,3,2,3,1,3,2,3,1
+ferroalloys,720221,156:China: 2018 Tariff Implementation Plan r,201801,1,1,1,,0.111,False,1,1,1,,0.079,False,False,False,False,False,False,False,0,0,1,1,1,6,1,1,2,6
+ferroalloys,720221,156:China: 2019 list of licensed ferroalloy ,201901,1,1,1,,0.076,False,1,0,1,,0.059,False,False,False,False,False,False,False,0,0,1,1,1,18,1,1,1,18
+ferroalloys,720221,156:Export tax,202105,1,1,1,,0.098,False,0,0,1,,0.058,False,False,False,False,False,False,False,1,1,2,2,2,46,2,2,2,46
+ferroalloys,720221,156:China: 2022 Tariff Adjustment Plan relea,202201,1,1,1,,0.072,False,0,0,0,,0.037,False,False,False,False,False,False,False,0,0,1,1,1,54,1,1,1,54
+ferroalloys,720221,156:China: 2025 export licensing goods catal,202501,1,1,1,,0.089,False,1,1,1,,0.093,False,False,False,False,False,False,False,2,3,2,2,2,90,2,2,2,90
+ferroalloys,720249,156:China: 2018 list of licensed ferroalloy ,201801,2,2,2,10,0.46,False,2,2,2,10,0.339,False,False,False,False,False,False,False,1,1,2,2,2,10,2,2,2,10
+ferroalloys,720249,156:China: 2019 list of licensed ferroalloy ,201901,2,2,2,22,0.306,False,2,2,2,22,0.311,False,False,False,False,False,False,False,0,0,1,1,1,22,1,1,1,22
+ferroalloys,720249,156:China: Import/export tariffs on some ste,202105,2,2,2,50,0.222,False,1,1,1,50,0.137,False,False,False,False,False,False,False,0,0,2,1,2,50,2,2,2,50
+ferroalloys,720249,156:China: Ministry announces export tariffs,202108,2,2,2,53,0.187,False,1,1,1,53,0.112,False,False,False,False,False,False,False,0,0,2,2,2,53,2,2,2,53
+ferroalloys,720249,156:China: 2022 Tariff Adjustment Plan relea,202201,2,2,2,58,0.187,False,1,1,1,58,0.096,False,False,False,False,False,False,False,0,0,1,1,1,58,1,1,1,58
+ferroalloys,720260,360:Indonesia: Introduced export and import ,202111,3,2,3,56,0.512,False,2,2,2,56,0.319,False,False,False,False,False,False,False,0,0,2,2,2,56,2,1,2,56
+ferroalloys,720270,156:China: 2018 list of licensed ferroalloy ,201801,2,3,3,10,0.334,False,2,3,3,10,0.275,False,False,False,False,False,False,False,0,0,3,3,3,10,2,3,3,10
+ferroalloys,720270,156:China: 2019 list of licensed ferroalloy ,201901,3,2,3,22,0.949,False,3,2,3,22,0.899,False,False,False,False,False,False,False,2,2,3,3,3,22,3,2,3,22
+ferroalloys,720280,156:China: 2018 list of licensed ferroalloy ,201801,3,3,3,10,0.774,False,3,3,3,10,0.654,False,False,False,False,False,False,False,2,1,3,3,3,10,3,3,3,10
+ferroalloys,720280,156:China: 2019 list of licensed ferroalloy ,201901,2,2,3,22,0.556,False,2,2,2,22,0.46,False,False,False,False,False,False,False,0,0,2,2,2,22,2,3,3,22
+ferroalloys,720292,156:China: 2018 list of licensed ferroalloy ,201801,2,2,2,10,0.415,False,2,2,2,10,0.381,False,False,False,False,False,False,False,0,0,1,2,2,10,2,2,2,10
+ferroalloys,720292,156:China: 2019 list of licensed ferroalloy ,201901,2,2,2,22,0.326,False,2,2,2,22,0.313,False,False,False,False,False,False,False,0,0,1,1,1,22,1,1,1,22
+refractory_minor_metals,810194,"156:Export controls on tungsten, tellurium, ",202502,2,2,2,95,0.224,False,2,2,2,94,0.228,False,False,False,False,False,False,False,0,0,1,1,1,93,1,1,1,93
+refractory_minor_metals,810411,156:China: 2025 dual-use catalogue for expor,202501,1,1,1,,0.055,False,0,0,0,,0.041,False,False,False,False,False,False,False,0,0,1,1,1,79,1,1,1,64
+battery_materials,810520,180:Cobalt export suspension,202502,3,3,3,95,0.691,False,3,3,3,95,0.76,False,False,False,False,False,False,False,1,1,3,3,3,95,3,3,3,95
+refractory_minor_metals,811010,156:Export controls on antimony and superhar,202409,3,2,3,90,0.551,False,2,2,2,90,0.548,False,False,False,False,False,False,False,0,0,3,2,3,90,3,3,3,90
+battery_materials,811100,360:Indonesia: Introduced export and import ,202306,0,0,0,,0.049,False,0,0,0,,0.032,False,False,False,False,False,False,False,0,0,1,1,1,12,0,1,2,9
+refractory_minor_metals,811292,156:China: 2022 export licensing goods catal,202201,3,3,3,58,0.63,False,3,3,3,58,0.666,False,False,False,False,False,False,False,0,0,1,2,2,58,1,2,2,58
+refractory_minor_metals,811292,156:Export controls on gallium and germanium,202308,2,3,3,77,0.474,False,2,2,2,77,0.358,False,False,False,False,False,False,False,0,0,1,1,1,77,1,1,1,77
+refractory_minor_metals,811292,"156:Export controls on tungsten, tellurium, ",202502,2,2,2,95,0.394,False,2,2,2,95,0.382,False,False,False,False,False,False,False,0,0,1,1,1,95,1,1,1,95
+rare_earths_magnets,850511,156:China: Government releases revised catal,202312,1,1,1,78,0.092,False,1,1,1,47,0.083,False,False,False,False,False,False,False,0,0,1,1,1,56,1,1,1,51
+rare_earths_magnets,850511,156:Export controls on seven rare-earth elem,202504,1,1,1,94,0.095,False,1,1,1,63,0.124,False,False,False,False,False,False,False,0,0,1,1,1,72,1,1,1,67
+rare_earths_magnets,850511,156:Expanded rare-earth export controls (Oct,202511,1,1,1,101,0.094,False,1,1,1,70,0.092,False,False,False,False,False,False,False,2,3,2,2,2,79,2,2,2,74

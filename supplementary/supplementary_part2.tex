@@ -1,0 +1,391 @@
+\clearpage
+\textbf{Supplementary Note 7. The yield-model lineage and the gamma–Poisson family (Sections 1 and 3.1 of the main text).}
+
+\textit{The die-yield lineage.} The earliest die-yield model assumes defects that are Poisson-distributed over the wafer with density $D_{0}$, so that a die of area $A$ is defect-free with probability $\exp(-AD_{0})$. Observed yields exceeded this prediction for large dies, and the explanation---defect density varies across wafers and across regions of a wafer---led Murphy (1964) to average the Poisson yield over a triangular distribution of $D_{0}$ and Seeds (1967) and Price (1970) over an exponential distribution. Stapper (1973) and Stapper et al.\ (1983) generalised the mixture to a gamma distribution, which yields the negative-binomial formula (Y2) below with a cluster parameter $\alpha$. The negative-binomial model became standard because $\alpha$ could be estimated from wafer maps and because it nests the earlier forms (Cunningham, 1990; Stapper, 1989). Defect density itself follows a learning curve that is well approximated by a log-linear decline in cumulative volume (Wright, 1936), and yield engineers use the fitted $(D_{0},\alpha)$ to set scrap and disposition limits and to select among model variants with information criteria. Fig.~S1(a) summarises this lineage, each model drawn as the distribution of defect density over which it averages the Poisson yield.
+
+\textit{The source model.} For a die of area $A$ on a wafer with defect density $D_{0}$ and cluster parameter $\alpha$, the source model of Section 3.1 of the main text can be stated in four expressions,
+\begin{align}
+Y_{\mathrm{Poisson}} &= \exp(-AD_{0}), \tag{Y1}\\
+Y_{\mathrm{NB}} &= \Big(1 + \frac{AD_{0}}{\alpha}\Big)^{-\alpha}, \tag{Y2}\\
+\log D_{0}(v) &= a_{0} - b_{0}\log v, \tag{Y3}\\
+\text{scrap rate} &= 1 - Y_{\mathrm{NB}}\ \text{(die level)}, \tag{Y4}
+\end{align}
+where $v$ is cumulative volume and (Y3) is the learning curve. In the source, $(D_{0},\alpha)$ are estimated from inspection data, (Y3) is fitted by least squares and scrap limits are set as control limits on yield; Sections 3.2--4.4 of the main text replace each of these steps, and Fig.~S4 draws the three-layer correspondence---detection, model, alarm---between the two readings.
+
+\noindent\begin{minipage}{\linewidth}\centering\includegraphics[width=\linewidth]{figs/FigS4_correspondence.png}
+\captionof{figure}{Fig. S4. Three-layer correspondence between semiconductor yield engineering (source) and supply-chain early warning (target): inline inspection and event screening (detection), negative-binomial yield and mixed-Poisson reliability (model), disposition limits and the cost-based alarm (alarm).}\label{fig:S4}\end{minipage}
+\vspace{14pt}
+
+\textit{The gamma–Poisson family across domains.} The negative-binomial yield model is one instance of a much older idea: a Poisson process whose intensity is itself gamma-distributed, so that heterogeneity of the intensity produces over-dispersion and the probability of zero events is the Laplace transform of the intensity distribution evaluated at the exposure. Greenwood and Yule's accident proneness (1920), the CreditRisk+ model of portfolio default counts (Credit Suisse Financial Products, 1997), the dispersion parameter of superspreading (Lloyd-Smith et al., 2005), gamma frailty in survival and reliability analysis (Vaupel et al., 1979; Hougaard, 2000) and the general theory of mixed Poisson processes (Grandell, 1997) all rest on this construction; software-reliability growth models (Goel and Okumoto, 1979) play the role of the learning curve, and count-regression practice made the negative binomial the default for over-dispersed counts (Lawless, 1987; Cameron and Trivedi, 2013). Fig.~S1(b) summarises this genealogy around the zero-probability identity at its centre, with the supply-shock case of the main text below. Table S17 gives the variable correspondence between the source (die yield) and target (supply reliability) readings that Fig.~S4 draws (Section 1 of the main text).
+
+\noindent\begin{minipage}{\linewidth}\centering\includegraphics[width=\linewidth]{figs/FigS1_lineages.pdf}
+\captionof{figure}{Fig. S1. (a) Die-yield model lineage from the Poisson formula to the negative binomial; (b) the gamma–Poisson family across domains.}\label{fig:S1}\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S17. Variable correspondence between the source (die yield) and target (supply reliability) models (Fig.~S4; Section 1 of the main text).}\label{tab:S17}
+\centering\footnotesize
+\begin{tabular}{p{3.1cm}lp{5.9cm}ll}
+\toprule
+Source (yield) & Symbol & Target (supply) & Symbol & Role \\ \midrule
+defect density (defects per unit area) & $D_{0}$ & risk intensity (expected shocks per period for a reference item) & $R_{it}$ & intensity \\
+die area & $A$ & exposure coefficient (dimensionless multiplier of expected shocks) & $C_{i}$ & exposure \\
+cluster parameter & $\alpha$ & dispersion parameter (within-period clustering of intensity) & $\alpha'_{g}$ & dispersion \\
+defects per die & – & shock events per item-period & $N_{it}$ & count \\
+expected defects per die & $AD_{0}$ & expected shocks per item-period & $\mu_{it} = R_{it}C_{i}\Delta$ & mean \\
+die yield & $Y$ & supply reliability index, $P(N_{it} = 0)$ & $\mathrm{SRI}_{it}$ & reliability \\
+scrap rate & – & supply disruption rate (Supplementary Note 8) & $\mathrm{SDR}_{it}$ & loss \\
+learning curve in cumulative volume & (Y3) & group-level dynamic log-intensity & $m_{t}^{g},\delta_{t}^{g}$ & dynamics \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\textbf{Supplementary Note 8. Severity and the supply disruption rate (Section 4.4 of the main text).}
+
+The SRI answers ``will there be a shock?''; the disruption rate answers ``how much supply is lost?'' Because a period without shocks has zero loss, the loss variable has a point mass at zero and the natural model is a hurdle,
+\begin{align}\mathrm{SDR}_{it} &= \mathbf{1}\{N_{it}\ge 1\}\,S_{it}, \tag{S8.1}\\ S_{it}\mid N_{it}\ge 1 &\sim \mathrm{Beta}\big(\phi\,m_{it},\ \phi\,(1-m_{it})\big), \tag{S8.2}\\ \mathrm{logit}\,m_{it} &= \gamma_{0} + \gamma_{1}\log\mu_{it} + \boldsymbol{\gamma}_{2}^{\top}\mathbf{x}_{i,t-1}\ (+\,\gamma_{3}\log N_{it}), \tag{S8.3}\\ E[\mathrm{SDR}_{it}] &= (1-\mathrm{SRI}_{it})\,m_{it},\qquad E[\mathrm{Loss}_{it}] = \mu_{it}\,E[S_{it}], \tag{S8.4}\end{align}
+where (S8.2)–(S8.3) is a beta regression (Ferrari and Cribari-Neto, 2004) for the loss fraction given a shock, with precision $\phi$, and the second equality in (S8.4) assumes losses add across shocks; the optional term in parentheses in (S8.3) lets the loss fraction depend on the number of shocks realised in the period. The two outputs of the framework---probability of disruption and loss given disruption---thus come from (4) of the main text and (S8.2) respectively. If complete stoppage ($S = 1$) can occur, a one-inflated beta or the compression of Smithson and Verkuilen (2006) is used (Ospina and Ferrari, 2010). For heavy-tailed severities the beta body is complemented by a generalised-Pareto tail fitted to exceedances of the observed loss fraction over its 90th percentile by the peaks-over-threshold method (Pickands, 1975; Coles, 2001), once at least ten exceedances are available (Section 4.4 of the main text). The priors are $\phi \sim \mathrm{Gamma}(2, 0.1)$ and $\gamma \sim N(0,1)$; the severity submodel is fitted at every monitoring origin, and its recovery of the design and the coverage of its loss-fraction intervals before and after conformalisation are reported in Table S15.
+
+\textbf{Supplementary Note 9. Industry instances of the intensity–exposure–dispersion structure (Section 6.2 of the main text).}
+
+The intensity–exposure–dispersion structure of Proposition 1 is not specific to critical materials. Table S18 instantiates $(\lambda, s, \alpha) \equiv (R, C, \alpha')$ for five industries at two levels: the process level, where the source model already operates in a form adapted to each industry, and the supply level, where the framework applies to the industry's own critical inputs. Fig.~S2 shows the dual application. The detection layer differs in every row; the model and alarm layers do not.
+
+\begin{landscape}
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S18. Industry instances of the intensity–exposure–dispersion structure.}\label{tab:S18}
+\centering\scriptsize
+\begin{tabular}{p{2.4cm}p{4.2cm}p{3.0cm}p{3.0cm}p{3.4cm}p{3.2cm}p{3.2cm}}
+\toprule
+Industry & Detection source & Intensity $\lambda$ ($= R$) & Exposure $s$ ($= C$) & Clustering $\alpha$ ($= \alpha'$) & Process-level output & Supply-level instance \\ \midrule
+lithium-ion batteries & electrode vision, X-ray CT, field battery-management data & electrode defect density & cell area / capacity & coating-roll and lot correlation & cell yield / lot scrap & precursors, separators \\
+displays & pixel inspection images (mura) & pixel defect density & panel area & spatial mura clustering & panel yield / substrate breakage & emitter materials \\
+biopharmaceuticals & bioreactor sensors, GMP deviation records & contamination / deviation intensity & batch scale and value & raw-material lot and facility correlation & batch purity / batch rejection & media, chromatography resins \\
+AI data centres & GPU telemetry (ECC errors, thermal) & node failure intensity & cluster and job size & rack- and power-level common cause & job completion / node uptime & high-bandwidth memory, accelerators \\
+space systems & component qualification tests, on-orbit telemetry & component failure intensity & mission duration, orbital environment & common-cause failures & mission success / vehicle loss & space-grade components \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}\centering\includegraphics[width=0.9\linewidth]{figs/FigS2_industry_map.pdf}
+\captionof{figure}{Fig. S2. Industry instance map: the intensity–exposure–dispersion structure at process level and at supply level.}\label{fig:S2}\end{minipage}
+\end{landscape}
+\textbf{Supplementary Note 10. Expected cost of the alarm policies (Section 5.6 of the main text).}
+
+\textit{Inputs.} All quantities come from the archived replication-level results of Study B (\path{results/B/<cell>__all.jsonl}, 65 replications in 12 cells) and the follow-up baselines (\path{A3_farrington_replications.csv}, \path{B1_nbcharts_replications_group.csv}): for method $m$ at level $k$ in replication $j$, the one-month detection rate $\mathrm{DR}_{mkj}$ (\texttt{dr\_h1}), the share of decision item-months with the level in force (\texttt{alarm\_share}; alarm months per item-year $\mathrm{AM} = 12\times$ share), the number of alarm onsets (\texttt{n\_onsets}) and the false onsets per item-year over the whole window (\texttt{fa\_per\_itemyear}) and in the stable windows (\texttt{fa\_per\_itemyear\_stable}, the Table 6 quantity). The number of realised shock item-months in the detection window ($\tau = 37,\dots,118$) is counted exactly by regenerating each simulated panel from its archived seed (\path{dgp.simulate}, \path{dgp.seed_of('B', cell, rep)}); the regeneration reproduces the archived base rates and the EWMA/CUSUM metrics of all 65 replications to four decimals (\path{code/tools/validate_regen.py}).
+
+\textit{Model A (main text).} $\mathrm{EC}_{mkj}(r) = \mathrm{AM}_{mkj} + r\,(1-\mathrm{DR}_{mkj})\,E_{j}$, with $E_{j}$ the shock item-months per item-year; never acting costs $rE_{j}$, always acting 12. For methods with several operating points the reported value at each $r$ is the cheapest of their levels (the lower envelope of the level-wise mean-cost lines); charts and the Farrington-type threshold have one line. Model A charges every alarm month, including those preceding a detected shock. The alternative that charges only alarm months not followed by a shock cannot be computed from the archived outputs, which hold alarm months and detection rates but not the alarm paths.
+
+\textit{Model B (the classification framing of eq.\ (19) and of Table 6).} $\mathrm{EC}^{B}_{mkj}(r) = \mathrm{FA}_{mkj} + r\,(1-\mathrm{DR}_{mkj})\,E_{j}$ with $\mathrm{FA}$ the false onsets per item-year over the whole window. An onset is counted once however long the alarm stays on, so the always-on policy has almost no onsets and a cost of zero, and every probability-based method is cheapest at its lowest threshold for every $r$ (Table S22). Model B is reported to tie the cost analysis to the false-alarm definition of Table 6; the conclusions of the main text rest on Model A.
+
+\textit{Statistics.} Means over the 65 replications (the reference cell has 10) with Monte Carlo standard errors; paired differences M2 $-$ $m$ at each method's cheapest level with two-sided sign tests; savings $1 - \mathrm{EC}_{\mathrm{M2}}/\mathrm{EC}_{m}$ on the means; break-even ratios $r^{*}$ where the envelope curves cross (log grid of 600 points on $[1, 100]$); the value of monitoring $1 - \mathrm{EC}_{\mathrm{M2}} / \min(rE, 12)$. Scripts: \path{code/tools/extract_alarm_share.py}, \path{code/tools/cost_curves.py}; outputs under \path{results/analysis/cost/}.
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S19.1. Expected cost per item-year (Model A; units of one alarm-month), all twelve cells (n = 65): mean over replications (Monte Carlo standard error) at the method's cheapest level [L$k$] for each avoidable loss per shock $r$. Never act = $rE$; always act = 12.}\label{tab:S19.1}
+\centering\scriptsize
+\begin{tabular}{lrrrrr}
+\toprule
+Method & $r = 2$ & $r = 5$ & $r = 10$ & $r = 20$ & $r = 50$ \\ \midrule
+M2 (proposed) & 5.18 (0.34) [L3] & 8.03 (0.35) [L3] & 10.47 (0.22) [L2] & 12.02 (0.06) [L1] & 12.91 (0.08) [L1] \\
+NB complete pooling & 5.26 (0.34) [L3] & 8.08 (0.35) [L3] & 10.52 (0.22) [L2] & 12.02 (0.06) [L1] & 12.88 (0.08) [L1] \\
+NB no pooling & 5.26 (0.33) [L3] & 8.10 (0.35) [L3] & 10.48 (0.22) [L2] & 11.94 (0.08) [L1] & 13.17 (0.08) [L1] \\
+Poisson M0 & 5.42 (0.34) [L3] & 8.15 (0.36) [L3] & 10.53 (0.22) [L2] & 12.01 (0.06) [L1] & 12.91 (0.08) [L1] \\
+XGBoost & 4.91 (0.32) [L3] & 8.76 (0.42) [L3] & 10.79 (0.21) [L2] & 12.19 (0.04) [L1] & 12.95 (0.08) [L1] \\
+LSTM & 5.05 (0.33) [L3] & 8.78 (0.42) [L3] & 10.95 (0.20) [L2] & 12.18 (0.05) [L1] & 13.07 (0.08) [L1] \\
+TFT & 4.98 (0.33) [L3] & 8.97 (0.44) [L3] & 11.07 (0.22) [L2] & 12.19 (0.05) [L1] & 13.18 (0.09) [L1] \\
+Sigma-rule (plug-in SRI) & 5.05 (0.25) [L3] & 10.06 (0.47) [L1] & 16.96 (0.90) [L1] & 30.77 (1.78) [L1] & 72.21 (4.42) [L1] \\
+EWMA & 5.56 (0.26) & 9.85 (0.46) & 16.99 (0.82) & 31.27 (1.55) & 74.13 (3.74) \\
+CUSUM & 5.18 (0.29) & 9.47 (0.47) & 16.62 (0.79) & 30.92 (1.44) & 73.83 (3.41) \\
+CUSUM, negative-binomial design & 5.08 (0.29) & 9.73 (0.50) & 17.47 (0.88) & 32.95 (1.65) & 79.41 (3.99) \\
+Farrington-type threshold & 4.64 (0.28) & 10.96 (0.69) & 21.49 (1.38) & 42.56 (2.74) & 105.76 (6.84) \\
+Never act & 4.44 (0.29) & 11.10 (0.73) & 22.21 (1.46) & 44.42 (2.92) & 111.04 (7.30) \\
+Always act & 12.00 (0.00) & 12.00 (0.00) & 12.00 (0.00) & 12.00 (0.00) & 12.00 (0.00) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S19.2. Expected cost per item-year (Model A; units of one alarm-month), cells with $\bar{\mu}$ = 0.05 (n = 30): mean over replications (Monte Carlo standard error) at the method's cheapest level [L$k$] for each avoidable loss per shock $r$. Never act = $rE$; always act = 12.}\label{tab:S19.2}
+\centering\scriptsize
+\begin{tabular}{lrrrrr}
+\toprule
+Method & $r = 2$ & $r = 5$ & $r = 10$ & $r = 20$ & $r = 50$ \\ \midrule
+M2 (proposed) & 2.59 (0.18) [L3] & 5.31 (0.26) [L3] & 8.84 (0.24) [L2] & 11.58 (0.07) [L1] & 12.54 (0.10) [L1] \\
+NB complete pooling & 2.63 (0.18) [L3] & 5.34 (0.26) [L3] & 8.94 (0.24) [L2] & 11.57 (0.07) [L1] & 12.47 (0.09) [L1] \\
+NB no pooling & 2.68 (0.18) [L3] & 5.34 (0.26) [L3] & 8.92 (0.25) [L2] & 11.41 (0.10) [L1] & 13.04 (0.15) [L1] \\
+Poisson M0 & 2.73 (0.20) [L3] & 5.36 (0.27) [L3] & 8.92 (0.24) [L2] & 11.58 (0.08) [L1] & 12.54 (0.12) [L1] \\
+XGBoost & 2.32 (0.13) [L3] & 5.59 (0.30) [L3] & 9.29 (0.27) [L2] & 11.94 (0.06) [L1] & 12.64 (0.11) [L1] \\
+LSTM & 2.39 (0.14) [L3] & 5.59 (0.30) [L3] & 9.55 (0.24) [L2] & 11.90 (0.06) [L1] & 12.82 (0.13) [L1] \\
+TFT & 2.36 (0.13) [L3] & 5.62 (0.30) [L3] & 9.55 (0.29) [L2] & 11.91 (0.07) [L1] & 13.04 (0.17) [L1] \\
+Sigma-rule (plug-in SRI) & 3.24 (0.14) [L3] & 6.00 (0.28) [L3] & 10.12 (0.40) [L1] & 17.17 (0.73) [L1] & 38.31 (1.74) [L1] \\
+EWMA & 3.73 (0.21) & 6.21 (0.29) & 10.33 (0.44) & 18.57 (0.73) & 43.30 (1.64) \\
+CUSUM & 3.01 (0.20) & 5.75 (0.29) & 10.30 (0.45) & 19.40 (0.77) & 46.72 (1.76) \\
+CUSUM, negative-binomial design & 2.98 (0.20) & 5.74 (0.30) & 10.34 (0.46) & 19.54 (0.79) & 47.15 (1.81) \\
+Farrington-type threshold & 2.53 (0.13) & 5.79 (0.31) & 11.23 (0.61) & 22.11 (1.20) & 54.74 (3.00) \\
+Never act & 2.27 (0.13) & 5.67 (0.32) & 11.33 (0.63) & 22.67 (1.27) & 56.67 (3.17) \\
+Always act & 12.00 (0.00) & 12.00 (0.00) & 12.00 (0.00) & 12.00 (0.00) & 12.00 (0.00) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S19.3. Expected cost per item-year (Model A; units of one alarm-month), cells with $\bar{\mu}$ = 0.2 (n = 35): mean over replications (Monte Carlo standard error) at the method's cheapest level [L$k$] for each avoidable loss per shock $r$. Never act = $rE$; always act = 12.}\label{tab:S19.3}
+\centering\scriptsize
+\begin{tabular}{lrrrrr}
+\toprule
+Method & $r = 2$ & $r = 5$ & $r = 10$ & $r = 20$ & $r = 50$ \\ \midrule
+M2 (proposed) & 7.41 (0.24) [L3] & 10.37 (0.15) [L3] & 11.86 (0.06) [L2] & 12.39 (0.03) [L1] & 13.23 (0.08) [L1] \\
+NB complete pooling & 7.51 (0.24) [L3] & 10.43 (0.15) [L3] & 11.87 (0.05) [L2] & 12.40 (0.03) [L1] & 13.24 (0.08) [L1] \\
+NB no pooling & 7.46 (0.22) [L3] & 10.47 (0.16) [L3] & 11.82 (0.07) [L2] & 12.38 (0.04) [L1] & 13.29 (0.09) [L1] \\
+Poisson M0 & 7.71 (0.21) [L3] & 10.53 (0.18) [L3] & 11.92 (0.05) [L2] & 12.39 (0.03) [L1] & 13.22 (0.08) [L1] \\
+XGBoost & 7.14 (0.20) [L3] & 11.47 (0.26) [L3] & 12.08 (0.04) [L2] & 12.40 (0.03) [L1] & 13.23 (0.08) [L1] \\
+LSTM & 7.33 (0.18) [L3] & 11.52 (0.25) [L3] & 12.13 (0.02) [L1] & 12.42 (0.03) [L1] & 13.28 (0.09) [L1] \\
+TFT & 7.23 (0.19) [L3] & 11.66 (0.05) [L2] & 12.13 (0.02) [L1] & 12.42 (0.04) [L1] & 13.30 (0.09) [L1] \\
+Sigma-rule (plug-in SRI) & 6.59 (0.23) [L3] & 13.02 (0.40) [L1] & 22.83 (0.74) [L1] & 42.44 (1.43) [L1] & 101.26 (3.50) [L1] \\
+EWMA & 7.13 (0.23) & 12.97 (0.27) & 22.70 (0.38) & 42.16 (0.66) & 100.55 (1.59) \\
+CUSUM & 7.03 (0.23) & 12.66 (0.24) & 22.04 (0.38) & 40.80 (0.76) & 97.07 (2.01) \\
+CUSUM, negative-binomial design & 6.88 (0.25) & 13.14 (0.29) & 23.58 (0.44) & 44.45 (0.83) & 107.06 (2.12) \\
+Farrington-type threshold & 6.45 (0.25) & 15.39 (0.60) & 30.29 (1.19) & 60.09 (2.38) & 149.48 (5.94) \\
+Never act & 6.31 (0.25) & 15.77 (0.64) & 31.53 (1.27) & 63.06 (2.55) & 157.65 (6.37) \\
+Always act & 12.00 (0.00) & 12.00 (0.00) & 12.00 (0.00) & 12.00 (0.00) & 12.00 (0.00) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\begin{landscape}
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S20. Saving of M2 relative to each policy, all twelve cells (Model A): $1 - \mathrm{EC}_{\mathrm{M2}}/\mathrm{EC}_{m}$ on the means (share of the 65 replications in which M2 is cheaper; two-sided sign-test p-value, ties excluded), each method at its cheapest level. The last row prices the better trivial policy replication by replication, the mean of $\min(rE_j, 12)$, which is a cheaper benchmark than the $\min(rE, 12)$ at the mean shock frequency of the subset that Table S21.1 and the main text use for the value of monitoring.}\label{tab:S20}
+\centering\scriptsize
+\begin{tabular}{llllll}
+\toprule
+Compared with & $r = 2$ & $r = 5$ & $r = 10$ & $r = 20$ & $r = 50$ \\ \midrule
+NB complete pooling & +1.4\% (85\%; $<$0.001) & +0.6\% (63\%; 0.05) & +0.5\% (65\%; 0.02) & -0.0\% (52\%; 0.88) & -0.2\% (48\%; 0.88) \\
+NB no pooling & +1.4\% (77\%; $<$0.001) & +0.8\% (68\%; 0.01) & +0.2\% (46\%; 0.62) & -0.7\% (32\%; 0.01) & +2.0\% (65\%; 0.03) \\
+Poisson M0 & +4.3\% (82\%; $<$0.001) & +1.4\% (69\%; 0.00) & +0.7\% (66\%; 0.02) & -0.0\% (44\%; 0.47) & -0.1\% (46\%; 0.67) \\
+XGBoost & -5.5\% (15\%; $<$0.001) & +8.3\% (91\%; $<$0.001) & +3.0\% (88\%; $<$0.001) & +1.4\% (88\%; $<$0.001) & +0.3\% (60\%; 0.19) \\
+LSTM & -2.7\% (26\%; $<$0.001) & +8.6\% (95\%; $<$0.001) & +4.4\% (95\%; $<$0.001) & +1.3\% (90\%; $<$0.001) & +1.2\% (71\%; 0.01) \\
+TFT & -4.0\% (20\%; $<$0.001) & +10.5\% (97\%; $<$0.001) & +5.5\% (97\%; $<$0.001) & +1.4\% (80\%; $<$0.001) & +2.0\% (67\%; 0.02) \\
+Sigma-rule (plug-in SRI) & -2.7\% (43\%; 0.32) & +20.1\% (100\%; $<$0.001) & +38.3\% (97\%; $<$0.001) & +60.9\% (98\%; $<$0.001) & +82.1\% (100\%; $<$0.001) \\
+EWMA & +6.8\% (54\%; 0.62) & +18.4\% (100\%; $<$0.001) & +38.4\% (94\%; $<$0.001) & +61.6\% (100\%; $<$0.001) & +82.6\% (100\%; $<$0.001) \\
+CUSUM & -0.1\% (46\%; 0.62) & +15.2\% (100\%; $<$0.001) & +37.0\% (92\%; $<$0.001) & +61.1\% (100\%; $<$0.001) & +82.5\% (100\%; $<$0.001) \\
+CUSUM, negative-binomial design & -2.1\% (48\%; 0.80) & +17.4\% (98\%; $<$0.001) & +40.1\% (91\%; $<$0.001) & +63.5\% (100\%; $<$0.001) & +83.7\% (100\%; $<$0.001) \\
+Farrington-type threshold & -11.7\% (28\%; $<$0.001) & +26.7\% (100\%; $<$0.001) & +51.3\% (92\%; $<$0.001) & +71.8\% (100\%; $<$0.001) & +87.8\% (100\%; $<$0.001) \\
+Never act & -16.7\% (0\%; $<$0.001) & +27.7\% (94\%; $<$0.001) & +52.9\% (91\%; $<$0.001) & +72.9\% (100\%; $<$0.001) & +88.4\% (100\%; $<$0.001) \\
+Always act & +56.8\% (100\%; $<$0.001) & +33.1\% (100\%; $<$0.001) & +12.8\% (82\%; $<$0.001) & -0.1\% (42\%; 0.21) & -7.6\% (6\%; $<$0.001) \\
+Better of never and always act, by replication & -16.7\% (0\%) & +10.3\% (94\%) & +6.0\% (72\%) & -0.1\% (42\%) & -7.6\% (6\%) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\end{landscape}
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S21.1. Level switching points of M2 (the $r$ at which level 2 becomes cheaper than level 3, and level 1 cheaper than level 2), the value of monitoring $1 - \mathrm{EC}_{\mathrm{M2}}/\min(rE, 12)$ (its maximum and the range of $r$ over which it exceeds 10\%), and break-even ratios $r^{*}$ at which the M2 envelope crosses the never-act line, the always-act line and the envelopes of XGBoost, the LSTM and the CUSUM (Model A; `none' = no crossing on $[1, 100]$).}\label{tab:S21_1}
+\centering\scriptsize
+\begin{tabular}{lrrrllrrrrr}
+\toprule
+Subset & n & L3$\to$L2 & L2$\to$L1 & Max value & Value $>$ 10\% & $r^{*}$ never & $r^{*}$ always & $r^{*}$ XGBoost & $r^{*}$ LSTM & $r^{*}$ CUSUM \\ \midrule
+All cells & 65 & 7.0 & 18.4 & 30\% at $r$ = 5.4 & 3.1–11.8 & 2.6 & 19.4 & 2.8, 59.7 & 2.5 & 2.0 \\
+$\bar{\mu}$ = 0.05 & 30 & 8.4 & 19.3 & 25\% at $r$ = 10.6 & 6.8–16.5 & 3.4 & 33.1 & 3.5, 61.4 & 3.2 & none \\
+$\bar{\mu}$ = 0.2 & 35 & 6.2 & 14.6 & 23\% at $r$ = 3.8 & 3.0–5.4 & 2.5 & 11.7 & 2.6, 37.0 & 2.2 & 2.4 \\
+Stable & 20 & 7.5 & 21.2 & 26\% at $r$ = 8.0 & 4.2–16.4 & 3.0 & 26.4 & 44.2 & 76.2 & 1.9 \\
+Gradual & 25 & 6.9 & 17.1 & 29\% at $r$ = 5.0 & 3.1–9.7 & 2.5 & 16.8 & 2.8, 6.7, 8.2, 52.3 & 2.5 & 2.2 \\
+Abrupt & 20 & 6.7 & 15.9 & 29\% at $r$ = 4.4 & 3.0–7.9 & 2.5 & 15.9 & 3.0 & 2.9 & 1.8 \\
+$\alpha'$ = 0.5 & 30 & 7.3 & 18.6 & 26\% at $r$ = 6.2 & 3.7–12.4 & 2.9 & 21.2 & 3.0, 49.8 & 2.6 & 1.6 \\
+$\alpha'$ = 2 & 35 & 6.8 & 18.1 & 31\% at $r$ = 4.8 & 2.9–11.3 & 2.4 & 18.1 & 2.7, 73.3 & 2.3 & 2.2 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S21.2. Value of monitoring by method: the largest saving of each policy's lower envelope relative to the better of never acting and always acting, $\max_r\,[1 - \mathrm{EC}_m(r)/\min(rE, 12)]$, and the $r$ at which it occurs (Model A; all cells and the two base-rate subsets). The maximum lies at $r = 12/E$ for every policy because the trivial envelope peaks there.}\label{tab:S21_2}
+\centering\footnotesize
+\begin{tabular}{llll}
+\toprule
+Method & All cells & $\bar{\mu}$ = 0.05 & $\bar{\mu}$ = 0.2 \\ \midrule
+M2 (proposed) & 29.8\% at $r$ = 5.4 & 24.9\% at $r$ = 10.6 & 23.4\% at $r$ = 3.8 \\
+NB complete pooling & 29.4\% at $r$ = 5.4 & 24.1\% at $r$ = 10.6 & 22.7\% at $r$ = 3.8 \\
+NB no pooling & 29.2\% at $r$ = 5.4 & 23.9\% at $r$ = 10.6 & 22.7\% at $r$ = 3.8 \\
+Poisson M0 & 29.0\% at $r$ = 5.4 & 24.2\% at $r$ = 10.6 & 21.6\% at $r$ = 3.8 \\
+XGBoost & 22.7\% at $r$ = 5.4 & 20.3\% at $r$ = 10.6 & 18.7\% at $r$ = 3.8 \\
+LSTM & 22.5\% at $r$ = 5.4 & 18.8\% at $r$ = 10.6 & 17.9\% at $r$ = 3.8 \\
+TFT & 20.7\% at $r$ = 5.4 & 17.8\% at $r$ = 10.6 & 16.5\% at $r$ = 3.8 \\
+Sigma-rule (plug-in SRI) & 11.5\% at $r$ = 5.4 & 12.2\% at $r$ = 10.6 & 10.9\% at $r$ = 3.8 \\
+EWMA & 13.1\% at $r$ = 5.4 & 9.8\% at $r$ = 10.6 & 11.2\% at $r$ = 3.8 \\
+CUSUM & 16.2\% at $r$ = 5.4 & 9.7\% at $r$ = 10.6 & 13.1\% at $r$ = 3.8 \\
+CUSUM, negative-binomial design & 13.7\% at $r$ = 5.4 & 9.3\% at $r$ = 10.6 & 11.2\% at $r$ = 3.8 \\
+Farrington-type threshold & 1.6\% at $r$ = 5.4 & 1.1\% at $r$ = 10.5 & 1.3\% at $r$ = 3.8 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S21.3. Alarm budget and detection at a like-for-like operating point (Study B, all cells, means over the 65 replications): alarm months per item-year, the share of decision item-months in which the level is in force, the one-month detection rate (share of shock item-months with the level in force in the preceding month) and the ratio of that rate to the share in force, which is the detection rate relative to an alarm switched on at random for the same share of months (1 = no skill).}\label{tab:S21_3}
+\centering\footnotesize
+\begin{tabular}{lrrrr}
+\toprule
+Policy and level & Alarm months / item-year & Share in force & Detected $\le$ 1 month & Ratio to random \\ \midrule
+M2, level 1 & 11.42 & 95\% & 98\% & 1.03 \\
+M2, level 2 & 8.66 & 72\% & 85\% & 1.17 \\
+M2, level 3 & 3.29 & 27\% & 43\% & 1.57 \\
+NB complete pooling, level 3 & 3.38 & 28\% & 43\% & 1.54 \\
+NB no pooling, level 3 & 3.36 & 28\% & 44\% & 1.56 \\
+Poisson M0, level 3 & 3.59 & 30\% & 45\% & 1.52 \\
+XGBoost, level 3 & 2.35 & 20\% & 30\% & 1.51 \\
+LSTM, level 3 & 2.56 & 21\% & 31\% & 1.47 \\
+TFT, level 3 & 2.32 & 19\% & 28\% & 1.46 \\
+Sigma-rule, limit 2 & 2.09 & 17\% & 26\% & 1.47 \\
+Sigma-rule, limit 3 & 1.33 & 11\% & 17\% & 1.50 \\
+EWMA & 2.70 & 23\% & 30\% & 1.34 \\
+CUSUM & 2.32 & 19\% & 28\% & 1.44 \\
+CUSUM, negative-binomial design & 1.98 & 17\% & 24\% & 1.43 \\
+Farrington-type threshold & 0.43 & 4\% & 5\% & 1.31 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S21.4. A risk-averse reading of the cost curves (Model A, all cells, 65 replications): the 90th percentile and the conditional mean beyond it (CVaR$_{0.90}$) of the per-replication cost $\mathrm{EC}_j(r)$, each at the level that minimises that measure [L$k$ for the percentile / for the CVaR]; never acting is the same statistic of $rE_j$, always acting is 12 in every replication. Under the mean, M2 beats both trivial policies for $r$ in [2.6, 19.3] (largest saving 29.8\% at $r$ = 5.4); under the 90th percentile for $r$ in [2.5, 8.6] (19.5\% at 3.4); under CVaR$_{0.90}$ for $r$ in [2.2, 6.3] (17.3\% at 2.8).}\label{tab:S21_4}
+\centering\scriptsize
+\begin{tabular}{llllll}
+\toprule
+Method & $r = 2$ & $r = 5$ & $r = 10$ & $r = 20$ & $r = 50$ \\ \midrule
+M2 (proposed) & 8.45 / 9.33 [L3/L3] & 11.08 / 11.48 [L3/L3] & 12.12 / 12.27 [L2/L2] & 12.54 / 12.72 [L1/L1] & 13.56 / 14.01 [L1/L1] \\
+NB complete pooling & 8.55 / 9.42 [L3/L3] & 11.19 / 11.57 [L3/L3] & 12.13 / 12.28 [L2/L2] & 12.54 / 12.72 [L1/L1] & 13.56 / 14.01 [L1/L1] \\
+NB no pooling & 8.61 / 9.23 [L3/L3] & 11.26 / 11.62 [L3/L3] & 12.18 / 12.27 [L1/L1] & 12.55 / 12.72 [L1/L1] & 14.04 / 14.39 [L1/L1] \\
+Poisson M0 & 9.02 / 9.51 [L3/L3] & 11.64 / 11.90 [L3/L3] & 12.18 / 12.28 [L2/L1] & 12.54 / 12.70 [L1/L1] & 13.73 / 14.08 [L1/L1] \\
+XGBoost & 7.76 / 8.75 [L3/L3] & 11.93 / 12.00 [L2/L2] & 12.20 / 12.28 [L1/L1] & 12.54 / 12.70 [L1/L1] & 13.75 / 14.12 [L1/L1] \\
+LSTM & 7.97 / 8.87 [L3/L3] & 11.92 / 12.01 [L2/L2] & 12.21 / 12.29 [L1/L1] & 12.62 / 12.75 [L1/L1] & 13.94 / 14.30 [L1/L1] \\
+TFT & 7.90 / 8.83 [L3/L3] & 11.91 / 12.02 [L2/L2] & 12.20 / 12.29 [L1/L1] & 12.59 / 12.77 [L1/L1] & 14.22 / 14.60 [L1/L1] \\
+Sigma-rule (plug-in SRI) & 7.40 / 8.56 [L3/L3] & 14.52 / 16.53 [L1/L1] & 25.54 / 29.53 [L1/L1] & 47.59 / 55.52 [L1/L1] & 113.73 / 133.50 [L1/L1] \\
+EWMA & 8.23 / 8.93 & 13.98 / 15.06 & 24.61 / 25.64 & 45.97 / 47.05 & 108.36 / 111.81 \\
+CUSUM & 8.15 / 8.91 & 13.63 / 14.60 & 24.01 / 25.04 & 43.87 / 46.68 & 105.00 / 112.22 \\
+CUSUM, negative-binomial design & 7.85 / 8.89 & 14.56 / 15.43 & 25.23 / 27.27 & 47.71 / 51.57 & 116.23 / 125.16 \\
+Farrington-type threshold & 7.24 / 8.54 & 17.32 / 20.56 & 34.13 / 40.59 & 67.74 / 80.66 & 168.57 / 200.88 \\
+Never act & 7.16 / 8.49 & 17.89 / 21.23 & 35.78 / 42.47 & 71.55 / 84.93 & 178.88 / 212.33 \\
+Always act & 12.00 / 12.00 & 12.00 / 12.00 & 12.00 / 12.00 & 12.00 / 12.00 & 12.00 / 12.00 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S22. Expected cost per item-year under Model B (false onsets per item-year over the whole window plus $r$ times the missed shocks per item-year), all twelve cells, each method at its cheapest level [L$k$]. Always acting has no false onsets and no misses, hence a cost of zero; every probability-based method is cheapest at level 1 for every $r$.}\label{tab:S22}
+\centering\scriptsize
+\begin{tabular}{lrrrrr}
+\toprule
+Method & $r = 2$ & $r = 5$ & $r = 10$ & $r = 20$ & $r = 50$ \\ \midrule
+M2 (proposed) & 0.22 [L1] & 0.31 [L1] & 0.46 [L1] & 0.76 [L1] & 1.66 [L1] \\
+NB complete pooling & 0.22 [L1] & 0.30 [L1] & 0.45 [L1] & 0.74 [L1] & 1.61 [L1] \\
+NB no pooling & 0.27 [L1] & 0.39 [L1] & 0.60 [L1] & 1.01 [L1] & 2.25 [L1] \\
+Poisson M0 & 0.22 [L1] & 0.31 [L1] & 0.46 [L1] & 0.76 [L1] & 1.65 [L1] \\
+XGBoost & 0.18 [L1] & 0.26 [L1] & 0.39 [L1] & 0.64 [L1] & 1.41 [L1] \\
+LSTM & 0.19 [L1] & 0.28 [L1] & 0.43 [L1] & 0.73 [L1] & 1.61 [L1] \\
+TFT & 0.23 [L1] & 0.33 [L1] & 0.49 [L1] & 0.82 [L1] & 1.82 [L1] \\
+Sigma-rule (plug-in SRI) & 3.31 [L1] & 7.45 [L1] & 14.35 [L1] & 28.17 [L1] & 69.60 [L1] \\
+EWMA & 3.12 & 7.41 & 14.55 & 28.84 & 71.69 \\
+CUSUM & 2.90 & 7.19 & 14.34 & 28.64 & 71.55 \\
+CUSUM, negative-binomial design & 3.13 & 7.77 & 15.51 & 31.00 & 77.46 \\
+Farrington-type threshold & 4.40 & 10.72 & 21.26 & 42.32 & 105.52 \\
+Never act & 4.44 & 11.10 & 22.21 & 44.42 & 111.04 \\
+Always act & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\textit{Sensitivity.} Counting a shock as detected when the level was in force at any time in the three months before it (\texttt{dr\_h3}, with $E$ counted over $\tau = 39,\dots,118$) lowers the Model A cost of every alarm policy, by 1\% to 16\% at $r = 5$ and by 1\% to 21\% at $r = 20$ (the largest changes are those of the sigma-rule and the EWMA; never acting rises by 0.7\% because $E$ is counted over a shorter window), and leaves every ordering of the main text in place. The two-channel headline level of M2 (triage level or persistent $q$-alarm, whichever is higher) adds 0.27 alarm months per item-year to level 2 and 0.01 to level 1 and raises the one-month detection rate of level 2 from 0.847 to 0.857; its Model A cost is within 0.1\% of the triage channel at level 1 and within 3\% at level 2 (+2.7\%, +2.2\%, +1.3\%, 0.0\% and −2.3\% at $r$ = 2, 5, 10, 20 and 50). Weighting the loss by the mean loss fraction (0.17 under the log-normal severity of Table 4, 0.12 under the Pareto severity; Table S15) rescales $r$ and leaves the curves otherwise unchanged.
+
+\textbf{Supplementary Note 11. Numerical verification of the Hawkes window-count dispersion (Section 3.4 of the main text and Supplementary Note 16).}
+
+Table S23 verifies (10)–(11) of the main text by exact cluster simulation (Hawkes and Oakes, 1974) of an exponential-kernel Hawkes process with $\Lambda\Delta = 0.5$; 20 replicates of 3,000 windows per cell after burn-in. Fig.~S3 plots the index of dispersion (10) against $\kappa\Delta$ for four branching ratios and the moment-matched dispersion per unit mean (11).
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S23. Numerical verification of (10)–(11) of the main text by exact cluster simulation of an exponential-kernel Hawkes process with $\Lambda\Delta = 0.5$; 20 replicates of 3,000 windows per cell after burn-in.}\label{tab:S23}
+\centering\footnotesize
+\begin{tabular}{lllllll}
+\toprule
+$n$ & $\kappa\Delta$ & mean count & $D$ (empirical) & $D$ (10) & $\alpha'_{match}$ (empirical) & $\alpha'_{match}$ (11) \\ \midrule
+0.3 & 0.3 & 0.491 & 1.132 & 1.142 & 3.73 & 3.53 \\
+0.3 & 1.0 & 0.504 & 1.383 & 1.383 & 1.32 & 1.31 \\
+0.3 & 4.0 & 0.509 & 1.798 & 1.785 & 0.64 & 0.64 \\
+0.6 & 0.3 & 0.500 & 1.719 & 1.714 & 0.70 & 0.70 \\
+0.6 & 1.0 & 0.508 & 2.953 & 2.931 & 0.26 & 0.26 \\
+0.6 & 4.0 & 0.499 & 4.857 & 4.962 & 0.13 & 0.13 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}\centering\includegraphics[width=\linewidth]{figs/FigS3_hawkes_dispersion.pdf}
+\captionof{figure}{Fig. S3. (a) Index of dispersion (10) of Hawkes window counts against $\kappa\Delta$ for four branching ratios, large-window asymptotes dotted; (b) moment-matched dispersion per unit mean, (11).}\label{fig:S3}\end{minipage}
+\vspace{14pt}
+
+\textbf{Supplementary Note 12. Alarm metrics of the robustness arms (Section 5.4 of the main text).}
+
+Table S24 tabulates, for the robustness arms of Section 5.4 that keep the gamma–Poisson truth (the Hawkes arms are in Section 5.4 and Note 11), the M2 alarm metrics that the main text quotes: AUC-PR, Brier score and expected calibration error of the three-month event probability, the one-month detection rates at triage levels 2 and 3, the stable-window false alarms per item-year at level 2, the sequential coverage of the conformal sets, the delay of the $q$ channel after the change, the posterior median of $\alpha'$ and the RMSE of $\log C_i$. Every arm is the reference design ($\alpha' = 2$, $\bar{\mu} = 0.2$, gradual, $I = 30$, $T = 120$) with one factor changed, five replications; the first row is the Study B reference cell (ten replications). Source: \path{results/analysis/R_cells.csv} and \path{B_cells.csv}.
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S24. Alarm metrics of M2 in the robustness arms of Section 5.4 (five replications each; the reference cell of Study B, ten replications, for comparison): AUC-PR, Brier score and ECE of the three-month event probability; one-month detection rate at triage levels 2 and 3; stable-window false alarms per item-year at level 2; sequential coverage of the conformal sets (target 0.90); mean delay of the $q$ channel after the change (months); posterior median of $\alpha'$ (truth 2) and RMSE of $\log C_i$.}\label{tab:S24}
+\centering\scriptsize
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.9cm}rrrrrrrrrrr}
+\toprule
+Arm & n & AUC-PR & Brier & ECE & DR $\le$ 1 m, L2 & DR $\le$ 1 m, L3 & FA (stable), L2 & Set cov. & $q$ ARL$_1$ & $\alpha'$ median & RMSE $\log C$ \\ \midrule
+reference cell (Study B) & 10 & 0.810 & 0.201 & 0.041 & 0.98 & 0.71 & 0.39 & 0.909 & 25.5 & – & – \\
+measurement error in $\mathbf{z}$ ($\varsigma$ = 0.5) & 5 & 0.803 & 0.203 & 0.042 & 0.98 & 0.70 & 0.34 & 0.907 & 25.9 & 2.15 & 0.14 \\
+15\% missing indicators, latent AR(1) & 5 & 0.825 & 0.193 & 0.041 & 0.98 & 0.73 & 0.45 & 0.914 & 30.5 & 2.12 & 0.14 \\
+15\% missing indicators, last value carried forward & 5 & 0.825 & 0.192 & 0.041 & 0.98 & 0.73 & 0.45 & 0.914 & 28.9 & 2.01 & 0.15 \\
+Pareto severity & 5 & 0.814 & 0.197 & 0.031 & 0.98 & 0.57 & 0.34 & 0.914 & 27.1 & 1.97 & 0.13 \\
+20\% cold-start items & 5 & 0.825 & 0.195 & 0.045 & 0.98 & 0.74 & 0.41 & 0.911 & 24.6 & 2.09 & 0.16 \\
+indicator lag 2 in the truth, 1 in the model & 5 & 0.802 & 0.201 & 0.030 & 0.98 & 0.72 & 0.42 & 0.909 & 28.7 & 1.62 & 0.15 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\textbf{Supplementary Note 13. Modelling choices and the details of the parameter-recovery results (Sections 3.3 and 5.2 of the main text).}
+
+\textit{Three choices in the intensity dynamics (7)–(9).} First, there is no additional item-period noise term in (7): a log-normal disturbance on $\log R$ and the gamma multiplier in (2) both represent unexplained intensity variation and are not separately identified at small $\mu$ (Table S16 measures the price of fitting the gamma form to a log-normal truth). Second, the level and slope are indexed by group, not item: the item-specific level and the exposure $u_i$ in (14) are identified only through their sum, and item-level slopes cannot be estimated from rare counts (Section 3.2); static item differences therefore live in $C_i$ and the trend in the group, which also lets a cold-start item inherit its group's trajectory. Third, $\sigma_\eta = \tau_\zeta = 0$ reduces (8)–(9) to the deterministic log-linear trend (Y3), so the dynamic model nests the source model (Section 4.1).
+
+\textit{Reference cell: two decisions fed back into the design.} In the single replication of the reference cell reported in Section 5.2, the deterioration probability $P(\delta_t^g > 0.01 \mid \mathcal{D})$ needs a floor: without it the probability floats around one half, with it it averages 0.23 before $t_0$ and 0.76 after $t_0 + 12$. Even the smoothed posterior detects a $+0.02$ per month slope change only seven to eight months after onset, so the slope is a secondary flag and the primary statistics are the level-based $p$ and $q$; and sparse (horseshoe) innovations buy nothing in a gradual regime, so the Gaussian model is the base.
+
+\textit{(i) Pooling.} Complete pooling attributes the residual item heterogeneity to dispersion: coverage of $\log C_i$ falls to 0.13–0.49, and as the information grows its $\alpha'$ intervals contract around a value that is too small—at $\bar{\mu} = 0.5$ and $I = 30$ they cover the truth in 20\% of cases (Fig.~4 of the main text; Table S5). The bias is predictable: an omitted item effect $u_i \sim N(0, \tau_C^2)$ multiplies the gamma variable in (2), and the pseudo-true dispersion of the misspecified model is 1.61 at $\tau_C = 0.3$ and 1.00 at $\tau_C = 0.6$ for the item means of the reference cell (Supplementary Note 3; Table S7). No pooling keeps nominal coverage but learns little about the item-level $\alpha'_i$, whose log-scale interval width stays between 1.7 and 3.2.
+
+\textit{(ii) Dispersion information.} The width of the 90\% interval for $\log\alpha'$ falls by a factor of 2.4–4.9 from $\bar{\mu} = 0.05$ to $\bar{\mu} = 0.5$ at $I = 30$ and by 1.6–3.9 at $I = 10$ (Fig.~4b)—more slowly than the $8/\mu^2$ scaling of Section 3.2 implies, because at small $\bar{\mu}$ the hierarchical prior supplies the information that the counts lack; doubling $T$ narrows it by a further 14–42\%. When the dispersion differs across groups—$\alpha'_g$ = (1, 2, 4) and (0.5, 2, 8)—the hierarchy orders the groups correctly in every replication and covers each group's truth in 93\% and 67\% of cases, whereas complete pooling settles at 1.62 and 1.09 and covers them in 20\% and 0\% (Table S13).
+
+\textit{(iii) Abrupt changes.} With strong data ($I = 30$, $\bar{\mu} \geq 0.2$) the horseshoe variant locates the change sharply—posterior probability 0.65–0.90 on the true month, against 0.06–0.10 with Gaussian innovations—but its fits fail a convergence check in 18 of these 20 replications because the posterior is multimodal in the month of the jump; with weak data it spreads the change over neighbouring months. With either innovation model the 90\% interval for the change date contains the true month in every replication (Table S11).
+
+\input{supplementary_backtest}
+
+\textbf{Supplementary Note 15. Conformal prediction sets (Sections 4.3 and 5.3 (iv) of the main text).}
+
+For the observable count $N_{i,t+h}$ the framework forms distribution-free prediction sets from the posterior predictive mass function by the adaptive-prediction-sets construction of Romano et al.\ (2020): the candidate counts are ordered by predictive mass, the set is the smallest initial segment whose cumulative mass reaches the calibrated level, and the level is calibrated on the conformity scores of past item-periods. Because exchangeability fails under regime change, the per-item miscoverage level is adjusted online by adaptive conformal inference (Gibbs and Candès, 2021), which raises the level after a miss and lowers it after a cover, so that the realised sequential coverage tracks the 90\% target; most sets are $\{0\}$ or $\{0,1\}$, and the set size is itself informative. Conformalised quantile regression (Romano et al., 2019) does the same for the loss fraction given a shock (Supplementary Note 8, Table S15). In Study B the sets cover 91.8\% of the counts under M2 with 2.03 counts on average and 90.6\% under the Poisson model with 1.68 (Table 6b of the main text); the gain from modelling over-dispersion lies in the calibration of the event probabilities and in run-length control, not in the prediction sets.
+
+\textbf{Supplementary Note 16. Window-count dispersion of an exponential-kernel Hawkes process (Section 3.4 of the main text).}
+
+Let $\lambda(t) = \nu + \sum_{t_{k} < t} a\, e^{-b(t - t_{k})}$ with $n = a/b < 1$, stationary rate $\Lambda = \nu/(1 - n)$ and $\kappa = b - a = b(1 - n)$. Hawkes (1971) gives the complete covariance density of the stationary process as $\Lambda\,\delta(\tau) + c(\tau)$ with
+\begin{equation}
+c(\tau) = \frac{\Lambda\, a\,(2b - a)}{2\kappa}\, e^{-\kappa|\tau|}, \qquad \tau \neq 0. \tag{S16.1}
+\end{equation}
+The variance of the count in a window of length $\Delta$ is the double integral of the covariance density over the window,
+\begin{equation}
+\mathrm{Var}[N(\Delta)] = \Lambda\Delta + 2\int_{0}^{\Delta} (\Delta - \tau)\, c(\tau)\, d\tau. \tag{S16.2}
+\end{equation}
+Using $\int_{0}^{\Delta} (\Delta - \tau)\, e^{-\kappa\tau}\, d\tau = \Delta/\kappa - (1 - e^{-\kappa\Delta})/\kappa^{2}$,
+\begin{equation}
+\mathrm{Var}[N(\Delta)] = \Lambda\Delta\left[1 + \frac{a(2b - a)}{\kappa^{2}}\left(1 - \frac{1 - e^{-\kappa\Delta}}{\kappa\Delta}\right)\right], \tag{S16.3}
+\end{equation}
+and substituting $a = nb$, $\kappa = b(1 - n)$ gives $a(2b - a)/\kappa^{2} = n(2 - n)/(1 - n)^{2}$, which is (10) of the main text. The large-window limit $1/(1 - n)^{2}$ follows from $1 + n(2 - n)/(1 - n)^{2} = 1/(1 - n)^{2}$, and the small-window expansion from $g(y) = y/2 - y^{2}/6 + O(y^{3})$. The expression agrees with the variance formula of Da Fonseca and Zaatour (2014); Supplementary Note 11 verifies (10)--(11) by exact cluster simulation (Table S23, Fig.~S3).
+
+\input{supplementary_note17_rare_arm}
+
+\vspace{10pt}
+
+\textbf{References cited in Supplementary Notes 7–11, 15 and 16.} Cameron, A.C., Trivedi, P.K., 2013. Regression Analysis of Count Data, 2nd ed. Cambridge University Press, Cambridge. Coles, S., 2001. An Introduction to Statistical Modeling of Extreme Values. Springer, London. Credit Suisse Financial Products, 1997. CreditRisk+: A Credit Risk Management Framework. London. Cunningham, J.A., 1990. IEEE Trans. Semicond. Manuf. 3, 60–71. Da Fonseca, J., Zaatour, R., 2014. J. Futures Mark. 34, 548–579. Ferrari, S., Cribari-Neto, F., 2004. J. Appl. Stat. 31, 799–815. Gibbs, I., Candès, E., 2021. Adv. Neural Inf. Process. Syst. 34, 1660–1672. Goel, A.L., Okumoto, K., 1979. IEEE Trans. Reliab. R-28, 206–211. Grandell, J., 1997. Mixed Poisson Processes. Chapman \& Hall, London. Greenwood, M., Yule, G.U., 1920. J. R. Stat. Soc. 83, 255–279. Hawkes, A.G., 1971. Biometrika 58, 83–90. Hawkes, A.G., Oakes, D., 1974. J. Appl. Probab. 11, 493–503. Hougaard, P., 2000. Analysis of Multivariate Survival Data. Springer, New York. Lawless, J.F., 1987. Can. J. Stat. 15, 209–225. Lloyd-Smith, J.O., et al., 2005. Nature 438, 355–359. Murphy, B.T., 1964. Proc. IEEE 52, 1537–1545. Ospina, R., Ferrari, S.L.P., 2010. Stat. Pap. 51, 111–126. Pickands, J., 1975. Ann. Stat. 3, 119–131. Price, J.E., 1970. Proc. IEEE 58, 1290–1291. Romano, Y., Patterson, E., Candès, E., 2019. Adv. Neural Inf. Process. Syst. 32, 3538–3548. Romano, Y., Sesia, M., Candès, E., 2020. Adv. Neural Inf. Process. Syst. 33, 3581–3591. Seeds, R.B., 1967. IEEE Int. Conv. Rec. 6, 60–61. Smithson, M., Verkuilen, J., 2006. Psychol. Methods 11, 54–71. Stapper, C.H., 1973. IEEE Trans. Electron Devices 20, 655–657. Stapper, C.H., 1989. Microelectron. J. 20, 129–151. Stapper, C.H., Armstrong, F.M., Saji, K., 1983. Proc. IEEE 71, 453–470. Vaupel, J.W., Manton, K.G., Stallard, E., 1979. Demography 16, 439–454. Wright, T.P., 1936. J. Aeronaut. Sci. 3, 122–128.

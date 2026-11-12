@@ -1,0 +1,7 @@
+Hierarchical I = 10, T = 60 n per base rate {0.05: 10, 0.2: 10, 0.5: 10}
+Hierarchical I = 30, T = 120 n per base rate {0.05: 10, 0.2: 20, 0.5: 10}
+No pooling I = 10, T = 60 n per base rate {0.05: 10, 0.2: 10, 0.5: 10}
+No pooling I = 30, T = 120 n per base rate {0.05: 10, 0.2: 20, 0.5: 10}
+Complete pooling I = 10, T = 60 n per base rate {0.05: 10, 0.2: 10, 0.5: 10}
+Complete pooling I = 30, T = 120 n per base rate {0.05: 10, 0.2: 20, 0.5: 10}
+saved fig6 6 series

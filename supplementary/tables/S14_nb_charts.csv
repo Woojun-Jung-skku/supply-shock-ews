@@ -1,0 +1,7 @@
+Chart,Det. ≤ 1 mo,Det. ≤ 3 mo,FA / item-year,Lead (IQR),ARL₀ (90%),ARL₀ by regime,ARL₁
+"CUSUM, NB design, α̂ pooled within group",0.24,0.25,0.010,3.1 (1.8–5.1),24.7 (20–33),16 / 98 / 105,40.0
+"EWMA, NB design, α̂ pooled within group",0.28,0.36,0.225,4.2 (1.8–8.8),9.8 (9–10),10 / 9 / 11,17.9
+Poisson CUSUM (Table 6),0.28,0.29,0.020,3.6 (2.1–6.3),16.6 (13–22),11 / 46 / 71,37.2
+Poisson EWMA (Table 6),0.30,0.39,0.246,4.2 (1.9–8.8),8.9 (8–9),9 / 8 / 10,16.5
+"CUSUM, NB design, α̂ pooled across the panel",0.23,0.24,0.010,3.5 (2.2–5.5),24.4 (19–33),16 / 115 / 144,40.4
+"EWMA, NB design, α̂ pooled across the panel",0.28,0.36,0.229,4.2 (1.8–8.7),9.8 (9–10),10 / 9 / 11,18.0

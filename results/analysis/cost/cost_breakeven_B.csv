@@ -1,0 +1,281 @@
+model,subset,n,method,label,r_star,M2_cheaper_at_r1,M2_cheaper_at_r100
+B,All cells,65,NBcomplete,NB complete pooling,none,False,False
+B,All cells,65,NBnone,NB no pooling,none,True,True
+B,All cells,65,M0,Poisson M0,none,False,False
+B,All cells,65,xgb,XGBoost,none,False,False
+B,All cells,65,lstm,LSTM,none,False,False
+B,All cells,65,tft,TFT,1.3,False,True
+B,All cells,65,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,All cells,65,ewma,EWMA,none,True,True
+B,All cells,65,cusum,CUSUM,none,True,True
+B,All cells,65,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,All cells,65,farr,Farrington-type threshold,none,True,True
+B,All cells,65,never,Never act,none,True,True
+B,All cells,65,always,Always act,none,False,False
+B,All cells,65,trivial,"min(never, always)",none,False,False
+B,mu 0.05,30,NBcomplete,NB complete pooling,none,False,False
+B,mu 0.05,30,NBnone,NB no pooling,none,True,True
+B,mu 0.05,30,M0,Poisson M0,none,False,False
+B,mu 0.05,30,xgb,XGBoost,none,False,False
+B,mu 0.05,30,lstm,LSTM,none,False,False
+B,mu 0.05,30,tft,TFT,1.3,False,True
+B,mu 0.05,30,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,mu 0.05,30,ewma,EWMA,none,True,True
+B,mu 0.05,30,cusum,CUSUM,none,True,True
+B,mu 0.05,30,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,mu 0.05,30,farr,Farrington-type threshold,none,True,True
+B,mu 0.05,30,never,Never act,none,True,True
+B,mu 0.05,30,always,Always act,none,False,False
+B,mu 0.05,30,trivial,"min(never, always)",none,False,False
+B,mu 0.2,35,NBcomplete,NB complete pooling,none,False,False
+B,mu 0.2,35,NBnone,NB no pooling,none,True,True
+B,mu 0.2,35,M0,Poisson M0,none,False,False
+B,mu 0.2,35,xgb,XGBoost,none,False,False
+B,mu 0.2,35,lstm,LSTM,2.8,False,True
+B,mu 0.2,35,tft,TFT,1.1,False,True
+B,mu 0.2,35,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,mu 0.2,35,ewma,EWMA,none,True,True
+B,mu 0.2,35,cusum,CUSUM,none,True,True
+B,mu 0.2,35,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,mu 0.2,35,farr,Farrington-type threshold,none,True,True
+B,mu 0.2,35,never,Never act,none,True,True
+B,mu 0.2,35,always,Always act,none,False,False
+B,mu 0.2,35,trivial,"min(never, always)",none,False,False
+B,stable,20,NBcomplete,NB complete pooling,none,False,False
+B,stable,20,NBnone,NB no pooling,none,True,True
+B,stable,20,M0,Poisson M0,none,False,False
+B,stable,20,xgb,XGBoost,none,False,False
+B,stable,20,lstm,LSTM,none,False,False
+B,stable,20,tft,TFT,none,False,False
+B,stable,20,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,stable,20,ewma,EWMA,none,True,True
+B,stable,20,cusum,CUSUM,none,True,True
+B,stable,20,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,stable,20,farr,Farrington-type threshold,none,True,True
+B,stable,20,never,Never act,none,True,True
+B,stable,20,always,Always act,none,False,False
+B,stable,20,trivial,"min(never, always)",none,False,False
+B,gradual,25,NBcomplete,NB complete pooling,none,False,False
+B,gradual,25,NBnone,NB no pooling,none,True,True
+B,gradual,25,M0,Poisson M0,none,False,False
+B,gradual,25,xgb,XGBoost,none,False,False
+B,gradual,25,lstm,LSTM,none,False,False
+B,gradual,25,tft,TFT,none,False,False
+B,gradual,25,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,gradual,25,ewma,EWMA,none,True,True
+B,gradual,25,cusum,CUSUM,none,True,True
+B,gradual,25,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,gradual,25,farr,Farrington-type threshold,none,True,True
+B,gradual,25,never,Never act,none,True,True
+B,gradual,25,always,Always act,none,False,False
+B,gradual,25,trivial,"min(never, always)",none,False,False
+B,abrupt,20,NBcomplete,NB complete pooling,none,False,False
+B,abrupt,20,NBnone,NB no pooling,none,True,True
+B,abrupt,20,M0,Poisson M0,none,True,True
+B,abrupt,20,xgb,XGBoost,80.3,False,True
+B,abrupt,20,lstm,LSTM,2.8,False,True
+B,abrupt,20,tft,TFT,none,True,True
+B,abrupt,20,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,abrupt,20,ewma,EWMA,none,True,True
+B,abrupt,20,cusum,CUSUM,none,True,True
+B,abrupt,20,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,abrupt,20,farr,Farrington-type threshold,none,True,True
+B,abrupt,20,never,Never act,none,True,True
+B,abrupt,20,always,Always act,none,False,False
+B,abrupt,20,trivial,"min(never, always)",none,False,False
+B,alpha 0.5,30,NBcomplete,NB complete pooling,none,False,False
+B,alpha 0.5,30,NBnone,NB no pooling,none,True,True
+B,alpha 0.5,30,M0,Poisson M0,none,False,False
+B,alpha 0.5,30,xgb,XGBoost,none,False,False
+B,alpha 0.5,30,lstm,LSTM,none,False,False
+B,alpha 0.5,30,tft,TFT,none,True,True
+B,alpha 0.5,30,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,alpha 0.5,30,ewma,EWMA,none,True,True
+B,alpha 0.5,30,cusum,CUSUM,none,True,True
+B,alpha 0.5,30,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,alpha 0.5,30,farr,Farrington-type threshold,none,True,True
+B,alpha 0.5,30,never,Never act,none,True,True
+B,alpha 0.5,30,always,Always act,none,False,False
+B,alpha 0.5,30,trivial,"min(never, always)",none,False,False
+B,alpha 2,35,NBcomplete,NB complete pooling,none,False,False
+B,alpha 2,35,NBnone,NB no pooling,none,True,True
+B,alpha 2,35,M0,Poisson M0,2.0,False,True
+B,alpha 2,35,xgb,XGBoost,none,False,False
+B,alpha 2,35,lstm,LSTM,none,False,False
+B,alpha 2,35,tft,TFT,4.3,False,True
+B,alpha 2,35,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,alpha 2,35,ewma,EWMA,none,True,True
+B,alpha 2,35,cusum,CUSUM,none,True,True
+B,alpha 2,35,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,alpha 2,35,farr,Farrington-type threshold,none,True,True
+B,alpha 2,35,never,Never act,none,True,True
+B,alpha 2,35,always,Always act,none,False,False
+B,alpha 2,35,trivial,"min(never, always)",none,False,False
+B,B-a0.5-mu0.05-abrupt,5,NBcomplete,NB complete pooling,none,False,False
+B,B-a0.5-mu0.05-abrupt,5,NBnone,NB no pooling,none,True,True
+B,B-a0.5-mu0.05-abrupt,5,M0,Poisson M0,none,True,True
+B,B-a0.5-mu0.05-abrupt,5,xgb,XGBoost,none,False,False
+B,B-a0.5-mu0.05-abrupt,5,lstm,LSTM,none,True,True
+B,B-a0.5-mu0.05-abrupt,5,tft,TFT,none,True,True
+B,B-a0.5-mu0.05-abrupt,5,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,B-a0.5-mu0.05-abrupt,5,ewma,EWMA,none,True,True
+B,B-a0.5-mu0.05-abrupt,5,cusum,CUSUM,none,True,True
+B,B-a0.5-mu0.05-abrupt,5,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,B-a0.5-mu0.05-abrupt,5,farr,Farrington-type threshold,none,True,True
+B,B-a0.5-mu0.05-abrupt,5,never,Never act,none,True,True
+B,B-a0.5-mu0.05-abrupt,5,always,Always act,none,False,False
+B,B-a0.5-mu0.05-abrupt,5,trivial,"min(never, always)",none,False,False
+B,B-a0.5-mu0.05-gradual,5,NBcomplete,NB complete pooling,none,False,False
+B,B-a0.5-mu0.05-gradual,5,NBnone,NB no pooling,none,True,True
+B,B-a0.5-mu0.05-gradual,5,M0,Poisson M0,none,False,False
+B,B-a0.5-mu0.05-gradual,5,xgb,XGBoost,none,False,False
+B,B-a0.5-mu0.05-gradual,5,lstm,LSTM,none,False,False
+B,B-a0.5-mu0.05-gradual,5,tft,TFT,1.3,True,False
+B,B-a0.5-mu0.05-gradual,5,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,B-a0.5-mu0.05-gradual,5,ewma,EWMA,none,True,True
+B,B-a0.5-mu0.05-gradual,5,cusum,CUSUM,none,True,True
+B,B-a0.5-mu0.05-gradual,5,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,B-a0.5-mu0.05-gradual,5,farr,Farrington-type threshold,none,True,True
+B,B-a0.5-mu0.05-gradual,5,never,Never act,none,True,True
+B,B-a0.5-mu0.05-gradual,5,always,Always act,none,False,False
+B,B-a0.5-mu0.05-gradual,5,trivial,"min(never, always)",none,False,False
+B,B-a0.5-mu0.05-stable,5,NBcomplete,NB complete pooling,none,False,False
+B,B-a0.5-mu0.05-stable,5,NBnone,NB no pooling,none,True,True
+B,B-a0.5-mu0.05-stable,5,M0,Poisson M0,none,False,False
+B,B-a0.5-mu0.05-stable,5,xgb,XGBoost,none,False,False
+B,B-a0.5-mu0.05-stable,5,lstm,LSTM,none,False,False
+B,B-a0.5-mu0.05-stable,5,tft,TFT,none,False,False
+B,B-a0.5-mu0.05-stable,5,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,B-a0.5-mu0.05-stable,5,ewma,EWMA,none,True,True
+B,B-a0.5-mu0.05-stable,5,cusum,CUSUM,none,True,True
+B,B-a0.5-mu0.05-stable,5,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,B-a0.5-mu0.05-stable,5,farr,Farrington-type threshold,none,True,True
+B,B-a0.5-mu0.05-stable,5,never,Never act,none,True,True
+B,B-a0.5-mu0.05-stable,5,always,Always act,none,False,False
+B,B-a0.5-mu0.05-stable,5,trivial,"min(never, always)",none,False,False
+B,B-a0.5-mu0.2-abrupt,5,NBcomplete,NB complete pooling,none,False,False
+B,B-a0.5-mu0.2-abrupt,5,NBnone,NB no pooling,none,True,True
+B,B-a0.5-mu0.2-abrupt,5,M0,Poisson M0,1.0,True,False
+B,B-a0.5-mu0.2-abrupt,5,xgb,XGBoost,none,False,False
+B,B-a0.5-mu0.2-abrupt,5,lstm,LSTM,none,True,True
+B,B-a0.5-mu0.2-abrupt,5,tft,TFT,none,True,True
+B,B-a0.5-mu0.2-abrupt,5,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,B-a0.5-mu0.2-abrupt,5,ewma,EWMA,none,True,True
+B,B-a0.5-mu0.2-abrupt,5,cusum,CUSUM,none,True,True
+B,B-a0.5-mu0.2-abrupt,5,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,B-a0.5-mu0.2-abrupt,5,farr,Farrington-type threshold,none,True,True
+B,B-a0.5-mu0.2-abrupt,5,never,Never act,none,True,True
+B,B-a0.5-mu0.2-abrupt,5,always,Always act,none,False,False
+B,B-a0.5-mu0.2-abrupt,5,trivial,"min(never, always)",none,False,False
+B,B-a0.5-mu0.2-gradual,5,NBcomplete,NB complete pooling,none,True,True
+B,B-a0.5-mu0.2-gradual,5,NBnone,NB no pooling,none,True,True
+B,B-a0.5-mu0.2-gradual,5,M0,Poisson M0,1.0,True,False
+B,B-a0.5-mu0.2-gradual,5,xgb,XGBoost,none,False,False
+B,B-a0.5-mu0.2-gradual,5,lstm,LSTM,1.0,True,False
+B,B-a0.5-mu0.2-gradual,5,tft,TFT,1.0,True,False
+B,B-a0.5-mu0.2-gradual,5,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,B-a0.5-mu0.2-gradual,5,ewma,EWMA,none,True,True
+B,B-a0.5-mu0.2-gradual,5,cusum,CUSUM,none,True,True
+B,B-a0.5-mu0.2-gradual,5,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,B-a0.5-mu0.2-gradual,5,farr,Farrington-type threshold,none,True,True
+B,B-a0.5-mu0.2-gradual,5,never,Never act,none,True,True
+B,B-a0.5-mu0.2-gradual,5,always,Always act,none,False,False
+B,B-a0.5-mu0.2-gradual,5,trivial,"min(never, always)",none,False,False
+B,B-a0.5-mu0.2-stable,5,NBcomplete,NB complete pooling,none,False,False
+B,B-a0.5-mu0.2-stable,5,NBnone,NB no pooling,none,True,True
+B,B-a0.5-mu0.2-stable,5,M0,Poisson M0,none,False,False
+B,B-a0.5-mu0.2-stable,5,xgb,XGBoost,none,False,False
+B,B-a0.5-mu0.2-stable,5,lstm,LSTM,none,False,False
+B,B-a0.5-mu0.2-stable,5,tft,TFT,none,True,True
+B,B-a0.5-mu0.2-stable,5,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,B-a0.5-mu0.2-stable,5,ewma,EWMA,none,True,True
+B,B-a0.5-mu0.2-stable,5,cusum,CUSUM,none,True,True
+B,B-a0.5-mu0.2-stable,5,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,B-a0.5-mu0.2-stable,5,farr,Farrington-type threshold,none,True,True
+B,B-a0.5-mu0.2-stable,5,never,Never act,none,True,True
+B,B-a0.5-mu0.2-stable,5,always,Always act,none,False,False
+B,B-a0.5-mu0.2-stable,5,trivial,"min(never, always)",none,False,False
+B,B-a2-mu0.05-abrupt,5,NBcomplete,NB complete pooling,none,False,False
+B,B-a2-mu0.05-abrupt,5,NBnone,NB no pooling,none,True,True
+B,B-a2-mu0.05-abrupt,5,M0,Poisson M0,none,True,True
+B,B-a2-mu0.05-abrupt,5,xgb,XGBoost,11.9,False,True
+B,B-a2-mu0.05-abrupt,5,lstm,LSTM,none,False,False
+B,B-a2-mu0.05-abrupt,5,tft,TFT,none,True,True
+B,B-a2-mu0.05-abrupt,5,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,B-a2-mu0.05-abrupt,5,ewma,EWMA,none,True,True
+B,B-a2-mu0.05-abrupt,5,cusum,CUSUM,none,True,True
+B,B-a2-mu0.05-abrupt,5,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,B-a2-mu0.05-abrupt,5,farr,Farrington-type threshold,none,True,True
+B,B-a2-mu0.05-abrupt,5,never,Never act,none,True,True
+B,B-a2-mu0.05-abrupt,5,always,Always act,none,False,False
+B,B-a2-mu0.05-abrupt,5,trivial,"min(never, always)",none,False,False
+B,B-a2-mu0.05-gradual,5,NBcomplete,NB complete pooling,none,False,False
+B,B-a2-mu0.05-gradual,5,NBnone,NB no pooling,none,True,True
+B,B-a2-mu0.05-gradual,5,M0,Poisson M0,none,False,False
+B,B-a2-mu0.05-gradual,5,xgb,XGBoost,none,False,False
+B,B-a2-mu0.05-gradual,5,lstm,LSTM,4.8,False,True
+B,B-a2-mu0.05-gradual,5,tft,TFT,none,False,False
+B,B-a2-mu0.05-gradual,5,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,B-a2-mu0.05-gradual,5,ewma,EWMA,none,True,True
+B,B-a2-mu0.05-gradual,5,cusum,CUSUM,none,True,True
+B,B-a2-mu0.05-gradual,5,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,B-a2-mu0.05-gradual,5,farr,Farrington-type threshold,none,True,True
+B,B-a2-mu0.05-gradual,5,never,Never act,none,True,True
+B,B-a2-mu0.05-gradual,5,always,Always act,none,False,False
+B,B-a2-mu0.05-gradual,5,trivial,"min(never, always)",none,False,False
+B,B-a2-mu0.05-stable,5,NBcomplete,NB complete pooling,none,False,False
+B,B-a2-mu0.05-stable,5,NBnone,NB no pooling,none,True,True
+B,B-a2-mu0.05-stable,5,M0,Poisson M0,none,False,False
+B,B-a2-mu0.05-stable,5,xgb,XGBoost,none,False,False
+B,B-a2-mu0.05-stable,5,lstm,LSTM,none,False,False
+B,B-a2-mu0.05-stable,5,tft,TFT,none,False,False
+B,B-a2-mu0.05-stable,5,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,B-a2-mu0.05-stable,5,ewma,EWMA,none,True,True
+B,B-a2-mu0.05-stable,5,cusum,CUSUM,none,True,True
+B,B-a2-mu0.05-stable,5,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,B-a2-mu0.05-stable,5,farr,Farrington-type threshold,none,True,True
+B,B-a2-mu0.05-stable,5,never,Never act,none,True,True
+B,B-a2-mu0.05-stable,5,always,Always act,none,False,False
+B,B-a2-mu0.05-stable,5,trivial,"min(never, always)",none,False,False
+B,B-a2-mu0.2-abrupt,5,NBcomplete,NB complete pooling,none,False,False
+B,B-a2-mu0.2-abrupt,5,NBnone,NB no pooling,none,True,True
+B,B-a2-mu0.2-abrupt,5,M0,Poisson M0,none,False,False
+B,B-a2-mu0.2-abrupt,5,xgb,XGBoost,none,False,False
+B,B-a2-mu0.2-abrupt,5,lstm,LSTM,none,False,False
+B,B-a2-mu0.2-abrupt,5,tft,TFT,3.0,False,True
+B,B-a2-mu0.2-abrupt,5,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,B-a2-mu0.2-abrupt,5,ewma,EWMA,none,True,True
+B,B-a2-mu0.2-abrupt,5,cusum,CUSUM,none,True,True
+B,B-a2-mu0.2-abrupt,5,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,B-a2-mu0.2-abrupt,5,farr,Farrington-type threshold,none,True,True
+B,B-a2-mu0.2-abrupt,5,never,Never act,none,True,True
+B,B-a2-mu0.2-abrupt,5,always,Always act,none,False,False
+B,B-a2-mu0.2-abrupt,5,trivial,"min(never, always)",none,False,False
+B,B-a2-mu0.2-gradual,10,NBcomplete,NB complete pooling,1.1;1.1;1.5;1.6;1.6;1.7;1.8;1.9;2.1;2.3;2.4;2.4;2.7;2.8;2.9;3.4;3.4;3.9;4.0;4.3;9.0;13.8;14.9;22.9;25.7;28.5;30.0;30.3;30.5;31.9;35.8;36.1;39.3;54.7;57.6;63.2;68.9,True,False
+B,B-a2-mu0.2-gradual,10,NBnone,NB no pooling,none,True,True
+B,B-a2-mu0.2-gradual,10,M0,Poisson M0,none,True,True
+B,B-a2-mu0.2-gradual,10,xgb,XGBoost,none,False,False
+B,B-a2-mu0.2-gradual,10,lstm,LSTM,1.5,False,True
+B,B-a2-mu0.2-gradual,10,tft,TFT,none,False,False
+B,B-a2-mu0.2-gradual,10,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,B-a2-mu0.2-gradual,10,ewma,EWMA,none,True,True
+B,B-a2-mu0.2-gradual,10,cusum,CUSUM,none,True,True
+B,B-a2-mu0.2-gradual,10,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,B-a2-mu0.2-gradual,10,farr,Farrington-type threshold,none,True,True
+B,B-a2-mu0.2-gradual,10,never,Never act,none,True,True
+B,B-a2-mu0.2-gradual,10,always,Always act,none,False,False
+B,B-a2-mu0.2-gradual,10,trivial,"min(never, always)",none,False,False
+B,B-a2-mu0.2-stable,5,NBcomplete,NB complete pooling,none,False,False
+B,B-a2-mu0.2-stable,5,NBnone,NB no pooling,none,True,True
+B,B-a2-mu0.2-stable,5,M0,Poisson M0,none,False,False
+B,B-a2-mu0.2-stable,5,xgb,XGBoost,none,False,False
+B,B-a2-mu0.2-stable,5,lstm,LSTM,none,False,False
+B,B-a2-mu0.2-stable,5,tft,TFT,none,False,False
+B,B-a2-mu0.2-stable,5,sigma,Sigma-rule (plug-in SRI),none,True,True
+B,B-a2-mu0.2-stable,5,ewma,EWMA,none,True,True
+B,B-a2-mu0.2-stable,5,cusum,CUSUM,none,True,True
+B,B-a2-mu0.2-stable,5,nbcusum,"CUSUM, negative-binomial design",none,True,True
+B,B-a2-mu0.2-stable,5,farr,Farrington-type threshold,none,True,True
+B,B-a2-mu0.2-stable,5,never,Never act,none,True,True
+B,B-a2-mu0.2-stable,5,always,Always act,none,False,False
+B,B-a2-mu0.2-stable,5,trivial,"min(never, always)",none,False,False

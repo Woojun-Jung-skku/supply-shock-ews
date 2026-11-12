@@ -1,0 +1,63 @@
+
+### Table-6(a) style, level 2: stable (n = 5)
+Method                    AUC-PR   Brier     ECE  Det≤1m  Det≤3m FA/item-yr Alarm-mo/item-yr     Lead med (IQR)
+M2 (proposed)              0.164   0.073   0.011    0.20    0.26       0.18              0.9      9.2 (3.4–18.1)
+Poisson M0                 0.168   0.073   0.010    0.20    0.25       0.16              0.8      8.8 (3.2–17.2)
+XGBoost                    0.138   0.074   0.010    0.07    0.10       0.09              0.3     10.6 (4.0–20.9)
+Sigma-rule, level 2            –       –       –    0.23    0.37       0.69              1.7     12.5 (4.8–25.4)
+EWMA                           –       –       –    0.11    0.16       0.18              0.9     10.4 (4.5–20.2)
+CUSUM                          –       –       –    0.03    0.03       0.01              0.2      7.2 (4.8–10.7)
+
+### Table-6(b) style: stable
+q channel, M2 (proposed)   realised ARL0 median    15 (range 7–246; bootstrap-predicted 25–37; calibrated 5/5) | set coverage 0.928 size 1.01
+q channel, Poisson M0      realised ARL0 median    12 (range 4–246; bootstrap-predicted 14–29; calibrated 4/5)
+EWMA                       realised ARL0 median    14 (range 12–17)
+CUSUM                      realised ARL0 median    76 (range 52–117)
+
+### Table-6(a) style, level 2: gradual (n = 5)
+Method                    AUC-PR   Brier     ECE  Det≤1m  Det≤3m FA/item-yr Alarm-mo/item-yr     Lead med (IQR)
+M2 (proposed)              0.278   0.101   0.012    0.42    0.48       0.29              2.1      7.4 (3.2–15.9)
+Poisson M0                 0.281   0.101   0.017    0.38    0.45       0.26              1.8      7.0 (3.2–15.2)
+XGBoost                    0.223   0.107   0.045    0.10    0.14       0.09              0.4      6.9 (3.0–17.9)
+Sigma-rule, level 2            –       –       –    0.32    0.47       0.83              2.4     10.5 (4.4–22.6)
+EWMA                           –       –       –    0.19    0.25       0.25              1.3      8.7 (4.0–18.3)
+CUSUM                          –       –       –    0.06    0.06       0.01              0.2      5.6 (3.9–8.1)
+
+### Table-6(b) style: gradual
+q channel, M2 (proposed)   realised ARL0 median    72 (range 72–72; bootstrap-predicted 27–35; calibrated 5/5) | ARL1 mean 33.5 (range 28–49) | set coverage 0.937 size 1.09
+q channel, Poisson M0      realised ARL0 median    72 (range 72–72; bootstrap-predicted 15–25; calibrated 1/5) | ARL1 mean 43.7 (range 35–57)
+EWMA                       realised ARL0 median    17 (range 14–23) | ARL1 mean 31.9
+CUSUM                      realised ARL0 median  2400 (range 2400–2400) | ARL1 mean 56.5
+
+### Table-6(a) style, level 2: abrupt (n = 5)
+Method                    AUC-PR   Brier     ECE  Det≤1m  Det≤3m FA/item-yr Alarm-mo/item-yr     Lead med (IQR)
+M2 (proposed)              0.340   0.128   0.019    0.63    0.69       0.38              4.0      7.4 (3.0–13.8)
+Poisson M0                 0.326   0.130   0.027    0.57    0.63       0.36              3.7      7.1 (3.0–13.8)
+XGBoost                    0.299   0.135   0.063    0.25    0.30       0.16              1.2      5.4 (2.6–11.2)
+Sigma-rule, level 2            –       –       –    0.29    0.45       0.75              2.4      9.2 (3.8–19.6)
+EWMA                           –       –       –    0.25    0.33       0.31              1.8      7.1 (3.0–15.3)
+CUSUM                          –       –       –    0.12    0.12       0.02              0.5      4.4 (1.9–7.8)
+
+### Table-6(b) style: abrupt
+q channel, M2 (proposed)   realised ARL0 median    72 (range 72–72; bootstrap-predicted 24–33; calibrated 5/5) | ARL1 mean 9.5 (range 4–22) | set coverage 0.943 size 1.19
+q channel, Poisson M0      realised ARL0 median    72 (range 72–72; bootstrap-predicted 13–27; calibrated 4/5) | ARL1 mean 17.8 (range 11–36)
+EWMA                       realised ARL0 median    16 (range 15–23) | ARL1 mean 22.2
+CUSUM                      realised ARL0 median  2400 (range 2400–2400) | ARL1 mean 54.2
+
+### Table-6(a) style, level 2: pooled over the three rare cells (n = 15)
+Method                    AUC-PR   Brier     ECE  Det≤1m  Det≤3m FA/item-yr Alarm-mo/item-yr     Lead med (IQR)
+M2 (proposed)              0.261   0.101   0.014    0.42    0.48       0.28              2.3      8.0 (3.2–16.0)
+Poisson M0                 0.258   0.101   0.018    0.39    0.44       0.26              2.1      7.6 (3.1–15.4)
+XGBoost                    0.220   0.106   0.039    0.14    0.18       0.12              0.7      7.6 (3.2–16.7)
+Sigma-rule, level 2            –       –       –    0.28    0.43       0.76              2.2     10.7 (4.3–22.6)
+EWMA                           –       –       –    0.18    0.25       0.25              1.3      8.7 (3.9–17.9)
+CUSUM                          –       –       –    0.07    0.07       0.01              0.3      5.7 (3.5–8.8)
+
+### Table-6(b) style: pooled over the three rare cells
+q channel, M2 (proposed)   realised ARL0 median    72 (range 7–246; bootstrap-predicted 24–37; calibrated 15/15) | ARL1 mean 21.5 (range 4–49) | set coverage 0.936 size 1.10
+q channel, Poisson M0      realised ARL0 median    72 (range 4–246; bootstrap-predicted 13–29; calibrated 9/15) | ARL1 mean 30.7 (range 11–57)
+EWMA                       realised ARL0 median    16 (range 12–23) | ARL1 mean 27.1
+CUSUM                      realised ARL0 median  2400 (range 52–2400) | ARL1 mean 55.3
+
+E per cell: {'stable': 0.344, 'gradual': 0.53, 'abrupt': 0.739} pooled 0.538
+prevalence per cell: {'stable': 0.082, 'gradual': 0.124, 'abrupt': 0.167}

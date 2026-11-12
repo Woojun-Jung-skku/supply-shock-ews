@@ -1,0 +1,51 @@
+Follow-up arms A2 / A5 / A6 — summary of results/followup (2026-10-06 11:10)
+
+A2  beta = 0, reference design, n = 5 replications (robustness protocol; study_robust record)
+  recovery fits: failed 0/5, refits 1
+  beta posterior median, mean over replications (truth 0): [0.025, -0.013, -0.004]; 90% intervals cover 0: 0.93; mean width [0.109, 0.109, 0.106]
+  w posterior median [0.489, 0.33] (truth [0.5, 0.3]), kappa_w 0.806 (truth 0.8); log C RMSE 0.151, cover 0.89
+  M2 alarm pipeline (triage level 2) — beta = 0 arm | Study B reference cell (beta = (0.4, 0.3, 0.2), n = 10):
+    AUC-PR                     0.804 (0.010; n=5) | 0.810 (0.007; n=10)
+    Brier                      0.203 (0.004; n=5) | 0.201 (0.002; n=10)
+    ECE                        0.039 (0.003; n=5) | 0.041 (0.003; n=10)
+    base rate                  0.583 (0.005; n=5) | 0.579 (0.005; n=10)
+    detected <= 1 mo           0.982 (0.002; n=5) | 0.977 (0.002; n=10)
+    detected <= 3 mo           0.996 (0.001; n=5) | 0.992 (0.002; n=10)
+    false alarms / item-year   0.313 (0.039; n=5) | 0.385 (0.026; n=10)
+    lead (months)              4.500 (0.707; n=5) | 4.700 (0.300; n=10)
+    ARL1 (q)                   29.532 (2.663; n=5) | 25.534 (3.320; n=10)
+    ARL0 (q, pooled)           180.0 (90% 90.0-360.0) | 51.4 (90% 31.3-120.0)
+    EWMA                       dr1 0.300 (0.009; n=5) | 0.391 (0.014; n=10);  fa 0.210 (0.039; n=5) | 0.237 (0.018; n=10);  ARL0 12.2 | 7.9
+    CUSUM                      dr1 0.291 (0.016; n=5) | 0.394 (0.019; n=10);  fa 0.013 (0.006; n=5) | 0.022 (0.008; n=10);  ARL0 109.1 | 32.0
+    sigma-rule level 2         dr1 0.367 (0.009; n=5), fa 0.547 (0.082; n=5)
+    reference-cell ML AUC-PR for scale: XGBoost 0.765, LSTM 0.762, TFT 0.735
+
+A5  M2 refitted every 24 months (origins 36, 60, 84, 108), n = 65/65 Study B replications
+  Table 6 M2 row — 24-month refit | 6-month refit (Table 6, n = 65):
+    AUC-PR                     0.600 (0.024; n=65) | 0.602 (0.024; n=65)
+    Brier                      0.187 (0.004; n=65) | 0.186 (0.004; n=65)
+    ECE                        0.038 (0.001; n=65) | 0.035 (0.001; n=65)
+    detected <= 1 mo           0.845 (0.020; n=65) | 0.847 (0.020; n=65)
+    detected <= 3 mo           0.887 (0.016; n=65) | 0.888 (0.016; n=65)
+    false alarms / item-year   0.415 (0.015; n=65) | 0.420 (0.016; n=65)
+    lead (months)              5.892 (0.202; n=65) | 5.977 (0.208; n=65)
+    ARL1 (q)                   20.556 (2.165; n=45) | 20.830 (2.242; n=45)
+    conformal cover            0.918 (0.002; n=65) | 0.918 (0.002; n=65)
+    conformal size             2.033 (0.104; n=65) | 2.028 (0.103; n=65)
+    ARL0 (q, pooled)           32.4 (90% 21.5-60.2; no-alarm share 0.69) | 34.7 (90% 23.0-64.0)
+    failed origin fits / rep   0.123 (0.047; n=65) of 4 | 0.523 (0.120; n=65) of 14;  fit seconds / rep 185 (10; n=65) | 773 (38; n=65)
+  by regime (24-month | 6-month): AUC-PR, detected <= 1 mo, false alarms, ARL0, ARL1
+    stable   n=20/20: AUC-PR 0.473 | 0.474;  dr1 0.744 | 0.744;  fa 0.350 | 0.352;  ARL0 27.0 | 28.0;  ARL1 nan | -
+    gradual  n=25/25: AUC-PR 0.640 | 0.642;  dr1 0.873 | 0.875;  fa 0.437 | 0.443;  ARL0 78.3 | 78.3;  ARL1 30.9 | 31.6
+    abrupt   n=20/20: AUC-PR 0.677 | 0.681;  dr1 0.911 | 0.915;  fa 0.452 | 0.459;  ARL0 30.6 | 40.0;  ARL1 7.6 | 7.4
+
+A6  horseshoe2 (reparameterised regularised horseshoe; warm-up 1,000 / 1,000 draws, target 0.99, depth 10), replications 0-9
+  cell | variant | n | failed | R-hat fail | ESS fail | div fail | R-hat max (median) | ESS min (median) | change-date |error| mean / median | 90% cover | P(true month) mean [range] | m_t RMSE | m_t cover | s / fit (median) | steps
+  A-a2-mu0.2-abrupt-I30-T120 | horseshoe2 (A6)  | 10 | 7 | 7 | 6 | 0 | 1.0128 | 333 | 0.70 / 0.3 | 1.00 | 0.66 [0.11-0.97] | 0.145 | 0.94 | 467 | 129
+  A-a2-mu0.2-abrupt-I30-T120 | horseshoe (v1.4) | 10 | 8 | 6 | 4 | 2 | 1.0107 | 494 | 0.73 / 0.5 | 1.00 | 0.65 [0.12-0.99] | 0.144 | 0.93 | 260 | 79
+  A-a2-mu0.2-abrupt-I30-T120 | hier (v1.4)      | 10 | 0 | 0 | 0 | 0 | 1.0066 | 942 | 0.77 / 0.7 | 1.00 | 0.06 [0.02-0.10] | 0.184 | 0.90 | 149 | 79
+    failed fits' worst R-hat site: {'m_t': 7}
+  A-a2-mu0.5-abrupt-I30-T120 | horseshoe2 (A6)  | 10 | 10 | 8 | 10 | 0 | 1.0149 | 189 | 0.10 / 0.0 | 1.00 | 0.91 [0.76-1.00] | 0.088 | 0.95 | 615 | 189
+  A-a2-mu0.5-abrupt-I30-T120 | horseshoe (v1.4) | 10 | 10 | 9 | 10 | 2 | 1.0151 | 187 | 0.10 / 0.0 | 1.00 | 0.90 [0.69-1.00] | 0.089 | 0.95 | 350 | 111
+  A-a2-mu0.5-abrupt-I30-T120 | hier (v1.4)      | 10 | 1 | 0 | 0 | 1 | 1.0057 | 953 | 0.37 / 0.3 | 1.00 | 0.10 [0.04-0.20] | 0.146 | 0.91 | 246 | 87
+    failed fits' worst R-hat site: {'m_t': 10}

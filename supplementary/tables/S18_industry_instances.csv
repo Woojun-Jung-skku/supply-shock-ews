@@ -1,0 +1,6 @@
+Industry,Detection source,Intensity,Exposure,Clustering,Process-level output,Supply-level instance
+lithium-ion batteries,"electrode vision, X-ray CT, field battery-management data",electrode defect density,cell area / capacity,coating-roll and lot correlation,cell yield / lot scrap,"precursors, separators"
+displays,pixel inspection images (mura),pixel defect density,panel area,spatial mura clustering,panel yield / substrate breakage,emitter materials
+biopharmaceuticals,"bioreactor sensors, GMP deviation records",contamination / deviation intensity,batch scale and value,raw-material lot and facility correlation,batch purity / batch rejection,"media, chromatography resins"
+AI data centres,"GPU telemetry (ECC errors, thermal)",node failure intensity,cluster and job size,rack- and power-level common cause,job completion / node uptime,"high-bandwidth memory, accelerators"
+space systems,"component qualification tests, on-orbit telemetry",component failure intensity,"mission duration, orbital environment",common-cause failures,mission success / vehicle loss,space-grade components

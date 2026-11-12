@@ -1,0 +1,645 @@
+Cost digest — expected cost per item-year, Study B replications (n = 65)
+shocks per item-year E (tau = 37..118): all 2.221; mu 0.05 1.133; mu 0.2 3.153; by regime stable 1.503, gradual 2.379, abrupt 2.741
+alarm months per item-year (12 x alarm share) and false onsets per item-year (whole window / stable), all cells:
+  M2_tri1        DR1 0.980  alarm-months/yr 11.42  onsets/yr 0.220  false onsets/yr 0.164 / 0.351
+  M2_tri2        DR1 0.847  alarm-months/yr  8.66  onsets/yr 0.416  false onsets/yr 0.292 / 0.420
+  M2_tri3        DR1 0.429  alarm-months/yr  3.29  onsets/yr 0.365  false onsets/yr 0.142 / 0.132
+  NBcomplete_tri1 DR1 0.981  alarm-months/yr 11.44  onsets/yr 0.216  false onsets/yr 0.160 / 0.344
+  NBcomplete_tri2 DR1 0.847  alarm-months/yr  8.73  onsets/yr 0.416  false onsets/yr 0.291 / 0.424
+  NBcomplete_tri3 DR1 0.432  alarm-months/yr  3.38  onsets/yr 0.370  false onsets/yr 0.148 / 0.144
+  NBnone_tri1    DR1 0.970  alarm-months/yr 11.11  onsets/yr 0.251  false onsets/yr 0.188 / 0.364
+  NBnone_tri2    DR1 0.823  alarm-months/yr  8.28  onsets/yr 0.421  false onsets/yr 0.288 / 0.405
+  NBnone_tri3    DR1 0.437  alarm-months/yr  3.36  onsets/yr 0.366  false onsets/yr 0.149 / 0.141
+  M0_tri1        DR1 0.980  alarm-months/yr 11.42  onsets/yr 0.217  false onsets/yr 0.161 / 0.345
+  M0_tri2        DR1 0.847  alarm-months/yr  8.68  onsets/yr 0.408  false onsets/yr 0.281 / 0.401
+  M0_tri3        DR1 0.454  alarm-months/yr  3.59  onsets/yr 0.385  false onsets/yr 0.159 / 0.164
+  xgb_tri1       DR1 0.985  alarm-months/yr 11.67  onsets/yr 0.183  false onsets/yr 0.130 / 0.290
+  xgb_tri2       DR1 0.788  alarm-months/yr  8.28  onsets/yr 0.409  false onsets/yr 0.280 / 0.375
+  xgb_tri3       DR1 0.296  alarm-months/yr  2.35  onsets/yr 0.320  false onsets/yr 0.117 / 0.155
+  lstm_tri1      DR1 0.981  alarm-months/yr 11.59  onsets/yr 0.187  false onsets/yr 0.135 / 0.313
+  lstm_tri2      DR1 0.844  alarm-months/yr  9.06  onsets/yr 0.352  false onsets/yr 0.248 / 0.366
+  lstm_tri3      DR1 0.313  alarm-months/yr  2.56  onsets/yr 0.260  false onsets/yr 0.102 / 0.129
+  tft_tri1       DR1 0.978  alarm-months/yr 11.53  onsets/yr 0.220  false onsets/yr 0.160 / 0.342
+  tft_tri2       DR1 0.749  alarm-months/yr  7.86  onsets/yr 0.550  false onsets/yr 0.367 / 0.476
+  tft_tri3       DR1 0.282  alarm-months/yr  2.32  onsets/yr 0.413  false onsets/yr 0.160 / 0.202
+  sigma_1        DR1 0.369  alarm-months/yr  3.15  onsets/yr 1.045  false onsets/yr 0.543 / 0.626
+  sigma_2        DR1 0.256  alarm-months/yr  2.09  onsets/yr 0.859  false onsets/yr 0.432 / 0.485
+  sigma_3        DR1 0.166  alarm-months/yr  1.33  onsets/yr 0.664  false onsets/yr 0.331 / 0.372
+  ewma           DR1 0.303  alarm-months/yr  2.70  onsets/yr 0.545  false onsets/yr 0.267 / 0.246
+  cusum          DR1 0.277  alarm-months/yr  2.32  onsets/yr 0.107  false onsets/yr 0.038 / 0.020
+  nbcusum        DR1 0.237  alarm-months/yr  1.98  onsets/yr 0.086  false onsets/yr 0.029 / 0.010
+  farr           DR1 0.047  alarm-months/yr  0.43  onsets/yr 0.407  false onsets/yr 0.190 / 0.193
+  head1          DR1 0.980  alarm-months/yr 11.43  onsets/yr 0.218  false onsets/yr 0.162 / 0.350
+  head2          DR1 0.857  alarm-months/yr  8.93  onsets/yr 0.392  false onsets/yr 0.276 / 0.421
+
+######## Model A — posture cost per alarm-month ########
+
+== All cells (n = 65; E = 2.221) ==   EC at the method's best level (level in brackets)
+method                                         r=2             r=5            r=10            r=20            r=50
+M2 (proposed)                          5.18 [3.0]         8.03 [3.0]        10.47 [2.0]        12.02 [1.0]        12.91 [1.0]    
+NB complete pooling                    5.26 [3.0]         8.08 [3.0]        10.52 [2.0]        12.02 [1.0]        12.88 [1.0]    
+NB no pooling                          5.26 [3.0]         8.10 [3.0]        10.48 [2.0]        11.94 [1.0]        13.17 [1.0]    
+Poisson M0                             5.42 [3.0]         8.15 [3.0]        10.53 [2.0]        12.01 [1.0]        12.91 [1.0]    
+XGBoost                                4.91 [3.0]         8.76 [3.0]        10.79 [2.0]        12.19 [1.0]        12.95 [1.0]    
+LSTM                                   5.05 [3.0]         8.78 [3.0]        10.95 [2.0]        12.18 [1.0]        13.07 [1.0]    
+TFT                                    4.98 [3.0]         8.97 [3.0]        11.07 [2.0]        12.19 [1.0]        13.18 [1.0]    
+Sigma-rule (plug-in SRI)               5.05 [3.0]        10.06 [1.0]        16.96 [1.0]        30.77 [1.0]        72.21 [1.0]    
+EWMA                                   5.56 [-]         9.85 [-]        16.99 [-]        31.27 [-]        74.13 [-]    
+CUSUM                                  5.18 [-]         9.47 [-]        16.62 [-]        30.92 [-]        73.83 [-]    
+CUSUM, negative-binomial design        5.08 [-]         9.73 [-]        17.47 [-]        32.95 [-]        79.41 [-]    
+Farrington-type threshold              4.64 [-]        10.96 [-]        21.49 [-]        42.56 [-]       105.76 [-]    
+Never act                              4.44 [-]        11.10 [-]        22.21 [-]        44.42 [-]       111.04 [-]    
+Always act                            12.00 [-]        12.00 [-]        12.00 [-]        12.00 [-]        12.00 [-]    
+-- M2 saving vs method (1 - EC_M2/EC_m) | share of replications with M2 cheaper | sign p --
+NB complete pooling                   1.4%  85% p=0.00     0.6%  63% p=0.05     0.5%  65% p=0.02    -0.0%  52% p=0.88    -0.2%  48% p=0.88 
+NB no pooling                         1.4%  77% p=0.00     0.8%  68% p=0.01     0.2%  46% p=0.62    -0.7%  32% p=0.01     2.0%  65% p=0.03 
+Poisson M0                            4.3%  82% p=0.00     1.4%  69% p=0.00     0.7%  66% p=0.02    -0.0%  44% p=0.47    -0.1%  46% p=0.67 
+XGBoost                              -5.5%  15% p=0.00     8.3%  91% p=0.00     3.0%  88% p=0.00     1.4%  88% p=0.00     0.3%  60% p=0.19 
+LSTM                                 -2.7%  26% p=0.00     8.6%  95% p=0.00     4.4%  95% p=0.00     1.3%  90% p=0.00     1.2%  71% p=0.01 
+TFT                                  -4.0%  20% p=0.00    10.5%  97% p=0.00     5.5%  97% p=0.00     1.4%  80% p=0.00     2.0%  67% p=0.02 
+Sigma-rule (plug-in SRI)             -2.7%  43% p=0.32    20.1% 100% p=0.00    38.3%  97% p=0.00    60.9%  98% p=0.00    82.1% 100% p=0.00 
+EWMA                                  6.8%  54% p=0.62    18.4% 100% p=0.00    38.4%  94% p=0.00    61.6% 100% p=0.00    82.6% 100% p=0.00 
+CUSUM                                -0.1%  46% p=0.62    15.2% 100% p=0.00    37.0%  92% p=0.00    61.1% 100% p=0.00    82.5% 100% p=0.00 
+CUSUM, negative-binomial design      -2.1%  48% p=0.80    17.4%  98% p=0.00    40.1%  91% p=0.00    63.5% 100% p=0.00    83.7% 100% p=0.00 
+Farrington-type threshold           -11.7%  28% p=0.00    26.7% 100% p=0.00    51.3%  92% p=0.00    71.8% 100% p=0.00    87.8% 100% p=0.00 
+Never act                           -16.7%   0% p=0.00    27.7%  94% p=0.00    52.9%  91% p=0.00    72.9% 100% p=0.00    88.4% 100% p=0.00 
+Always act                           56.8% 100% p=0.00    33.1% 100% p=0.00    12.8%  82% p=0.00    -0.1%  42% p=0.21    -7.6%   6% p=0.00 
+min(never, always)                  -16.7%   0%           10.3%  94%            6.0%  72%           -0.1%  42%           -7.6%   6%        
+-- break-even r* (M2 envelope vs method envelope; grid 1..100) --
+NB complete pooling                r* = 18.4               M2 cheaper at r=1: True  at r=100: False
+NB no pooling                      r* = 6.9;9.6;17.6;27.1  M2 cheaper at r=1: True  at r=100: True
+Poisson M0                         r* = 18.4               M2 cheaper at r=1: True  at r=100: False
+XGBoost                            r* = 2.8;59.7           M2 cheaper at r=1: False at r=100: False
+LSTM                               r* = 2.5                M2 cheaper at r=1: False at r=100: True
+TFT                                r* = 2.5                M2 cheaper at r=1: False at r=100: True
+Sigma-rule (plug-in SRI)           r* = 2.2                M2 cheaper at r=1: False at r=100: True
+EWMA                               r* = 1.2                M2 cheaper at r=1: False at r=100: True
+CUSUM                              r* = 2.0                M2 cheaper at r=1: False at r=100: True
+CUSUM, negative-binomial design    r* = 2.2                M2 cheaper at r=1: False at r=100: True
+Farrington-type threshold          r* = 2.5                M2 cheaper at r=1: False at r=100: True
+Never act                          r* = 2.6                M2 cheaper at r=1: False at r=100: True
+Always act                         r* = 19.4               M2 cheaper at r=1: True  at r=100: False
+min(never, always)                 r* = 2.6;19.4           M2 cheaper at r=1: False at r=100: False
+-- M2 level by r: 3 at r=1; switches 7.0:3->2;18.4:2->1; 1 at r=100.  Value of monitoring 1 - EC_M2/min(never, always): max 29.8% at r = 5.4; above 10% for r in 3.1-11.8
+
+== mu 0.05 (n = 30; E = 1.133) ==   EC at the method's best level (level in brackets)
+method                                         r=2             r=5            r=10            r=20            r=50
+M2 (proposed)                          2.59 [3.0]         5.31 [3.0]         8.84 [2.0]        11.58 [1.0]        12.54 [1.0]    
+NB complete pooling                    2.63 [3.0]         5.34 [3.0]         8.94 [2.0]        11.57 [1.0]        12.47 [1.0]    
+NB no pooling                          2.68 [3.0]         5.34 [3.0]         8.92 [2.0]        11.41 [1.0]        13.04 [1.0]    
+Poisson M0                             2.73 [3.0]         5.36 [3.0]         8.92 [2.0]        11.58 [1.0]        12.54 [1.0]    
+XGBoost                                2.32 [3.0]         5.59 [3.0]         9.29 [2.0]        11.94 [1.0]        12.64 [1.0]    
+LSTM                                   2.39 [3.0]         5.59 [3.0]         9.55 [2.0]        11.90 [1.0]        12.82 [1.0]    
+TFT                                    2.36 [3.0]         5.62 [3.0]         9.55 [2.0]        11.91 [1.0]        13.04 [1.0]    
+Sigma-rule (plug-in SRI)               3.24 [3.0]         6.00 [3.0]        10.12 [1.0]        17.17 [1.0]        38.31 [1.0]    
+EWMA                                   3.73 [-]         6.21 [-]        10.33 [-]        18.57 [-]        43.30 [-]    
+CUSUM                                  3.01 [-]         5.75 [-]        10.30 [-]        19.40 [-]        46.72 [-]    
+CUSUM, negative-binomial design        2.98 [-]         5.74 [-]        10.34 [-]        19.54 [-]        47.15 [-]    
+Farrington-type threshold              2.53 [-]         5.79 [-]        11.23 [-]        22.11 [-]        54.74 [-]    
+Never act                              2.27 [-]         5.67 [-]        11.33 [-]        22.67 [-]        56.67 [-]    
+Always act                            12.00 [-]        12.00 [-]        12.00 [-]        12.00 [-]        12.00 [-]    
+-- M2 saving vs method (1 - EC_M2/EC_m) | share of replications with M2 cheaper | sign p --
+NB complete pooling                   1.5%  77% p=0.01     0.7%  60% p=0.36     1.1%  73% p=0.02    -0.1%  43% p=0.58    -0.5%  37% p=0.20 
+NB no pooling                         3.4%  93% p=0.00     0.6%  60% p=0.36     0.9%  63% p=0.20    -1.4%  33% p=0.10     3.9%  87% p=0.00 
+Poisson M0                            5.1%  77% p=0.01     1.1%  63% p=0.20     0.8%  62% p=0.26     0.0%  43% p=0.58     0.0%  47% p=0.86 
+XGBoost                             -12.0%   7% p=0.00     5.0%  90% p=0.00     4.8%  90% p=0.00     3.0%  90% p=0.00     0.8%  53% p=0.86 
+LSTM                                 -8.4%  17% p=0.00     5.1%  90% p=0.00     7.4% 100% p=0.00     2.7%  90% p=0.00     2.2%  63% p=0.20 
+TFT                                  -9.9%  13% p=0.00     5.5%  93% p=0.00     7.5%  97% p=0.00     2.8%  80% p=0.00     3.9%  67% p=0.10 
+Sigma-rule (plug-in SRI)             20.0%  93% p=0.00    11.5% 100% p=0.00    12.6%  93% p=0.00    32.5%  97% p=0.00    67.3% 100% p=0.00 
+EWMA                                 30.5% 100% p=0.00    14.5% 100% p=0.00    14.4%  87% p=0.00    37.7% 100% p=0.00    71.0% 100% p=0.00 
+CUSUM                                14.0%  90% p=0.00     7.6% 100% p=0.00    14.1%  83% p=0.00    40.3% 100% p=0.00    73.2% 100% p=0.00 
+CUSUM, negative-binomial design      12.9%  93% p=0.00     7.5%  97% p=0.00    14.5%  80% p=0.00    40.8% 100% p=0.00    73.4% 100% p=0.00 
+Farrington-type threshold            -2.7%  57% p=0.58     8.3% 100% p=0.00    21.3%  83% p=0.00    47.6% 100% p=0.00    77.1% 100% p=0.00 
+Never act                           -14.4%   0% p=0.00     6.3%  87% p=0.00    22.0%  80% p=0.00    48.9% 100% p=0.00    77.9% 100% p=0.00 
+Always act                           78.4% 100% p=0.00    55.8% 100% p=0.00    26.3% 100% p=0.00     3.5%  90% p=0.00    -4.5%  13% p=0.00 
+min(never, always)                  -14.4%   0%            6.3%  87%           12.7%  80%            3.5%  90%           -4.5%  13%        
+-- break-even r* (M2 envelope vs method envelope; grid 1..100) --
+NB complete pooling                r* = 19.3               M2 cheaper at r=1: True  at r=100: False
+NB no pooling                      r* = 6.5;8.5;18.5;27.4  M2 cheaper at r=1: True  at r=100: True
+Poisson M0                         r* = 7.1;8.4            M2 cheaper at r=1: True  at r=100: True
+XGBoost                            r* = 3.5;61.4           M2 cheaper at r=1: False at r=100: False
+LSTM                               r* = 3.2                M2 cheaper at r=1: False at r=100: True
+TFT                                r* = 3.3                M2 cheaper at r=1: False at r=100: True
+Sigma-rule (plug-in SRI)           r* = none               M2 cheaper at r=1: True  at r=100: True
+EWMA                               r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM                              r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM, negative-binomial design    r* = none               M2 cheaper at r=1: True  at r=100: True
+Farrington-type threshold          r* = 2.4                M2 cheaper at r=1: False at r=100: True
+Never act                          r* = 3.4                M2 cheaper at r=1: False at r=100: True
+Always act                         r* = 33.1               M2 cheaper at r=1: True  at r=100: False
+min(never, always)                 r* = 3.4;33.1           M2 cheaper at r=1: False at r=100: False
+-- M2 level by r: 3 at r=1; switches 8.4:3->2;19.3:2->1; 1 at r=100.  Value of monitoring 1 - EC_M2/min(never, always): max 24.9% at r = 10.6; above 10% for r in 6.8-16.5
+
+== mu 0.2 (n = 35; E = 3.153) ==   EC at the method's best level (level in brackets)
+method                                         r=2             r=5            r=10            r=20            r=50
+M2 (proposed)                          7.41 [3.0]        10.37 [3.0]        11.86 [2.0]        12.39 [1.0]        13.23 [1.0]    
+NB complete pooling                    7.51 [3.0]        10.43 [3.0]        11.87 [2.0]        12.40 [1.0]        13.24 [1.0]    
+NB no pooling                          7.46 [3.0]        10.47 [3.0]        11.82 [2.0]        12.38 [1.0]        13.29 [1.0]    
+Poisson M0                             7.71 [3.0]        10.53 [3.0]        11.92 [2.0]        12.39 [1.0]        13.22 [1.0]    
+XGBoost                                7.14 [3.0]        11.47 [3.0]        12.08 [2.0]        12.40 [1.0]        13.23 [1.0]    
+LSTM                                   7.33 [3.0]        11.52 [3.0]        12.13 [1.0]        12.42 [1.0]        13.28 [1.0]    
+TFT                                    7.23 [3.0]        11.66 [2.0]        12.13 [1.0]        12.42 [1.0]        13.30 [1.0]    
+Sigma-rule (plug-in SRI)               6.59 [3.0]        13.02 [1.0]        22.83 [1.0]        42.44 [1.0]       101.26 [1.0]    
+EWMA                                   7.13 [-]        12.97 [-]        22.70 [-]        42.16 [-]       100.55 [-]    
+CUSUM                                  7.03 [-]        12.66 [-]        22.04 [-]        40.80 [-]        97.07 [-]    
+CUSUM, negative-binomial design        6.88 [-]        13.14 [-]        23.58 [-]        44.45 [-]       107.06 [-]    
+Farrington-type threshold              6.45 [-]        15.39 [-]        30.29 [-]        60.09 [-]       149.48 [-]    
+Never act                              6.31 [-]        15.77 [-]        31.53 [-]        63.06 [-]       157.65 [-]    
+Always act                            12.00 [-]        12.00 [-]        12.00 [-]        12.00 [-]        12.00 [-]    
+-- M2 saving vs method (1 - EC_M2/EC_m) | share of replications with M2 cheaper | sign p --
+NB complete pooling                   1.4%  91% p=0.00     0.6%  66% p=0.09     0.1%  57% p=0.50     0.0%  75% p=0.15     0.0%  75% p=0.15 
+NB no pooling                         0.7%  63% p=0.18     1.0%  74% p=0.01    -0.3%  31% p=0.04    -0.1%  30% p=0.04     0.4%  43% p=0.58 
+Poisson M0                            4.0%  86% p=0.00     1.5%  74% p=0.01     0.5%  69% p=0.04    -0.0%  44% p=0.81    -0.1%  44% p=0.81 
+XGBoost                              -3.7%  23% p=0.00     9.6%  91% p=0.00     1.9%  86% p=0.00     0.1%  83% p=0.01    -0.1%  72% p=0.10 
+LSTM                                 -1.1%  34% p=0.09    10.0% 100% p=0.00     2.2%  83% p=0.00     0.2%  89% p=0.00     0.3%  83% p=0.01 
+TFT                                  -2.4%  26% p=0.01    11.1% 100% p=0.00     2.3%  80% p=0.00     0.3%  79% p=0.02     0.5%  68% p=0.17 
+Sigma-rule (plug-in SRI)            -12.3%   0% p=0.00    20.4% 100% p=0.00    48.1% 100% p=0.00    70.8% 100% p=0.00    86.9% 100% p=0.00 
+EWMA                                 -3.9%  14% p=0.00    20.1% 100% p=0.00    47.8% 100% p=0.00    70.6% 100% p=0.00    86.8% 100% p=0.00 
+CUSUM                                -5.3%   9% p=0.00    18.1% 100% p=0.00    46.2% 100% p=0.00    69.6% 100% p=0.00    86.4% 100% p=0.00 
+CUSUM, negative-binomial design      -7.6%   9% p=0.00    21.1% 100% p=0.00    49.7% 100% p=0.00    72.1% 100% p=0.00    87.6% 100% p=0.00 
+Farrington-type threshold           -14.7%   3% p=0.00    32.7% 100% p=0.00    60.9% 100% p=0.00    79.4% 100% p=0.00    91.1% 100% p=0.00 
+Never act                           -17.4%   0% p=0.00    34.2% 100% p=0.00    62.4% 100% p=0.00    80.3% 100% p=0.00    91.6% 100% p=0.00 
+Always act                           38.3% 100% p=0.00    13.6% 100% p=0.00     1.2%  66% p=0.09    -3.3%   0% p=0.00   -10.3%   0% p=0.00 
+min(never, always)                  -17.4%   0%           11.9% 100%            1.2%  66%           -3.3%   0%          -10.3%   0%        
+-- break-even r* (M2 envelope vs method envelope; grid 1..100) --
+NB complete pooling                r* = 13.3;14.7          M2 cheaper at r=1: True  at r=100: True
+NB no pooling                      r* = 6.0;11.3;14.2;24.7 M2 cheaper at r=1: True  at r=100: True
+Poisson M0                         r* = 14.5               M2 cheaper at r=1: True  at r=100: False
+XGBoost                            r* = 2.6;37.0           M2 cheaper at r=1: False at r=100: False
+LSTM                               r* = 2.2                M2 cheaper at r=1: False at r=100: True
+TFT                                r* = 2.3                M2 cheaper at r=1: False at r=100: True
+Sigma-rule (plug-in SRI)           r* = 2.5                M2 cheaper at r=1: False at r=100: True
+EWMA                               r* = 2.3                M2 cheaper at r=1: False at r=100: True
+CUSUM                              r* = 2.4                M2 cheaper at r=1: False at r=100: True
+CUSUM, negative-binomial design    r* = 2.5                M2 cheaper at r=1: False at r=100: True
+Farrington-type threshold          r* = 2.5                M2 cheaper at r=1: False at r=100: True
+Never act                          r* = 2.5                M2 cheaper at r=1: False at r=100: True
+Always act                         r* = 11.7               M2 cheaper at r=1: True  at r=100: False
+min(never, always)                 r* = 2.5;11.7           M2 cheaper at r=1: False at r=100: False
+-- M2 level by r: 3 at r=1; switches 6.2:3->2;14.6:2->1; 1 at r=100.  Value of monitoring 1 - EC_M2/min(never, always): max 23.4% at r = 3.8; above 10% for r in 3.0-5.4
+
+== stable (n = 20; E = 1.503) ==   EC at the method's best level (level in brackets)
+method                                         r=2             r=5            r=10            r=20            r=50
+M2 (proposed)                          3.57 [3.0]         6.42 [3.0]         9.35 [2.0]        11.58 [2.0]        12.76 [1.0]    
+NB complete pooling                    3.62 [3.0]         6.44 [3.0]         9.44 [2.0]        11.64 [2.0]        12.73 [1.0]    
+NB no pooling                          3.67 [3.0]         6.43 [3.0]         9.28 [2.0]        11.59 [1.0]        12.85 [1.0]    
+Poisson M0                             3.88 [3.0]         6.40 [3.0]         9.46 [2.0]        11.46 [2.0]        12.69 [1.0]    
+XGBoost                                3.66 [3.0]         6.54 [3.0]         9.76 [2.0]        11.82 [2.0]        12.70 [1.0]    
+LSTM                                   3.83 [3.0]         6.64 [3.0]         9.98 [2.0]        11.88 [2.0]        12.86 [1.0]    
+TFT                                    3.76 [3.0]         6.76 [3.0]         9.88 [2.0]        12.05 [1.0]        12.96 [1.0]    
+Sigma-rule (plug-in SRI)               3.62 [3.0]         7.54 [3.0]        12.86 [1.0]        23.27 [1.0]        54.49 [1.0]    
+EWMA                                   3.88 [-]         7.67 [-]        13.97 [-]        26.58 [-]        64.41 [-]    
+CUSUM                                  3.60 [-]         7.42 [-]        13.78 [-]        26.51 [-]        64.69 [-]    
+CUSUM, negative-binomial design        3.43 [-]         7.48 [-]        14.24 [-]        27.76 [-]        68.30 [-]    
+Farrington-type threshold              3.21 [-]         7.54 [-]        14.75 [-]        29.18 [-]        72.47 [-]    
+Never act                              3.01 [-]         7.51 [-]        15.03 [-]        30.05 [-]        75.13 [-]    
+Always act                            12.00 [-]        12.00 [-]        12.00 [-]        12.00 [-]        12.00 [-]    
+-- M2 saving vs method (1 - EC_M2/EC_m) | share of replications with M2 cheaper | sign p --
+NB complete pooling                   1.5%  80% p=0.01     0.3%  55% p=0.82     1.0%  75% p=0.04     0.4%  50% p=1.00    -0.2%  62% p=0.45 
+NB no pooling                         2.9%  90% p=0.00     0.2%  50% p=1.00    -0.8%  35% p=0.26     0.0%  50% p=1.00     0.8%  65% p=0.26 
+Poisson M0                            8.0%  90% p=0.00    -0.4%  45% p=0.82     1.2%  68% p=0.17    -1.1%  37% p=0.36    -0.5%  59% p=0.63 
+XGBoost                               2.5%  45% p=0.82     1.8%  70% p=0.12     4.2%  90% p=0.00     2.0%  65% p=0.26    -0.5%  50% p=1.00 
+LSTM                                  6.9%  75% p=0.04     3.3%  85% p=0.00     6.4% 100% p=0.00     2.5%  80% p=0.01     0.8%  78% p=0.03 
+TFT                                   5.1%  60% p=0.50     5.0%  90% p=0.00     5.4%  95% p=0.00     3.9%  60% p=0.50     1.6%  63% p=0.36 
+Sigma-rule (plug-in SRI)              1.4%  50% p=1.00    14.8% 100% p=0.00    27.3%  90% p=0.00    50.2% 100% p=0.00    76.6% 100% p=0.00 
+EWMA                                  8.2%  60% p=0.50    16.2% 100% p=0.00    33.1%  80% p=0.01    56.4% 100% p=0.00    80.2% 100% p=0.00 
+CUSUM                                 1.0%  50% p=1.00    13.4% 100% p=0.00    32.2%  75% p=0.04    56.3% 100% p=0.00    80.3% 100% p=0.00 
+CUSUM, negative-binomial design      -4.0%  45% p=0.82    14.2%  95% p=0.00    34.4%  70% p=0.12    58.3% 100% p=0.00    81.3% 100% p=0.00 
+Farrington-type threshold           -11.1%  50% p=1.00    14.8% 100% p=0.00    36.6%  75% p=0.04    60.3% 100% p=0.00    82.4% 100% p=0.00 
+Never act                           -18.7%   0% p=0.00    14.5%  80% p=0.01    37.8%  70% p=0.12    61.5% 100% p=0.00    83.0% 100% p=0.00 
+Always act                           70.3% 100% p=0.00    46.5% 100% p=0.00    22.1% 100% p=0.00     3.5%  50% p=1.00    -6.3%  15% p=0.00 
+min(never, always)                  -18.7%   0%           13.6%  80%            3.6%  70%            3.5%  50%           -6.3%  15%        
+-- break-even r* (M2 envelope vs method envelope; grid 1..100) --
+NB complete pooling                r* = 6.8;7.5;28.5       M2 cheaper at r=1: True  at r=100: False
+NB no pooling                      r* = 5.4;13.9;20.0;40.6 M2 cheaper at r=1: True  at r=100: True
+Poisson M0                         r* = 4.8;8.0;14.8;22.0;26.8 M2 cheaper at r=1: True  at r=100: False
+XGBoost                            r* = 44.2               M2 cheaper at r=1: True  at r=100: False
+LSTM                               r* = 76.2               M2 cheaper at r=1: True  at r=100: False
+TFT                                r* = none               M2 cheaper at r=1: True  at r=100: True
+Sigma-rule (plug-in SRI)           r* = 1.9                M2 cheaper at r=1: False at r=100: True
+EWMA                               r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM                              r* = 1.9                M2 cheaper at r=1: False at r=100: True
+CUSUM, negative-binomial design    r* = 2.3                M2 cheaper at r=1: False at r=100: True
+Farrington-type threshold          r* = 2.7                M2 cheaper at r=1: False at r=100: True
+Never act                          r* = 3.0                M2 cheaper at r=1: False at r=100: True
+Always act                         r* = 26.4               M2 cheaper at r=1: True  at r=100: False
+min(never, always)                 r* = 3.0;26.4           M2 cheaper at r=1: False at r=100: False
+-- M2 level by r: 3 at r=1; switches 7.5:3->2;21.2:2->1; 1 at r=100.  Value of monitoring 1 - EC_M2/min(never, always): max 25.8% at r = 8.0; above 10% for r in 4.2-16.4
+
+== gradual (n = 25; E = 2.379) ==   EC at the method's best level (level in brackets)
+method                                         r=2             r=5            r=10            r=20            r=50
+M2 (proposed)                          5.51 [3.0]         8.46 [3.0]        10.84 [2.0]        12.12 [1.0]        13.02 [1.0]    
+NB complete pooling                    5.60 [3.0]         8.52 [3.0]        10.85 [2.0]        12.11 [1.0]        12.97 [1.0]    
+NB no pooling                          5.57 [3.0]         8.55 [3.0]        10.89 [2.0]        12.06 [1.0]        13.27 [1.0]    
+Poisson M0                             5.63 [3.0]         8.55 [3.0]        10.82 [2.0]        12.10 [1.0]        12.99 [1.0]    
+XGBoost                                5.24 [3.0]         9.25 [3.0]        11.01 [2.0]        12.22 [1.0]        13.03 [1.0]    
+LSTM                                   5.35 [3.0]         9.28 [3.0]        11.20 [2.0]        12.23 [1.0]        13.10 [1.0]    
+TFT                                    5.28 [3.0]         9.48 [3.0]        11.29 [2.0]        12.19 [1.0]        13.05 [1.0]    
+Sigma-rule (plug-in SRI)               5.39 [3.0]        10.49 [1.0]        17.51 [1.0]        31.53 [1.0]        73.62 [1.0]    
+EWMA                                   5.88 [-]        10.57 [-]        18.38 [-]        34.00 [-]        80.85 [-]    
+CUSUM                                  5.37 [-]        10.19 [-]        18.23 [-]        34.30 [-]        82.52 [-]    
+CUSUM, negative-binomial design        5.29 [-]        10.50 [-]        19.19 [-]        36.57 [-]        88.70 [-]    
+Farrington-type threshold              4.95 [-]        11.70 [-]        22.94 [-]        45.42 [-]       112.87 [-]    
+Never act                              4.76 [-]        11.90 [-]        23.79 [-]        47.58 [-]       118.96 [-]    
+Always act                            12.00 [-]        12.00 [-]        12.00 [-]        12.00 [-]        12.00 [-]    
+-- M2 saving vs method (1 - EC_M2/EC_m) | share of replications with M2 cheaper | sign p --
+NB complete pooling                   1.7%  92% p=0.00     0.6%  64% p=0.23     0.0%  56% p=0.69    -0.1%  36% p=0.42    -0.4%  36% p=0.42 
+NB no pooling                         1.1%  72% p=0.04     1.0%  76% p=0.01     0.4%  48% p=1.00    -0.5%  36% p=0.29     1.8%  59% p=0.52 
+Poisson M0                            2.2%  76% p=0.01     1.0%  76% p=0.01    -0.3%  56% p=0.69    -0.1%  25% p=0.08    -0.3%  25% p=0.08 
+XGBoost                              -5.1%   4% p=0.00     8.5% 100% p=0.00     1.5%  80% p=0.00     0.9%  73% p=0.12     0.1%  53% p=1.00 
+LSTM                                 -3.0%   8% p=0.00     8.8% 100% p=0.00     3.1%  88% p=0.00     0.9%  80% p=0.04     0.6%  53% p=1.00 
+TFT                                  -4.2%   4% p=0.00    10.8% 100% p=0.00     3.9%  96% p=0.00     0.6%  67% p=0.30     0.2%  53% p=1.00 
+Sigma-rule (plug-in SRI)             -2.1%  40% p=0.42    19.3% 100% p=0.00    38.1% 100% p=0.00    61.6% 100% p=0.00    82.3% 100% p=0.00 
+EWMA                                  6.4%  48% p=1.00    19.9% 100% p=0.00    41.0% 100% p=0.00    64.4% 100% p=0.00    83.9% 100% p=0.00 
+CUSUM                                -2.5%  44% p=0.69    17.0% 100% p=0.00    40.5% 100% p=0.00    64.7% 100% p=0.00    84.2% 100% p=0.00 
+CUSUM, negative-binomial design      -4.1%  44% p=0.69    19.4% 100% p=0.00    43.5% 100% p=0.00    66.9% 100% p=0.00    85.3% 100% p=0.00 
+Farrington-type threshold           -11.2%  28% p=0.04    27.6% 100% p=0.00    52.7% 100% p=0.00    73.3% 100% p=0.00    88.5% 100% p=0.00 
+Never act                           -15.7%   0% p=0.00    28.9% 100% p=0.00    54.4% 100% p=0.00    74.5% 100% p=0.00    89.1% 100% p=0.00 
+Always act                           54.1% 100% p=0.00    29.5% 100% p=0.00     9.6%  68% p=0.11    -1.0%  40% p=0.42    -8.5%   0% p=0.00 
+min(never, always)                  -15.7%   0%           10.2% 100%            6.4%  68%           -1.0%  40%           -8.5%   0%        
+-- break-even r* (M2 envelope vs method envelope; grid 1..100) --
+NB complete pooling                r* = 10.3               M2 cheaper at r=1: True  at r=100: False
+NB no pooling                      r* = 6.8;9.0;16.3;25.8  M2 cheaper at r=1: True  at r=100: True
+Poisson M0                         r* = 6.8;13.9;16.9      M2 cheaper at r=1: True  at r=100: False
+XGBoost                            r* = 2.8;6.7;8.2;52.3   M2 cheaper at r=1: False at r=100: False
+LSTM                               r* = 2.5                M2 cheaper at r=1: False at r=100: True
+TFT                                r* = 2.5;6.9;7.0;66.8   M2 cheaper at r=1: False at r=100: False
+Sigma-rule (plug-in SRI)           r* = 2.1                M2 cheaper at r=1: False at r=100: True
+EWMA                               r* = 1.3                M2 cheaper at r=1: False at r=100: True
+CUSUM                              r* = 2.2                M2 cheaper at r=1: False at r=100: True
+CUSUM, negative-binomial design    r* = 2.3                M2 cheaper at r=1: False at r=100: True
+Farrington-type threshold          r* = 2.4                M2 cheaper at r=1: False at r=100: True
+Never act                          r* = 2.5                M2 cheaper at r=1: False at r=100: True
+Always act                         r* = 16.8               M2 cheaper at r=1: True  at r=100: False
+min(never, always)                 r* = 2.5;16.8           M2 cheaper at r=1: False at r=100: False
+-- M2 level by r: 3 at r=1; switches 6.9:3->2;17.1:2->1; 1 at r=100.  Value of monitoring 1 - EC_M2/min(never, always): max 29.0% at r = 5.0; above 10% for r in 3.1-9.7
+
+== abrupt (n = 20; E = 2.741) ==   EC at the method's best level (level in brackets)
+method                                         r=2             r=5            r=10            r=20            r=50
+M2 (proposed)                          6.40 [3.0]         9.10 [3.0]        11.11 [2.0]        12.11 [1.0]        12.93 [1.0]    
+NB complete pooling                    6.47 [3.0]         9.18 [3.0]        11.19 [2.0]        12.11 [1.0]        12.93 [1.0]    
+NB no pooling                          6.45 [3.0]         9.20 [3.0]        11.18 [2.0]        12.13 [1.0]        13.38 [1.0]    
+Poisson M0                             6.68 [3.0]         9.40 [3.0]        11.25 [2.0]        12.10 [1.0]        13.01 [1.0]    
+XGBoost                                5.76 [3.0]        10.15 [2.0]        11.56 [2.0]        12.29 [1.0]        13.11 [1.0]    
+LSTM                                   5.90 [3.0]        10.31 [3.0]        11.59 [2.0]        12.27 [1.0]        13.22 [1.0]    
+TFT                                    5.83 [3.0]        10.09 [2.0]        11.91 [1.0]        12.32 [1.0]        13.56 [1.0]    
+Sigma-rule (plug-in SRI)               6.05 [3.0]        11.91 [1.0]        20.38 [1.0]        37.33 [1.0]        88.16 [1.0]    
+EWMA                                   6.84 [-]        11.13 [-]        18.27 [-]        32.56 [-]        75.43 [-]    
+CUSUM                                  6.51 [-]        10.61 [-]        17.45 [-]        31.11 [-]        72.11 [-]    
+CUSUM, negative-binomial design        6.47 [-]        10.99 [-]        18.54 [-]        33.63 [-]        78.91 [-]    
+Farrington-type threshold              5.68 [-]        13.46 [-]        26.43 [-]        52.36 [-]       130.16 [-]    
+Never act                              5.48 [-]        13.71 [-]        27.41 [-]        54.82 [-]       137.06 [-]    
+Always act                            12.00 [-]        12.00 [-]        12.00 [-]        12.00 [-]        12.00 [-]    
+-- M2 saving vs method (1 - EC_M2/EC_m) | share of replications with M2 cheaper | sign p --
+NB complete pooling                   1.1%  80% p=0.01     0.8%  70% p=0.12     0.7%  65% p=0.26    -0.0%  50% p=1.00    -0.0%  42% p=0.77 
+NB no pooling                         0.8%  70% p=0.12     1.1%  75% p=0.04     0.6%  55% p=0.82     0.2%  44% p=0.81     3.3%  72% p=0.10 
+Poisson M0                            4.2%  80% p=0.01     3.1%  85% p=0.00     1.3%  75% p=0.04    -0.1%  33% p=0.30     0.6%  53% p=1.00 
+XGBoost                             -11.1%   0% p=0.00    10.3% 100% p=0.00     3.9%  95% p=0.00     1.4%  93% p=0.00     1.4%  80% p=0.04 
+LSTM                                 -8.5%   0% p=0.00    11.7% 100% p=0.00     4.2% 100% p=0.00     1.3%  93% p=0.00     2.2%  80% p=0.04 
+TFT                                  -9.7%   0% p=0.00     9.8% 100% p=0.00     6.8%  85% p=0.00     1.7%  87% p=0.01     4.6%  87% p=0.01 
+Sigma-rule (plug-in SRI)             -5.9%  40% p=0.50    23.5% 100% p=0.00    45.5% 100% p=0.00    67.6% 100% p=0.00    85.3% 100% p=0.00 
+EWMA                                  6.4%  55% p=0.82    18.2% 100% p=0.00    39.2% 100% p=0.00    62.8% 100% p=0.00    82.9% 100% p=0.00 
+CUSUM                                 1.7%  45% p=0.82    14.2% 100% p=0.00    36.3% 100% p=0.00    61.1% 100% p=0.00    82.1% 100% p=0.00 
+CUSUM, negative-binomial design       1.0%  55% p=0.82    17.2% 100% p=0.00    40.1% 100% p=0.00    64.0% 100% p=0.00    83.6% 100% p=0.00 
+Farrington-type threshold           -12.6%   5% p=0.00    32.4% 100% p=0.00    58.0% 100% p=0.00    76.9% 100% p=0.00    90.1% 100% p=0.00 
+Never act                           -16.8%   0% p=0.00    33.6% 100% p=0.00    59.5% 100% p=0.00    77.9% 100% p=0.00    90.6% 100% p=0.00 
+Always act                           46.7% 100% p=0.00    24.1% 100% p=0.00     7.4%  80% p=0.01    -0.9%  40% p=0.50    -7.8%   5% p=0.00 
+min(never, always)                  -16.8%   0%            7.7% 100%            7.4%  80%           -0.9%  40%           -7.8%   5%        
+-- break-even r* (M2 envelope vs method envelope; grid 1..100) --
+NB complete pooling                r* = 15.9               M2 cheaper at r=1: True  at r=100: False
+NB no pooling                      r* = 6.5;8.7;15.6;18.6  M2 cheaper at r=1: True  at r=100: True
+Poisson M0                         r* = 15.7;22.6          M2 cheaper at r=1: True  at r=100: True
+XGBoost                            r* = 3.0                M2 cheaper at r=1: False at r=100: True
+LSTM                               r* = 2.9                M2 cheaper at r=1: False at r=100: True
+TFT                                r* = 2.8                M2 cheaper at r=1: False at r=100: True
+Sigma-rule (plug-in SRI)           r* = 2.3                M2 cheaper at r=1: False at r=100: True
+EWMA                               r* = 1.2                M2 cheaper at r=1: False at r=100: True
+CUSUM                              r* = 1.8                M2 cheaper at r=1: False at r=100: True
+CUSUM, negative-binomial design    r* = 1.9                M2 cheaper at r=1: False at r=100: True
+Farrington-type threshold          r* = 2.4                M2 cheaper at r=1: False at r=100: True
+Never act                          r* = 2.5                M2 cheaper at r=1: False at r=100: True
+Always act                         r* = 15.9               M2 cheaper at r=1: True  at r=100: False
+min(never, always)                 r* = 2.5;15.9           M2 cheaper at r=1: False at r=100: False
+-- M2 level by r: 3 at r=1; switches 6.7:3->2;15.9:2->1; 1 at r=100.  Value of monitoring 1 - EC_M2/min(never, always): max 28.8% at r = 4.4; above 10% for r in 3.0-7.9
+
+-- per cell: cheapest method at r = 5, 10, 20 (best level each) and M2 value of monitoring --
+  B-a0.5-mu0.05-abrupt     E=1.49  r=5: M2 6.80 (M2 6.80, trivial 7.44) | r=10: M2 10.37 (M2 10.37, trivial 12.00) | r=20: Poisson M0 11.90 (M2 11.93, trivial 12.00)
+  B-a0.5-mu0.05-gradual    E=1.07  r=5: Poisson M0 5.17 (M2 5.18, trivial 5.37) | r=10: Poisson M0 8.97 (M2 9.11, trivial 10.70) | r=20: NB no pooling 11.58 (M2 11.69, trivial 12.00)
+  B-a0.5-mu0.05-stable     E=0.70  r=5: Poisson M0 3.51 (M2 3.53, trivial 3.52) | r=10: Poisson M0 6.82 (M2 6.97, trivial 7.04) | r=20: Poisson M0 10.33 (M2 10.34, trivial 12.00)
+  B-a0.5-mu0.2-abrupt      E=3.38  r=5: M2 10.97 (M2 10.97, trivial 12.00) | r=10: M2 11.93 (M2 11.93, trivial 12.00) | r=20: Poisson M0 12.30 (M2 12.31, trivial 12.00)
+  B-a0.5-mu0.2-gradual     E=2.79  r=5: M2 10.28 (M2 10.28, trivial 12.00) | r=10: NB complete pooling 11.96 (M2 12.01, trivial 12.00) | r=20: TFT 12.38 (M2 12.40, trivial 12.00)
+  B-a0.5-mu0.2-stable      E=2.08  r=5: Poisson M0 8.98 (M2 9.02, trivial 10.42) | r=10: NB no pooling 11.40 (M2 11.55, trivial 12.00) | r=20: M2 12.27 (M2 12.27, trivial 12.00)
+  B-a2-mu0.05-abrupt       E=1.60  r=5: Poisson M0 7.09 (M2 7.10, trivial 8.01) | r=10: M2 10.05 (M2 10.05, trivial 12.00) | r=20: NB complete pooling 11.69 (M2 11.72, trivial 12.00)
+  B-a2-mu0.05-gradual      E=1.16  r=5: M2 5.44 (M2 5.44, trivial 5.78) | r=10: Poisson M0 8.98 (M2 9.04, trivial 11.25) | r=20: NB no pooling 11.42 (M2 11.60, trivial 12.00)
+  B-a2-mu0.05-stable       E=0.78  r=5: M2 3.80 (M2 3.80, trivial 3.88) | r=10: NB no pooling 7.36 (M2 7.43, trivial 7.76) | r=20: Poisson M0 10.74 (M2 10.95, trivial 12.00)
+  B-a2-mu0.2-abrupt        E=4.50  r=5: M2 11.54 (M2 11.54, trivial 12.00) | r=10: NB no pooling 12.08 (M2 12.09, trivial 12.00) | r=20: Poisson M0 12.48 (M2 12.49, trivial 12.00)
+  B-a2-mu0.2-gradual       E=3.44  r=5: M2 10.71 (M2 10.71, trivial 12.00) | r=10: NB no pooling 11.99 (M2 12.03, trivial 12.00) | r=20: NB no pooling 12.45 (M2 12.45, trivial 12.00)
+  B-a2-mu0.2-stable        E=2.45  r=5: Poisson M0 9.28 (M2 9.34, trivial 11.92) | r=10: NB no pooling 11.21 (M2 11.35, trivial 12.00) | r=20: NB no pooling 12.27 (M2 12.35, trivial 12.00)
+
+######## Model B — classification cost per false onset (eq. (19) framing) ########
+
+== All cells (n = 65; E = 2.221) ==   EC at the method's best level (level in brackets)
+method                                         r=2             r=5            r=10            r=20            r=50
+M2 (proposed)                          0.22 [1.0]         0.31 [1.0]         0.46 [1.0]         0.76 [1.0]         1.66 [1.0]    
+NB complete pooling                    0.22 [1.0]         0.30 [1.0]         0.45 [1.0]         0.74 [1.0]         1.61 [1.0]    
+NB no pooling                          0.27 [1.0]         0.39 [1.0]         0.60 [1.0]         1.01 [1.0]         2.25 [1.0]    
+Poisson M0                             0.22 [1.0]         0.31 [1.0]         0.46 [1.0]         0.76 [1.0]         1.65 [1.0]    
+XGBoost                                0.18 [1.0]         0.26 [1.0]         0.39 [1.0]         0.64 [1.0]         1.41 [1.0]    
+LSTM                                   0.19 [1.0]         0.28 [1.0]         0.43 [1.0]         0.73 [1.0]         1.61 [1.0]    
+TFT                                    0.23 [1.0]         0.33 [1.0]         0.49 [1.0]         0.82 [1.0]         1.82 [1.0]    
+Sigma-rule (plug-in SRI)               3.31 [1.0]         7.45 [1.0]        14.35 [1.0]        28.17 [1.0]        69.60 [1.0]    
+EWMA                                   3.12 [-]         7.41 [-]        14.55 [-]        28.84 [-]        71.69 [-]    
+CUSUM                                  2.90 [-]         7.19 [-]        14.34 [-]        28.64 [-]        71.55 [-]    
+CUSUM, negative-binomial design        3.13 [-]         7.77 [-]        15.51 [-]        31.00 [-]        77.46 [-]    
+Farrington-type threshold              4.40 [-]        10.72 [-]        21.26 [-]        42.32 [-]       105.52 [-]    
+Never act                              4.44 [-]        11.10 [-]        22.21 [-]        44.42 [-]       111.04 [-]    
+Always act                             0.00 [-]         0.00 [-]         0.00 [-]         0.00 [-]         0.00 [-]    
+-- M2 saving vs method (1 - EC_M2/EC_m) | share of replications with M2 cheaper | sign p --
+NB complete pooling                  -2.7%  32% p=0.04    -2.8%  32% p=0.04    -2.9%  32% p=0.04    -3.0%  32% p=0.04    -3.1%  32% p=0.04 
+NB no pooling                        17.2%  96% p=0.00    20.5%  96% p=0.00    22.9%  96% p=0.00    24.8%  96% p=0.00    26.4%  96% p=0.00 
+Poisson M0                           -1.7%  39% p=0.21    -1.3%  34% p=0.06    -1.1%  34% p=0.06    -0.8%  34% p=0.06    -0.7%  34% p=0.06 
+XGBoost                             -23.4%  13% p=0.00   -21.4%  13% p=0.00   -19.8%  15% p=0.00   -18.6%  17% p=0.00   -17.5%  17% p=0.00 
+LSTM                                -15.4%  36% p=0.08   -10.9%  38% p=0.14    -7.5%  38% p=0.14    -4.9%  38% p=0.14    -2.7%  40% p=0.24 
+TFT                                   1.0%  46% p=0.67     3.7%  48% p=0.89     5.7%  48% p=0.89     7.4%  48% p=0.89     8.7%  50% p=1.00 
+Sigma-rule (plug-in SRI)             93.2% 100% p=0.00    95.8% 100% p=0.00    96.8% 100% p=0.00    97.3% 100% p=0.00    97.6% 100% p=0.00 
+EWMA                                 92.8% 100% p=0.00    95.8% 100% p=0.00    96.8% 100% p=0.00    97.4% 100% p=0.00    97.7% 100% p=0.00 
+CUSUM                                92.3% 100% p=0.00    95.6% 100% p=0.00    96.8% 100% p=0.00    97.3% 100% p=0.00    97.7% 100% p=0.00 
+CUSUM, negative-binomial design      92.8% 100% p=0.00    96.0% 100% p=0.00    97.0% 100% p=0.00    97.5% 100% p=0.00    97.9% 100% p=0.00 
+Farrington-type threshold            94.9% 100% p=0.00    97.1% 100% p=0.00    97.8% 100% p=0.00    98.2% 100% p=0.00    98.4% 100% p=0.00 
+Never act                            95.0% 100% p=0.00    97.2% 100% p=0.00    97.9% 100% p=0.00    98.3% 100% p=0.00    98.5% 100% p=0.00 
+Always act                           -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00 
+min(never, always)                   -inf%   0%           -inf%   0%           -inf%   0%           -inf%   0%           -inf%   0%        
+-- break-even r* (M2 envelope vs method envelope; grid 1..100) --
+NB complete pooling                r* = none               M2 cheaper at r=1: False at r=100: False
+NB no pooling                      r* = none               M2 cheaper at r=1: True  at r=100: True
+Poisson M0                         r* = none               M2 cheaper at r=1: False at r=100: False
+XGBoost                            r* = none               M2 cheaper at r=1: False at r=100: False
+LSTM                               r* = none               M2 cheaper at r=1: False at r=100: False
+TFT                                r* = 1.3                M2 cheaper at r=1: False at r=100: True
+Sigma-rule (plug-in SRI)           r* = none               M2 cheaper at r=1: True  at r=100: True
+EWMA                               r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM                              r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM, negative-binomial design    r* = none               M2 cheaper at r=1: True  at r=100: True
+Farrington-type threshold          r* = none               M2 cheaper at r=1: True  at r=100: True
+Never act                          r* = none               M2 cheaper at r=1: True  at r=100: True
+Always act                         r* = none               M2 cheaper at r=1: False at r=100: False
+min(never, always)                 r* = none               M2 cheaper at r=1: False at r=100: False
+-- M2 level by r: 1 at r=1; switches none; 1 at r=100.  Value of monitoring 1 - EC_M2/min(never, always): max -inf% at r = 1.0; above 10% for r in none
+
+== mu 0.05 (n = 30; E = 1.133) ==   EC at the method's best level (level in brackets)
+method                                         r=2             r=5            r=10            r=20            r=50
+M2 (proposed)                          0.32 [1.0]         0.42 [1.0]         0.58 [1.0]         0.90 [1.0]         1.86 [1.0]    
+NB complete pooling                    0.31 [1.0]         0.40 [1.0]         0.55 [1.0]         0.85 [1.0]         1.76 [1.0]    
+NB no pooling                          0.41 [1.0]         0.57 [1.0]         0.84 [1.0]         1.39 [1.0]         3.02 [1.0]    
+Poisson M0                             0.32 [1.0]         0.41 [1.0]         0.57 [1.0]         0.89 [1.0]         1.86 [1.0]    
+XGBoost                                0.24 [1.0]         0.31 [1.0]         0.42 [1.0]         0.66 [1.0]         1.36 [1.0]    
+LSTM                                   0.26 [1.0]         0.35 [1.0]         0.50 [1.0]         0.81 [1.0]         1.73 [1.0]    
+TFT                                    0.33 [1.0]         0.44 [1.0]         0.63 [1.0]         1.01 [1.0]         2.14 [1.0]    
+Sigma-rule (plug-in SRI)               2.14 [1.0]         4.25 [1.0]         7.78 [1.0]        14.82 [1.0]        35.97 [1.0]    
+EWMA                                   1.96 [-]         4.43 [-]         8.56 [-]        16.80 [-]        41.53 [-]    
+CUSUM                                  1.85 [-]         4.59 [-]         9.14 [-]        18.24 [-]        45.56 [-]    
+CUSUM, negative-binomial design        1.87 [-]         4.63 [-]         9.23 [-]        18.43 [-]        46.04 [-]    
+Farrington-type threshold              2.40 [-]         5.67 [-]        11.11 [-]        21.99 [-]        54.62 [-]    
+Never act                              2.27 [-]         5.67 [-]        11.33 [-]        22.67 [-]        56.67 [-]    
+Always act                             0.00 [-]         0.00 [-]         0.00 [-]         0.00 [-]         0.00 [-]    
+-- M2 saving vs method (1 - EC_M2/EC_m) | share of replications with M2 cheaper | sign p --
+NB complete pooling                  -3.6%  31% p=0.06    -4.3%  31% p=0.06    -4.9%  31% p=0.06    -5.5%  31% p=0.06    -6.0%  31% p=0.06 
+NB no pooling                        21.0%  97% p=0.00    26.7% 100% p=0.00    31.3% 100% p=0.00    35.1% 100% p=0.00    38.3% 100% p=0.00 
+Poisson M0                           -2.1%  41% p=0.46    -1.6%  34% p=0.14    -1.1%  34% p=0.14    -0.7%  34% p=0.14    -0.4%  34% p=0.14 
+XGBoost                             -36.4%  17% p=0.00   -36.5%  17% p=0.00   -36.6%  20% p=0.00   -36.6%  23% p=0.01   -36.7%  23% p=0.01 
+LSTM                                -24.6%  33% p=0.10   -19.5%  37% p=0.20   -15.0%  37% p=0.20   -11.2%  37% p=0.20    -7.8%  40% p=0.36 
+TFT                                   1.2%  50% p=1.00     4.8%  53% p=0.86     7.8%  53% p=0.86    10.6%  53% p=0.86    13.0%  57% p=0.58 
+Sigma-rule (plug-in SRI)             84.8% 100% p=0.00    90.1% 100% p=0.00    92.5% 100% p=0.00    93.9% 100% p=0.00    94.8% 100% p=0.00 
+EWMA                                 83.5% 100% p=0.00    90.5% 100% p=0.00    93.2% 100% p=0.00    94.6% 100% p=0.00    95.5% 100% p=0.00 
+CUSUM                                82.5% 100% p=0.00    90.8% 100% p=0.00    93.6% 100% p=0.00    95.1% 100% p=0.00    95.9% 100% p=0.00 
+CUSUM, negative-binomial design      82.6% 100% p=0.00    90.9% 100% p=0.00    93.7% 100% p=0.00    95.1% 100% p=0.00    96.0% 100% p=0.00 
+Farrington-type threshold            86.5% 100% p=0.00    92.6% 100% p=0.00    94.8% 100% p=0.00    95.9% 100% p=0.00    96.6% 100% p=0.00 
+Never act                            85.7% 100% p=0.00    92.6% 100% p=0.00    94.9% 100% p=0.00    96.0% 100% p=0.00    96.7% 100% p=0.00 
+Always act                           -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00 
+min(never, always)                   -inf%   0%           -inf%   0%           -inf%   0%           -inf%   0%           -inf%   0%        
+-- break-even r* (M2 envelope vs method envelope; grid 1..100) --
+NB complete pooling                r* = none               M2 cheaper at r=1: False at r=100: False
+NB no pooling                      r* = none               M2 cheaper at r=1: True  at r=100: True
+Poisson M0                         r* = none               M2 cheaper at r=1: False at r=100: False
+XGBoost                            r* = none               M2 cheaper at r=1: False at r=100: False
+LSTM                               r* = none               M2 cheaper at r=1: False at r=100: False
+TFT                                r* = 1.3                M2 cheaper at r=1: False at r=100: True
+Sigma-rule (plug-in SRI)           r* = none               M2 cheaper at r=1: True  at r=100: True
+EWMA                               r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM                              r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM, negative-binomial design    r* = none               M2 cheaper at r=1: True  at r=100: True
+Farrington-type threshold          r* = none               M2 cheaper at r=1: True  at r=100: True
+Never act                          r* = none               M2 cheaper at r=1: True  at r=100: True
+Always act                         r* = none               M2 cheaper at r=1: False at r=100: False
+min(never, always)                 r* = none               M2 cheaper at r=1: False at r=100: False
+-- M2 level by r: 1 at r=1; switches none; 1 at r=100.  Value of monitoring 1 - EC_M2/min(never, always): max -inf% at r = 1.0; above 10% for r in none
+
+== mu 0.2 (n = 35; E = 3.153) ==   EC at the method's best level (level in brackets)
+method                                         r=2             r=5            r=10            r=20            r=50
+M2 (proposed)                          0.14 [1.0]         0.22 [1.0]         0.36 [1.0]         0.64 [1.0]         1.48 [1.0]    
+NB complete pooling                    0.14 [1.0]         0.22 [1.0]         0.36 [1.0]         0.64 [1.0]         1.48 [1.0]    
+NB no pooling                          0.15 [1.0]         0.24 [1.0]         0.39 [1.0]         0.69 [1.0]         1.59 [1.0]    
+Poisson M0                             0.14 [1.0]         0.22 [1.0]         0.36 [1.0]         0.64 [1.0]         1.47 [1.0]    
+XGBoost                                0.13 [1.0]         0.22 [1.0]         0.35 [1.0]         0.63 [1.0]         1.45 [1.0]    
+LSTM                                   0.14 [1.0]         0.22 [1.0]         0.37 [1.0]         0.65 [1.0]         1.52 [1.0]    
+TFT                                    0.14 [1.0]         0.23 [1.0]         0.37 [1.0]         0.66 [1.0]         1.54 [1.0]    
+Sigma-rule (plug-in SRI)               4.31 [1.0]        10.19 [1.0]        19.99 [1.0]        39.60 [1.0]        98.43 [1.0]    
+EWMA                                   4.12 [-]         9.96 [-]        19.69 [-]        39.15 [-]        97.54 [-]    
+CUSUM                                  3.79 [-]         9.42 [-]        18.80 [-]        37.56 [-]        93.83 [-]    
+CUSUM, negative-binomial design        4.20 [-]        10.47 [-]        20.90 [-]        41.77 [-]       104.39 [-]    
+Farrington-type threshold              6.12 [-]        15.06 [-]        29.96 [-]        59.75 [-]       149.15 [-]    
+Never act                              6.31 [-]        15.77 [-]        31.53 [-]        63.06 [-]       157.65 [-]    
+Always act                             0.00 [-]         0.00 [-]         0.00 [-]         0.00 [-]         0.00 [-]    
+-- M2 saving vs method (1 - EC_M2/EC_m) | share of replications with M2 cheaper | sign p --
+NB complete pooling                  -0.7%  36% p=0.55    -0.4%  36% p=0.55    -0.3%  36% p=0.55    -0.2%  36% p=0.55    -0.1%  36% p=0.55 
+NB no pooling                         8.4%  96% p=0.00     7.8%  92% p=0.00     7.5%  92% p=0.00     7.2%  92% p=0.00     7.0%  92% p=0.00 
+Poisson M0                           -0.9%  33% p=0.39    -0.9%  33% p=0.39    -1.0%  33% p=0.39    -1.0%  33% p=0.39    -1.0%  33% p=0.39 
+XGBoost                              -3.5%   6% p=0.00    -2.9%   6% p=0.00    -2.6%   6% p=0.00    -2.3%   6% p=0.00    -2.1%   6% p=0.00 
+LSTM                                 -0.4%  41% p=0.63     0.7%  41% p=0.63     1.4%  41% p=0.63     1.8%  41% p=0.63     2.2%  41% p=0.63 
+TFT                                   0.7%  39% p=0.48     1.9%  39% p=0.48     2.7%  39% p=0.48     3.2%  39% p=0.48     3.6%  39% p=0.48 
+Sigma-rule (plug-in SRI)             96.8% 100% p=0.00    97.8% 100% p=0.00    98.2% 100% p=0.00    98.4% 100% p=0.00    98.5% 100% p=0.00 
+EWMA                                 96.7% 100% p=0.00    97.8% 100% p=0.00    98.2% 100% p=0.00    98.4% 100% p=0.00    98.5% 100% p=0.00 
+CUSUM                                96.4% 100% p=0.00    97.6% 100% p=0.00    98.1% 100% p=0.00    98.3% 100% p=0.00    98.4% 100% p=0.00 
+CUSUM, negative-binomial design      96.7% 100% p=0.00    97.9% 100% p=0.00    98.3% 100% p=0.00    98.5% 100% p=0.00    98.6% 100% p=0.00 
+Farrington-type threshold            97.7% 100% p=0.00    98.5% 100% p=0.00    98.8% 100% p=0.00    98.9% 100% p=0.00    99.0% 100% p=0.00 
+Never act                            97.8% 100% p=0.00    98.6% 100% p=0.00    98.9% 100% p=0.00    99.0% 100% p=0.00    99.1% 100% p=0.00 
+Always act                           -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00 
+min(never, always)                   -inf%   0%           -inf%   0%           -inf%   0%           -inf%   0%           -inf%   0%        
+-- break-even r* (M2 envelope vs method envelope; grid 1..100) --
+NB complete pooling                r* = none               M2 cheaper at r=1: False at r=100: False
+NB no pooling                      r* = none               M2 cheaper at r=1: True  at r=100: True
+Poisson M0                         r* = none               M2 cheaper at r=1: False at r=100: False
+XGBoost                            r* = none               M2 cheaper at r=1: False at r=100: False
+LSTM                               r* = 2.8                M2 cheaper at r=1: False at r=100: True
+TFT                                r* = 1.1                M2 cheaper at r=1: False at r=100: True
+Sigma-rule (plug-in SRI)           r* = none               M2 cheaper at r=1: True  at r=100: True
+EWMA                               r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM                              r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM, negative-binomial design    r* = none               M2 cheaper at r=1: True  at r=100: True
+Farrington-type threshold          r* = none               M2 cheaper at r=1: True  at r=100: True
+Never act                          r* = none               M2 cheaper at r=1: True  at r=100: True
+Always act                         r* = none               M2 cheaper at r=1: False at r=100: False
+min(never, always)                 r* = none               M2 cheaper at r=1: False at r=100: False
+-- M2 level by r: 1 at r=1; switches none; 1 at r=100.  Value of monitoring 1 - EC_M2/min(never, always): max -inf% at r = 1.0; above 10% for r in none
+
+== stable (n = 20; E = 1.503) ==   EC at the method's best level (level in brackets)
+method                                         r=2             r=5            r=10            r=20            r=50
+M2 (proposed)                          0.27 [1.0]         0.37 [1.0]         0.53 [1.0]         0.85 [1.0]         1.81 [1.0]    
+NB complete pooling                    0.26 [1.0]         0.36 [1.0]         0.51 [1.0]         0.82 [1.0]         1.74 [1.0]    
+NB no pooling                          0.32 [1.0]         0.45 [1.0]         0.66 [1.0]         1.08 [1.0]         2.35 [1.0]    
+Poisson M0                             0.25 [1.0]         0.34 [1.0]         0.49 [1.0]         0.78 [1.0]         1.66 [1.0]    
+XGBoost                                0.19 [1.0]         0.25 [1.0]         0.36 [1.0]         0.58 [1.0]         1.24 [1.0]    
+LSTM                                   0.21 [1.0]         0.29 [1.0]         0.43 [1.0]         0.71 [1.0]         1.54 [1.0]    
+TFT                                    0.24 [1.0]         0.33 [1.0]         0.48 [1.0]         0.79 [1.0]         1.70 [1.0]    
+Sigma-rule (plug-in SRI)               2.68 [1.0]         5.80 [1.0]        11.00 [1.0]        21.41 [1.0]        52.63 [1.0]    
+EWMA                                   2.75 [-]         6.53 [-]        12.83 [-]        25.44 [-]        63.27 [-]    
+CUSUM                                  2.57 [-]         6.39 [-]        12.76 [-]        25.48 [-]        63.66 [-]    
+CUSUM, negative-binomial design        2.72 [-]         6.77 [-]        13.53 [-]        27.04 [-]        67.59 [-]    
+Farrington-type threshold              3.07 [-]         7.40 [-]        14.62 [-]        29.05 [-]        72.33 [-]    
+Never act                              3.01 [-]         7.51 [-]        15.03 [-]        30.05 [-]        75.13 [-]    
+Always act                             0.00 [-]         0.00 [-]         0.00 [-]         0.00 [-]         0.00 [-]    
+-- M2 saving vs method (1 - EC_M2/EC_m) | share of replications with M2 cheaper | sign p --
+NB complete pooling                  -3.6%  38% p=0.45    -3.7%  38% p=0.45    -3.8%  38% p=0.45    -3.9%  38% p=0.45    -3.9%  38% p=0.45 
+NB no pooling                        15.8%  95% p=0.00    18.1%  95% p=0.00    20.1%  95% p=0.00    21.7%  95% p=0.00    23.1%  95% p=0.00 
+Poisson M0                           -7.5%  19% p=0.02    -7.9%  12% p=0.00    -8.3%  12% p=0.00    -8.6%  12% p=0.00    -8.9%  12% p=0.00 
+XGBoost                             -44.6%   0% p=0.00   -44.9%   0% p=0.00   -45.1%   0% p=0.00   -45.3%   0% p=0.00   -45.4%   0% p=0.00 
+LSTM                                -32.3%  12% p=0.00   -27.3%  12% p=0.00   -23.3%  12% p=0.00   -20.0%  12% p=0.00   -17.3%  12% p=0.00 
+TFT                                 -13.0%  26% p=0.06   -10.8%  26% p=0.06    -8.9%  26% p=0.06    -7.3%  26% p=0.06    -6.0%  32% p=0.17 
+Sigma-rule (plug-in SRI)             89.8% 100% p=0.00    93.6% 100% p=0.00    95.2% 100% p=0.00    96.0% 100% p=0.00    96.6% 100% p=0.00 
+EWMA                                 90.1% 100% p=0.00    94.4% 100% p=0.00    95.9% 100% p=0.00    96.7% 100% p=0.00    97.1% 100% p=0.00 
+CUSUM                                89.4% 100% p=0.00    94.2% 100% p=0.00    95.9% 100% p=0.00    96.7% 100% p=0.00    97.2% 100% p=0.00 
+CUSUM, negative-binomial design      90.0% 100% p=0.00    94.6% 100% p=0.00    96.1% 100% p=0.00    96.9% 100% p=0.00    97.3% 100% p=0.00 
+Farrington-type threshold            91.1% 100% p=0.00    95.0% 100% p=0.00    96.4% 100% p=0.00    97.1% 100% p=0.00    97.5% 100% p=0.00 
+Never act                            90.9% 100% p=0.00    95.1% 100% p=0.00    96.5% 100% p=0.00    97.2% 100% p=0.00    97.6% 100% p=0.00 
+Always act                           -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00 
+min(never, always)                   -inf%   0%           -inf%   0%           -inf%   0%           -inf%   0%           -inf%   0%        
+-- break-even r* (M2 envelope vs method envelope; grid 1..100) --
+NB complete pooling                r* = none               M2 cheaper at r=1: False at r=100: False
+NB no pooling                      r* = none               M2 cheaper at r=1: True  at r=100: True
+Poisson M0                         r* = none               M2 cheaper at r=1: False at r=100: False
+XGBoost                            r* = none               M2 cheaper at r=1: False at r=100: False
+LSTM                               r* = none               M2 cheaper at r=1: False at r=100: False
+TFT                                r* = none               M2 cheaper at r=1: False at r=100: False
+Sigma-rule (plug-in SRI)           r* = none               M2 cheaper at r=1: True  at r=100: True
+EWMA                               r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM                              r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM, negative-binomial design    r* = none               M2 cheaper at r=1: True  at r=100: True
+Farrington-type threshold          r* = none               M2 cheaper at r=1: True  at r=100: True
+Never act                          r* = none               M2 cheaper at r=1: True  at r=100: True
+Always act                         r* = none               M2 cheaper at r=1: False at r=100: False
+min(never, always)                 r* = none               M2 cheaper at r=1: False at r=100: False
+-- M2 level by r: 1 at r=1; switches none; 1 at r=100.  Value of monitoring 1 - EC_M2/min(never, always): max -inf% at r = 1.0; above 10% for r in none
+
+== gradual (n = 25; E = 2.379) ==   EC at the method's best level (level in brackets)
+method                                         r=2             r=5            r=10            r=20            r=50
+M2 (proposed)                          0.20 [1.0]         0.29 [1.0]         0.45 [1.0]         0.75 [1.0]         1.66 [1.0]    
+NB complete pooling                    0.20 [1.0]         0.29 [1.0]         0.43 [1.0]         0.72 [1.0]         1.59 [1.0]    
+NB no pooling                          0.24 [1.0]         0.37 [1.0]         0.57 [1.0]         0.97 [1.0]         2.18 [1.0]    
+Poisson M0                             0.20 [1.0]         0.29 [1.0]         0.44 [1.0]         0.73 [1.0]         1.62 [1.0]    
+XGBoost                                0.18 [1.0]         0.26 [1.0]         0.39 [1.0]         0.66 [1.0]         1.47 [1.0]    
+LSTM                                   0.18 [1.0]         0.27 [1.0]         0.42 [1.0]         0.71 [1.0]         1.59 [1.0]    
+TFT                                    0.20 [1.0]         0.28 [1.0]         0.43 [1.0]         0.72 [1.0]         1.58 [1.0]    
+Sigma-rule (plug-in SRI)               3.35 [1.0]         7.56 [1.0]        14.57 [1.0]        28.60 [1.0]        70.68 [1.0]    
+EWMA                                   3.40 [-]         8.09 [-]        15.90 [-]        31.52 [-]        78.38 [-]    
+CUSUM                                  3.25 [-]         8.08 [-]        16.11 [-]        32.19 [-]        80.41 [-]    
+CUSUM, negative-binomial design        3.51 [-]         8.72 [-]        17.41 [-]        34.79 [-]        86.92 [-]    
+Farrington-type threshold              4.69 [-]        11.43 [-]        22.68 [-]        45.16 [-]       112.60 [-]    
+Never act                              4.76 [-]        11.90 [-]        23.79 [-]        47.58 [-]       118.96 [-]    
+Always act                             0.00 [-]         0.00 [-]         0.00 [-]         0.00 [-]         0.00 [-]    
+-- M2 saving vs method (1 - EC_M2/EC_m) | share of replications with M2 cheaper | sign p --
+NB complete pooling                  -2.1%  33% p=0.39    -2.9%  25% p=0.15    -3.5%  25% p=0.15    -4.0%  25% p=0.15    -4.4%  25% p=0.15 
+NB no pooling                        16.7% 100% p=0.00    19.5% 100% p=0.00    21.5% 100% p=0.00    23.0% 100% p=0.00    24.2% 100% p=0.00 
+Poisson M0                           -1.5%  50% p=1.00    -1.6%  43% p=0.79    -1.7%  43% p=0.79    -1.8%  43% p=0.79    -1.9%  43% p=0.79 
+XGBoost                             -15.1%  20% p=0.04   -14.2%  20% p=0.04   -13.6%  20% p=0.04   -13.0%  20% p=0.04   -12.6%  20% p=0.04 
+LSTM                                -11.9%  40% p=0.61    -9.1%  47% p=1.00    -7.1%  47% p=1.00    -5.5%  47% p=1.00    -4.3%  53% p=1.00 
+TFT                                  -2.5%  43% p=0.79    -3.4%  36% p=0.42    -4.1%  36% p=0.42    -4.6%  36% p=0.42    -5.1%  36% p=0.42 
+Sigma-rule (plug-in SRI)             93.9% 100% p=0.00    96.1% 100% p=0.00    96.9% 100% p=0.00    97.4% 100% p=0.00    97.7% 100% p=0.00 
+EWMA                                 94.0% 100% p=0.00    96.4% 100% p=0.00    97.2% 100% p=0.00    97.6% 100% p=0.00    97.9% 100% p=0.00 
+CUSUM                                93.7% 100% p=0.00    96.4% 100% p=0.00    97.2% 100% p=0.00    97.7% 100% p=0.00    97.9% 100% p=0.00 
+CUSUM, negative-binomial design      94.2% 100% p=0.00    96.6% 100% p=0.00    97.4% 100% p=0.00    97.8% 100% p=0.00    98.1% 100% p=0.00 
+Farrington-type threshold            95.7% 100% p=0.00    97.4% 100% p=0.00    98.0% 100% p=0.00    98.3% 100% p=0.00    98.5% 100% p=0.00 
+Never act                            95.7% 100% p=0.00    97.5% 100% p=0.00    98.1% 100% p=0.00    98.4% 100% p=0.00    98.6% 100% p=0.00 
+Always act                           -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00 
+min(never, always)                   -inf%   0%           -inf%   0%           -inf%   0%           -inf%   0%           -inf%   0%        
+-- break-even r* (M2 envelope vs method envelope; grid 1..100) --
+NB complete pooling                r* = none               M2 cheaper at r=1: False at r=100: False
+NB no pooling                      r* = none               M2 cheaper at r=1: True  at r=100: True
+Poisson M0                         r* = none               M2 cheaper at r=1: False at r=100: False
+XGBoost                            r* = none               M2 cheaper at r=1: False at r=100: False
+LSTM                               r* = none               M2 cheaper at r=1: False at r=100: False
+TFT                                r* = none               M2 cheaper at r=1: False at r=100: False
+Sigma-rule (plug-in SRI)           r* = none               M2 cheaper at r=1: True  at r=100: True
+EWMA                               r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM                              r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM, negative-binomial design    r* = none               M2 cheaper at r=1: True  at r=100: True
+Farrington-type threshold          r* = none               M2 cheaper at r=1: True  at r=100: True
+Never act                          r* = none               M2 cheaper at r=1: True  at r=100: True
+Always act                         r* = none               M2 cheaper at r=1: False at r=100: False
+min(never, always)                 r* = none               M2 cheaper at r=1: False at r=100: False
+-- M2 level by r: 1 at r=1; switches none; 1 at r=100.  Value of monitoring 1 - EC_M2/min(never, always): max -inf% at r = 1.0; above 10% for r in none
+
+== abrupt (n = 20; E = 2.741) ==   EC at the method's best level (level in brackets)
+method                                         r=2             r=5            r=10            r=20            r=50
+M2 (proposed)                          0.20 [1.0]         0.28 [1.0]         0.42 [1.0]         0.69 [1.0]         1.51 [1.0]    
+NB complete pooling                    0.20 [1.0]         0.28 [1.0]         0.41 [1.0]         0.69 [1.0]         1.51 [1.0]    
+NB no pooling                          0.25 [1.0]         0.37 [1.0]         0.58 [1.0]         1.00 [1.0]         2.24 [1.0]    
+Poisson M0                             0.21 [1.0]         0.30 [1.0]         0.45 [1.0]         0.76 [1.0]         1.66 [1.0]    
+XGBoost                                0.18 [1.0]         0.26 [1.0]         0.40 [1.0]         0.68 [1.0]         1.50 [1.0]    
+LSTM                                   0.20 [1.0]         0.29 [1.0]         0.45 [1.0]         0.77 [1.0]         1.72 [1.0]    
+TFT                                    0.25 [1.0]         0.37 [1.0]         0.58 [1.0]         0.99 [1.0]         2.23 [1.0]    
+Sigma-rule (plug-in SRI)               3.87 [1.0]         8.96 [1.0]        17.43 [1.0]        34.38 [1.0]        85.22 [1.0]    
+EWMA                                   3.15 [-]         7.44 [-]        14.58 [-]        28.87 [-]        71.74 [-]    
+CUSUM                                  2.78 [-]         6.88 [-]        13.71 [-]        27.38 [-]        68.37 [-]    
+CUSUM, negative-binomial design        3.06 [-]         7.58 [-]        15.13 [-]        30.22 [-]        75.50 [-]    
+Farrington-type threshold              5.37 [-]        13.15 [-]        26.12 [-]        52.05 [-]       129.85 [-]    
+Never act                              5.48 [-]        13.71 [-]        27.41 [-]        54.82 [-]       137.06 [-]    
+Always act                             0.00 [-]         0.00 [-]         0.00 [-]         0.00 [-]         0.00 [-]    
+-- M2 saving vs method (1 - EC_M2/EC_m) | share of replications with M2 cheaper | sign p --
+NB complete pooling                  -2.1%  25% p=0.15    -1.5%  33% p=0.39    -1.0%  33% p=0.39    -0.6%  33% p=0.39    -0.3%  33% p=0.39 
+NB no pooling                        19.7%  94% p=0.00    24.5%  94% p=0.00    27.9%  94% p=0.00    30.5%  94% p=0.00    32.4%  94% p=0.00 
+Poisson M0                            5.1%  55% p=1.00     6.5%  55% p=1.00     7.6%  55% p=1.00     8.4%  55% p=1.00     9.1%  55% p=1.00 
+XGBoost                             -11.4%  20% p=0.04    -7.5%  20% p=0.04    -4.6%  27% p=0.12    -2.3%  33% p=0.30    -0.5%  33% p=0.30 
+LSTM                                 -1.7%  60% p=0.61     3.4%  60% p=0.61     7.1%  60% p=0.61     9.9%  60% p=0.61    12.1%  60% p=0.61 
+TFT                                  18.5%  73% p=0.12    23.6%  87% p=0.01    27.2%  87% p=0.01    29.9%  87% p=0.01    32.1%  87% p=0.01 
+Sigma-rule (plug-in SRI)             94.8% 100% p=0.00    96.9% 100% p=0.00    97.6% 100% p=0.00    98.0% 100% p=0.00    98.2% 100% p=0.00 
+EWMA                                 93.7% 100% p=0.00    96.2% 100% p=0.00    97.1% 100% p=0.00    97.6% 100% p=0.00    97.9% 100% p=0.00 
+CUSUM                                92.8% 100% p=0.00    95.9% 100% p=0.00    96.9% 100% p=0.00    97.5% 100% p=0.00    97.8% 100% p=0.00 
+CUSUM, negative-binomial design      93.5% 100% p=0.00    96.3% 100% p=0.00    97.2% 100% p=0.00    97.7% 100% p=0.00    98.0% 100% p=0.00 
+Farrington-type threshold            96.3% 100% p=0.00    97.9% 100% p=0.00    98.4% 100% p=0.00    98.7% 100% p=0.00    98.8% 100% p=0.00 
+Never act                            96.4% 100% p=0.00    97.9% 100% p=0.00    98.5% 100% p=0.00    98.7% 100% p=0.00    98.9% 100% p=0.00 
+Always act                           -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00    -inf%   0% p=0.00 
+min(never, always)                   -inf%   0%           -inf%   0%           -inf%   0%           -inf%   0%           -inf%   0%        
+-- break-even r* (M2 envelope vs method envelope; grid 1..100) --
+NB complete pooling                r* = none               M2 cheaper at r=1: False at r=100: False
+NB no pooling                      r* = none               M2 cheaper at r=1: True  at r=100: True
+Poisson M0                         r* = none               M2 cheaper at r=1: True  at r=100: True
+XGBoost                            r* = 80.3               M2 cheaper at r=1: False at r=100: True
+LSTM                               r* = 2.8                M2 cheaper at r=1: False at r=100: True
+TFT                                r* = none               M2 cheaper at r=1: True  at r=100: True
+Sigma-rule (plug-in SRI)           r* = none               M2 cheaper at r=1: True  at r=100: True
+EWMA                               r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM                              r* = none               M2 cheaper at r=1: True  at r=100: True
+CUSUM, negative-binomial design    r* = none               M2 cheaper at r=1: True  at r=100: True
+Farrington-type threshold          r* = none               M2 cheaper at r=1: True  at r=100: True
+Never act                          r* = none               M2 cheaper at r=1: True  at r=100: True
+Always act                         r* = none               M2 cheaper at r=1: False at r=100: False
+min(never, always)                 r* = none               M2 cheaper at r=1: False at r=100: False
+-- M2 level by r: 1 at r=1; switches none; 1 at r=100.  Value of monitoring 1 - EC_M2/min(never, always): max -inf% at r = 1.0; above 10% for r in none
+
+-- per cell: cheapest method at r = 5, 10, 20 (best level each) and M2 value of monitoring --
+  B-a0.5-mu0.05-abrupt     E=1.49  r=5: XGBoost 0.25 (M2 0.30, trivial 0.00) | r=10: XGBoost 0.36 (M2 0.40, trivial 0.00) | r=20: XGBoost 0.56 (M2 0.62, trivial 0.00)
+  B-a0.5-mu0.05-gradual    E=1.07  r=5: LSTM 0.28 (M2 0.41, trivial 0.00) | r=10: LSTM 0.37 (M2 0.57, trivial 0.00) | r=20: LSTM 0.56 (M2 0.90, trivial 0.00)
+  B-a0.5-mu0.05-stable     E=0.70  r=5: XGBoost 0.34 (M2 0.53, trivial 0.00) | r=10: XGBoost 0.44 (M2 0.73, trivial 0.00) | r=20: XGBoost 0.66 (M2 1.12, trivial 0.00)
+  B-a0.5-mu0.2-abrupt      E=3.38  r=5: XGBoost 0.22 (M2 0.23, trivial 0.00) | r=10: XGBoost 0.34 (M2 0.36, trivial 0.00) | r=20: XGBoost 0.59 (M2 0.61, trivial 0.00)
+  B-a0.5-mu0.2-gradual     E=2.79  r=5: XGBoost 0.20 (M2 0.21, trivial 0.00) | r=10: XGBoost 0.33 (M2 0.34, trivial 0.00) | r=20: XGBoost 0.60 (M2 0.61, trivial 0.00)
+  B-a0.5-mu0.2-stable      E=2.08  r=5: XGBoost 0.20 (M2 0.20, trivial 0.00) | r=10: XGBoost 0.30 (M2 0.31, trivial 0.00) | r=20: XGBoost 0.52 (M2 0.52, trivial 0.00)
+  B-a2-mu0.05-abrupt       E=1.60  r=5: LSTM 0.32 (M2 0.36, trivial 0.00) | r=10: LSTM 0.46 (M2 0.51, trivial 0.00) | r=20: LSTM 0.74 (M2 0.80, trivial 0.00)
+  B-a2-mu0.05-gradual      E=1.16  r=5: XGBoost 0.34 (M2 0.40, trivial 0.00) | r=10: XGBoost 0.47 (M2 0.55, trivial 0.00) | r=20: XGBoost 0.74 (M2 0.85, trivial 0.00)
+  B-a2-mu0.05-stable       E=0.78  r=5: XGBoost 0.29 (M2 0.53, trivial 0.00) | r=10: XGBoost 0.38 (M2 0.72, trivial 0.00) | r=20: XGBoost 0.57 (M2 1.11, trivial 0.00)
+  B-a2-mu0.2-abrupt        E=4.50  r=5: XGBoost 0.24 (M2 0.24, trivial 0.00) | r=10: XGBoost 0.40 (M2 0.41, trivial 0.00) | r=20: XGBoost 0.74 (M2 0.74, trivial 0.00)
+  B-a2-mu0.2-gradual       E=3.44  r=5: XGBoost 0.23 (M2 0.23, trivial 0.00) | r=10: XGBoost 0.38 (M2 0.38, trivial 0.00) | r=20: XGBoost 0.68 (M2 0.69, trivial 0.00)
+  B-a2-mu0.2-stable        E=2.45  r=5: XGBoost 0.20 (M2 0.21, trivial 0.00) | r=10: XGBoost 0.33 (M2 0.36, trivial 0.00) | r=20: XGBoost 0.59 (M2 0.64, trivial 0.00)
+
+######## Sensitivity (Model A, all cells): detection within 3 months (dr3) and the two-channel headline of M2 ########
+r = 5: M2 8.03->7.43; NB complete pooling 8.08->7.47; NB no pooling 8.10->7.48; Poisson M0 8.15->7.52; XGBoost 8.76->8.08; LSTM 8.78->8.29; TFT 8.97->8.04; Sigma-rule 10.06->8.41; EWMA 9.85->8.88; CUSUM 9.47->9.33; CUSUM, negative-binomial design 9.73->9.65; Farrington-type threshold 10.96->9.97; Never act 11.10->11.18; Always act 12.00->12.00; M2 headline level 1 11.58->11.46; M2 headline level 2 9.77->9.49
+r = 20: M2 12.02->11.10; NB complete pooling 12.02->11.14; NB no pooling 11.94->11.41; Poisson M0 12.01->11.24; XGBoost 12.19->11.74; LSTM 12.18->11.72; TFT 12.19->11.67; Sigma-rule 30.77->24.19; EWMA 31.27->27.40; CUSUM 30.92->30.37; CUSUM, negative-binomial design 32.95->32.65; Farrington-type threshold 42.56->38.60; Never act 44.42->44.71; Always act 12.00->12.00; M2 headline level 1 12.03->11.55; M2 headline level 2 12.27->11.17

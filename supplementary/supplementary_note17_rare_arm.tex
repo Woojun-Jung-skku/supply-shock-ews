@@ -1,0 +1,186 @@
+\textbf{Supplementary Note 17. The rare arm (Sections 5.1, 5.3 and 5.6 of the main text).}
+
+\textbf{Design.} Three cells at a base rate of $\bar{\mu} = 0.02$ shocks per item-month (0.24 per item-year), $I = 100$ items, $T = 120$ months, $G = 3$ groups, $\alpha' = 2$, one per regime---stable, gradual ($+2\%$ per month from $t_0 = 60$) and abrupt ($+\log 3$ at $t_0 = 60$)---with five replications each (cells \texttt{B-a2-mu0.02-\{stable,gradual,abrupt\}-I100}, seeds \texttt{seed\_of("B", cell, rep)}). Everything else is the Study B protocol: the \texttt{t4\_min} design constants (four chains, 400 warm-up and 500 sampling iterations, fourteen origins $36, 42, \dots, 114$, 200 bootstrap paths for the $q$ channel, M0 refitted every four origins), the same decision months, thresholds, persistence rules and metrics (conventions on page 1). The realised three-month event prevalence is 8.2\%, 12.4\% and 16.7\% in the stable, gradual and abrupt cells (24--55\% in Study B), and $E$---shock item-months per item-year over the decision months, an item-month with several shocks counting once---is 0.34, 0.53 and 0.74 (1.13 and 3.15 at the two base rates of Study B); the corresponding numbers of shocks per item-year are 0.36, 0.57 and 0.82. The methods run are M2, the Poisson model M0, XGBoost, the sigma-rule, EWMA and CUSUM; the NB pooling variants, the Farrington-type threshold, the negative-binomial CUSUM and the two recurrent networks (LSTM, TFT) were not run in this arm. All 210 origin fits of M2 passed the convergence check (106 after the one refit; maximum $\widehat{R}$ 1.0099); no M0 fit failed. Conformal coverage was 0.93--0.94 (target 0.90) with 1.0--1.2 counts per set. The arm was run on two CPU cores in 2-hour chunks resumed from an origin-level cache; the two replications of an earlier pilot run on a different machine reproduce to every recorded digit, as the fixed seeds imply.
+
+\textbf{Reading.} Table S29.1 gives the Table 6 metrics by cell and pooled; Table S29.2 the expected cost of Section 5.6, computed as in Table 8 and Tables S21.1--S21.2; Tables S29.3 and S29.4 the per-replication values behind the paired statements of the main text. \emph{Probabilities and triage.} The ranking advantage of M2 over the Poisson model is confined to the abrupt cell (AUC-PR $+0.014$, five of five replications; stable and gradual within $0.004$); the calibration advantage holds in every changing-regime replication (ECE 0.012 and 0.019 against 0.017 and 0.027) and is absent in the stable cell (0.011 against 0.010); XGBoost ranks worse in all fifteen replications and rarely crosses the level-2 threshold. \emph{Change channel.} The $q$ channel of M2 reached the 24-month target in all fifteen bootstrap calibrations (thresholds 0.90--0.975, persistence 2, predicted ARL$_0$ 24--37) and the Poisson channel in nine (one of five in the gradual cell, where even the 0.99 threshold with persistence 3--4 predicted 15--25); in the ten changing-regime replications neither channel alarmed in the 24-month pre-change window, and M2 signalled the change sooner in every replication (abrupt 9.5 against 17.8 months, gradual 33.5 against 43.7). In the stable cell both channels alarmed more often over the 82-month window than the bootstrap had predicted: realised ARL$_0$ (group-months per alarm month) 15, 31, 7, 246 and 13 for M2 and 4, 12, 246, 246 and 8 for the Poisson model, below the target in three of five replications each (246 = no alarm). \emph{Cost.} Against Study B the band in which M2 beats both trivial policies moves from $r \approx 2.6$--19 to $3.6$--66 (pooled) and its centre $12/E$ from 5.4 to 22; the largest saving against the better trivial policy is 22--29\% by cell and 27\% over the three cells (Study B: 30\% over its twelve cells, 23--25\% within a base rate; Table S21.1), against 23--26\% for the Poisson model and 15\% for XGBoost, and it exceeds 10\% for $r$ between 12 and 44 (pooled). The cheapest level of M2 switches from 3 to 2 near $r \approx 10$ and from 2 to 1 near $r \approx 26$ (7 and 18 in Study B). At small ratios there is little to save: at $r = 5$ the three probability-based alarms cost within 2.5\% of never acting in every cell. Paired by replication, at the level that is cheapest on average in the cell (the convention of Table S20; Table S29.4), M2 and the Poisson model cost within 2.3\% of each other in the stable and gradual cells at every tabulated ratio, the Poisson model being the cheaper at some; in the abrupt cell M2 is 1.2--5.2\% cheaper at every tabulated ratio, in four or five of the five replications. Against XGBoost, M2 is 6--17\% cheaper at $r = 20$ and 5--9\% at $r = 50$, in every replication of every cell, and 2--7\% dearer at $r = 2$ in the two changing-regime cells, as in Study B, where the learners are cheaper when misses are cheap. The level of a policy is fixed per cell at each $r$, as in Table 8; choosing it replication by replication, which no policy could do in advance, would lower the pooled cost of XGBoost at $r = 20$ from 9.64 to 9.06 and leave that of M2 at 8.04, narrowing the pooled gap from 17\% to 11\%.
+
+\clearpage
+\captionof{table}{Table S29.1. Alarm performance in the rare arm ($\bar{\mu} = 0.02$, $I = 100$, $T = 120$, $\alpha' = 2$; five replications per cell), by cell and pooled, evaluated exactly as Table 6 of the main text. (a) Event probabilities for ``at least one shock within three months'' and triage at level 2 ($\pi_2 = 0.167$, two consecutive months): detection in the month before the shock and within three months, false-alarm onsets per item-year in the stable windows, alarm months per item-year, median lead time (mean of the replication quartiles). (b) Change channel and prediction sets: calibrations reaching the 24-month ARL$_0$ target in the 200 bootstrap paths, the bootstrap-predicted ARL$_0$, the realised ARL$_0$ (median and range over replications; 72 and 246 = no alarm in the 24-month pre-change window or the 82-month stable window), ARL$_1$ (mean over replications; range), conformal coverage and set size.}\label{tab:S29.1}
+{\scriptsize
+\begin{tabular}{llrrrrrrrl}
+\toprule
+Cell & Method & AUC-PR & Brier & ECE & Det.\ $\le$1 m & Det.\ $\le$3 m & FA / item-yr & Alarm-mo / item-yr & Lead, median (IQR) \\
+\midrule
+Stable & M2 (proposed) & 0.164 & 0.073 & 0.011 & 0.20 & 0.26 & 0.18 & 0.9 & 9.2 (3.4--18.1) \\
+ & Poisson M0 & 0.168 & 0.073 & 0.010 & 0.20 & 0.25 & 0.16 & 0.8 & 8.8 (3.2--17.2) \\
+ & XGBoost & 0.138 & 0.074 & 0.010 & 0.07 & 0.10 & 0.09 & 0.3 & 10.6 (4.0--20.9) \\
+ & Sigma-rule, level 2 & -- & -- & -- & 0.23 & 0.37 & 0.69 & 1.7 & 12.5 (4.8--25.4) \\
+ & EWMA & -- & -- & -- & 0.11 & 0.16 & 0.18 & 0.9 & 10.4 (4.5--20.2) \\
+ & CUSUM & -- & -- & -- & 0.03 & 0.03 & 0.01 & 0.2 & 7.2 (4.8--10.7) \\
+\addlinespace
+Gradual & M2 (proposed) & 0.278 & 0.101 & 0.012 & 0.42 & 0.48 & 0.29 & 2.1 & 7.4 (3.2--15.9) \\
+ & Poisson M0 & 0.281 & 0.101 & 0.017 & 0.38 & 0.45 & 0.26 & 1.8 & 7.0 (3.2--15.2) \\
+ & XGBoost & 0.223 & 0.107 & 0.045 & 0.10 & 0.14 & 0.09 & 0.4 & 6.9 (3.0--17.9) \\
+ & Sigma-rule, level 2 & -- & -- & -- & 0.32 & 0.47 & 0.83 & 2.4 & 10.5 (4.4--22.6) \\
+ & EWMA & -- & -- & -- & 0.19 & 0.25 & 0.25 & 1.3 & 8.7 (4.0--18.3) \\
+ & CUSUM & -- & -- & -- & 0.06 & 0.06 & 0.01 & 0.2 & 5.6 (3.9--8.1) \\
+\addlinespace
+Abrupt & M2 (proposed) & 0.340 & 0.128 & 0.019 & 0.63 & 0.69 & 0.38 & 4.0 & 7.4 (3.0--13.8) \\
+ & Poisson M0 & 0.326 & 0.130 & 0.027 & 0.57 & 0.63 & 0.36 & 3.7 & 7.1 (3.0--13.8) \\
+ & XGBoost & 0.299 & 0.135 & 0.063 & 0.25 & 0.30 & 0.16 & 1.2 & 5.4 (2.6--11.2) \\
+ & Sigma-rule, level 2 & -- & -- & -- & 0.29 & 0.45 & 0.75 & 2.4 & 9.2 (3.8--19.6) \\
+ & EWMA & -- & -- & -- & 0.25 & 0.33 & 0.31 & 1.8 & 7.1 (3.0--15.3) \\
+ & CUSUM & -- & -- & -- & 0.12 & 0.12 & 0.02 & 0.5 & 4.4 (1.9--7.8) \\
+\addlinespace
+Pooled & M2 (proposed) & 0.261 & 0.101 & 0.014 & 0.42 & 0.48 & 0.28 & 2.3 & 8.0 (3.2--16.0) \\
+ & Poisson M0 & 0.258 & 0.101 & 0.018 & 0.39 & 0.44 & 0.26 & 2.1 & 7.6 (3.1--15.4) \\
+ & XGBoost & 0.220 & 0.106 & 0.039 & 0.14 & 0.18 & 0.12 & 0.7 & 7.6 (3.2--16.7) \\
+ & Sigma-rule, level 2 & -- & -- & -- & 0.28 & 0.43 & 0.76 & 2.2 & 10.7 (4.3--22.6) \\
+ & EWMA & -- & -- & -- & 0.18 & 0.25 & 0.25 & 1.3 & 8.7 (3.9--17.9) \\
+ & CUSUM & -- & -- & -- & 0.07 & 0.07 & 0.01 & 0.3 & 5.7 (3.5--8.8) \\
+\bottomrule
+\end{tabular}
+
+\vspace{4pt}
+(b) Change channel and prediction sets
+
+\begin{tabular}{llcccccc}
+\toprule
+Cell & Channel & Calibrated & Predicted ARL$_0$ & Realised ARL$_0$, median (range) & ARL$_1$, mean (range) & Set coverage & Set size \\
+\midrule
+Stable & $q$ channel, M2 & 5/5 & 25--37 & 15 (7--246) & -- & 0.928 & 1.01 \\
+ & $q$ channel, Poisson M0 & 4/5 & 14--29 & 12 (4--246) & -- & -- & -- \\
+ & EWMA & -- & 24 (nominal) & 14 (12--17) & -- & -- & -- \\
+ & CUSUM & -- & 24 (nominal) & 76 (52--117) & -- & -- & -- \\
+\addlinespace
+Gradual & $q$ channel, M2 & 5/5 & 27--35 & 72 (72--72) & 33.5 (28--49) & 0.937 & 1.09 \\
+ & $q$ channel, Poisson M0 & 1/5 & 15--25 & 72 (72--72) & 43.7 (35--57) & -- & -- \\
+ & EWMA & -- & 24 (nominal) & 17 (14--23) & 31.9 (30--35) & -- & -- \\
+ & CUSUM & -- & 24 (nominal) & 2400 (2400--2400) & 56.5 (56--57) & -- & -- \\
+\addlinespace
+Abrupt & $q$ channel, M2 & 5/5 & 24--33 & 72 (72--72) & 9.5 (4--22) & 0.943 & 1.19 \\
+ & $q$ channel, Poisson M0 & 4/5 & 13--27 & 72 (72--72) & 17.8 (11--36) & -- & -- \\
+ & EWMA & -- & 24 (nominal) & 16 (15--23) & 22.2 (18--27) & -- & -- \\
+ & CUSUM & -- & 24 (nominal) & 2400 (2400--2400) & 54.2 (53--55) & -- & -- \\
+\addlinespace
+Pooled & $q$ channel, M2 & 15/15 & 24--37 & 72 (7--246) & 21.5 (4--49) & 0.936 & 1.10 \\
+ & $q$ channel, Poisson M0 & 9/15 & 13--29 & 72 (4--246) & 30.7 (11--57) & -- & -- \\
+ & EWMA & -- & 24 (nominal) & 16 (12--23) & 27.1 (18--35) & -- & -- \\
+ & CUSUM & -- & 24 (nominal) & 2400 (52--2400) & 55.3 (53--57) & -- & -- \\
+\bottomrule
+\end{tabular}}
+
+Realised ARL$_0$ of the $q$ channels is in group-months (three groups), of EWMA and CUSUM in item-months (100 items), as in Table 6; the stable window is the 24 decision months before the change in the gradual and abrupt cells (72 group-months, 2,400 item-months) and all 82 decision months in the stable cell (246 and 8,200).
+
+\clearpage
+\captionof{table}{Table S29.2. Expected cost per item-year in the rare arm (Model A of Section 5.6, units of one alarm-month), by cell and pooled over the fifteen replications, computed as in Table 8: for each policy the lower envelope of its level-wise mean-cost lines (eq. 21), i.e. the mean over replications at the level that is cheapest on average at that $r$, with the standard error in brackets, at $r$ = 2, 5, 10, 20 and 50. The last three columns give, as in Tables S21.1 and S21.2, the band of $r$ in which the policy is cheaper than the better of never and always acting, $\min(rE, 12)$ with $E$ the mean of the subset, its largest saving against that policy, which lies at $r = 12/E$ (34.9, 22.6, 16.2; 22.3 pooled), and the range of $r$ over which the saving exceeds 10\%. Never act costs $rE$ per item-year ($E$ = 0.34, 0.53, 0.74; 0.54 pooled); always act costs 12.}\label{tab:S29.2}
+{\scriptsize
+\begin{tabular}{llrrrrrccc}
+\toprule
+Cell & Method & $r=2$ & $r=5$ & $r=10$ & $r=20$ & $r=50$ & Band of $r$ & Largest saving & Saving $>$ 10\% \\
+\midrule
+Stable & M2 (proposed) & 0.69 (0.02) & 1.72 (0.05) & 3.44 (0.10) & 6.36 (0.09) & 10.42 (0.16) & 4.1--72 & 22\% & 25--55 \\
+ & Poisson M0 & 0.69 (0.02) & 1.72 (0.05) & 3.44 (0.10) & 6.28 (0.09) & 10.39 (0.11) & 4.3--72 & 23\% & 22--56 \\
+ & XGBoost & 0.69 (0.02) & 1.72 (0.05) & 3.44 (0.10) & 6.74 (0.16) & 11.23 (0.14) & 14.0--62 & 15\% & 33--43 \\
+ & Sigma-rule (3 limits) & 1.72 (0.06) & 2.60 (0.07) & 4.05 (0.11) & 6.96 (0.20) & 13.96 (0.31) & 21.3--41 & 12\% & 31--36 \\
+ & EWMA & 1.47 (0.06) & 2.38 (0.07) & 3.90 (0.11) & 6.95 (0.19) & 16.09 (0.43) & 21.7--37 & 4\% & -- \\
+ & CUSUM & 0.83 (0.04) & 1.83 (0.06) & 3.49 (0.10) & 6.81 (0.17) & 16.79 (0.40) & 14.1--36 & 2\% & -- \\
+ & Never act & 0.69 (0.02) & 1.72 (0.05) & 3.44 (0.10) & 6.88 (0.20) & 17.21 (0.50) & -- & -- & -- \\
+ & Always act & 12.00 & 12.00 & 12.00 & 12.00 & 12.00 & -- & -- & -- \\
+\addlinespace
+Gradual & M2 (proposed) & 1.08 (0.02) & 2.62 (0.06) & 5.16 (0.17) & 8.25 (0.27) & 11.23 (0.12) & 3.3--64 & 24\% & 12--42 \\
+ & Poisson M0 & 1.08 (0.02) & 2.62 (0.06) & 5.05 (0.16) & 8.32 (0.24) & 11.26 (0.19) & 3.2--62 & 24\% & 12--43 \\
+ & XGBoost & 1.06 (0.02) & 2.65 (0.06) & 5.14 (0.16) & 9.89 (0.38) & 12.36 (0.14) & $<$1--45$^{a}$ & 15\% & 21--31 \\
+ & Sigma-rule (3 limits) & 2.44 (0.07) & 3.66 (0.09) & 5.69 (0.13) & 9.40 (0.16) & 18.35 (0.26) & 13.1--29 & 15\% & 19--25 \\
+ & EWMA & 2.19 (0.08) & 3.48 (0.11) & 5.63 (0.17) & 9.93 (0.31) & 22.83 (0.76) & 13.3--25 & 8\% & -- \\
+ & CUSUM & 1.21 (0.02) & 2.71 (0.06) & 5.21 (0.14) & 10.21 (0.29) & 25.20 (0.73) & 7.1--24 & 4\% & -- \\
+ & Never act & 1.06 (0.02) & 2.65 (0.06) & 5.30 (0.12) & 10.60 (0.23) & 26.50 (0.58) & -- & -- & -- \\
+ & Always act & 12.00 & 12.00 & 12.00 & 12.00 & 12.00 & -- & -- & -- \\
+\addlinespace
+Abrupt & M2 (proposed) & 1.59 (0.05) & 3.60 (0.08) & 6.77 (0.09) & 9.51 (0.12) & 11.73 (0.16) & 3.7--57 & 29\% & 10--26 \\
+ & Poisson M0 & 1.62 (0.06) & 3.65 (0.08) & 6.87 (0.11) & 10.03 (0.20) & 11.96 (0.22) & 4.3--51 & 26\% & 11--25 \\
+ & XGBoost & 1.49 (0.04) & 3.68 (0.08) & 6.77 (0.12) & 10.70 (0.15) & 12.32 (0.17) & 3.3--44 & 15\% & 11--22 \\
+ & Sigma-rule (3 limits) & 2.80 (0.06) & 4.55 (0.10) & 7.47 (0.16) & 12.10 (0.18) & 25.16 (0.38) & 10.5--20 & 13\% & 15--17 \\
+ & EWMA & 2.92 (0.07) & 4.58 (0.08) & 7.36 (0.10) & 12.92 (0.15) & 29.61 (0.35) & 9.9--18 & 10\% & -- \\
+ & CUSUM & 1.83 (0.07) & 3.79 (0.08) & 7.06 (0.11) & 13.58 (0.21) & 33.16 (0.51) & 6.2--18 & 7\% & -- \\
+ & Never act & 1.48 (0.03) & 3.69 (0.08) & 7.39 (0.17) & 14.77 (0.33) & 36.94 (0.84) & -- & -- & -- \\
+ & Always act & 12.00 & 12.00 & 12.00 & 12.00 & 12.00 & -- & -- & -- \\
+\addlinespace
+Pooled & M2 (proposed) & 1.12 (0.10) & 2.65 (0.21) & 5.19 (0.35) & 8.04 (0.36) & 11.12 (0.16) & 3.6--66 & 27\% & 12--44 \\
+ & Poisson M0 & 1.13 (0.10) & 2.66 (0.21) & 5.16 (0.37) & 8.21 (0.42) & 11.20 (0.20) & 4.0--63 & 26\% & 12--43 \\
+ & XGBoost & 1.08 (0.09) & 2.68 (0.22) & 5.15 (0.36) & 9.64 (0.63) & 11.97 (0.16) & 3.6--50 & 16\% & 19--32 \\
+ & Sigma-rule (3 limits) & 2.32 (0.12) & 3.60 (0.22) & 5.74 (0.38) & 9.53 (0.55) & 19.16 (1.24) & 13.2--28 & 14\% & 19--24 \\
+ & EWMA & 2.19 (0.16) & 3.48 (0.24) & 5.63 (0.38) & 9.94 (0.66) & 22.84 (1.50) & 12.4--25 & 9\% & -- \\
+ & CUSUM & 1.29 (0.11) & 2.78 (0.22) & 5.25 (0.39) & 10.20 (0.75) & 25.05 (1.81) & 7.1--24 & 5\% & -- \\
+ & Never act & 1.08 (0.09) & 2.69 (0.22) & 5.38 (0.44) & 10.75 (0.87) & 26.88 (2.18) & -- & -- & -- \\
+ & Always act & 12.00 & 12.00 & 12.00 & 12.00 & 12.00 & -- & -- & -- \\
+\bottomrule
+\end{tabular}}
+
+$^{a}$ XGBoost in the gradual cell: the level-3 alarm is almost never in force, so that the policy costs less than never acting from $r = 1$ by under 1\%; its saving exceeds 1\% for $r$ between 8 and 44.
+
+Levels used at $r$ = 2/5/10/20/50 (the cheapest on average): stable: M2 3/3/3/2/1, Poisson M0 3/3/3/2/1, XGBoost 3/3/3/2/1, sigma-rule limit 3/3/3/3/1; gradual: M2 3/3/2/2/1, Poisson M0 3/3/2/2/1, XGBoost 3/3/2/2/1, sigma-rule limit 3/3/3/1/1; abrupt: M2 3/3/2/2/1, Poisson M0 3/3/2/2/1, XGBoost 3/3/2/1/1, sigma-rule limit 3/3/3/1/1; pooled: M2 3/3/2/2/1, Poisson M0 3/3/2/2/1, XGBoost 3/3/2/2/1, sigma-rule limit 3/3/3/1/1.
+
+\vspace{8pt}
+\captionof{table}{Table S29.3. The rare arm replication by replication: AUC-PR and ECE of the event probabilities for M2, the Poisson model and XGBoost, the level-2 detection share within one month, and the realised ARL$_0$ and ARL$_1$ of the two $q$ channels (group-months; 72 and 246 = no alarm; ARL$_1$ in months after the change). The paired differences quoted in the main text are computed within these rows: AUC-PR of M2 exceeds that of the Poisson model in 1/5, 2/5 and 5/5 replications of the stable, gradual and abrupt cells and that of XGBoost in 15/15; the ECE of M2 is below that of the Poisson model in 3/5, 5/5 and 5/5 and below that of XGBoost in 2/5, 5/5 and 5/5.}\label{tab:S29.3}
+{\scriptsize
+\begin{tabular}{lrrrrrrrrrrrrr}
+\toprule
+ & & \multicolumn{3}{c}{AUC-PR} & \multicolumn{3}{c}{ECE} & \multicolumn{3}{c}{Det.\ $\le$1 m, level 2} & \multicolumn{2}{c}{$q$ channel ARL$_0$ / ARL$_1$} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}\cmidrule(lr){12-13}
+Cell & Rep & M2 & M0 & XGB & M2 & M0 & XGB & M2 & M0 & XGB & M2 & M0 \\
+\midrule
+Stable & 0 & 0.149 & 0.152 & 0.130 & 0.0131 & 0.0063 & 0.0101 & 0.17 & 0.16 & 0.05 & 15 / -- & 4 / -- \\
+ & 1 & 0.141 & 0.139 & 0.121 & 0.0165 & 0.0171 & 0.0046 & 0.16 & 0.14 & 0.06 & 31 / -- & 12 / -- \\
+ & 2 & 0.138 & 0.143 & 0.110 & 0.0106 & 0.0063 & 0.0083 & 0.13 & 0.12 & 0.05 & 7 / -- & 246 / -- \\
+ & 3 & 0.190 & 0.194 & 0.163 & 0.0050 & 0.0067 & 0.0121 & 0.26 & 0.29 & 0.08 & 246 / -- & 246 / -- \\
+ & 4 & 0.202 & 0.209 & 0.163 & 0.0096 & 0.0116 & 0.0157 & 0.28 & 0.31 & 0.10 & 13 / -- & 8 / -- \\
+\addlinespace
+Gradual & 0 & 0.232 & 0.230 & 0.192 & 0.0172 & 0.0221 & 0.0479 & 0.37 & 0.35 & 0.06 & 72 / 31 & 72 / 35 \\
+ & 1 & 0.266 & 0.270 & 0.196 & 0.0208 & 0.0254 & 0.0548 & 0.43 & 0.39 & 0.05 & 72 / 28 & 72 / 38 \\
+ & 2 & 0.302 & 0.311 & 0.241 & 0.0072 & 0.0161 & 0.0470 & 0.50 & 0.41 & 0.07 & 72 / 29 & 72 / 47 \\
+ & 3 & 0.306 & 0.303 & 0.242 & 0.0093 & 0.0141 & 0.0335 & 0.40 & 0.38 & 0.19 & 72 / 49 & 72 / 57 \\
+ & 4 & 0.282 & 0.288 & 0.243 & 0.0075 & 0.0090 & 0.0400 & 0.40 & 0.38 & 0.15 & 72 / 30 & 72 / 41 \\
+\addlinespace
+Abrupt & 0 & 0.317 & 0.311 & 0.278 & 0.0205 & 0.0231 & 0.0629 & 0.62 & 0.58 & 0.18 & 72 / 10 & 72 / 14 \\
+ & 1 & 0.354 & 0.339 & 0.322 & 0.0187 & 0.0315 & 0.0713 & 0.63 & 0.58 & 0.28 & 72 / 5 & 72 / 13 \\
+ & 2 & 0.361 & 0.338 & 0.315 & 0.0168 & 0.0200 & 0.0502 & 0.63 & 0.62 & 0.34 & 72 / 22 & 72 / 36 \\
+ & 3 & 0.304 & 0.300 & 0.270 & 0.0174 & 0.0287 & 0.0705 & 0.62 & 0.50 & 0.15 & 72 / 6 & 72 / 11 \\
+ & 4 & 0.365 & 0.341 & 0.311 & 0.0214 & 0.0330 & 0.0603 & 0.65 & 0.58 & 0.31 & 72 / 4 & 72 / 15 \\
+\bottomrule
+\end{tabular}}
+
+\clearpage
+\captionof{table}{Table S29.4. Expected cost replication by replication in the rare arm (units of one alarm-month per item-year): $E_j$, the shock item-months per item-year of the replication, and the cost (21) of M2, the Poisson model and XGBoost at $r$ = 2, 5, 10, 20 and 50, each at the level that is cheapest on average in its cell at that $r$ (the levels listed under Table S29.2). The paired statements of Section 5.6 are computed within these rows; never acting costs $rE_j$ and always acting 12.}\label{tab:S29.4}
+{\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrr*{5}{rrr}}
+\toprule
+ & & & \multicolumn{3}{c}{$r=2$} & \multicolumn{3}{c}{$r=5$} & \multicolumn{3}{c}{$r=10$} & \multicolumn{3}{c}{$r=20$} & \multicolumn{3}{c}{$r=50$} \\
+\cmidrule(lr){4-6}\cmidrule(lr){7-9}\cmidrule(lr){10-12}\cmidrule(lr){13-15}\cmidrule(lr){16-18}
+Cell & Rep & $E_j$ & M2 & M0 & XGB & M2 & M0 & XGB & M2 & M0 & XGB & M2 & M0 & XGB & M2 & M0 & XGB \\
+\midrule
+Stable & 0 & 0.347 & 0.69 & 0.69 & 0.69 & 1.73 & 1.73 & 1.73 & 3.47 & 3.47 & 3.47 & 6.57 & 6.54 & 6.92 & 10.09 & 10.59 & 11.17 \\
+ & 1 & 0.318 & 0.64 & 0.64 & 0.64 & 1.59 & 1.59 & 1.59 & 3.17 & 3.18 & 3.18 & 6.08 & 6.01 & 6.29 & 10.12 & 10.17 & 11.47 \\
+ & 2 & 0.325 & 0.65 & 0.65 & 0.65 & 1.62 & 1.62 & 1.63 & 3.25 & 3.25 & 3.25 & 6.25 & 6.19 & 6.44 & 10.75 & 10.47 & 11.50 \\
+ & 3 & 0.364 & 0.73 & 0.73 & 0.73 & 1.82 & 1.82 & 1.82 & 3.63 & 3.63 & 3.65 & 6.55 & 6.41 & 7.10 & 10.29 & 10.09 & 10.74 \\
+ & 4 & 0.367 & 0.74 & 0.74 & 0.74 & 1.84 & 1.83 & 1.84 & 3.67 & 3.65 & 3.68 & 6.38 & 6.26 & 6.96 & 10.84 & 10.62 & 11.27 \\
+ & mean & 0.344 & 0.69 & 0.69 & 0.69 & 1.72 & 1.72 & 1.72 & 3.44 & 3.44 & 3.44 & 6.36 & 6.28 & 6.74 & 10.42 & 10.39 & 11.23 \\
+\addlinespace
+Gradual & 0 & 0.522 & 1.06 & 1.07 & 1.04 & 2.62 & 2.64 & 2.61 & 5.44 & 5.37 & 5.22 & 8.75 & 8.75 & 10.11 & 11.47 & 11.39 & 12.07 \\
+ & 1 & 0.574 & 1.17 & 1.15 & 1.15 & 2.83 & 2.81 & 2.87 & 5.69 & 5.52 & 5.68 & 8.97 & 9.02 & 11.13 & 11.52 & 11.91 & 12.85 \\
+ & 2 & 0.528 & 1.11 & 1.09 & 1.06 & 2.63 & 2.63 & 2.64 & 4.95 & 4.74 & 5.14 & 7.61 & 7.84 & 10.06 & 10.90 & 10.91 & 12.50 \\
+ & 3 & 0.521 & 1.06 & 1.05 & 1.04 & 2.52 & 2.53 & 2.60 & 4.97 & 4.83 & 4.90 & 8.12 & 8.05 & 9.15 & 11.06 & 10.86 & 12.11 \\
+ & 4 & 0.505 & 1.03 & 1.04 & 1.01 & 2.48 & 2.49 & 2.52 & 4.77 & 4.79 & 4.75 & 7.78 & 7.92 & 9.03 & 11.20 & 11.22 & 12.29 \\
+ & mean & 0.530 & 1.08 & 1.08 & 1.06 & 2.62 & 2.62 & 2.65 & 5.16 & 5.05 & 5.14 & 8.25 & 8.32 & 9.89 & 11.23 & 11.26 & 12.36 \\
+\addlinespace
+Abrupt & 0 & 0.723 & 1.51 & 1.53 & 1.45 & 3.53 & 3.55 & 3.61 & 6.96 & 6.95 & 6.94 & 9.72 & 9.99 & 11.27 & 12.26 & 12.32 & 12.41 \\
+ & 1 & 0.790 & 1.76 & 1.81 & 1.62 & 3.90 & 3.93 & 3.95 & 6.94 & 7.19 & 7.12 & 9.85 & 10.52 & 10.46 & 11.58 & 12.13 & 12.53 \\
+ & 2 & 0.729 & 1.58 & 1.62 & 1.46 & 3.50 & 3.55 & 3.60 & 6.52 & 6.56 & 6.42 & 9.20 & 9.33 & 10.45 & 11.29 & 11.13 & 11.67 \\
+ & 3 & 0.692 & 1.45 & 1.46 & 1.39 & 3.45 & 3.47 & 3.46 & 6.62 & 6.72 & 6.64 & 9.29 & 10.19 & 10.76 & 11.72 & 12.23 & 12.65 \\
+ & 4 & 0.760 & 1.65 & 1.68 & 1.54 & 3.63 & 3.73 & 3.77 & 6.82 & 6.94 & 6.73 & 9.51 & 10.13 & 10.58 & 11.77 & 12.00 & 12.34 \\
+ & mean & 0.739 & 1.59 & 1.62 & 1.49 & 3.60 & 3.65 & 3.68 & 6.77 & 6.87 & 6.77 & 9.51 & 10.03 & 10.70 & 11.73 & 11.96 & 12.32 \\
+\bottomrule
+\end{tabular}}
+
+

@@ -1,0 +1,66 @@
+hs6,name,group,include,note
+281111,Hydrogen fluoride (hydrofluoric acid),semiconductor_chemicals,1,Japan export licensing to Korea from 2019-07-04
+370790,"Chemical preparations for photographic uses, other (incl. photoresists)",semiconductor_chemicals,1,Japan 2019-07-04; basket code
+381800,Chemical elements doped for use in electronics (wafers),semiconductor_chemicals,1,
+280461,"Silicon, >= 99.99% Si (polysilicon)",semiconductor_chemicals,1,
+280469,"Silicon, other",semiconductor_chemicals,1,
+280429,"Rare gases other than argon (neon, krypton, xenon)",semiconductor_chemicals,1,Ukraine 2022 (neon)
+280421,Argon,semiconductor_chemicals,1,
+284700,Hydrogen peroxide,semiconductor_chemicals,1,
+281410,"Ammonia, anhydrous",semiconductor_chemicals,1,
+280610,Hydrogen chloride (hydrochloric acid),semiconductor_chemicals,1,
+280800,Nitric acid; sulphonitric acids,semiconductor_chemicals,1,
+280700,Sulphuric acid; oleum,semiconductor_chemicals,1,
+280920,Phosphoric acid and polyphosphoric acids,semiconductor_chemicals,1,
+282619,"Fluorides, other (incl. tungsten hexafluoride)",semiconductor_chemicals,1,basket code
+285000,"Hydrides, nitrides, azides, silicides and borides (incl. silane)",semiconductor_chemicals,1,basket code
+281290,"Halides and halide oxides of non-metals, other (incl. NF3)",semiconductor_chemicals,1,verify HS2022 code for NF3
+283691,Lithium carbonates,battery_materials,1,
+282520,Lithium oxide and hydroxide,battery_materials,1,
+282690,"Complex fluorine salts, other (incl. LiPF6)",battery_materials,1,basket code
+282200,Cobalt oxides and hydroxides,battery_materials,1,DRC export suspension 2025-02 (verify)
+810520,Cobalt mattes and intermediate products; unwrought cobalt; powders,battery_materials,1,
+283324,Nickel sulphates,battery_materials,1,
+750210,"Nickel, unwrought, not alloyed",battery_materials,1,
+750400,Nickel powders and flakes,battery_materials,1,
+260400,Nickel ores and concentrates,battery_materials,1,Indonesia ore export ban 2020-01-01
+250410,"Natural graphite, powder or flakes",battery_materials,1,China export controls 2023-12-01
+380110,Artificial graphite,battery_materials,1,China export controls 2023-12-01
+282010,Manganese dioxide,battery_materials,1,
+811100,Manganese; articles thereof; waste and scrap,battery_materials,1,
+850760,Lithium-ion accumulators,battery_materials,1,downstream product; optional
+811292,"Unwrought gallium, germanium, indium, niobium, vanadium (HS2017 basket; hafnium/rhenium split off in HS2022)",refractory_minor_metals,1,China Ga/Ge controls 2023-08-01; indium 2025-02-04; HS2022 revision
+282560,Germanium oxides and zirconium dioxide,refractory_minor_metals,1,China 2023-08-01
+811010,"Antimony, unwrought; powders",refractory_minor_metals,1,China 2024-09-15
+282580,Antimony oxides,refractory_minor_metals,1,China 2024-09-15
+810194,"Tungsten, unwrought",refractory_minor_metals,1,China 2025-02-04
+284180,Tungstates,refractory_minor_metals,1,China 2025-02-04
+261100,Tungsten ores and concentrates,refractory_minor_metals,1,China 2025-02-04
+810320,"Tantalum, unwrought; powders",refractory_minor_metals,1,
+261590,"Niobium, tantalum or vanadium ores and concentrates",refractory_minor_metals,1,
+810291,"Molybdenum, unwrought; powders",refractory_minor_metals,1,China 2025-02-04
+282570,Molybdenum oxides and hydroxides,refractory_minor_metals,1,China 2025-02-04
+261310,"Molybdenum ores and concentrates, roasted",refractory_minor_metals,1,
+282530,Vanadium oxides and hydroxides,refractory_minor_metals,1,
+810411,"Magnesium, unwrought, >= 99.8%",refractory_minor_metals,1,
+810419,"Magnesium, unwrought, other",refractory_minor_metals,1,
+810600,Bismuth and articles thereof,refractory_minor_metals,1,China 2025-02-04; HS2022 split (8106.10/90) verify
+280450,Boron; tellurium,refractory_minor_metals,1,China 2025-02-04 (tellurium)
+280490,Selenium,refractory_minor_metals,1,
+810820,"Titanium, unwrought; powders",refractory_minor_metals,1,
+282300,Titanium oxides,refractory_minor_metals,1,
+811221,"Chromium, unwrought; powders",refractory_minor_metals,1,
+720241,"Ferro-chromium, > 4% carbon",ferroalloys,1,
+720249,"Ferro-chromium, other",ferroalloys,1,
+720260,Ferro-nickel,ferroalloys,1,
+720280,Ferro-tungsten and ferro-silico-tungsten,ferroalloys,1,
+720270,Ferro-molybdenum,ferroalloys,1,
+720292,Ferro-vanadium,ferroalloys,1,
+720293,Ferro-niobium,ferroalloys,1,
+720221,"Ferro-silicon, > 55% silicon",ferroalloys,1,
+720230,Ferro-silico-manganese,ferroalloys,1,
+280530,"Rare-earth metals, scandium and yttrium",rare_earths_magnets,1,China 2025-04-04 (seven REEs)
+284610,Cerium compounds,rare_earths_magnets,1,
+284690,"Rare-earth compounds, other",rare_earths_magnets,1,China 2025-04-04
+850511,Permanent magnets of metal (incl. NdFeB),rare_earths_magnets,1,China 2025-04-04
+850519,"Permanent magnets, other",rare_earths_magnets,1,

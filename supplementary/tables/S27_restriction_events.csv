@@ -1,0 +1,65 @@
+month,hs6,partner,measure,M2_level_at,M2_p_at,M2_q_alarm_at,M2_months_alert_before,xgb_level_at,sigma_level_at,ewma_alarm_at,cusum_alarm_at,farr_alarm_at
+201706,261100,643,Export tax (Resolution of the Government,2,0.42,False,3.0,2,1,False,False,False
+201801,261590,108,Fiscal tax on exports (Loi No.1/28 du 31,1,0.094,False,10.0,2,0,False,False,False
+201801,720221,156,China: 2018 Tariff Implementation Plan r,2,0.198,False,10.0,1,0,False,False,False
+201801,720249,156,China: 2018 list of licensed ferroalloy ,3,0.563,False,10.0,3,2,False,False,False
+201801,720270,156,China: 2018 list of licensed ferroalloy ,2,0.331,False,10.0,3,0,False,False,False
+201801,720280,156,China: 2018 list of licensed ferroalloy ,3,0.662,False,10.0,3,2,False,False,False
+201801,720292,156,China: 2018 list of licensed ferroalloy ,2,0.467,False,10.0,2,0,False,False,False
+201803,282200,180,Other export measures (Loi n°18/001 du 0,1,0.072,False,12.0,1,0,False,False,False
+201809,283691,32,Export tax (Decreto 793/2018),0,0.05,False,,0,0,False,False,False
+201901,281111,156,China: 2019 catalogue of 'dual-use' good,1,0.071,False,,1,0,False,False,False
+201901,720221,156,China: 2019 list of licensed ferroalloy ,2,0.271,False,22.0,3,1,True,False,False
+201901,720249,156,China: 2019 list of licensed ferroalloy ,2,0.295,False,22.0,1,0,False,False,False
+201901,720270,156,China: 2019 list of licensed ferroalloy ,3,0.923,False,22.0,3,2,False,False,False
+201901,720280,156,China: 2019 list of licensed ferroalloy ,2,0.533,False,22.0,1,0,False,False,False
+201901,720292,156,China: 2019 list of licensed ferroalloy ,2,0.422,False,22.0,2,0,False,False,False
+201907,281111,392,Export licensing of HF / photoresists / ,0,0.042,False,,1,0,False,False,False
+201907,370790,392,Export licensing of HF / photoresists / ,2,0.346,False,28.0,1,0,False,False,False
+202105,720221,156,Export tax,1,0.158,False,50.0,2,0,False,False,False
+202105,720249,156,China: Import/export tariffs on some ste,1,0.215,False,50.0,2,0,False,False,False
+202108,720249,156,China: Ministry announces export tariffs,2,0.248,False,53.0,2,0,False,False,False
+202111,720260,360,Indonesia: Introduced export and import ,3,0.604,False,56.0,3,0,False,False,False
+202201,280530,156,China: 2022 export licensing goods catal,2,0.236,False,58.0,2,0,False,False,False
+202201,284690,156,China: 2022 export licensing goods catal,1,0.138,False,58.0,1,0,False,False,False
+202201,720221,156,China: 2022 Tariff Adjustment Plan relea,1,0.115,False,58.0,1,0,False,False,False
+202201,720249,156,China: 2022 Tariff Adjustment Plan relea,1,0.139,False,58.0,1,0,False,False,False
+202201,811292,156,China: 2022 export licensing goods catal,3,0.634,False,58.0,1,0,False,False,False
+202306,811100,360,Indonesia: Introduced export and import ,0,0.039,False,,1,0,False,False,False
+202308,282560,156,Export controls on gallium and germanium,2,0.252,False,77.0,2,0,False,False,False
+202308,285000,156,China: Government announces export contr,2,0.495,False,77.0,2,0,False,True,False
+202308,381800,156,China: Government announces export contr,1,0.071,False,,1,0,False,False,False
+202308,811292,156,Export controls on gallium and germanium,2,0.494,False,77.0,1,0,False,False,False
+202312,250410,156,Export controls on graphite items,0,0.036,False,,1,0,False,False,False
+202312,380110,156,Export controls on graphite items,1,0.068,False,,0,0,False,False,False
+202312,850511,156,China: Government releases revised catal,1,0.081,False,81.0,1,0,False,False,False
+202409,282580,156,Export controls on antimony and superhar,1,0.157,False,90.0,1,0,False,False,False
+202409,285000,156,China: Government announces export contr;842:United States of America: Introduction o,2,0.213,False,90.0,1,0,False,True,False
+202409,811010,156,Export controls on antimony and superhar,3,0.805,False,90.0,3,0,True,True,False
+202501,280450,156,China: 2025 dual-use catalogue for expor,3,0.823,False,94.0,3,1,False,False,False
+202501,282580,156,China: 2025 export licensing goods catal,2,0.205,False,94.0,2,3,True,False,False
+202501,282619,156,China: 2025 dual-use catalogue for expor,1,0.124,False,16.0,0,0,False,False,False
+202501,284700,156,China: 2025 dual-use catalogue for expor,3,0.778,False,94.0,3,0,False,False,False
+202501,380110,156,China: 2025 dual-use catalogue for expor,1,0.083,False,,1,0,False,False,False
+202501,381800,156,China: 2025 dual-use catalogue for expor,0,0.056,False,,0,0,False,False,False
+202501,720221,156,China: 2025 export licensing goods catal,2,0.39,False,94.0,3,0,True,True,False
+202501,810411,156,China: 2025 dual-use catalogue for expor,1,0.064,False,78.0,1,0,False,False,False
+202502,280450,156,"Export controls on tungsten, tellurium, ",3,0.855,False,95.0,3,3,False,False,False
+202502,284180,156,"Export controls on tungsten, tellurium, ",3,0.779,False,95.0,1,0,False,False,False
+202502,381800,156,China: Government announces export contr,0,0.039,False,,0,0,False,False,False
+202502,810194,156,"Export controls on tungsten, tellurium, ",2,0.268,False,92.0,1,0,False,False,False
+202502,810520,180,Cobalt export suspension,3,0.583,False,95.0,3,3,False,False,False
+202502,811292,156,"Export controls on tungsten, tellurium, ",2,0.504,False,95.0,1,0,False,False,False
+202504,280530,156,Export controls on seven rare-earth elem,3,0.82,False,97.0,3,0,False,False,False
+202504,284690,156,Export controls on seven rare-earth elem,3,0.627,False,97.0,3,3,True,True,False
+202504,850511,156,Export controls on seven rare-earth elem,1,0.124,False,97.0,1,0,False,False,False
+202505,280461,392,Japan: Government tightens the restricti,2,0.499,False,98.0,1,0,False,False,False
+202505,281290,392,Japan: Government tightens the restricti,2,0.286,False,98.0,1,0,False,True,False
+202505,282619,392,Japan: Government tightens the restricti,1,0.078,False,20.0,1,0,False,False,False
+202507,282520,156,China: Government revises catalogue cont,2,0.285,False,74.0,2,3,True,False,False
+202510,280530,156,China: Government announces export contr,3,0.59,False,103.0,2,0,False,False,False
+202510,284690,156,China: Government announces export contr,2,0.37,False,103.0,2,0,False,True,False
+202510,381800,156,China: Ministry of Commerce issues expor,1,0.087,False,,3,3,True,False,False
+202511,280530,156,Expanded rare-earth export controls (Oct,2,0.492,False,104.0,2,0,False,False,False
+202511,284690,156,Expanded rare-earth export controls (Oct,2,0.355,False,104.0,2,0,False,True,False
+202511,850511,156,Expanded rare-earth export controls (Oct,1,0.072,False,104.0,1,2,False,False,False

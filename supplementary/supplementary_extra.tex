@@ -1,0 +1,101 @@
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S13. Dispersion that differs across groups (Section 5.2 (ii)): the reference cell (gradual, $\bar{\mu}$ = 0.2, I = 30, T = 120) re-drawn with group dispersions $\alpha'_g$ = (1, 2, 4) and (0.5, 2, 8), five replications each, fitted with the hierarchical model and with complete pooling (one $\alpha'$). Posterior median of $\alpha'_g$ (geometric mean over replications and its range), realised coverage of the 90\% interval, mean log-scale width, and the posterior medians of $\tau_\alpha$ and $m_\alpha$ of (16) (hierarchical fits; the truth is sd(log $\alpha'_g$) = 0.57 and 1.13, mean(log $\alpha'_g$) = 0.69). For complete pooling the single $\alpha'$ is compared with each of the three truths.}\label{tab:S13}
+\centering\scriptsize
+\begin{tabular}{llrrrrrrrrr}
+\toprule
+Fit, truth & Group & Truth & n & Failed & $\alpha'$ median & Range & Cov. & log width & $\tau_\alpha$ & $m_\alpha$ \\ \midrule
+hierarchical (16), truth (1, 2, 4) & group 1 & 1 & 5 & 0 & 1.13 & 0.85–1.54 & 0.80 & 0.67 & 0.592 & 0.741 \\
+ & group 2 & 2 & 5 & 0 & 2.14 & 2.06–2.23 & 1.00 & 0.91 &  &  \\
+ & group 3 & 4 & 5 & 0 & 3.94 & 2.81–6.71 & 1.00 & 1.24 &  &  \\
+complete pooling, truth (1, 2, 4) & all & 2.00 (geo. mean) & 5 & 0 & 1.62 & 1.35–1.91 & 0.20 & 0.45 & – & – \\
+hierarchical (16), truth (0.5, 2, 8) & group 1 & 0.5 & 5 & 0 & 0.51 & 0.36–0.72 & 0.40 & 0.48 & 0.830 & 0.570 \\
+ & group 2 & 2 & 5 & 0 & 2.09 & 1.61–2.79 & 1.00 & 0.89 &  &  \\
+ & group 3 & 8 & 5 & 0 & 4.69 & 3.40–6.69 & 0.60 & 1.54 &  &  \\
+complete pooling, truth (0.5, 2, 8) & all & 2.00 (geo. mean) & 5 & 0 & 1.09 & 0.89–1.32 & 0.00 & 0.36 & – & – \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{22pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S14. Control charts designed under the negative binomial (Section 5.1, 5.3 (iii)): Study B, pooled over the twelve cells (65 replications), evaluated exactly as the EWMA and CUSUM rows of Table 6. Detection within one and three months, false alarms per item-year in the stable windows, median lead time (mean of the replication quartiles), pooled ARL$_0$ with its 90\% bootstrap interval and by regime (stable / gradual / abrupt cells), and ARL$_1$.}\label{tab:S14}
+\centering\scriptsize
+\begin{tabular}{lrrrrrrr}
+\toprule
+Chart & Det. $\le$ 1 mo & Det. $\le$ 3 mo & FA / item-year & Lead (IQR) & ARL$_0$ (90\%) & ARL$_0$ by regime & ARL$_1$ \\ \midrule
+CUSUM, NB design, α̂ pooled within group & 0.24 & 0.25 & 0.010 & 3.1 (1.8–5.1) & 24.7 (20–33) & 16 / 98 / 105 & 40.0 \\
+EWMA, NB design, α̂ pooled within group & 0.28 & 0.36 & 0.225 & 4.2 (1.8–8.8) & 9.8 (9–10) & 10 / 9 / 11 & 17.9 \\
+Poisson CUSUM (Table 6) & 0.28 & 0.29 & 0.020 & 3.6 (2.1–6.3) & 16.6 (13–22) & 11 / 46 / 71 & 37.2 \\
+Poisson EWMA (Table 6) & 0.30 & 0.39 & 0.246 & 4.2 (1.9–8.8) & 8.9 (8–9) & 9 / 8 / 10 & 16.5 \\
+CUSUM, NB design, α̂ pooled across the panel & 0.23 & 0.24 & 0.010 & 3.5 (2.2–5.5) & 24.4 (19–33) & 16 / 115 / 144 & 40.4 \\
+EWMA, NB design, α̂ pooled across the panel & 0.28 & 0.36 & 0.229 & 4.2 (1.8–8.7) & 9.8 (9–10) & 10 / 9 / 11 & 18.0 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}\begin{flushleft}\footnotesize Design: phase I = months 13--36 per item, as for the Poisson charts; the dispersion is the pooled moment estimator $\hat{\alpha} = \sum_i \hat{\mu}_i^2 / \sum_i (s_i^2 - \hat{\mu}_i)$ over the items of the group (or of the whole panel), Poisson when the pooled excess variance is not positive; the CUSUM reference value is the negative-binomial likelihood-ratio value for a 1.5-fold shift, $k = \hat{\alpha}\log[(\hat{\alpha} + 1.5\hat{\mu})/(\hat{\alpha} + \hat{\mu})] / \log[1.5(\hat{\alpha} + \hat{\mu})/(\hat{\alpha} + 1.5\hat{\mu})]$; the limit is the $(1 - 1/24)$ quantile of the statistic's in-control distribution simulated from the fitted negative binomial (20,000 months), the same nominal run length as the Poisson charts. Estimated dispersion (geometric mean over items, group pooling): 5.5 at $\alpha'$ = 0.5 and 39.2 at $\alpha'$ = 2, with 14\% and 24\% of the items treated as Poisson.\end{flushleft}
+\end{minipage}
+\vspace{22pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S14 (continued). Why the negative-binomial design does not restore the EWMA's run length: realised ARL$_0$ (90\% interval) of the negative-binomial-designed charts in the four stable cells of Study B (20 replications) when the in-control parameters are estimated from phase I as in Table S14, when the true time-averaged in-control mean of each item is used instead (oracle mean), when the true dispersion is used as well (oracle mean and dispersion), and when the data are generated without indicator effects ($\beta$ = 0) and the parameters estimated as usual.}\label{tab:S14b}
+\centering\footnotesize
+\begin{tabular}{lrr}
+\toprule
+In-control model & EWMA ARL$_0$ & CUSUM ARL$_0$ \\ \midrule
+parameters estimated in phase I (as in Table S14) & 9.6 (8.9-10.5) & 16.0 (13.0-20.8) \\
+oracle in-control mean & 15.8 (14.6-17.2) & 33.5 (24.9-50.5) \\
+oracle mean and dispersion & 15.7 (14.4-17.1) & 34.2 (25.7-52.2) \\
+no indicator effects in the truth ($\beta$ = 0), estimated & 12.0 (10.8-13.2) & 23.6 (17.3-35.6) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{22pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S15. The severity submodel (S8.2)--(S8.3) of Supplementary Note 8 evaluated (Sections 4.4 and 5.4): the robustness protocol on the reference design with log-normal and with Pareto severity, five replications each. In the data-generating process the loss fraction is drawn independently of the intensity and the indicators, so $\gamma_1 = \gamma_2 = 0$ and logit$^{-1}(\gamma_0)$ = E[S]. Columns: mean realised loss fraction; posterior median of $\gamma_0$ at the last origin against its implied truth and the coverage of its 90\% interval; largest absolute posterior median among $\gamma_1$ and the indicator coefficients $\gamma_2$, with the share of their 90\% intervals covering 0; posterior median of $\phi$; number of losses realised in the decision months; coverage and mean width of the 5--95\% posterior predictive interval of the loss fraction (raw) and after conformalised quantile regression on the earlier losses (CQR, target 0.90); share of level-3 months in which the tail-adjusted expected loss confirms the severe level.}\label{tab:S15}
+\centering\scriptsize
+\begin{tabular}{lrrrrrrrrrrr}
+\toprule
+Severity & n & mean S & $\gamma_0$ (truth; cov.) & max |$\gamma_1$, $\gamma_2$| (cov. 0) & $\phi$ & losses & raw cov. & width & CQR cov. & width & severe conf. \\ \midrule
+log-normal (reference) & 5 & 0.169 & -1.57 (-1.59; 1.00) & 0.06 (0.90) & 9.5 & 679 & 0.932 & 0.39 & 0.908 & 0.37 & 1.00 \\
+Pareto & 5 & 0.118 & -1.92 (-2.01; 0.40) & 0.06 (1.00) & 13.3 & 709 & 0.936 & 0.27 & 0.896 & 0.21 & 0.67 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{22pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S16. Heterogeneity that is not gamma (Sections 3.3 and 5.4): the robustness protocol (recovery fit, M2 alarm pipeline, EWMA and CUSUM) on the reference design with the gamma multiplier of (2) replaced, in the truth only, by a log-normal multiplier of the same mean (1) and variance (1/$\alpha'$ = 0.5), five replications. The fitted model is the gamma--Poisson hierarchy of Section 4 in every column, so the recovery of $\alpha'$ is judged against the variance-matched value 2. Second column: the same protocol with the gamma multiplier, run with the same code and seeds convention (the reference arm of Table S15). Third column: the archived Study B reference cell (ten replications) and, for the recovery rows, the Study A hierarchical fits of replications 0--4 of the reference cell, as in Table S8. Means over replications with Monte Carlo standard errors in brackets.}\label{tab:S16}
+\centering\scriptsize
+\begin{tabular}{p{0.34\linewidth}lll}
+\toprule
+Quantity & Log-normal (5 rep.) & Gamma, same protocol (5 rep.) & Study B reference (10 rep.) \\ \midrule
+$\alpha'$ posterior median, geometric mean over groups and replications (range over replications); truth 2 = the variance-matched value & 2.42 (1.92–2.98) & 2.35 (1.94–2.97) & 2.15 (1.79–2.48) \\
+90\% intervals of $\alpha'$ covering 2 (share over groups and replications) & 0.87 & 0.87 & 1.00 \\
+Mean width of the 90\% interval of log $\alpha'$ & 0.79 & 0.81 & 0.73 \\
+log C: RMSE / coverage of the 90\% intervals & 0.15 / 0.90 & 0.14 / 0.90 & 0.15 / 0.91 \\
+w posterior median (truth (0.5, 0.3)) & (0.50, 0.29) & (0.51, 0.34) & (0.53, 0.31) \\
+$\kappa_w$ posterior median (coverage of 0.8) & 0.80 (1.00) & 0.84 (1.00) & 0.84 (1.00) \\
+$\beta$ posterior median (truth (0.4, 0.3, 0.2)) & (0.395, 0.299, 0.191) & (0.389, 0.314, 0.194) & (0.405, 0.302, 0.190) \\
+90\% intervals of $\beta$ covering the truth & 0.93 & 1.00 & 0.93 \\
+Recovery fits failed & 0 of 5 & 0 of 5 & 0 of 5 \\
+\midrule
+AUC-PR & 0.805 (0.006) & 0.807 (0.006) & 0.810 (0.007) \\
+Brier score & 0.201 (0.003) & 0.199 (0.003) & 0.201 (0.002) \\
+ECE & 0.045 (0.006) & 0.039 (0.011) & 0.041 (0.003) \\
+Event share & 0.590 (0.010) & 0.568 (0.016) & 0.579 (0.005) \\
+Detected $\le$ 1 month (level 2) & 0.98 (0.00) & 0.98 (0.00) & 0.98 (0.00) \\
+Detected $\le$ 3 months & 0.99 (0.00) & 0.99 (0.00) & 0.99 (0.00) \\
+False alarms per item-year (stable windows) & 0.33 (0.03) & 0.43 (0.04) & 0.39 (0.03) \\
+Lead time (median, months) & 4.4 (0.4) & 5.1 (0.5) & 4.7 (0.3) \\
+Conformal coverage / set size & 0.909 / 2.15 & 0.904 / 2.08 & 0.909 / 2.29 \\
+ARL$_0$ of the q channel (pooled, 90\% interval) & 360 (360–360) & 72 (36–360) & 51 (31–120) \\
+ARL$_1$ of the q channel & 31.7 (3.0) & 30.6 (1.8) & 25.5 (3.3) \\
+\midrule
+EWMA: detected $\le$ 1 month / false alarms / ARL$_0$ & 0.35 / 0.18 / 9.0 & 0.33 / 0.17 / 10.7 & 0.39 / 0.24 / 7.9 \\
+CUSUM: detected $\le$ 1 month / false alarms / ARL$_0$ & 0.33 / 0.02 / 53.7 & 0.31 / 0.01 / 57.1 & 0.39 / 0.02 / 32.0 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}\begin{flushleft}\footnotesize ARL$_0$ of the $q$ channel: no persistent alarm occurred in the stable windows of the five log-normal replications, so the pooled value is the stable unit-months (360) with the alarm count floored at one, as elsewhere.\end{flushleft}
+\end{minipage}
+\vspace{22pt}
+

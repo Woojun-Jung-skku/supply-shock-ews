@@ -1,0 +1,68 @@
+== per cell, triage level 2: detection within 1 month / false alarms per item-year (stable windows)
+                    M2 dr1  M2 fa  M0 dr1  M0 fa  NBcomplete dr1  NBcomplete fa  xgb dr1  xgb fa  lstm dr1  lstm fa  tft dr1  tft fa
+alpha mu   regime                                                                                                                   
+0.5   0.05 abrupt    0.850  0.540   0.831  0.483           0.842          0.593    0.636   0.490     0.808    0.453    0.596   0.680
+           gradual   0.721  0.543   0.705  0.530           0.721          0.547    0.468   0.487     0.676    0.493    0.457   0.637
+           stable    0.525  0.429   0.559  0.438           0.523          0.434    0.554   0.516     0.586    0.420    0.462   0.593
+      0.20 abrupt    0.978  0.437   0.971  0.407           0.979          0.433    0.982   0.387     0.973    0.380    0.949   0.433
+           gradual   0.971  0.357   0.971  0.353           0.973          0.353    0.977   0.287     0.970    0.283    0.943   0.443
+           stable    0.944  0.289   0.960  0.225           0.951          0.261    0.967   0.175     0.961    0.169    0.932   0.283
+2.0   0.05 abrupt    0.843  0.553   0.812  0.450           0.841          0.570    0.713   0.523     0.823    0.563    0.608   0.667
+           gradual   0.728  0.547   0.719  0.563           0.728          0.557    0.519   0.407     0.665    0.557    0.494   0.543
+           stable    0.547  0.465   0.584  0.458           0.544          0.462    0.510   0.495     0.606    0.414    0.458   0.537
+      0.20 abrupt    0.988  0.307   0.983  0.323           0.986          0.323    0.986   0.307     0.984    0.270    0.972   0.347
+           gradual   0.977  0.385   0.975  0.395           0.979          0.385    0.979   0.317     0.978    0.310    0.959   0.398
+           stable    0.959  0.223   0.964  0.188           0.962          0.201    0.971   0.164     0.965    0.142    0.950   0.234
+
+== cells where a baseline's L2 detection is >= M2's with fewer false alarms
+M0 2 ['0.5/0.2/stable', '2.0/0.2/stable']
+NBcomplete 2 ['0.5/0.2/stable', '2.0/0.2/stable']
+xgb 5 ['0.5/0.2/abrupt', '0.5/0.2/gradual', '0.5/0.2/stable', '2.0/0.2/gradual', '2.0/0.2/stable']
+lstm 6 ['0.5/0.2/gradual', '0.5/0.2/stable', '2.0/0.05/stable', '2.0/0.2/abrupt', '2.0/0.2/gradual', '2.0/0.2/stable']
+tft 0 []
+
+== AUC-PR difference to M2 by cell (mean over replications)
+M0          min -0.021 max +0.005  cells > 0: 2
+NBnone      min -0.022 max -0.004  cells > 0: 0
+NBcomplete  min -0.013 max +0.002  cells > 0: 2
+xgb         min -0.067 max -0.023  cells > 0: 0
+lstm        min -0.097 max -0.040  cells > 0: 0
+tft         min -0.095 max -0.049  cells > 0: 0
+
+== conformal coverage before / after t0 (M2, M0, NB): mean over replications
+M2 0.912 0.92 size 2.03
+M0 0.91 0.905 size 1.68
+NBnone 0.907 0.924 size 2.15
+NBcomplete 0.911 0.921 size 2.02
+
+== M2 with / without replications that have a failed origin fit
+replications with a failed M2 origin fit: 22 of 65
+failed origin fits by cell: {(0.5, 0.2, 'abrupt'): 5, (0.5, 0.2, 'gradual'): 2, (0.5, 0.2, 'stable'): 4, (2.0, 0.05, 'abrupt'): 2, (2.0, 0.05, 'gradual'): 2, (2.0, 0.2, 'abrupt'): 1, (2.0, 0.2, 'gradual'): 4, (2.0, 0.2, 'stable'): 2}
+M2_aucpr               all 0.602  without 0.555
+M2_brier               all 0.186  without 0.177
+M2_ece                 all 0.035  without 0.034
+M2_tri2_dr1            all 0.847  without 0.800
+M2_tri2_fa_stable      all 0.420  without 0.441
+M2_conf_cover          all 0.918  without 0.918
+paired differences (baseline - M2), all replications vs without those replications:
+  M0          aucpr  all -0.0080  without -0.0053
+  M0          ece    all +0.0236  without +0.0162
+  NBnone      aucpr  all -0.0112  without -0.0110
+  NBnone      ece    all +0.0184  without +0.0175
+  NBcomplete  aucpr  all -0.0061  without -0.0052
+  NBcomplete  ece    all +0.0007  without +0.0004
+  xgb         aucpr  all -0.0484  without -0.0488
+  xgb         ece    all +0.0400  without +0.0378
+  lstm        aucpr  all -0.0584  without -0.0586
+  lstm        ece    all +0.0325  without +0.0284
+  tft         aucpr  all -0.0791  without -0.0757
+  tft         ece    all +0.0508  without +0.0473
+
+== lead time (median months, level 2) and detection within 3 months
+M2 6.0 0.888
+xgb 5.0 0.838
+lstm 5.0 0.879
+tft 5.0 0.821
+
+== Study A: reasons of the fits that failed after the refit (last attempt)
+failed 45 {'rhat': 23, 'ess': 15, 'div': 24}

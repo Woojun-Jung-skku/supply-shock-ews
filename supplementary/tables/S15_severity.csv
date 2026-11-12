@@ -1,0 +1,3 @@
+Severity,n,mean S,γ₀ (truth; cov.),"max |γ₁, γ₂| (cov. 0)",φ,losses,raw cov.,width,CQR cov.,width,severe conf.
+log-normal (reference),5,0.169,-1.57 (-1.59; 1.00),0.06 (0.90),9.5,679,0.932,0.39,0.908,0.37,1.00
+Pareto,5,0.118,-1.92 (-2.01; 0.40),0.06 (1.00),13.3,709,0.936,0.27,0.896,0.21,0.67

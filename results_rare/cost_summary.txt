@@ -1,0 +1,86 @@
+
+=== stable: n = 5, mean E = 0.344 shock item-months per item-year, 12/E = 34.9
+Method                        r = 2    r = 5   r = 10   r = 20   r = 50   level at each r | band, largest saving against min(rE, 12)
+M2 (proposed)                  0.69     1.72     3.44     6.36    10.42   L3/L3/L3/L2/L1         | band 4.1-71.8; max 22.4% at r = 34.9; >10% for r in 24.8-55.3
+Poisson M0                     0.69     1.72     3.44     6.28    10.39   L3/L3/L3/L2/L1         | band 4.3-72.3; max 22.6% at r = 34.9; >10% for r in 22.4-55.7
+XGBoost                        0.69     1.72     3.44     6.74    11.23   L3/L3/L3/L2/L1         | band 14.0-61.9; max 14.6% at r = 34.9; >10% for r in 32.6-43.4
+Sigma-rule (plug-in SRI)       1.72     2.60     4.05     6.96    13.96   L3/L3/L3/L3/L1         | band 21.3-41.4; max 12.5% at r = 34.9; >10% for r in 31.2-36.2
+EWMA                           1.47     2.38     3.90     6.95    16.09   one level              | band 21.7-36.6; max 4.3% at r = 34.9; >10% for r in none
+CUSUM                          0.83     1.83     3.49     6.81    16.79   one level              | band 14.1-35.6; max 2.0% at r = 34.9; >10% for r in none
+Never act                      0.69     1.72     3.44     6.88    17.21
+Always act                    12.00    12.00    12.00    12.00    12.00
+M2 level switches: L3 -> L2 at r = 12.6; L2 -> L1 at r = 29.3
+M2 against Poisson M0 : r = 2: +0.1% (3/5); r = 5: -0.0% (2/5); r = 10: -0.0% (2/5); r = 20: -1.3% (0/5); r = 50: -0.3% (2/5)   [+ = M2 cheaper; (replications in which M2 is cheaper)]
+M2 against XGBoost    : r = 2: +0.1% (3/5); r = 5: +0.2% (4/5); r = 10: +0.2% (4/5); r = 20: +5.6% (5/5); r = 50: +7.2% (5/5)   [+ = M2 cheaper; (replications in which M2 is cheaper)]
+-- other convention (per-replication envelope and per-replication trivial policy; not the manuscript's):
+   M2 (proposed)                  0.69     1.72     3.44     6.36    10.42   | band 4.1-71.8; max 20.7% at r = 36.9; >10% for r in 24.8-55.3
+   Poisson M0                     0.69     1.72     3.44     6.28    10.39   | band 4.3-72.3; max 21.0% at r = 36.9; >10% for r in 22.4-55.7
+   XGBoost                        0.69     1.72     3.44     6.74    11.23   | band 9.1-61.9; max 13.1% at r = 36.9; >10% for r in 32.2-43.4
+   Sigma-rule (plug-in SRI)       1.72     2.60     4.05     6.92    13.96   | band 20.6-41.4; max 11.1% at r = 32.9; >10% for r in 31.2-34.9
+   EWMA                           1.47     2.38     3.90     6.95    16.09   | band 21.7-36.0; max 3.9% at r = 32.7; >10% for r in none
+   CUSUM                          0.83     1.83     3.49     6.81    16.79   | band 14.1-34.4; max 1.9% at r = 32.7; >10% for r in none
+
+=== gradual: n = 5, mean E = 0.530 shock item-months per item-year, 12/E = 22.6
+Method                        r = 2    r = 5   r = 10   r = 20   r = 50   level at each r | band, largest saving against min(rE, 12)
+M2 (proposed)                  1.08     2.62     5.16     8.25    11.23   L3/L3/L2/L2/L1         | band 3.3-63.7; max 24.5% at r = 22.6; >10% for r in 12.3-42.3
+Poisson M0                     1.08     2.62     5.05     8.32    11.26   L3/L3/L2/L2/L1         | band 3.2-62.1; max 23.5% at r = 22.6; >10% for r in 11.9-42.6
+XGBoost                        1.06     2.65     5.14     9.89    12.36   L3/L3/L2/L2/L1         | band 1.0-45.5; max 15.3% at r = 22.6; >10% for r in 21.1-30.5
+Sigma-rule (plug-in SRI)       2.44     3.66     5.69     9.40    18.35   L3/L3/L3/L1/L1         | band 13.1-28.7; max 15.1% at r = 22.6; >10% for r in 19.2-24.7
+EWMA                           2.19     3.48     5.63     9.93    22.83   one level              | band 13.3-24.8; max 7.8% at r = 22.6; >10% for r in none
+CUSUM                          1.21     2.71     5.21    10.21    25.20   one level              | band 7.1-23.6; max 4.0% at r = 22.6; >10% for r in none
+Never act                      1.06     2.65     5.30    10.60    26.50
+Always act                    12.00    12.00    12.00    12.00    12.00
+M2 level switches: L3 -> L2 at r = 10.0; L2 -> L1 at r = 25.2
+M2 against Poisson M0 : r = 2: -0.5% (2/5); r = 5: +0.1% (3/5); r = 10: -2.3% (1/5); r = 20: +0.8% (3/5); r = 50: +0.2% (3/5)   [+ = M2 cheaper; (replications in which M2 is cheaper)]
+M2 against XGBoost    : r = 2: -2.3% (0/5); r = 5: +1.2% (4/5); r = 10: -0.5% (1/5); r = 20: +16.6% (5/5); r = 50: +9.2% (5/5)   [+ = M2 cheaper; (replications in which M2 is cheaper)]
+-- other convention (per-replication envelope and per-replication trivial policy; not the manuscript's):
+   M2 (proposed)                  1.08     2.62     5.10     8.25    11.23   | band 3.3-63.7; max 23.2% at r = 22.7; >10% for r in 12.3-42.3
+   Poisson M0                     1.08     2.62     5.03     8.32    11.26   | band 3.2-62.1; max 22.3% at r = 23.0; >10% for r in 11.9-42.6
+   XGBoost                        1.06     2.65     5.14     9.73    12.36   | band 6.2-45.5; max 14.5% at r = 23.8; >10% for r in 20.7-30.5
+   Sigma-rule (plug-in SRI)       2.44     3.66     5.69     9.40    18.35   | band 13.1-28.7; max 13.7% at r = 22.7; >10% for r in 19.2-24.7
+   EWMA                           2.19     3.48     5.63     9.93    22.83   | band 13.3-24.8; max 6.9% at r = 20.9; >10% for r in none
+   CUSUM                          1.21     2.71     5.21    10.21    25.20   | band 7.1-23.5; max 3.8% at r = 20.9; >10% for r in none
+
+=== abrupt: n = 5, mean E = 0.739 shock item-months per item-year, 12/E = 16.2
+Method                        r = 2    r = 5   r = 10   r = 20   r = 50   level at each r | band, largest saving against min(rE, 12)
+M2 (proposed)                  1.59     3.60     6.77     9.51    11.73   L3/L3/L2/L2/L1         | band 3.7-57.3; max 29.3% at r = 16.2; >10% for r in 10.3-25.5
+Poisson M0                     1.62     3.65     6.87    10.03    11.96   L3/L3/L2/L2/L1         | band 4.3-50.8; max 26.3% at r = 16.2; >10% for r in 10.6-25.2
+XGBoost                        1.49     3.68     6.77    10.70    12.32   L3/L3/L2/L1/L1         | band 3.3-44.1; max 14.8% at r = 16.2; >10% for r in 11.1-21.8
+Sigma-rule (plug-in SRI)       2.80     4.55     7.47    12.10    25.16   L3/L3/L3/L1/L1         | band 10.5-19.8; max 12.8% at r = 16.2; >10% for r in 14.8-17.0
+EWMA                           2.92     4.58     7.36    12.92    29.61   one level              | band 9.9-18.3; max 9.7% at r = 16.2; >10% for r in none
+CUSUM                          1.83     3.79     7.06    13.58    33.16   one level              | band 6.2-17.6; max 7.2% at r = 16.2; >10% for r in none
+Never act                      1.48     3.69     7.39    14.77    36.94
+Always act                    12.00    12.00    12.00    12.00    12.00
+M2 level switches: L3 -> L2 at r = 9.5; L2 -> L1 at r = 24.6
+M2 against Poisson M0 : r = 2: +1.7% (5/5); r = 5: +1.2% (5/5); r = 10: +1.4% (4/5); r = 20: +5.2% (5/5); r = 50: +2.0% (4/5)   [+ = M2 cheaper; (replications in which M2 is cheaper)]
+M2 against XGBoost    : r = 2: -6.9% (0/5); r = 5: +2.0% (5/5); r = 10: -0.0% (2/5); r = 20: +11.1% (5/5); r = 50: +4.8% (5/5)   [+ = M2 cheaper; (replications in which M2 is cheaper)]
+-- other convention (per-replication envelope and per-replication trivial policy; not the manuscript's):
+   M2 (proposed)                  1.59     3.60     6.76     9.51    11.73   | band 3.7-57.3; max 28.0% at r = 16.5; >10% for r in 10.3-25.6
+   Poisson M0                     1.62     3.65     6.87    10.03    11.96   | band 4.3-50.8; max 24.8% at r = 16.5; >10% for r in 10.6-25.2
+   XGBoost                        1.49     3.68     6.77    10.70    12.32   | band 3.3-44.1; max 14.3% at r = 15.8; >10% for r in 11.1-21.8
+   Sigma-rule (plug-in SRI)       2.80     4.55     7.47    12.10    25.16   | band 10.5-19.8; max 11.3% at r = 15.8; >10% for r in 14.7-16.9
+   EWMA                           2.92     4.58     7.36    12.92    29.61   | band 9.9-18.3; max 8.6% at r = 15.2; >10% for r in none
+   CUSUM                          1.83     3.79     7.06    13.58    33.16   | band 6.2-17.6; max 6.9% at r = 15.2; >10% for r in none
+
+=== pooled: n = 15, mean E = 0.538 shock item-months per item-year, 12/E = 22.3
+Method                        r = 2    r = 5   r = 10   r = 20   r = 50   level at each r | band, largest saving against min(rE, 12)
+M2 (proposed)                  1.12     2.65     5.19     8.04    11.12   L3/L3/L2/L2/L1         | band 3.6-65.8; max 27.5% at r = 22.3; >10% for r in 11.7-44.2
+Poisson M0                     1.13     2.66     5.16     8.21    11.20   L3/L3/L2/L2/L1         | band 4.0-63.3; max 25.7% at r = 22.3; >10% for r in 11.8-43.3
+XGBoost                        1.08     2.68     5.15     9.64    11.97   L3/L3/L2/L2/L1         | band 3.6-50.4; max 15.5% at r = 22.3; >10% for r in 19.0-32.3
+Sigma-rule (plug-in SRI)       2.32     3.60     5.74     9.53    19.16   L3/L3/L3/L1/L1         | band 13.2-27.7; max 14.3% at r = 22.3; >10% for r in 19.1-23.9
+EWMA                           2.19     3.48     5.63     9.94    22.84   one level              | band 12.4-24.8; max 8.9% at r = 22.3; >10% for r in none
+CUSUM                          1.29     2.78     5.25    10.20    25.05   one level              | band 7.1-23.6; max 5.4% at r = 22.3; >10% for r in none
+Never act                      1.08     2.69     5.38    10.75    26.88
+Always act                    12.00    12.00    12.00    12.00    12.00
+M2 level switches: L3 -> L2 at r = 10.0; L2 -> L1 at r = 26.2
+M2 against Poisson M0 : r = 2: +0.7% (10/15); r = 5: +0.6% (10/15); r = 10: -0.5% (5/15); r = 20: +2.1% (8/15); r = 50: +0.7% (9/15)   [+ = M2 cheaper; (replications in which M2 is cheaper)]
+M2 against XGBoost    : r = 2: -3.9% (3/15); r = 5: +1.4% (13/15); r = 10: -0.7% (3/15); r = 20: +16.6% (15/15); r = 50: +7.1% (15/15)   [+ = M2 cheaper; (replications in which M2 is cheaper)]
+-- other convention (per-replication envelope and per-replication trivial policy; not the manuscript's):
+   M2 (proposed)                  1.12     2.65     5.10     8.04    11.12   | band 3.6-65.8; max 19.7% at r = 16.6; >10% for r in 11.6-44.2
+   Poisson M0                     1.13     2.66     5.11     8.21    11.20   | band 4.0-63.3; max 18.5% at r = 16.6; >10% for r in 11.8-43.3
+   XGBoost                        1.08     2.68     5.12     9.06    11.97   | band 3.6-50.4; max 9.6% at r = 23.0; >10% for r in none
+   Sigma-rule (plug-in SRI)       2.32     3.60     5.74     9.47    19.16   | band 12.7-23.8; max 5.6% at r = 16.6; >10% for r in none
+   EWMA                           2.19     3.48     5.63     9.94    22.84   | band 12.4-19.2; max 3.9% at r = 15.8; >10% for r in none
+   CUSUM                          1.29     2.78     5.25    10.20    25.05   | band 7.1-18.2; max 4.2% at r = 15.2; >10% for r in none
+
+per-replication E_j: {'stable': [0.347, 0.318, 0.325, 0.364, 0.367], 'gradual': [0.522, 0.574, 0.528, 0.521, 0.505], 'abrupt': [0.723, 0.79, 0.729, 0.692, 0.76]}

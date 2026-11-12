@@ -1,0 +1,3 @@
+Study A: 738 fits, 108 cells; failed 6.1%, refit 41.7%
+Study B: 65 replications, 12 cells; replications with a failed origin fit 36.9%
+Robustness: 75 replications, 14 cells

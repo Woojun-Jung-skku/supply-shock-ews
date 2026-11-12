@@ -1,0 +1,13 @@
+Method,All cells,mu 0.05,mu 0.2
+M2 (proposed),29.8\% at $r$ = 5.4,24.9\% at $r$ = 10.6,23.4\% at $r$ = 3.8
+NB complete pooling,29.4\% at $r$ = 5.4,24.1\% at $r$ = 10.6,22.7\% at $r$ = 3.8
+NB no pooling,29.2\% at $r$ = 5.4,23.9\% at $r$ = 10.6,22.7\% at $r$ = 3.8
+Poisson M0,29.0\% at $r$ = 5.4,24.2\% at $r$ = 10.6,21.6\% at $r$ = 3.8
+XGBoost,22.7\% at $r$ = 5.4,20.3\% at $r$ = 10.6,18.7\% at $r$ = 3.8
+LSTM,22.5\% at $r$ = 5.4,18.8\% at $r$ = 10.6,17.9\% at $r$ = 3.8
+TFT,20.7\% at $r$ = 5.4,17.8\% at $r$ = 10.6,16.5\% at $r$ = 3.8
+Sigma-rule (plug-in SRI),11.5\% at $r$ = 5.4,12.2\% at $r$ = 10.6,10.9\% at $r$ = 3.8
+EWMA,13.1\% at $r$ = 5.4,9.8\% at $r$ = 10.6,11.2\% at $r$ = 3.8
+CUSUM,16.2\% at $r$ = 5.4,9.7\% at $r$ = 10.6,13.1\% at $r$ = 3.8
+"CUSUM, negative-binomial design",13.7\% at $r$ = 5.4,9.3\% at $r$ = 10.6,11.2\% at $r$ = 3.8
+Farrington-type threshold,1.6\% at $r$ = 5.4,1.1\% at $r$ = 10.5,1.3\% at $r$ = 3.8

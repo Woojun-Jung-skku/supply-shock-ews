@@ -1,0 +1,27 @@
+Farrington-type baseline (A3), Study B, pooled over the twelve cells (mean over replications, MCSE):
+  detected <= 1 month  0.047 (0.002)
+  detected <= 3 months 0.133 (0.004)
+  false alarms / item-year (stable windows) 0.193 (0.007)
+  lead time median 4.2 (0.3); IQR (mean of replication quartiles) 1.9-8.7
+  ARL0 pooled 36.4 (bootstrap SE 1.1; 90% 34.6-38.2); alarm months 2244 / unit-months 81600
+  ARL1 18.5 (0.9), censored 67 of 1350 item windows
+  n = 65 replications; mean threshold 1.53, mean fitted mu 0.312
+
+per cell:
+                      dr1     fa    arl1   n
+alpha mu   regime                           
+0.5   0.05 abrupt   0.050  0.240  14.654   5
+           gradual  0.042  0.230  23.714   5
+           stable   0.028  0.212     NaN   5
+      0.20 abrupt   0.061  0.210  10.218   5
+           gradual  0.052  0.217  16.946   5
+           stable   0.048  0.204     NaN   5
+2.0   0.05 abrupt   0.038  0.217  18.460   5
+           gradual  0.045  0.263  28.246   5
+           stable   0.025  0.190     NaN   5
+      0.20 abrupt   0.056  0.120  11.214   5
+           gradual  0.060  0.132  21.395  10
+           stable   0.040  0.148     NaN   5
+ARL0 stable: 36.9 (90% 34.3-40.1)
+ARL0 gradual: 34.4 (90% 32.2-37.0)
+ARL0 abrupt: 37.0 (90% 34.3-40.1)

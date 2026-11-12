@@ -1,0 +1,10 @@
+numpy>=1.26
+scipy>=1.11
+pandas>=2.0
+jax>=0.4.30
+jaxlib>=0.4.30
+numpyro>=0.15
+arviz>=0.18,<1.0                # tests/test_diag.py uses the ArviZ 0.x API
+scikit-learn>=1.3
+xgboost>=2.0
+matplotlib>=3.8

@@ -1,0 +1,5 @@
+# data/ — extracts used by the backtest (Section 5.5, Supplementary Note 14)
+- `oecd_irm_items.csv`: OECD Inventory of Export Restrictions on Industrial Raw Materials, complete data set (2009–2021, HS 2007 six-digit), rows for the 65 items of `backtest/items_hs6.csv`; source: OECD web archive of 12 December 2022 (https://web-archive.oecd.org/2022-12-12/513026-oecd-industrial-raw-materials-complete-data.xlsx), extracted 26 October 2026. © OECD.
+- `oecd_export.csv`: the same measures grouped by country, type, date of introduction and legal basis (input of `events_restrictions.py`).
+- `gta_critical_minerals.csv`: Global Trade Alert, curated data set "Import and Export Restrictions: Critical Minerals" plus a query on the 65 item codes (1,593 interventions, 2008–2026), extracted through the GTA Data Center API on 26 October 2026; affected products are listed only where they intersect the item list. Licence CC BY-NC 4.0 (https://globaltradealert.org).
+- UN Comtrade records (`data_bt/raw_410.csv`) are not redistributed (UN Comtrade terms of use); `backtest/pull_comtrade_multi.py` re-extracts them (free API key).

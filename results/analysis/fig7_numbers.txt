@@ -1,0 +1,18 @@
+ARL0 M2_q_arl: 34.7 [23.0, 64.0] alarms 235 / 8160 unit-months, no-alarm replications 0.69
+ARL0 NBcomplete_q_arl: 31.3 [20.6, 56.0] alarms 261 / 8160 unit-months, no-alarm replications 0.68
+ARL0 NBnone_q_arl: 31.0 [20.2, 57.9] alarms 263 / 8160 unit-months, no-alarm replications 0.60
+ARL0 M0_q_arl: 72.2 [38.2, 206.5] alarms 113 / 8160 unit-months, no-alarm replications 0.85
+ARL0 sigma_arl: 4.6 [4.5, 4.8] alarms 17617 / 81600 unit-months, no-alarm replications 0.00
+ARL0 ewma_arl: 8.9 [8.4, 9.5] alarms 9177 / 81600 unit-months, no-alarm replications 0.00
+ARL0 cusum_arl: 16.6 [13.3, 22.2] alarms 4924 / 81600 unit-months, no-alarm replications 0.18
+L2 CUSUM: detection 0.277, false alarms 0.020
+L2 EWMA: detection 0.303, false alarms 0.246
+L2 $\sigma$-rule, level 2: detection 0.256, false alarms 0.485
+L2 TFT: detection 0.749, false alarms 0.476
+L2 LSTM: detection 0.844, false alarms 0.366
+L2 XGBoost: detection 0.788, false alarms 0.375
+L2 Poisson M0: detection 0.847, false alarms 0.401
+L2 NB no pooling: detection 0.823, false alarms 0.405
+L2 NB complete pooling: detection 0.847, false alarms 0.424
+L2 M2 (proposed): detection 0.847, false alarms 0.420
+saved fig7 replications 65

@@ -1,0 +1,7 @@
+A7: complete pooling and the item-effect scale (reference cell of the pooling comparison, reps 0-4)
+tau_C = 0.0: variance-matching alpha' 2.00 (+0%), KL pseudo-true on a stylised mean grid 2.00; on the reference-cell means: 2.00 with the level free (scale 1.000), 2.00 with the level held (manuscript: level free)
+tau_C = 0.3: variance-matching alpha' 1.56 (-22%), KL pseudo-true on a stylised mean grid 1.59; on the reference-cell means: 1.61 with the level free (scale 1.046), 1.60 with the level held (manuscript: level free)
+tau_C = 0.6: variance-matching alpha' 0.87 (-57%), KL pseudo-true on a stylised mean grid 0.94; on the reference-cell means: 1.00 with the level free (scale 1.197), 0.96 with the level held (manuscript: level free)
+complete  tau_C=0.0: n=5 fits (failed 0); alpha' posterior median: geo-mean 2.34 (+17%), range 1.91-2.93; 90% cover 0.80; log width 0.55; log C cover 0.78, RMSE 0.04
+complete  tau_C=0.6: n=5 fits (failed 0); alpha' posterior median: geo-mean 1.27 (-36%), range 1.11-1.44; 90% cover 0.00; log width 0.34; log C cover 0.09, RMSE 0.49
+hier      tau_C=0.6: n=5 fits (failed 0); alpha' posterior median: geo-mean 1.90 (-5%), range 1.52-2.44; 90% cover 0.93; log width 0.61; log C cover 0.91, RMSE 0.18

@@ -1,0 +1,9 @@
+Source (yield),Symbol,Target (supply),Symbol,Role
+defect density (defects per unit area),$D_{0}$,risk intensity (expected shocks per period for a reference item),$R_{it}$,intensity
+die area,$A$,exposure coefficient (dimensionless multiplier of expected shocks),$C_{i}$,exposure
+cluster parameter,$\alpha$,dispersion parameter (within-period clustering of intensity),$\alpha'_{g}$,dispersion
+defects per die,–,shock events per item-period,$N_{it}$,count
+expected defects per die,$AD_{0}$,expected shocks per item-period,$\mu_{it} = R_{it}C_{i}\Delta$,mean
+die yield,$Y$,"supply reliability index, $P(N_{it} = 0)$",$\mathrm{SRI}_{it}$,reliability
+scrap rate,–,supply disruption rate (Supplementary Note 8),$\mathrm{SDR}_{it}$,loss
+learning curve in cumulative volume,(Y3),group-level dynamic log-intensity,"$m_{t}^{g},\delta_{t}^{g}$",dynamics

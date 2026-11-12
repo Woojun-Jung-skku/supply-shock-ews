@@ -1,0 +1,12 @@
+partner_iso3,partner_code,measure,announced,implemented,hs_scope,scope_level,source_to_verify,note
+JPN,392,Export licensing of HF / photoresists / fluorinated polyimide to Korea,2019-07-01,2019-07-04,281111;370790,hs6,METI notice 2019-07-01; GTA; OECD inventory,Korea-specific; removal of Korea from white list 2019-08-28
+CHN,156,Export controls on gallium and germanium items,2023-07-03,2023-08-01,811292;282560,hs6,MOFCOM/GAC Announcement 2023 No. 23; GTA; OECD,
+CHN,156,Export controls on graphite items,2023-10-20,2023-12-01,250410;380110,hs6,MOFCOM/GAC Announcement 2023 No. 39; GTA; OECD,
+CHN,156,Export controls on antimony and superhard materials,2024-08-15,2024-09-15,811010;282580,hs6,MOFCOM/GAC Announcement 2024 No. 33; GTA,
+CHN,156,"Export controls on tungsten, tellurium, bismuth, molybdenum, indium items",2025-02-04,2025-02-04,810194;284180;261100;280450;810600;810291;282570;811292,hs6,MOFCOM/GAC Announcement 2025 No. 10; GTA,
+CHN,156,"Export controls on seven rare-earth elements and related magnets",2025-04-04,2025-04-04,280530;284690;850511,hs6,MOFCOM/GAC Announcement 2025 No. 18; GTA,scope by element; magnets by composition (verify HS mapping)
+CHN,156,Expanded rare-earth export controls (October 2025 package),2025-10-09,2025-11-08,280530;284690;850511,hs6,MOFCOM Announcements 2025 No. 61/62; GTA,implementation suspended in Nov 2025 (verify status)
+IDN,360,Nickel ore export ban,2019-09-02,2020-01-01,260400,hs6,Ministry of Energy and Mineral Resources Reg. 11/2019; GTA; OECD,
+COD,180,Cobalt export suspension,2025-02-22,2025-02-22,810520;282200,hs6,ARECOMS decision Feb 2025; GTA,four months then extended (verify)
+CHN,156,Rare-earth export quota cut (second-half 2010 quota),2010-07-08,2010-07-08,280530;284610;284690,hs6,MOFCOM 2010; OECD inventory,relevant only if the panel starts before 2011
+ZWE,716,Ban on exports of unprocessed lithium ore,2022-12-20,2022-12-20,253090,hs6,Base Minerals Export Control (Unbeneficiated Lithium Bearing Minerals) Order 2022; GTA,item not in the list unless 253090 is added

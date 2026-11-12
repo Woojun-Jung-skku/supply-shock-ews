@@ -1,0 +1,309 @@
+\textbf{Supplementary Note 14. The backtest on public trade data (Section 5.5 of the main text).}
+
+\textit{Data.} Monthly imports of the Republic of Korea (UN Comtrade reporter 410) by partner at the six-digit HS level, extracted from the UN Comtrade data API on 26 October 2026 with \path{backtest/pull_comtrade_multi.py} for the 65 items of Table S25.2 (five groups: semiconductor chemicals, gases and wafers; battery materials; refractory and minor metals; ferroalloys; rare earths and magnets), 2013-01 to 2025-12 (Korea's monthly series on Comtrade begin in 2013; HS 810291, unwrought molybdenum, is coded 810294 from HS 2007 and returned no records, leaving 64 items). Quantities are net weights in kilograms; the 11\% of partner-month records reported without a weight enter the panel as zero quantity and their value enters the unit value---all 5,440 records of 2013 are among them, so quantities begin in 2014-01, the panel in 2014-02 and complete trailing-twelve-month windows in 2015-01, two years before the first decision month. Export-restriction measures come from three sources merged by \path{backtest/events_restrictions.py}: the OECD Inventory of Export Restrictions on Industrial Raw Materials (complete data set, 2009--2021 at the six-digit level of HS 2007, from the OECD web archive of 12 December 2022, the current location of the file), the Global Trade Alert database (the curated data set `Import and Export Restrictions: Critical Minerals' and a query on the 65 item codes, 1,593 interventions, 2008--2026, extracted through the GTA Data Center on 26 October 2026, CC BY-NC 4.0) and a seed list of eleven documented measures whose announcement and implementation dates were checked against the GTA records (nine matched on partner, implementation month and HS scope; the October 2025 extension of China's rare-earth controls carries the GTA implementation date of 10 November 2026 after its suspension; Zimbabwe's 2022 lithium-ore ban covers no listed item). From the GTA records we keep the five export-type intervention types (export ban, export licensing requirement, export quota, export tax, other export-related non-tariff measure), measures whose affected jurisdictions include the Republic of Korea (which removes measures aimed at other destinations, such as entity-list controls and sanctions packages), measures listing at most 100 HS6 codes (which removes economy-wide frameworks: full export-tariff schedules, catch-all rules, the ratification of an export-control law) and measures whose title does not name sanctions, entity lists or catch-all controls; from the OECD inventory we keep every introduction, increase, extension or revision of a measure (eliminations, decreases and the annual `left unchanged' records are dropped) grouped by country, type, date of introduction and legal basis. A measure recorded by more than one source counts once per partner and month. The resulting table holds 307 measures by 74 implementing jurisdictions, an EU measure counted once per member state (Table S27 lists those that became events).
+
+\textit{Events and indicators.} The panel runs from 2014-02, the first month with a positive trailing-twelve-month quantity (the windows are complete from 2015-01), to 2025-12, 143 months, and decisions are made from month 36 (2017-02) to the end, 107 months. A trade interruption (E1) is recorded for item $i$ in month $t$ when a partner that supplied at least a quarter of the item's imports over the trailing twelve months ships less than half of its own trailing-twelve-month median; an export-restriction implementation (E2) when a partner with a trailing share of at least 5\% implements a measure whose HS scope covers the item (exact six-digit code or a two- or four-digit parent); announcement months are recorded separately (E2a) for the lead-time analysis and are never a target. E3 is the union. The first version of the backtest plan used a partner-level definition with a lower share threshold (any partner with a trailing share of at least 5\%); on the 64-item panel it fired in about 35\% of all item-months over 2014--2025 and in 37\% of the decision item-months (4.4 per item-year, a three-month prevalence of 58\%), outside the prevalence range of the simulation design (24--55\% over the three-month horizon, Section 5.1) and high enough to keep the level-2 posture in force in eleven of twelve months. The share threshold was therefore raised to 25\% before the main run and fixed; with it E1 occurs in 17.8\% of the decision item-months (2.1 per item-year; three-month prevalence 34\%). Two alternative definitions---the largest partner's shipments halving, and the item's total imports halving---are reported as sensitivity runs in Table S28; items are screened on data coverage only (at least 60 months with positive imports), never on the number of events. The indicators and exposure measurements are those of Section 5.5 of the main text (partner Herfindahl index, top-partner share, twelve-month change in unit value, three-month growth in quantity; top-partner share and unit-value level over the first 36 months as exposure), lagged one month. The protocol is that of Section 5.3: refits at origins 36, 42, \ldots, 138 (18 origins, two chains of 500 warm-up and 600 sampling iterations), particle propagation between refits, thresholds $\pi = (0.048, 0.167, 0.5)$ with 2-of-2 persistence, the $q$ channel calibrated to ARL$_0 \geq 24$ months in 200 bootstrap paths from the posterior at the first origin (threshold 0.95, persistence 4-of-4, implied ARL$_0$ 2 months), and the baselines of Supplementary Note 2 fitted on the same information set (the LSTM and the temporal fusion transformer of Study B are not refitted here; XGBoost, pooled across the items, represents the machine-learning family, and a second variant holds out the twelve labelled months before each origin, recalibrates the model's probabilities on them by isotonic regression and applies the recalibration until the next origin). Chains start near the prior medians (the median of 15 prior draws per site); a fit whose rank-normalised split-$\widehat{R}$ reached 1.05 or whose bulk effective sample size fell below 100 on any stored quantity ($\boldsymbol{\beta}$, $\alpha'$, $\log C$, the group levels and slopes at the origin, $\sigma_\eta$, $\tau_\zeta$) was repeated once with 1,000 warm-up and 1,000 sampling iterations and kept either way (six of the 18 fits of M2 (origins 36, 42, 54, 126, 132, 138) and none of the 18 fits of the Poisson model); the fits in use have $\widehat{R} \leq 1.043$ and effective sample sizes of at least 56 (the repeated fit still below the criterion: M2 at origin 36, where $\sigma_\eta$ has ESS 56) (\path{results/backtest/main/fits/diagnostics.csv}). A posture dated month $t$ is set on the data through month $t-1$; the probability metrics score $p_{it}(3)$ dated $t$ against an event in months $t$ to $t+2$, the window it predicts, and a shock in month $t$ counts as detected within one month when the level dated $t$ is in force (within three months, when it is in force in any of the months $t-2$ to $t$).
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S25.1. Composition of the Korean import panel by group: items, decision item-months (2017-02 to 2025-12), trade interruptions (E1), their share of item-months, export-restriction implementations (E2) and announcements (E2a).}\label{tab:S25_1}
+\centering\scriptsize
+\begin{tabular}{lrrrrrr}
+\toprule
+Group & Items & Item-months & E1 & E1 share (\%) & E2 & E2a \\ \midrule
+Semiconductor chemicals, gases and wafers & 16 & 1712 & 269 & 15.7 & 14 & 15 \\
+Battery materials & 14 & 1498 & 172 & 11.5 & 8 & 7 \\
+Refractory and minor metals & 20 & 2104 & 487 & 23.1 & 14 & 13 \\
+Ferroalloys & 9 & 963 & 192 & 19.9 & 17 & 16 \\
+Rare earths and magnets & 5 & 535 & 93 & 17.4 & 11 & 10 \\
+\textbf{All groups} & 64 & 6812 & 1213 & 17.8 & 64 & 61 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S25.2. The 65 items: HS 2017 six-digit code, description, group, months with positive imports (2014-02 to 2025-12), and E1 and E2 item-months in the decision window.}\label{tab:S25_2}
+\centering\tiny
+\begin{tabular}{llp{3.2cm}rrrl}
+\toprule
+HS6 & Item & Group & Months & E1 & E2 & Note \\ \midrule
+281111 & Hydrogen fluoride (hydrofluoric acid) & Semiconductor chemicals & 143 & 5 & 2 &  \\
+370790 & Chemical preparations for photographic uses, other (incl. ph & Semiconductor chemicals & 143 & 0 & 1 &  \\
+381800 & Chemical elements doped for use in electronics (wafers) & Semiconductor chemicals & 131 & 6 & 4 &  \\
+280461 & Silicon, >= 99.99\% Si (polysilicon) & Semiconductor chemicals & 131 & 26 & 1 &  \\
+280469 & Silicon, other & Semiconductor chemicals & 143 & 1 & 0 &  \\
+280429 & Rare gases other than argon (neon, krypton, xenon) & Semiconductor chemicals & 143 & 10 & 0 &  \\
+280421 & Argon & Semiconductor chemicals & 80 & 2 & 0 &  \\
+284700 & Hydrogen peroxide & Semiconductor chemicals & 143 & 49 & 1 &  \\
+281410 & Ammonia, anhydrous & Semiconductor chemicals & 143 & 34 & 0 &  \\
+280610 & Hydrogen chloride (hydrochloric acid) & Semiconductor chemicals & 143 & 2 & 0 &  \\
+280800 & Nitric acid; sulphonitric acids & Semiconductor chemicals & 143 & 39 & 0 &  \\
+280700 & Sulphuric acid; oleum & Semiconductor chemicals & 131 & 48 & 0 &  \\
+280920 & Phosphoric acid and polyphosphoric acids & Semiconductor chemicals & 143 & 5 & 0 &  \\
+282619 & Fluorides, other (incl. tungsten hexafluoride) & Semiconductor chemicals & 131 & 4 & 2 &  \\
+285000 & Hydrides, nitrides, azides, silicides and borides (incl. sil & Semiconductor chemicals & 131 & 17 & 2 &  \\
+281290 & Halides and halide oxides of non-metals, other (incl. NF3) & Semiconductor chemicals & 143 & 21 & 1 &  \\
+283691 & Lithium carbonates & Battery materials & 143 & 6 & 1 &  \\
+282520 & Lithium oxide and hydroxide & Battery materials & 143 & 10 & 1 &  \\
+282690 & Complex fluorine salts, other (incl. LiPF6) & Battery materials & 131 & 0 & 0 &  \\
+282200 & Cobalt oxides and hydroxides & Battery materials & 131 & 21 & 1 &  \\
+810520 & Cobalt mattes and intermediate products; unwrought cobalt; p & Battery materials & 131 & 21 & 1 &  \\
+283324 & Nickel sulphates & Battery materials & 143 & 34 & 0 &  \\
+750210 & Nickel, unwrought, not alloyed & Battery materials & 143 & 14 & 0 &  \\
+750400 & Nickel powders and flakes & Battery materials & 143 & 20 & 0 &  \\
+260400 & Nickel ores and concentrates & Battery materials & 131 & 15 & 0 &  \\
+250410 & Natural graphite, powder or flakes & Battery materials & 143 & 3 & 1 &  \\
+380110 & Artificial graphite & Battery materials & 131 & 0 & 2 &  \\
+282010 & Manganese dioxide & Battery materials & 143 & 25 & 0 &  \\
+811100 & Manganese; articles thereof; waste and scrap & Battery materials & 143 & 1 & 1 &  \\
+850760 & Lithium-ion accumulators & Battery materials & 143 & 2 & 0 &  \\
+811292 & Unwrought gallium, germanium, indium, niobium, vanadium (HS2 & Refractory and minor metals & 143 & 17 & 3 &  \\
+282560 & Germanium oxides and zirconium dioxide & Refractory and minor metals & 131 & 8 & 1 &  \\
+811010 & Antimony, unwrought; powders & Refractory and minor metals & 143 & 50 & 1 &  \\
+282580 & Antimony oxides & Refractory and minor metals & 143 & 12 & 2 &  \\
+810194 & Tungsten, unwrought & Refractory and minor metals & 143 & 19 & 1 &  \\
+284180 & Tungstates & Refractory and minor metals & 143 & 49 & 1 &  \\
+261100 & Tungsten ores and concentrates & Refractory and minor metals & 116 & 23 & 1 &  \\
+810320 & Tantalum, unwrought; powders & Refractory and minor metals & 140 & 24 & 0 &  \\
+261590 & Niobium, tantalum or vanadium ores and concentrates & Refractory and minor metals & 90 & 9 & 1 &  \\
+810291 & Molybdenum, unwrought; powders & Refractory and minor metals & -- & -- & -- & dropped: no data \\
+282570 & Molybdenum oxides and hydroxides & Refractory and minor metals & 143 & 39 & 0 &  \\
+261310 & Molybdenum ores and concentrates, roasted & Refractory and minor metals & 143 & 5 & 0 &  \\
+282530 & Vanadium oxides and hydroxides & Refractory and minor metals & 143 & 31 & 0 &  \\
+810411 & Magnesium, unwrought, >= 99.8\% & Refractory and minor metals & 143 & 1 & 1 &  \\
+810419 & Magnesium, unwrought, other & Refractory and minor metals & 143 & 7 & 0 &  \\
+810600 & Bismuth and articles thereof & Refractory and minor metals & 95 & 21 & 0 &  \\
+280450 & Boron; tellurium & Refractory and minor metals & 143 & 51 & 2 &  \\
+280490 & Selenium & Refractory and minor metals & 143 & 34 & 0 &  \\
+810820 & Titanium, unwrought; powders & Refractory and minor metals & 143 & 36 & 0 &  \\
+282300 & Titanium oxides & Refractory and minor metals & 143 & 15 & 0 &  \\
+811221 & Chromium, unwrought; powders & Refractory and minor metals & 143 & 36 & 0 &  \\
+720241 & Ferro-chromium, > 4\% carbon & Ferroalloys & 143 & 19 & 0 &  \\
+720249 & Ferro-chromium, other & Ferroalloys & 143 & 24 & 5 &  \\
+720260 & Ferro-nickel & Ferroalloys & 143 & 41 & 1 &  \\
+720280 & Ferro-tungsten and ferro-silico-tungsten & Ferroalloys & 119 & 27 & 2 &  \\
+720270 & Ferro-molybdenum & Ferroalloys & 96 & 38 & 2 &  \\
+720292 & Ferro-vanadium & Ferroalloys & 143 & 9 & 2 &  \\
+720293 & Ferro-niobium & Ferroalloys & 143 & 4 & 0 &  \\
+720221 & Ferro-silicon, > 55\% silicon & Ferroalloys & 143 & 17 & 5 &  \\
+720230 & Ferro-silico-manganese & Ferroalloys & 143 & 13 & 0 &  \\
+280530 & Rare-earth metals, scandium and yttrium & Rare earths and magnets & 131 & 30 & 4 &  \\
+284610 & Cerium compounds & Rare earths and magnets & 143 & 34 & 0 &  \\
+284690 & Rare-earth compounds, other & Rare earths and magnets & 143 & 24 & 4 &  \\
+850511 & Permanent magnets of metal (incl. NdFeB) & Rare earths and magnets & 131 & 3 & 3 &  \\
+850519 & Permanent magnets, other & Rare earths and magnets & 131 & 2 & 0 &  \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S26.1. Alarm performance on the Korean import panel, target E1: trade interruptions: event probabilities for `at least one event within three months' and the alarm at each level---events flagged within one and within three months before they occur, false alarm onsets per item-year (onsets not followed by an event within three months), alarm months per item-year and lead time in months, median (quartiles); the $q$ channel and the headline level of the two models.}\label{tab:S26_1}
+\centering\tiny
+\begin{tabular}{lrrrrrrrl}
+\toprule
+Method & AUC-PR & Brier & ECE & Det.\ $\leq$1 m & Det.\ $\leq$3 m & False alarms & Alarm months & Lead \\ \midrule
+M2 (proposed), level 1 & -- & -- & -- & 0.98 & 0.99 & 0.18 & 11.3 & 12.0 (4.0--38.0) \\
+M2 (proposed), level 2 & 0.600 & 0.184 & 0.029 & 0.91 & 0.93 & 0.20 & 8.2 & 8.0 (3.0--18.0) \\
+M2 (proposed), level 3 & -- & -- & -- & 0.54 & 0.60 & 0.13 & 3.4 & 3.0 (1.0--6.0) \\
+M2 (proposed), $q$ channel & -- & -- & -- & 0.00 & 0.00 & -- & 0.0 & -- \\
+M2 (proposed), headline (max of level 2 and $q$) & -- & -- & -- & 0.91 & -- & 0.20 & 8.2 & -- \\
+Poisson M0, level 1 & -- & -- & -- & 0.99 & 1.00 & 0.12 & 11.7 & 12.0 (3.0--39.0) \\
+Poisson M0, level 2 & 0.603 & 0.187 & 0.064 & 0.93 & 0.94 & 0.12 & 8.6 & 6.0 (2.5--13.0) \\
+Poisson M0, level 3 & -- & -- & -- & 0.64 & 0.68 & 0.10 & 4.3 & 3.0 (2.0--6.5) \\
+Poisson M0, $q$ channel & -- & -- & -- & 0.00 & 0.00 & -- & 0.0 & -- \\
+Poisson M0, headline (max of level 2 and $q$) & -- & -- & -- & 0.93 & -- & 0.12 & 8.6 & -- \\
+XGBoost (pooled), level 1 & -- & -- & -- & 0.98 & 1.00 & 0.22 & 10.5 & 11.0 (4.0--34.0) \\
+XGBoost (pooled), level 2 & 0.661 & 0.167 & 0.022 & 0.88 & 0.91 & 0.25 & 6.8 & 6.0 (2.0--14.0) \\
+XGBoost (pooled), level 3 & -- & -- & -- & 0.57 & 0.66 & 0.15 & 3.1 & 2.0 (1.0--5.0) \\
+XGBoost, recalibrated, level 1 & -- & -- & -- & 0.98 & 0.99 & 0.25 & 10.3 & 11.0 (3.0--33.0) \\
+XGBoost, recalibrated, level 2 & 0.641 & 0.172 & 0.027 & 0.87 & 0.91 & 0.26 & 7.0 & 6.0 (2.0--16.0) \\
+XGBoost, recalibrated, level 3 & -- & -- & -- & 0.55 & 0.65 & 0.16 & 3.1 & 2.0 (1.0--5.0) \\
+Sigma-rule (plug-in SRI), level 1 & -- & -- & -- & 0.42 & 0.47 & 0.14 & 3.3 & 2.0 (1.0--6.0) \\
+Sigma-rule (plug-in SRI), level 2 & -- & -- & -- & 0.30 & 0.35 & 0.14 & 2.0 & 2.0 (1.0--6.2) \\
+Sigma-rule (plug-in SRI), level 3 & -- & -- & -- & 0.19 & 0.24 & 0.13 & 1.2 & 2.0 (1.0--5.0) \\
+EWMA & -- & -- & -- & 0.24 & 0.29 & 0.11 & 1.4 & 2.0 (1.0--5.0) \\
+CUSUM & -- & -- & -- & 0.18 & 0.19 & 0.02 & 1.4 & 1.0 (1.0--4.0) \\
+Farrington-type threshold & -- & -- & -- & 0.03 & 0.06 & 0.07 & 0.2 & 2.0 (1.0--12.0) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S26.2. Alarm performance on the Korean import panel, target E2: export-restriction implementations: event probabilities for `at least one event within three months' and the alarm at each level---events flagged within one and within three months before they occur, false alarm onsets per item-year (onsets not followed by an event within three months), alarm months per item-year and lead time in months, median (quartiles); the $q$ channel and the headline level of the two models.}\label{tab:S26_2}
+\centering\tiny
+\begin{tabular}{lrrrrrrrl}
+\toprule
+Method & AUC-PR & Brier & ECE & Det.\ $\leq$1 m & Det.\ $\leq$3 m & False alarms & Alarm months & Lead \\ \midrule
+M2 (proposed), level 1 & -- & -- & -- & 0.91 & 0.91 & 0.22 & 11.3 & 58.0 (14.5--80.0) \\
+M2 (proposed), level 2 & 0.025 & 0.205 & 0.341 & 0.61 & 0.66 & 0.26 & 8.2 & 52.0 (15.2--78.0) \\
+M2 (proposed), level 3 & -- & -- & -- & 0.22 & 0.30 & 0.32 & 3.4 & 31.0 (10.5--59.0) \\
+M2 (proposed), $q$ channel & -- & -- & -- & 0.00 & 0.00 & -- & 0.0 & -- \\
+M2 (proposed), headline (max of level 2 and $q$) & -- & -- & -- & 0.61 & -- & 0.26 & 8.2 & -- \\
+Poisson M0, level 1 & -- & -- & -- & 0.94 & 0.94 & 0.15 & 11.7 & 61.0 (14.5--91.0) \\
+Poisson M0, level 2 & 0.029 & 0.235 & 0.378 & 0.69 & 0.69 & 0.17 & 8.6 & 58.0 (12.8--91.0) \\
+Poisson M0, level 3 & -- & -- & -- & 0.33 & 0.36 & 0.19 & 4.3 & 53.0 (11.0--84.8) \\
+Poisson M0, $q$ channel & -- & -- & -- & 0.00 & 0.00 & -- & 0.0 & -- \\
+Poisson M0, headline (max of level 2 and $q$) & -- & -- & -- & 0.69 & -- & 0.17 & 8.6 & -- \\
+XGBoost (pooled), level 1 & -- & -- & -- & 0.92 & 0.95 & 0.26 & 10.5 & 43.0 (11.0--78.0) \\
+XGBoost (pooled), level 2 & 0.028 & 0.196 & 0.314 & 0.48 & 0.61 & 0.36 & 6.8 & 40.5 (11.5--77.8) \\
+XGBoost (pooled), level 3 & -- & -- & -- & 0.23 & 0.30 & 0.41 & 3.1 & 33.5 (11.0--58.0) \\
+XGBoost, recalibrated, level 1 & -- & -- & -- & 0.92 & 0.95 & 0.31 & 10.3 & 59.0 (13.0--78.0) \\
+XGBoost, recalibrated, level 2 & 0.026 & 0.196 & 0.319 & 0.48 & 0.62 & 0.39 & 7.0 & 36.0 (12.0--69.0) \\
+XGBoost, recalibrated, level 3 & -- & -- & -- & 0.25 & 0.31 & 0.46 & 3.1 & 34.0 (11.0--58.0) \\
+Sigma-rule (plug-in SRI), level 1 & -- & -- & -- & 0.20 & 0.30 & 0.34 & 3.3 & 34.0 (14.0--69.5) \\
+Sigma-rule (plug-in SRI), level 2 & -- & -- & -- & 0.16 & 0.22 & 0.33 & 2.0 & 35.5 (13.5--61.8) \\
+Sigma-rule (plug-in SRI), level 3 & -- & -- & -- & 0.09 & 0.12 & 0.29 & 1.2 & 27.0 (11.5--58.5) \\
+EWMA & -- & -- & -- & 0.11 & 0.14 & 0.29 & 1.4 & 31.5 (11.0--57.5) \\
+CUSUM & -- & -- & -- & 0.12 & 0.12 & 0.07 & 1.4 & 29.0 (21.0--36.8) \\
+Farrington-type threshold & -- & -- & -- & 0.00 & 0.03 & 0.15 & 0.2 & 33.0 (13.0--59.0) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S26.3. Alarm performance on the Korean import panel, target E3: union: event probabilities for `at least one event within three months' and the alarm at each level---events flagged within one and within three months before they occur, false alarm onsets per item-year (onsets not followed by an event within three months), alarm months per item-year and lead time in months, median (quartiles); the $q$ channel and the headline level of the two models.}\label{tab:S26_3}
+\centering\tiny
+\begin{tabular}{lrrrrrrrl}
+\toprule
+Method & AUC-PR & Brier & ECE & Det.\ $\leq$1 m & Det.\ $\leq$3 m & False alarms & Alarm months & Lead \\ \midrule
+M2 (proposed), level 1 & -- & -- & -- & 0.98 & 0.99 & 0.18 & 11.3 & 12.0 (4.0--35.0) \\
+M2 (proposed), level 2 & 0.602 & 0.192 & 0.036 & 0.90 & 0.92 & 0.19 & 8.2 & 7.0 (2.5--18.0) \\
+M2 (proposed), level 3 & -- & -- & -- & 0.52 & 0.59 & 0.13 & 3.4 & 3.0 (1.0--5.0) \\
+M2 (proposed), $q$ channel & -- & -- & -- & 0.00 & 0.00 & -- & 0.0 & -- \\
+M2 (proposed), headline (max of level 2 and $q$) & -- & -- & -- & 0.90 & -- & 0.19 & 8.2 & -- \\
+Poisson M0, level 1 & -- & -- & -- & 0.98 & 0.99 & 0.12 & 11.7 & 12.0 (3.5--36.5) \\
+Poisson M0, level 2 & 0.607 & 0.193 & 0.058 & 0.92 & 0.93 & 0.12 & 8.6 & 6.0 (2.8--13.0) \\
+Poisson M0, level 3 & -- & -- & -- & 0.63 & 0.66 & 0.09 & 4.3 & 3.0 (2.0--6.0) \\
+Poisson M0, $q$ channel & -- & -- & -- & 0.00 & 0.00 & -- & 0.0 & -- \\
+Poisson M0, headline (max of level 2 and $q$) & -- & -- & -- & 0.92 & -- & 0.12 & 8.6 & -- \\
+XGBoost (pooled), level 1 & -- & -- & -- & 0.98 & 0.99 & 0.21 & 10.5 & 11.0 (4.0--34.0) \\
+XGBoost (pooled), level 2 & 0.662 & 0.176 & 0.035 & 0.86 & 0.89 & 0.25 & 6.8 & 6.0 (2.0--13.0) \\
+XGBoost (pooled), level 3 & -- & -- & -- & 0.55 & 0.64 & 0.15 & 3.1 & 2.0 (1.0--4.0) \\
+XGBoost, recalibrated, level 1 & -- & -- & -- & 0.97 & 0.99 & 0.25 & 10.3 & 11.0 (3.0--32.0) \\
+XGBoost, recalibrated, level 2 & 0.643 & 0.181 & 0.034 & 0.85 & 0.89 & 0.26 & 7.0 & 6.0 (2.0--14.0) \\
+XGBoost, recalibrated, level 3 & -- & -- & -- & 0.54 & 0.64 & 0.16 & 3.1 & 2.0 (1.0--4.0) \\
+Sigma-rule (plug-in SRI), level 1 & -- & -- & -- & 0.41 & 0.47 & 0.14 & 3.3 & 2.0 (1.0--6.0) \\
+Sigma-rule (plug-in SRI), level 2 & -- & -- & -- & 0.29 & 0.34 & 0.14 & 2.0 & 2.0 (1.0--7.0) \\
+Sigma-rule (plug-in SRI), level 3 & -- & -- & -- & 0.19 & 0.23 & 0.13 & 1.2 & 2.0 (1.0--5.8) \\
+EWMA & -- & -- & -- & 0.23 & 0.28 & 0.11 & 1.4 & 2.0 (1.0--5.0) \\
+CUSUM & -- & -- & -- & 0.18 & 0.19 & 0.02 & 1.4 & 1.0 (1.0--4.0) \\
+Farrington-type threshold & -- & -- & -- & 0.03 & 0.06 & 0.07 & 0.2 & 3.0 (1.0--12.0) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S27. The export-restriction implementations (E2) in the decision window, one row per item and implementation month (a month in which two measures fall on one item is one row): implementation month, item, implementing partner (Comtrade code), measure, and the posture in force in the implementation month, set on the data through the month before (the convention of the detection rates at one month)---the triage level, three-month probability and $q$-alarm of M2 and the months since the item first reached the alert level, the triage level of XGBoost and of the sigma-rule, and the EWMA, CUSUM and Farrington-type alarms. Several items under one measure are separate rows.}\label{tab:S27}
+\centering\tiny
+\begin{tabular}{lllp{4.2cm}rrrrrrrrr}
+\toprule
+Month & HS6 & Partner & Measure & M2 lvl & $p(3)$ & $q$ & Since alert & XGB lvl & Sigma lvl & EWMA & CUSUM & Farr. \\ \midrule
+2017-06 & 261100 & 643 & Export tax (Resolution of the Government & 2 & 0.42 & no & 3 & 2 & 1 & no & no & no \\
+2018-01 & 261590 & 108 & Fiscal tax on exports (Loi No.1/28 du 31 & 1 & 0.09 & no & 10 & 2 & 0 & no & no & no \\
+2018-01 & 720221 & 156 & China: 2018 Tariff Implementation Plan r & 2 & 0.20 & no & 10 & 1 & 0 & no & no & no \\
+2018-01 & 720249 & 156 & China: 2018 list of licensed ferroalloy  & 3 & 0.56 & no & 10 & 3 & 2 & no & no & no \\
+2018-01 & 720270 & 156 & China: 2018 list of licensed ferroalloy  & 2 & 0.33 & no & 10 & 3 & 0 & no & no & no \\
+2018-01 & 720280 & 156 & China: 2018 list of licensed ferroalloy  & 3 & 0.66 & no & 10 & 3 & 2 & no & no & no \\
+2018-01 & 720292 & 156 & China: 2018 list of licensed ferroalloy  & 2 & 0.47 & no & 10 & 2 & 0 & no & no & no \\
+2018-03 & 282200 & 180 & Other export measures (Loi n°18/001 du 0 & 1 & 0.07 & no & 12 & 1 & 0 & no & no & no \\
+2018-09 & 283691 & 32 & Export tax (Decreto 793/2018) & 0 & 0.05 & no & -- & 0 & 0 & no & no & no \\
+2019-01 & 281111 & 156 & China: 2019 catalogue of 'dual-use' good & 1 & 0.07 & no & -- & 1 & 0 & no & no & no \\
+2019-01 & 720221 & 156 & China: 2019 list of licensed ferroalloy  & 2 & 0.27 & no & 22 & 3 & 1 & yes & no & no \\
+2019-01 & 720249 & 156 & China: 2019 list of licensed ferroalloy  & 2 & 0.29 & no & 22 & 1 & 0 & no & no & no \\
+2019-01 & 720270 & 156 & China: 2019 list of licensed ferroalloy  & 3 & 0.92 & no & 22 & 3 & 2 & no & no & no \\
+2019-01 & 720280 & 156 & China: 2019 list of licensed ferroalloy  & 2 & 0.53 & no & 22 & 1 & 0 & no & no & no \\
+2019-01 & 720292 & 156 & China: 2019 list of licensed ferroalloy  & 2 & 0.42 & no & 22 & 2 & 0 & no & no & no \\
+2019-07 & 281111 & 392 & Export licensing of HF / photoresists /  & 0 & 0.04 & no & -- & 1 & 0 & no & no & no \\
+2019-07 & 370790 & 392 & Export licensing of HF / photoresists /  & 2 & 0.35 & no & 28 & 1 & 0 & no & no & no \\
+2021-05 & 720221 & 156 & Export tax & 1 & 0.16 & no & 50 & 2 & 0 & no & no & no \\
+2021-05 & 720249 & 156 & China: Import/export tariffs on some ste & 1 & 0.21 & no & 50 & 2 & 0 & no & no & no \\
+2021-08 & 720249 & 156 & China: Ministry announces export tariffs & 2 & 0.25 & no & 53 & 2 & 0 & no & no & no \\
+2021-11 & 720260 & 360 & Indonesia: Introduced export and import  & 3 & 0.60 & no & 56 & 3 & 0 & no & no & no \\
+2022-01 & 280530 & 156 & China: 2022 export licensing goods catal & 2 & 0.24 & no & 58 & 2 & 0 & no & no & no \\
+2022-01 & 284690 & 156 & China: 2022 export licensing goods catal & 1 & 0.14 & no & 58 & 1 & 0 & no & no & no \\
+2022-01 & 720221 & 156 & China: 2022 Tariff Adjustment Plan relea & 1 & 0.12 & no & 58 & 1 & 0 & no & no & no \\
+2022-01 & 720249 & 156 & China: 2022 Tariff Adjustment Plan relea & 1 & 0.14 & no & 58 & 1 & 0 & no & no & no \\
+2022-01 & 811292 & 156 & China: 2022 export licensing goods catal & 3 & 0.63 & no & 58 & 1 & 0 & no & no & no \\
+2023-06 & 811100 & 360 & Indonesia: Introduced export and import  & 0 & 0.04 & no & -- & 1 & 0 & no & no & no \\
+2023-08 & 282560 & 156 & Export controls on gallium and germanium & 2 & 0.25 & no & 77 & 2 & 0 & no & no & no \\
+2023-08 & 285000 & 156 & China: Government announces export contr & 2 & 0.49 & no & 77 & 2 & 0 & no & yes & no \\
+2023-08 & 381800 & 156 & China: Government announces export contr & 1 & 0.07 & no & -- & 1 & 0 & no & no & no \\
+2023-08 & 811292 & 156 & Export controls on gallium and germanium & 2 & 0.49 & no & 77 & 1 & 0 & no & no & no \\
+2023-12 & 250410 & 156 & Export controls on graphite items & 0 & 0.04 & no & -- & 1 & 0 & no & no & no \\
+2023-12 & 380110 & 156 & Export controls on graphite items & 1 & 0.07 & no & -- & 0 & 0 & no & no & no \\
+2023-12 & 850511 & 156 & China: Government releases revised catal & 1 & 0.08 & no & 81 & 1 & 0 & no & no & no \\
+2024-09 & 282580 & 156 & Export controls on antimony and superhar & 1 & 0.16 & no & 90 & 1 & 0 & no & no & no \\
+2024-09 & 285000 & 156 & China: Government announces export contr;842:Uni & 2 & 0.21 & no & 90 & 1 & 0 & no & yes & no \\
+2024-09 & 811010 & 156 & Export controls on antimony and superhar & 3 & 0.81 & no & 90 & 3 & 0 & yes & yes & no \\
+2025-01 & 280450 & 156 & China: 2025 dual-use catalogue for expor & 3 & 0.82 & no & 94 & 3 & 1 & no & no & no \\
+2025-01 & 282580 & 156 & China: 2025 export licensing goods catal & 2 & 0.20 & no & 94 & 2 & 3 & yes & no & no \\
+2025-01 & 282619 & 156 & China: 2025 dual-use catalogue for expor & 1 & 0.12 & no & 16 & 0 & 0 & no & no & no \\
+2025-01 & 284700 & 156 & China: 2025 dual-use catalogue for expor & 3 & 0.78 & no & 94 & 3 & 0 & no & no & no \\
+2025-01 & 380110 & 156 & China: 2025 dual-use catalogue for expor & 1 & 0.08 & no & -- & 1 & 0 & no & no & no \\
+2025-01 & 381800 & 156 & China: 2025 dual-use catalogue for expor & 0 & 0.06 & no & -- & 0 & 0 & no & no & no \\
+2025-01 & 720221 & 156 & China: 2025 export licensing goods catal & 2 & 0.39 & no & 94 & 3 & 0 & yes & yes & no \\
+2025-01 & 810411 & 156 & China: 2025 dual-use catalogue for expor & 1 & 0.06 & no & 78 & 1 & 0 & no & no & no \\
+2025-02 & 280450 & 156 & Export controls on tungsten, tellurium,  & 3 & 0.85 & no & 95 & 3 & 3 & no & no & no \\
+2025-02 & 284180 & 156 & Export controls on tungsten, tellurium,  & 3 & 0.78 & no & 95 & 1 & 0 & no & no & no \\
+2025-02 & 381800 & 156 & China: Government announces export contr & 0 & 0.04 & no & -- & 0 & 0 & no & no & no \\
+2025-02 & 810194 & 156 & Export controls on tungsten, tellurium,  & 2 & 0.27 & no & 92 & 1 & 0 & no & no & no \\
+2025-02 & 810520 & 180 & Cobalt export suspension & 3 & 0.58 & no & 95 & 3 & 3 & no & no & no \\
+2025-02 & 811292 & 156 & Export controls on tungsten, tellurium,  & 2 & 0.50 & no & 95 & 1 & 0 & no & no & no \\
+2025-04 & 280530 & 156 & Export controls on seven rare-earth elem & 3 & 0.82 & no & 97 & 3 & 0 & no & no & no \\
+2025-04 & 284690 & 156 & Export controls on seven rare-earth elem & 3 & 0.63 & no & 97 & 3 & 3 & yes & yes & no \\
+2025-04 & 850511 & 156 & Export controls on seven rare-earth elem & 1 & 0.12 & no & 97 & 1 & 0 & no & no & no \\
+2025-05 & 280461 & 392 & Japan: Government tightens the restricti & 2 & 0.50 & no & 98 & 1 & 0 & no & no & no \\
+2025-05 & 281290 & 392 & Japan: Government tightens the restricti & 2 & 0.29 & no & 98 & 1 & 0 & no & yes & no \\
+2025-05 & 282619 & 392 & Japan: Government tightens the restricti & 1 & 0.08 & no & 20 & 1 & 0 & no & no & no \\
+2025-07 & 282520 & 156 & China: Government revises catalogue cont & 2 & 0.28 & no & 74 & 2 & 3 & yes & no & no \\
+2025-10 & 280530 & 156 & China: Government announces export contr & 3 & 0.59 & no & 103 & 2 & 0 & no & no & no \\
+2025-10 & 284690 & 156 & China: Government announces export contr & 2 & 0.37 & no & 103 & 2 & 0 & no & yes & no \\
+2025-10 & 381800 & 156 & China: Ministry of Commerce issues expor & 1 & 0.09 & no & -- & 3 & 3 & yes & no & no \\
+2025-11 & 280530 & 156 & Expanded rare-earth export controls (Oct & 2 & 0.49 & no & 104 & 2 & 0 & no & no & no \\
+2025-11 & 284690 & 156 & Expanded rare-earth export controls (Oct & 2 & 0.35 & no & 104 & 2 & 0 & no & yes & no \\
+2025-11 & 850511 & 156 & Expanded rare-earth export controls (Oct & 1 & 0.07 & no & 104 & 1 & 2 & no & no & no \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S28. Sensitivity of the backtest to the event definitions, level 2 of the probability-based methods and the sigma-rule: the strict E2 list (new export controls only, annual catalogue and quota renewals excluded; evaluated with the fits of the main run) and the two alternative E1 definitions (the largest partner's shipments halving; the item's total imports halving), each a separate run on the same 64 items. AUC-PR and ECE refer to the E1 probabilities and are not reported for the E2 rows. Last column: event item-months in the decision window.}\label{tab:S28}
+\centering\tiny
+\begin{tabular}{llrrrrrrr}
+\toprule
+Variant & Method & AUC-PR & ECE & Det.\ $\leq$1 m & Det.\ $\leq$3 m & False alarms & Alarm months & Events \\ \midrule
+E2 strict (new controls only), main fits & M2 (proposed) & -- & -- & 0.65 & 0.65 & 0.26 & 8.2 & 31 \\
+E2 strict (new controls only), main fits & Poisson M0 & -- & -- & 0.65 & 0.65 & 0.17 & 8.6 & 31 \\
+E2 strict (new controls only), main fits & XGBoost (pooled) & -- & -- & 0.42 & 0.55 & 0.36 & 6.8 & 31 \\
+E2 strict (new controls only), main fits & XGBoost, recalibrated & -- & -- & 0.42 & 0.58 & 0.40 & 7.0 & 31 \\
+E2 strict (new controls only), main fits & Sigma-rule (plug-in SRI) & -- & -- & 0.16 & 0.23 & 0.33 & 2.0 & 31 \\
+E2 strict (new controls only), main fits & EWMA & -- & -- & 0.10 & 0.13 & 0.30 & 1.4 & 31 \\
+E2 strict (new controls only), main fits & CUSUM & -- & -- & 0.23 & 0.23 & 0.07 & 1.4 & 31 \\
+E2 strict (new controls only), main fits & Farrington-type threshold & -- & -- & 0.00 & 0.03 & 0.15 & 0.2 & 31 \\
+E1 = largest partner halves & M2 (proposed) & 0.510 & 0.033 & 0.86 & 0.89 & 0.17 & 7.0 & 926 \\
+E1 = largest partner halves & Poisson M0 & 0.517 & 0.040 & 0.88 & 0.90 & 0.11 & 7.5 & 926 \\
+E1 = largest partner halves & XGBoost (pooled) & 0.569 & 0.024 & 0.83 & 0.87 & 0.24 & 6.2 & 926 \\
+E1 = largest partner halves & XGBoost, recalibrated & 0.555 & 0.025 & 0.81 & 0.87 & 0.30 & 6.2 & 926 \\
+E1 = largest partner halves & Sigma-rule (plug-in SRI) & -- & -- & 0.27 & 0.32 & 0.16 & 1.8 & 926 \\
+E1 = largest partner halves & EWMA & -- & -- & 0.21 & 0.26 & 0.13 & 1.2 & 926 \\
+E1 = largest partner halves & CUSUM & -- & -- & 0.08 & 0.09 & 0.02 & 0.7 & 926 \\
+E1 = largest partner halves & Farrington-type threshold & -- & -- & 0.02 & 0.05 & 0.08 & 0.2 & 926 \\
+E1 = total imports halve & M2 (proposed) & 0.573 & 0.016 & 0.83 & 0.86 & 0.16 & 5.1 & 750 \\
+E1 = total imports halve & Poisson M0 & 0.585 & 0.016 & 0.85 & 0.86 & 0.11 & 5.4 & 750 \\
+E1 = total imports halve & XGBoost (pooled) & 0.587 & 0.025 & 0.77 & 0.82 & 0.26 & 4.1 & 750 \\
+E1 = total imports halve & XGBoost, recalibrated & 0.570 & 0.020 & 0.77 & 0.84 & 0.33 & 4.4 & 750 \\
+E1 = total imports halve & Sigma-rule (plug-in SRI) & -- & -- & 0.26 & 0.32 & 0.16 & 1.7 & 750 \\
+E1 = total imports halve & EWMA & -- & -- & 0.23 & 0.29 & 0.14 & 1.2 & 750 \\
+E1 = total imports halve & CUSUM & -- & -- & 0.15 & 0.15 & 0.01 & 0.7 & 750 \\
+E1 = total imports halve & Farrington-type threshold & -- & -- & 0.02 & 0.04 & 0.09 & 0.1 & 750 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+\textit{Files.} The panel (\path{backtest/panel_410.csv}), the merged measures (\path{backtest/restrictions.csv}), the extracts of the OECD inventory and of the GTA database for the 65 items, the scripts and the result files of the runs (\path{results/backtest/}) are in the repository; the Comtrade records themselves are not redistributed (UN Comtrade terms of use) and are re-extracted by the script, which needs a free API subscription key.

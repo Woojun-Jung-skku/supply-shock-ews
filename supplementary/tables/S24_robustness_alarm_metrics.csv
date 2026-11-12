@@ -1,0 +1,8 @@
+Arm,n,aucpr,brier,ece,tri2_dr1,tri3_dr1,tri2_fa_stable,conf_cover,q_arl1,alpha_q50_med,logC_rmse
+reference cell (Study B),10,0.810,0.201,0.041,0.98,0.71,0.39,0.909,25.5,–,–
+measurement error in $\mathbf{z}$ ($\varsigma$ = 0.5),5,0.803,0.203,0.042,0.98,0.70,0.34,0.907,25.9,2.15,0.14
+"15\% missing indicators, latent AR(1)",5,0.825,0.193,0.041,0.98,0.73,0.45,0.914,30.5,2.12,0.14
+"15\% missing indicators, last value carried forward",5,0.825,0.192,0.041,0.98,0.73,0.45,0.914,28.9,2.01,0.15
+Pareto severity,5,0.814,0.197,0.031,0.98,0.57,0.34,0.914,27.1,1.97,0.13
+20\% cold-start items,5,0.825,0.195,0.045,0.98,0.74,0.41,0.911,24.6,2.09,0.16
+"indicator lag 2 in the truth, 1 in the model",5,0.802,0.201,0.030,0.98,0.72,0.42,0.909,28.7,1.62,0.15

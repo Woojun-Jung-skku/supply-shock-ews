@@ -1,0 +1,23 @@
+Quantity,Log-normal (5 rep.),"Gamma, same protocol (5 rep.)",Study B reference (10 rep.)
+"α′ posterior median, geometric mean over groups and replications (range over replications); truth 2 = the variance-matched value",2.42 (1.92–2.98),2.35 (1.94–2.97),2.15 (1.79–2.48)
+90% intervals of α′ covering 2 (share over groups and replications),0.87,0.87,1.00
+Mean width of the 90% interval of log α′,0.79,0.81,0.73
+log C: RMSE / coverage of the 90% intervals,0.15 / 0.90,0.14 / 0.90,0.15 / 0.91
+"w posterior median (truth (0.5, 0.3))","(0.50, 0.29)","(0.51, 0.34)","(0.53, 0.31)"
+κ_w posterior median (coverage of 0.8),0.80 (1.00),0.84 (1.00),0.84 (1.00)
+"β posterior median (truth (0.4, 0.3, 0.2))","(0.395, 0.299, 0.191)","(0.389, 0.314, 0.194)","(0.405, 0.302, 0.190)"
+90% intervals of β covering the truth,0.93,1.00,0.93
+Recovery fits failed,0 of 5,0 of 5,0 of 5
+AUC-PR,0.805 (0.006),0.807 (0.006),0.810 (0.007)
+Brier score,0.201 (0.003),0.199 (0.003),0.201 (0.002)
+ECE,0.045 (0.006),0.039 (0.011),0.041 (0.003)
+Event share,0.590 (0.010),0.568 (0.016),0.579 (0.005)
+Detected ≤ 1 month (level 2),0.98 (0.00),0.98 (0.00),0.98 (0.00)
+Detected ≤ 3 months,0.99 (0.00),0.99 (0.00),0.99 (0.00)
+False alarms per item-year (stable windows),0.33 (0.03),0.43 (0.04),0.39 (0.03)
+"Lead time (median, months)",4.4 (0.4),5.1 (0.5),4.7 (0.3)
+Conformal coverage / set size,0.909 / 2.15,0.904 / 2.08,0.909 / 2.29
+"ARL₀ of the q channel (pooled, 90% interval)",360 (360–360),72 (36–360),51 (31–120)
+ARL₁ of the q channel,31.7 (3.0),30.6 (1.8),25.5 (3.3)
+EWMA: detected ≤ 1 month / false alarms / ARL₀,0.35 / 0.18 / 9.0,0.33 / 0.17 / 10.7,0.39 / 0.24 / 7.9
+CUSUM: detected ≤ 1 month / false alarms / ARL₀,0.33 / 0.02 / 53.7,0.31 / 0.01 / 57.1,0.39 / 0.02 / 32.0
