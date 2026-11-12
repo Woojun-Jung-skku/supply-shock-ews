@@ -1,8 +1,21 @@
-# Rare arm (Sections 5.1, 5.3 and 5.6; Supplementary Note 17)
+# Rare arm (Sections 5.1, 5.3 and 5.6; Supplementary Note 7)
 
 Three cells at a base rate of 0.02 shocks per item-month (0.24 per item-year), I = 100 items, T = 120 months,
 alpha' = 2, one per regime (stable, gradual, abrupt), five replications each. The cells run through the Study B
 pipeline (`code/study_b.py`) with the `t4_min` design constants; only the cell definitions are new.
+
+The table numbers below and in the script headers are those of the extended results (`../extended_results/`). The
+manuscript uses other numbers:
+
+| Extended results (this folder) | Manuscript |
+|---|---|
+| Supplementary Note 17 | Supplementary Note 7 |
+| Table 6 | Table 4 |
+| Table 8 | Table 6 |
+| Table S20 | Table S7 |
+| Tables S21.1 and S21.2 | Tables S8 and S9 |
+| Tables S29.1 and S29.2 | Tables S15 and S16 |
+| Tables S29.3 and S29.4 | not in the manuscript |
 
 | File | Contents |
 |---|---|
@@ -12,7 +25,7 @@ pipeline (`code/study_b.py`) with the `t4_min` design constants; only the cell d
 | `check_cost_definition.py` | Applies the functions of `rare_cost.py` to the archived Study B records and checks that they reproduce Table 8 (eight policies) and the 'All cells' row of Table S21.1; exit code 1 on a mismatch. |
 | `tables_full.py` | The Table 6 metrics per cell and pooled. Output: `../results_rare/tables_6_style.txt` (Table S29.1). |
 | `analyze_full.py` | Replication-level values and the paired comparisons of AUC-PR, ECE and Brier score. Output: `../results_rare/per_rep_detail.txt` (Table S29.3). |
-| `gen_note17.py` | Writes `../supplementary/supplementary_note17_rare_arm.tex` (the body of Supplementary Note 17 with Tables S29.1–S29.4, which `supplementary_part2.tex` inputs after Note 16) from the result files; every number in the note is computed, none is typed. |
+| `gen_note17.py` | Writes `../extended_results/supplementary_note17_rare_arm.tex` (the body of Supplementary Note 17 with Tables S29.1–S29.4, which `supplementary_part2.tex` inputs after Note 16) from the result files; every number in the note is computed, none is typed. |
 
 ## Reproducing
 
@@ -24,8 +37,8 @@ python rare_arm/rare_cost.py    . results_rare > cost_summary.txt          # arc
 python rare_arm/check_cost_definition.py . results_rare             # same code on Study B: must print "reproduced"
 python rare_arm/tables_full.py  . results_rare > tables_6_style.txt        # archived as results_rare/tables_6_style.txt
 python rare_arm/analyze_full.py . results_rare > per_rep_detail.txt        # archived as results_rare/per_rep_detail.txt
-python rare_arm/gen_note17.py   . results_rare supplementary/supplementary_note17_rare_arm.tex
-cd supplementary && xelatex supplementary.tex && xelatex supplementary.tex   # the note is part of the supplementary material
+python rare_arm/gen_note17.py   . results_rare extended_results/supplementary_note17_rare_arm.tex
+cd extended_results && xelatex supplementary.tex && xelatex supplementary.tex   # the note is part of the extended results
 ```
 
 ## Two conventions that matter

@@ -1,14 +1,15 @@
-"""Result figures of the manuscript: Figs. 1, 2, 4 and 5 and Supplementary Fig. S3, numbered as in the manuscript.
+"""Result figures: Figs. 2 and 3 of the manuscript (parameter recovery, alarm performance), Fig. S3 of the extended
+results (hawkes_dispersion) and two figures that the manuscript does not use (sri_curves, sigma_rule).
 
-usage: python make_figs_color.py OUT_DIR [fig1 fig2 fig4 fig5 figS3]
-data: Figs. 1, 2 and S3 are analytic; Fig. 4 reads results/analysis/A_replications.csv; Fig. 5 reads
-results/analysis/B_replications.csv and B_cells.csv, the Farrington-type baseline (results/followup/out/
+usage: python make_figs_color.py OUT_DIR [sri_curves sigma_rule hawkes_dispersion parameter_recovery alarm_performance]
+data: sri_curves, sigma_rule and hawkes_dispersion are analytic; Fig. 2 reads results/analysis/A_replications.csv;
+Fig. 3 reads results/analysis/B_replications.csv and B_cells.csv, the Farrington-type baseline (results/followup/out/
 A3_farrington_replications.csv) and the negative-binomial-designed CUSUM (results/followup/out/
 B1_nbcharts_replications_group.csv), and code/tools/arl.py. Paths default to the repository layout and can be
 overridden with the environment variables ANALYSIS, TOOLS and FOLLOWUP.
-The schematic figures (Fig. 3 and Supplementary Figs. S1, S2 and S4) are drawn by schem19.py, Fig. 6 by
-backtest/fig_backtest.py and Fig. 7 by code/tools/cost_curves.py; all share the style module figstyle.py.
-Sizes: 180 mm wide (double column), Fig. 4 140 mm; saved at that exact width so all figures share one type scale."""
+The schematic figures (Fig. 1 and Figs. S1, S2 and S4 of the extended results) are drawn by schem19.py, Fig. 4 by
+backtest/fig_backtest.py and Fig. 5 by code/tools/cost_curves.py; all share the style module figstyle.py.
+Sizes: 180 mm wide (double column), Fig. 2 140 mm; saved at that exact width so all figures share one type scale."""
 import json
 import os
 import sys
@@ -38,7 +39,7 @@ os.makedirs(OUT, exist_ok=True)
 AP = "\\alpha\\prime"                  # alpha-prime in mathtext (a plain ' is set as a raised superscript)
 DOT = (0, (1, 1.6))                    # dotted reference lines
 DASH = (0, (4, 2))                     # dashed target / nominal lines
-LIM, LIMC = (0, (3.0, 1.6)), "#8B9199"  # Poisson limits (Fig. 1): thin dashed, grey in (a), series colour in (b)
+LIM, LIMC = (0, (3.0, 1.6)), "#8B9199"  # Poisson limits (sri_curves): thin dashed, grey in (a), series colour in (b)
 WHITE_LEG = dict(frameon=True, facecolor="white", edgecolor="none", framealpha=1.0, borderpad=0.3)
 
 
@@ -60,8 +61,8 @@ def two_panels(h_mm, w=W2):
     return fig, ax
 
 
-# ============================================================================ Fig. 1: SRI curves
-def fig1():
+# ============================================================================ sri_curves (not in the manuscript)
+def sri_curves():
     fig, ax = two_panels(64)
     mu = np.logspace(-2, 1, 400)
     for k, a in enumerate([0.2, 0.5, 1, 2, 10]):
@@ -86,10 +87,10 @@ def fig1():
         a.set_ylim(0, 1.02)
         a.set_ylabel("SRI = $P(N=0)$")
     letters(fig, ax)
-    save(fig, os.path.join(OUT, "Fig1_sri_curves"))
+    save(fig, os.path.join(OUT, "extra_sri_curves"))
 
 
-# ============================================================================ Fig. 2: sigma-rule false alarms
+# ============================================================================ sigma_rule (not in the manuscript)
 def p_alarm(mu, a, k=2.0):
     nstar = int(np.floor(mu + k * np.sqrt(mu))) + 1
     if np.isinf(a):
@@ -97,7 +98,7 @@ def p_alarm(mu, a, k=2.0):
     return nbinom.sf(nstar - 1, a, a / (a + mu)), nstar
 
 
-def fig2():
+def sigma_rule():
     fig, ax = two_panels(70)
     agrid = np.logspace(-1, 2, 300)
     XINF = 300.0
@@ -139,11 +140,11 @@ def fig2():
                  loc="lower right")
     fig.legend(handles=rowmajor(hs, 3), loc="outside upper center", ncol=3, handlelength=2.4)
     letters(fig, ax)
-    save(fig, os.path.join(OUT, "Fig2_sigma_rule"))
+    save(fig, os.path.join(OUT, "extra_sigma_rule"))
 
 
-# ============================================================================ Fig. S3: Hawkes dispersion
-def figS3():
+# ============================================================================ Fig. S3 of the extended results: Hawkes dispersion
+def hawkes_dispersion():
     g = lambda y: 1.0 - (1.0 - np.exp(-y)) / y
     D = lambda n, kD: 1.0 + n * (2.0 - n) / (1.0 - n) ** 2 * g(kD)
     kD = np.logspace(np.log10(0.05), np.log10(50), 400)
@@ -170,8 +171,8 @@ def figS3():
     save(fig, os.path.join(OUT, "FigS3_hawkes_dispersion"))
 
 
-# ============================================================================ Fig. 4: parameter recovery (Study A)
-def fig4():
+# ============================================================================ Fig. 2: parameter recovery (Study A)
+def parameter_recovery():
     d = pd.read_csv(os.path.join(ANALYSIS, "A_replications.csv"))
     d = d[np.isfinite(d["alpha_cover"])]
     d = d[(d.regime == "gradual") & (pd.to_numeric(d.alpha, errors="coerce") == 2)]
@@ -215,17 +216,17 @@ def fig4():
                   label="$I = 10$, $T = 60$")]
     fig.legend(handles=rowmajor(hs, 3), loc="outside upper center", ncol=3, handlelength=2.6, columnspacing=1.2)
     letters(fig, axes)
-    save(fig, os.path.join(OUT, "Fig4_parameter_recovery"))
+    save(fig, os.path.join(OUT, "Fig2_parameter_recovery"))
     for r in rows:
-        print("fig4", r)
+        print("parameter_recovery", r)
 
 
-# ============================================================================ Fig. 5: alarm performance (Study B)
-def fig5():
+# ============================================================================ Fig. 3: alarm performance (Study B)
+def alarm_performance():
     sys.path.insert(0, TOOLS)
     import arl as ARL
     d = pd.read_csv(os.path.join(ANALYSIS, "B_replications.csv"))
-    farr = pd.read_csv(os.path.join(FOLLOWUP, "A3_farrington_replications.csv"))     # v1.23: Table 6 row in the figure too
+    farr = pd.read_csv(os.path.join(FOLLOWUP, "A3_farrington_replications.csv"))     # the Farrington-type row of the alarm table is in the figure too
     d = d.merge(farr[[c for c in farr.columns if c in ("cell", "rep") or c.startswith("farr_")]], on=["cell", "rep"], how="left")
     nbc = pd.read_csv(os.path.join(FOLLOWUP, "B1_nbcharts_replications_group.csv"))   # v1.24: NB-designed CUSUM (B1)
     d = d.merge(nbc[[c for c in nbc.columns if c in ("cell", "rep") or c.startswith("nbcusum_")]], on=["cell", "rep"], how="left")
@@ -253,7 +254,7 @@ def fig5():
         c = METHOD[key][0]
         ax_a.plot([pr["lo"], pr["hi"]], [i, i], color=tint(c, 0.5), lw=2.6, solid_capstyle="butt", zorder=2)
         point(ax_a, pr["est"], i, key)
-        print(f"fig5 ARL0 {col}: {pr['est']:.1f} [{pr['lo']:.1f}, {pr['hi']:.1f}]")
+        print(f"alarm_performance ARL0 {col}: {pr['est']:.1f} [{pr['lo']:.1f}, {pr['hi']:.1f}]")
     ax_a.set_xscale("log")
     ax_a.set_xlim(1, 1000)
     ticks(ax_a, "x", [1, 3, 10, 30, 100, 300, 1000])
@@ -267,7 +268,7 @@ def fig5():
         c = METHOD[key][0]
         ax_b.plot([q1, q3], [i, i], color=tint(c, 0.5), lw=2.6, solid_capstyle="butt", zorder=2)
         point(ax_b, med, i, key)
-        print(f"fig5 ARL1 {col}: median {med:.1f} IQR [{q1:.1f}, {q3:.1f}]")
+        print(f"alarm_performance ARL1 {col}: median {med:.1f} IQR [{q1:.1f}, {q3:.1f}]")
     ax_b.set_xlim(0, 46)
     ax_b.set_xlabel("Delay from the change to the first alarm (months)")
     for ax, lab in ((ax_a, [n for *_, n in chan]), (ax_b, [""] * len(chan))):
@@ -286,7 +287,7 @@ def fig5():
     for col, key, name, ms in sorted(ops, key=lambda o: o[0] not in first):
         x, y = d[f"{col}_fa_stable"].mean(), d[f"{col}_dr1"].mean()
         point(ax_c, x, y, key, ms=7.6 if col == "M2_tri2" else ms)
-        print(f"fig5 L2 {name}: detection {y:.3f}, false alarms {x:.3f}")
+        print(f"alarm_performance L2 {name}: detection {y:.3f}, false alarms {x:.3f}")
     ax_c.set_xlim(0, 0.55)
     ax_c.set_ylim(0, 1)
     ax_c.set_xlabel("False alarms per item-year, stable windows")
@@ -320,10 +321,11 @@ def fig5():
     ax_d.legend(handles=[rf.method_handle(k, n, ms=4.8) for k, n in base], loc="upper center",
                 bbox_to_anchor=(0.5, -0.17), ncol=3, handletextpad=0.25, columnspacing=1.0)
     letters(fig, [ax_a, ax_b, ax_c, ax_d], align=["ylabel", 0.0, "ylabel", 0.0], groups=[(0, 2)])
-    save(fig, os.path.join(OUT, "Fig5_alarm_performance"))
+    save(fig, os.path.join(OUT, "Fig3_alarm_performance"))
 
 
-FIGS = dict(fig1=fig1, fig2=fig2, fig4=fig4, fig5=fig5, figS3=figS3)
+FIGS = dict(sri_curves=sri_curves, sigma_rule=sigma_rule, parameter_recovery=parameter_recovery,
+            alarm_performance=alarm_performance, hawkes_dispersion=hawkes_dispersion)
 if __name__ == "__main__":
     for name in (sys.argv[2:] or FIGS):
         FIGS[name]()

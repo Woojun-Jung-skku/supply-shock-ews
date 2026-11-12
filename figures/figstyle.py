@@ -41,10 +41,10 @@ def shade(c, f):
 RAMP = {3: [BLUE, TEAL, RED], 4: [BLUE, TEAL, GOLD, RED], 5: [PURPLE, BLUE, TEAL, GOLD, RED]}
 MARKS = ["o", "s", "^", "D", "v", "p"]
 
-# methods: one colour and marker everywhere (Figs. 4-7)
+# methods: one colour and marker everywhere (Figs. 2-5)
 #   name -> (colour, marker, filled)
 METHOD = {
-    "M2": (RED, "o", True),               # proposed; the hierarchical model of Fig. 4
+    "M2": (RED, "o", True),               # proposed; the hierarchical model of Fig. 2
     "NBcomplete": (BLUE, "^", True),      # complete pooling
     "NBnone": (TEAL, "s", True),          # no pooling
     "M0": (GOLD, "o", False),             # Poisson M0 (open circle)
@@ -58,7 +58,7 @@ METHOD = {
     "nbcusum": (PURPLE, "s", True),       # CUSUM designed under the negative binomial (B1; v1.24)
 }
 
-# schematic roles (Fig. 3, Figs. S1, S2, S4): source side, target side, shared structure, other domains
+# schematic roles (Fig. 1 and Figs. S1, S2, S4 of the extended results): source side, target side, shared structure, other domains
 ROLE = {"source": BLUE, "target": RED, "shared": PURPLE, "other": TEAL, "neutral": "#6b7785"}
 FILL_T = 0.88          # white share of a box fill
 FILL_T_STRONG = 0.80   # emphasised box

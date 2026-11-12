@@ -1,4 +1,5 @@
-"""Schematic figures (Fig. 3 and Supplementary Figs. S1, S2 and S4), numbered as in the manuscript: drawn, not boxed.
+"""Schematic figures: Fig. 1 of the manuscript (the inference stack) and Figs. S1, S2 and S4 of the extended
+results. Drawn, not boxed.
 
 Design system
   * Structure comes from alignment, whitespace and hairlines, not from boxes or tinted lanes.
@@ -9,7 +10,7 @@ Design system
     else neutral grey; one dark tone for the single shared structure.
   * One type scale (Liberation Sans, as in the result figures): headers 8 pt bold, titles 7.4 pt bold, grey lines
     6.8 pt, glyph labels 6.5 pt; hairlines 0.5 pt, glyph axes 0.5 pt, data lines 1.0 pt.
-usage: python schem19.py OUT_DIR [fig3 figS1 figS2 figS4]"""
+usage: python schem19.py OUT_DIR [inference_stack lineages industry_map three_layer_correspondence]"""
 import os
 import sys
 
@@ -180,7 +181,7 @@ def width_mm(fig, ax, s, fs, w="normal"):
     return bb.width / fig.dpi * 25.4
 
 
-# ============================================================================ Fig. S4: three-layer correspondence
+# ============================================================================ Fig. S4 of the extended results: three-layer correspondence
 def model_glyph(ax, b, c, xl, yl):
     """P(N = 0) against the mean (log scale): the mixed (negative-binomial) curve in colour above the Poisson
     curve (dashed)."""
@@ -198,7 +199,7 @@ def yticklab(ax, b, y, s, c=T2):
     txt(ax, b.x0 - 1.0, b.Y(y), s, fs=FS_G - 0.5, c=c, ha="right")
 
 
-def figS4():
+def three_layer_correspondence():
     """source and target side by side, three layers as rows; each cell = a glyph of what the layer handles and a
     title with one grey line; the glyphs face each other across a centre channel that names the layer; in the
     model row the channel lists the variable mapping."""
@@ -292,12 +293,12 @@ def figS4():
     save(fig, "FigS4_three_layer_correspondence")
 
 
-# ============================================================================ Fig. S1: lineages
+# ============================================================================ Fig. S1 of the extended results: lineages
 def letter(ax, x, y, L):
     txt(ax, x, y, f"({L})", fs=9, c=T1, w="bold", ha="left", va="top")
 
 
-def figS1():
+def lineages():
     """(a) the die-yield lineage as a sequence of mixing distributions of the defect density D0 (point mass,
     triangle, exponential, gamma), each with its yield formula; (b) the gamma-Poisson family: domains around one
     hub that shows the construction (gamma intensity -> Poisson counts -> negative binomial, P(N = 0) singled out)
@@ -386,7 +387,7 @@ def figS1():
     save(fig, "FigS1_lineages")
 
 
-# ============================================================================ Fig. 3: inference stack
+# ============================================================================ Fig. 1: inference stack
 BASE = 4.2        # height of a glyph's x-axis above the bottom of its slot (x labels sit below it)
 
 
@@ -441,7 +442,7 @@ def g_dag(ax, x0, y0, w, h):
 
 
 def g_particles(ax, x0, y0, w, h):
-    """full NUTS refits every K months (ticks) reset the posterior; between refits it is propagated forward
+    """full NUTS refits at a fixed interval (ticks) reset the posterior; between refits it is propagated forward
     (widening band) by particle reweighting."""
     b = Box(x0 + 2.0, y0 + BASE, w - 4.5, h - BASE - 4.6, xl=(0, 18), yl=(-1.0, 1.0))
     b.axes(ax, xlabel="month", yaxis=False)
@@ -456,15 +457,14 @@ def g_particles(ax, x0, y0, w, h):
         ax.plot([b.X(r0)] * 2, [b.Y(-1.0), b.Y(1.0)], color=T1, lw=0.7, zorder=4, solid_capstyle="butt")
     yk = b.Y(1.0) + 2.0
     arrow(ax, b.X(6), yk, b.X(12), yk, both=True, c=T2, lw=0.45, ms=3.0, z=5)
-    txt(ax, b.X(9), yk + 1.6, "$K$", fs=FS_G - 0.4, c=T2, ha="center")
+    txt(ax, b.X(9), yk + 1.6, "refit interval", fs=FS_G - 0.5, c=T2, ha="center")
     txt(ax, b.X(0) - 0.4, yk, "NUTS", fs=FS_G - 0.5, c=T2, ha="left", va="center")
 
 
 def g_uncertainty(ax, x0, y0, w, h):
-    """posterior predictive fan for a latent quantity (left) and a conformal prediction set for the count
-    (right: predictive probabilities, the set {0, 1} in colour)."""
+    """posterior predictive fan of the supply reliability index over the forecast horizon."""
     hb = h - BASE - 2.0
-    b = Box(x0 + 4.5, y0 + BASE, 11.5, hb, xl=(0, 6), yl=(0, 1))
+    b = Box(x0 + 7.5, y0 + BASE, w - 13.0, hb, xl=(0, 6), yl=(0, 1))
     b.axes(ax, xlabel="$h$", ylabel="SRI")
     hh = np.linspace(0, 6, 60)
     med = 0.62 - 0.035 * hh
@@ -473,13 +473,6 @@ def g_uncertainty(ax, x0, y0, w, h):
         ax.fill_between(b.X(hh), b.Y(np.clip(med - sd, 0, 1)), b.Y(np.clip(med + sd, 0, 1)), color=tint(TGT, f), lw=0,
                         zorder=2)
     ax.plot(b.X(hh), b.Y(med), color=TGT, lw=0.9, zorder=3)
-    b2 = Box(x0 + 20.0, y0 + BASE, 8.5, hb, xl=(-0.6, 3.6), yl=(0, 0.8))
-    b2.axes(ax, xlabel="$N$")
-    pm = [0.64, 0.24, 0.08, 0.03]
-    for k, v in enumerate(pm):
-        ax.add_patch(Rectangle((b2.X(k - 0.3), b2.Y(0)), b2.X(0.3) - b2.X(-0.3), b2.Y(v) - b2.Y(0),
-                               fc=TGT if k < 2 else tint(T2, 0.55), ec="none", zorder=2))
-    txt(ax, b2.X(1.2), b2.Y(0.70), "$\\{0,1\\}$", fs=FS_G - 0.5, c=T2, ha="left")
 
 
 def g_alarm(ax, x0, y0, w, h):
@@ -504,13 +497,13 @@ def g_alarm(ax, x0, y0, w, h):
     ax.plot(b2.X(t), b2.Y(qv), color=T2, lw=0.9, zorder=3)
 
 
-def fig3():
+def inference_stack():
     """the inference stack as a left-to-right pipeline: five stages, each a title, a glyph and one short line."""
     W = 180.0
     stages = [("Detection layer", "$N_{it}$, $x_{it}$, $z_i$", g_data),
               ("Hierarchical NB model", f"$N\\sim\\mathrm{{NB}}(RC\\Delta,\\,{AP}_g)$", g_dag),
               ("Posterior computation", "refit and propagate", g_particles),
-              ("Uncertainty", "predictive and conformal", g_uncertainty),
+              ("Uncertainty", "posterior predictive", g_uncertainty),
               ("Two-channel alarm", "triage $p$ and change $q$", g_alarm)]
     n = len(stages)
     gap = 4.6
@@ -527,10 +520,10 @@ def fig3():
         txt(ax, x0 + cw / 2, gy - 1.9, sub, fs=FS_S, c=T2, ha="center")
         if k < n - 1:
             arrow(ax, x0 + cw + 0.7, gy + BASE + 6.0, x0 + cw + gap - 0.7, gy + BASE + 6.0, c=AXIS, lw=0.6, ms=4.5)
-    save(fig, "Fig3_inference_stack")
+    save(fig, "Fig1_inference_stack")
 
 
-# ============================================================================ Fig. S2: industry map
+# ============================================================================ Fig. S2 of the extended results: industry map
 def _units(ax, rects, hits, c, dots):
     for k, (x, y, w, h) in enumerate(rects):
         ax.add_patch(Rectangle((x, y), w, h, fc=tint(c, 0.72) if k in hits else "white", ec=AXIS, lw=0.45, zorder=2))
@@ -633,7 +626,7 @@ def g_space(ax, x0, y0, w, h, c):
             dot(ax, xe, yy, 0.42, AXIS, z=3)
 
 
-def figS2():
+def industry_map():
     """five industries as columns. Process level (where the source model already operates): a glyph of the
     industry's own counting unit with clustered defects, and its output. Supply level (where the transferred
     framework applies): an item-period raster with one row per named critical input, and the inputs. Between the
@@ -685,7 +678,8 @@ def figS2():
     save(fig, "FigS2_industry_map")
 
 
-FIGS = dict(figS4=figS4, figS1=figS1, fig3=fig3, figS2=figS2)
+FIGS = dict(three_layer_correspondence=three_layer_correspondence, lineages=lineages, inference_stack=inference_stack,
+            industry_map=industry_map)
 if __name__ == "__main__":
     for n in (sys.argv[2:] or FIGS):
         FIGS[n]()

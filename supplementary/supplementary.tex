@@ -2,7 +2,7 @@
 \usepackage[margin=20mm]{geometry}
 \usepackage{fontspec}
 \setmainfont{TeX Gyre Pagella}
-\usepackage{booktabs,pdflscape,caption,array,url,amsmath,graphicx}
+\usepackage{booktabs,caption,array,url,amsmath,graphicx}
 \setlength{\tabcolsep}{3.5pt}
 \captionsetup{font=small,labelfont=bf,justification=justified,singlelinecheck=false,labelformat=empty,skip=4pt}
 \usepackage{unicode-math}
@@ -11,23 +11,50 @@
 \setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
 \pagestyle{plain}
 \begin{document}
-{\large\bfseries Supplementary material}
 
-{\bfseries A hierarchical gamma–Poisson early-warning model of supply shocks with cost-based alarms}
+{\large\bfseries Supplementary material}\\[2pt]
+{\bfseries A hierarchical gamma--Poisson early-warning model of supply shocks with cost-based alarms}\\[1pt]
+{\small Supplementary material to the manuscript}
 
-Supplementary material to the manuscript
+This supplement has two parts. Supplementary Notes 1--3 give the settings that are needed to reproduce the results: the sampler and its convergence criteria, the baselines and the severity submodel. Supplementary Notes 4--7 tabulate results that the main text cites but does not print: further results of the simulation study, the comparisons of expected cost, the backtest and the rare arm. All numbers are computed from the archived result files of the repository.
 
-This supplement gives, in Supplementary Notes 1--6, the implementation details that the main text summarises (sampler settings and convergence criteria, baseline specifications, the pseudo-true dispersion of the pooling comparison, the refit schedule, prior and indicator sensitivity, computational cost), and tabulates results that the main text cites but does not print: the triage results at levels 1 and 3 (Section 4.4, Section 5.3 (ii)), the Study B results by regime and by cell (Section 5.3), the Study A coverages by factor level and the pooling comparison behind Fig.~4 (Section 5.2), the sensitivity runs of Sections 5.2 (i), 5.2 (ii), 5.2 (iii), 5.3 (iii), 5.3 (iv) and 5.4 (prior sensitivity, the item-effect scale $\tau_C$, dispersion that differs across groups, uninformative indicators, the Farrington-type threshold by cell, the control charts designed under the negative binomial, the 24-month refit schedule, the reparameterised horseshoe and the severity submodel), and the fit diagnostics of Section 5.4. Supplementary Notes 7--17 hold material that the main text refers to but does not print: the yield-model lineage and the gamma--Poisson family with the source model and the variable correspondence (Note 7, Table S17, Figs.~S1 and S4), the severity submodel (Note 8), the industry instances of the intensity--exposure--dispersion structure (Note 9, Table S18, Fig.~S2), the expected-cost analysis of Section 5.6 with standard errors, paired comparisons, break-even ratios and the alternative cost model (Note 10, Tables S19.1--S22), the numerical verification of the Hawkes window-count dispersion of Supplementary Note 16 (Note 11, Table S23, Fig.~S3), the alarm metrics of the robustness arms of Section 5.4 (Note 12, Table S24), the modelling choices and parameter-recovery details of Sections 3.3 and 5.2 (Note 13), the backtest on the Korean import panel of Section 5.5---data sources, event construction, the event-definition decision, alarm metrics at every level and target, the export-restriction implementations one by one, and the sensitivity of the results to the event definitions (Note 14, Tables S25--S28)---the construction of the conformal prediction sets of Section 4.3 (Note 15), the derivation of the Hawkes window-count dispersion of Section 3.4 (Note 16), and the rare arm of the simulation study of Sections 5.1, 5.3 and 5.6 (Note 17, Tables S29.1--S29.4). All numbers are computed from the archived replication-level result files of the repository with the scripts listed at the end; conventions are those of the main text.
+\textbf{Conventions.} Entries are means over replications, with Monte Carlo standard errors in brackets where they are shown. Detection within one month counts a shock as detected when the level is in force in the month before it. False alarms are alarm onsets in the stable windows that no shock follows within three months, per item-year. ARL$_0$ is the ratio of unit-months in the stable windows to alarm months, pooled over the replications. The units are groups for the $q$ channels and items for the other rules. ARL$_1$ is the mean delay from the change to the first alarm. Posterior intervals are 90\% equal-tailed intervals.
 
-\textbf{Conventions.} Entries are means over replications with Monte Carlo standard errors in brackets unless stated otherwise. ARL$_0$ is the pooled ratio of stable-window unit-months to alarm months over the replications --- so a value pooled over cells is the unit-month-weighted harmonic mean of the cell or regime values, not their arithmetic mean (Table S2.4 shows the sums) --- with a 90\% bootstrap interval over replications (units: groups for the $q$ channels, items for the sigma-rule, EWMA, CUSUM and the Farrington-type threshold; stable windows: the 82 decision months of a stable cell, the 24 decision months before the change at month 60 elsewhere). ARL$_1$ is the mean delay from the change to the first alarm (first persistent alarm for the $q$ channels), censored at the end of monitoring. Detection within $h$ months counts a shock as detected when the level is in force in the month before it; false alarms are alarm onsets in stable windows not followed by a shock within three months, per item-year. Posterior intervals are 90\% equal-tailed; coverage is the realised share of intervals containing the truth. Failed fits are those that fail the convergence check of Section 4.1 after the one refit; they are included in all tables unless stated otherwise.
+\textbf{Supplementary Note 1. Sampler settings and convergence criteria (Section 4.1).}
+Posteriors are sampled with the No-U-Turn sampler in NumPyro. Each fit uses four chains with 400 warm-up and 500 sampling iterations, a target acceptance probability of 0.95 and a maximum tree depth of 10. The random-walk and hierarchical terms use non-centred parameterisations. The trend is sampled in reparameterised coordinates, namely the least-squares level and slope of the trend path of each group. This linear map has unit Jacobian, and it removes the ridge between the initial slope and the slope innovations. Chains start at the prior medians with small jitter, except $\sigma_\eta$ and $\tau_\zeta$, which start at 0.03 and 0.01.
 
-\textbf{Contents.} Supplementary Notes 1--6 (details of Sections 4.1, 5.1, 5.2 (i), 5.3 (iv) and 5.4), then Tables S1.1--S1.3 (triage at levels 1, 2, 3), S2.1--S2.3 (Table 6 by regime) and S2.4 (decomposition of the pooled ARL$_0$ by regime), S3.1--S3.2 (Study B by cell), S4 (Study A by factor level), S5 (pooling comparison, Fig.~4), S6 (prior sensitivity), S7 (item-effect scale $\tau_C$), S8 (indicators without information, $\beta = 0$), S9 (Farrington-type threshold by cell), S10.1--S10.2 (24-month refit schedule), S11 (horseshoe innovations, abrupt cells), S12 (fit diagnostics), S13 (dispersion that differs across groups), S14 (control charts designed under the negative binomial), S15 (the severity submodel and its loss-fraction intervals), S16 (heterogeneity that is not gamma); then Supplementary Notes 7--13 with Tables S17 (variable correspondence), S18 (industry instances), S19.1--S19.3 and S20--S22 (expected cost: means with standard errors by subset, savings and sign tests, level switching, break-even ratios and the value of monitoring by method, alarm budget and detection at like-for-like operating points, a risk-averse reading with the 90th percentile and CVaR of cost, the classification cost model), S23 (Hawkes dispersion verification) and S24 (alarm metrics of the robustness arms), Figs.~S1--S4; then Supplementary Note 14 with Tables S25.1--S25.2 (composition and items of the Korean import panel), S26.1--S26.3 (alarm metrics on the panel by target and level), S27 (the export-restriction implementations one by one) and S28 (sensitivity to the event definitions); then Supplementary Notes 15 (conformal prediction sets, Section 4.3) and 16 (window-count dispersion of a Hawkes process, Section 3.4); then Supplementary Note 17 (the rare arm of Sections 5.1, 5.3 and 5.6) with Tables S29.1 (alarm performance by cell and pooled), S29.2 (expected cost and the band of cost ratios in which each policy pays), and S29.3 and S29.4 (replication-level values).
+A fit is accepted when the rank-normalised $\widehat{R}$ is below 1.01, the bulk and tail effective sample sizes exceed 400 on the reported quantities, and no transition diverges. A fit that fails any criterion is repeated once on the same data with 1,000 warm-up and 1,000 sampling iterations. A fit that still fails is recorded as failed, and it is never replaced by a new draw of the data. Posterior predictive checks compare four statistics with their replicate distributions: the proportion of zero counts, the maximum count, the index of dispersion by group, and the autocorrelation of the counts at lags one to three.
 
-\input{supplementary_notes}
-\clearpage
+\textbf{Supplementary Note 2. Baseline specifications (Section 5.1).}
+\textit{Sigma-rule.} The plug-in SRI is the SRI at the posterior means of $\mu$ and $\alpha'$ from the M2 filter. Its limits lie 1$\sigma$, 1.5$\sigma$ and 2$\sigma$ below the mean of the preceding 24 months.
 
+\textit{Control charts.} The EWMA uses $\lambda = 0.2$, and the Poisson CUSUM uses the reference value of Lucas (1985) for a 1.5-fold shift. Both charts freeze their in-control means at months 13--36, and their limits are set for a nominal Poisson ARL$_0$ of 24 months. The CUSUM that is designed under the negative binomial uses the likelihood-ratio reference value for the same shift,
+\[
+k \;=\; \hat{\alpha}\,\log\!\left[\frac{\hat{\alpha} + 1.5\hat{\mu}}{\hat{\alpha} + \hat{\mu}}\right] \Big/ \log\!\left[\frac{1.5\,(\hat{\alpha} + \hat{\mu})}{\hat{\alpha} + 1.5\hat{\mu}}\right],
+\]
+where the dispersion $\hat{\alpha}$ is the pooled moment estimate within the group of the item. Its limit is the $(1 - 1/24)$ quantile of the in-control distribution of the statistic, which is simulated from the fitted negative binomial.
+
+\textit{Farrington-type threshold.} At every decision month and for every item, a quasi-Poisson regression with an intercept and a linear trend is fitted to the preceding 36 months. Past outliers are down-weighted once, and the estimated dispersion turns the fitted mean into a negative-binomial predictive distribution. The item raises an alarm when the count of the current month exceeds the $(1 - 1/24)$ quantile of this distribution.
+
+\textit{Machine-learning baselines.} XGBoost uses a depth of 3 or 6, a learning rate of 0.1 and up to 300 rounds. The LSTM and the temporal fusion transformer have 16 hidden units on windows of twelve months. All three are trained on the indicators, the exposure measurements and the count history of the item, with the same rolling-origin splits. Their hyperparameters are chosen on the last twelve labelled months of the training range of each origin.
+
+\textbf{Supplementary Note 3. Severity submodel (Section 4.3).}
+A period without a shock has no loss, so the loss variable has a point mass at zero. We therefore use a hurdle model,
+\begin{align}\mathrm{SDR}_{it} &= \mathbf{1}\{N_{it}\ge 1\}\,S_{it}, \tag{S3.1}\\ S_{it}\mid N_{it}\ge 1 &\sim \mathrm{Beta}\big(\phi\,m_{it},\ \phi\,(1-m_{it})\big), \tag{S3.2}\\ \mathrm{logit}\,m_{it} &= \gamma_{0} + \gamma_{1}\log\mu_{it} + \boldsymbol{\gamma}_{2}^{\top}\mathbf{x}_{i,t-1}. \tag{S3.3}\end{align}
+Equations (S3.2)--(S3.3) are a beta regression for the loss fraction $S_{it}$ given a shock, with precision $\phi$. For heavy-tailed severities, a generalised-Pareto tail complements the beta body. The tail is fitted by the peaks-over-threshold method to the exceedances of the observed loss fraction over its 90th percentile, once at least ten exceedances are available. The priors are $\phi \sim \mathrm{Gamma}(2, 0.1)$ and $\gamma \sim N(0,1)$. The submodel is fitted at every monitoring origin.
+
+\textbf{Supplementary Note 4. Further results of the simulation study (Sections 5.2--5.4).}
+Tables S1 and S2 give the triage results at levels 1 and 3, which the cost evaluation of Section 5.6 uses. Table S3 gives the results by regime, and Table S4 gives the triage results at level 2 by cell. Table S5 gives the coverage of the posterior intervals in Study A by factor level.
+
+\textit{Refit schedule.} We also refitted M2 every 24 months instead of every six, on the same 65 replications. The AUC-PR is then 0.600 against 0.602, and the ARL$_0$ in the stable windows is 32 months against 35. The ARL$_1$ is 20.6 against 20.8 months, and the other metrics differ by at most 0.005. The fitting time falls to a quarter.
+
+\textit{Priors and indicator information.} We varied the priors of Section 4.1 in the reference cell, with five replications each. Centring the dispersion hyperprior at $\log 1$ or $\log 5$ instead of $\log 2$ moves the posterior median of $\alpha'$ from 2.15 to 2.12 and 2.19. Doubling or quintupling the scales of the trend innovations leaves the level path unchanged. An AHP prior that points the wrong way, $\mathbf{w}^{\mathrm{AHP}} = (0.375, 0.625)$, pulls the posterior median of $\mathbf{w}$ from $(0.53, 0.31)$ to $(0.47, 0.39)$ for a truth of $(0.5, 0.3)$. However, it leaves the quantities that drive the alarms essentially unchanged. When the indicator information is removed from the truth ($\boldsymbol{\beta} = 0$), the alarm pipeline gives an AUC-PR of 0.80, against 0.81 in the reference cell.
+
+\textit{Robustness arms.} Table S6 gives the alarm metrics of M2 in the robustness arms. Each arm is the reference design with one factor changed, and it has five replications. In a further arm, the gamma multiplier of (2) is replaced in the truth by a lognormal multiplier with the same mean and variance. The fitted model then recovers the variance-matched dispersion (posterior median 2.42, against 2.35 under the gamma truth), and the AUC-PR is 0.805 against 0.807.
+
+\vspace{6pt}
 \noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S1.1. Triage at level 1 (cost ratio 1:20, threshold $\pi_1$ = 0.048, two consecutive months), Study B pooled over the twelve cells (65 replications; mean over replications and Monte Carlo standard error in brackets): share of shocks flagged within one and within three months before they occur, false alarms per item-year in the stable windows and median lead time in months. The sigma-rule is shown at its own level 1; EWMA, CUSUM and the Farrington-type threshold have one level, so their rows repeat across the three tables. Level 2 is Table 6(a) of the main text (Table S1.2).}\label{tab:S1-1}
+\captionof{table}{Table S1. Triage at level 1 (cost ratio 1:20, threshold $\pi_1$ = 0.048, two consecutive months) in Study B, pooled over the twelve cells (65 replications). The columns give the share of shocks flagged within one and within three months before they occur, the false alarms per item-year in the stable windows and the median lead time in months. The sigma-rule is shown at its own level 1. EWMA, CUSUM and the Farrington-type threshold have one level, so their rows are the same in Table S2. Level 2 is in Table 4(a) of the main text.}
 \centering\footnotesize
 \begin{tabular}{lrrrr}
 \toprule
@@ -46,36 +73,11 @@ Farrington-type threshold & 0.05 (0.00) & 0.13 (0.00) & 0.19 (0.01) & 4.2 (0.3) 
 \bottomrule
 \end{tabular}
 \end{minipage}
-\vspace{22pt}
+\vspace{8pt}
 
-
-
+\vspace{6pt}
 \noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S1.2. Triage at level 2 (cost ratio 1:5, threshold $\pi_2$ = 0.167, two consecutive months), Study B pooled over the twelve cells (65 replications; mean over replications and Monte Carlo standard error in brackets): share of shocks flagged within one and within three months before they occur, false alarms per item-year in the stable windows and median lead time in months. The sigma-rule is shown at its own level 2; EWMA, CUSUM and the Farrington-type threshold have one level, so their rows repeat across the three tables. This table repeats Table 6(a) of the main text for comparison.}\label{tab:S1-2}
-\centering\footnotesize
-\begin{tabular}{lrrrr}
-\toprule
-Method & Detected $\le$ 1 month & Detected $\le$ 3 months & False alarms per item-year & Lead time (median) \\ \midrule
-M2 (proposed) & 0.85 (0.02) & 0.89 (0.02) & 0.42 (0.02) & 6.0 (0.2) \\
-NB complete pooling & 0.85 (0.02) & 0.89 (0.02) & 0.42 (0.02) & 6.1 (0.2) \\
-NB no pooling & 0.82 (0.02) & 0.86 (0.02) & 0.41 (0.01) & 5.7 (0.2) \\
-Poisson M0 & 0.85 (0.02) & 0.89 (0.02) & 0.40 (0.02) & 5.9 (0.2) \\
-XGBoost & 0.79 (0.03) & 0.84 (0.02) & 0.37 (0.02) & 5.8 (0.2) \\
-LSTM & 0.84 (0.02) & 0.88 (0.02) & 0.37 (0.02) & 6.1 (0.3) \\
-TFT & 0.75 (0.03) & 0.82 (0.02) & 0.48 (0.02) & 5.4 (0.2) \\
-Sigma-rule (plug-in SRI), level 2 & 0.26 (0.01) & 0.39 (0.01) & 0.48 (0.02) & 4.0 (0.3) \\
-EWMA & 0.30 (0.02) & 0.39 (0.02) & 0.25 (0.01) & 4.2 (0.3) \\
-CUSUM & 0.28 (0.02) & 0.29 (0.02) & 0.02 (0.00) & 3.6 (0.3) \\
-Farrington-type threshold & 0.05 (0.00) & 0.13 (0.00) & 0.19 (0.01) & 4.2 (0.3) \\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\vspace{22pt}
-
-
-
-\noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S1.3. Triage at level 3 (cost ratio 1:1, threshold $\pi_3$ = 0.5, two consecutive months), Study B pooled over the twelve cells (65 replications; mean over replications and Monte Carlo standard error in brackets): share of shocks flagged within one and within three months before they occur, false alarms per item-year in the stable windows and median lead time in months. The sigma-rule is shown at its own level 3; EWMA, CUSUM and the Farrington-type threshold have one level, so their rows repeat across the three tables. Level 2 is Table 6(a) of the main text (Table S1.2).}\label{tab:S1-3}
+\captionof{table}{Table S2. Triage at level 3 (cost ratio 1:1, threshold $\pi_3$ = 0.5, two consecutive months) in Study B. The columns are those of Table S1, and the sigma-rule is shown at its own level 3.}
 \centering\footnotesize
 \begin{tabular}{lrrrr}
 \toprule
@@ -94,134 +96,36 @@ Farrington-type threshold & 0.05 (0.00) & 0.13 (0.00) & 0.19 (0.01) & 4.2 (0.3) 
 \bottomrule
 \end{tabular}
 \end{minipage}
-\vspace{22pt}
+\vspace{8pt}
 
-
-\clearpage
-\begin{landscape}
+\vspace{6pt}
 \noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S2.1. Alarm performance in the stable cells of Study B (four cells, 20 replications; triage at level 2; otherwise as Table 6). ARL$_0$ is pooled over replications (stable unit-months over alarm months); for the sigma-rule the event columns are at its level 2 and the run lengths at its first level, as in Table 6.}\label{tab:S2-stable}
+\captionof{table}{Table S3. Study B by regime: AUC-PR and ECE of the event probabilities, share of shocks flagged within one month at level 2 (Det.), ARL$_0$ in the stable cells and ARL$_1$ after the change, in months. Entries are means over the replications of the regime (four cells each; 20 replications in the stable regime, 25 in the gradual regime and 20 in the abrupt regime). The rows of the model-based methods give the ARL of their $q$ channel. For the sigma-rule, the detection column is at its level 2 and the run lengths are at its first limit, as in Table 4 of the main text.}
 \centering\scriptsize
-\begin{tabular}{lrrrrrrrrrrr}
+\begin{tabular}{l*{4}{r}*{4}{r}*{4}{r}}
 \toprule
-Method & AUC-PR & Brier & ECE & Det. $\le$1 mo & Det. $\le$3 mo & FA/item-yr & Lead & ARL$_0$ & ARL$_1$ & Set cov. & Set size \\ \midrule
-M2 (proposed) & 0.474 (0.042) & 0.172 (0.009) & 0.028 (0.002) & 0.74 (0.05) & 0.81 (0.04) & 0.35 (0.03) & 6.2 (0.4) & 28 & – & 0.906 (0.002) & 1.46 (0.08) \\
-NB complete pooling & 0.467 (0.042) & 0.174 (0.010) & 0.030 (0.002) & 0.74 (0.05) & 0.81 (0.04) & 0.34 (0.03) & 6.6 (0.5) & 26 & – & 0.906 (0.003) & 1.45 (0.08) \\
-NB no pooling & 0.466 (0.043) & 0.175 (0.009) & 0.042 (0.003) & 0.73 (0.05) & 0.79 (0.04) & 0.33 (0.02) & 6.2 (0.5) & 24 & – & 0.910 (0.002) & 1.55 (0.09) \\
-Poisson M0 & 0.471 (0.041) & 0.176 (0.010) & 0.045 (0.005) & 0.77 (0.05) & 0.83 (0.04) & 0.33 (0.03) & 6.4 (0.4) & 52 & – & 0.906 (0.002) & 1.31 (0.06) \\
-XGBoost & 0.437 (0.042) & 0.178 (0.010) & 0.025 (0.002) & 0.75 (0.05) & 0.82 (0.04) & 0.34 (0.04) & 6.7 (0.5) & – & – & – & – \\
-LSTM & 0.429 (0.042) & 0.180 (0.010) & 0.033 (0.002) & 0.78 (0.04) & 0.82 (0.04) & 0.29 (0.03) & 6.7 (0.6) & – & – & – & – \\
-TFT & 0.403 (0.038) & 0.187 (0.011) & 0.048 (0.004) & 0.70 (0.06) & 0.78 (0.04) & 0.41 (0.04) & 6.6 (0.4) & – & – & – & – \\
-Sigma-rule (plug-in SRI), level 2 & – & – & – & 0.21 (0.01) & 0.33 (0.01) & 0.45 (0.03) & 5.1 (0.6) & 4.9 & – & – & – \\
-EWMA & – & – & – & 0.15 (0.01) & 0.21 (0.01) & 0.22 (0.01) & 5.8 (0.6) & 8.8 & – & – & – \\
-CUSUM & – & – & – & 0.12 (0.02) & 0.13 (0.02) & 0.03 (0.00) & 5.3 (0.9) & 11 & – & – & – \\
-Farrington-type threshold & – & – & – & 0.04 (0.00) & 0.10 (0.00) & 0.19 (0.01) & 5.5 (0.6) & 37 & – & – & – \\
-\bottomrule
-\end{tabular}
-\par\vspace{3pt}{\scriptsize In the stable cells the whole monitoring span (82 decision months) is a stable window and no change occurs, so ARL$_1$ is undefined; the detection and false-alarm columns refer to the shocks and stable windows of these cells.}
-\end{minipage}
-\vspace{22pt}
-\end{landscape}
-
-\begin{landscape}
-\noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S2.2. Alarm performance in the gradual cells of Study B (four cells, 25 replications; triage at level 2; otherwise as Table 6). ARL$_0$ is pooled over replications (stable unit-months over alarm months); for the sigma-rule the event columns are at its level 2 and the run lengths at its first level, as in Table 6.}\label{tab:S2-gradual}
-\centering\scriptsize
-\begin{tabular}{lrrrrrrrrrrr}
-\toprule
-Method & AUC-PR & Brier & ECE & Det. $\le$1 mo & Det. $\le$3 mo & FA/item-yr & Lead & ARL$_0$ & ARL$_1$ & Set cov. & Set size \\ \midrule
-M2 (proposed) & 0.642 (0.035) & 0.192 (0.004) & 0.037 (0.002) & 0.87 (0.03) & 0.91 (0.02) & 0.44 (0.02) & 6.0 (0.4) & 78 & 31.6 (2.3) & 0.917 (0.003) & 1.97 (0.10) \\
-NB complete pooling & 0.638 (0.035) & 0.193 (0.004) & 0.035 (0.002) & 0.88 (0.03) & 0.91 (0.02) & 0.45 (0.02) & 6.0 (0.3) & 62 & 32.2 (2.2) & 0.918 (0.002) & 1.97 (0.10) \\
-NB no pooling & 0.631 (0.036) & 0.196 (0.005) & 0.055 (0.002) & 0.85 (0.03) & 0.88 (0.02) & 0.43 (0.02) & 5.7 (0.3) & 62 & 29.4 (2.2) & 0.920 (0.002) & 2.09 (0.11) \\
-Poisson M0 & 0.637 (0.035) & 0.195 (0.005) & 0.049 (0.003) & 0.87 (0.03) & 0.90 (0.02) & 0.45 (0.02) & 5.9 (0.4) & 164 & 37.0 (2.2) & 0.902 (0.003) & 1.64 (0.08) \\
-XGBoost & 0.588 (0.037) & 0.210 (0.005) & 0.084 (0.003) & 0.78 (0.05) & 0.83 (0.04) & 0.36 (0.02) & 5.5 (0.4) & – & – & – & – \\
-LSTM & 0.578 (0.038) & 0.210 (0.005) & 0.074 (0.005) & 0.85 (0.03) & 0.88 (0.03) & 0.39 (0.03) & 6.2 (0.5) & – & – & – & – \\
-TFT & 0.559 (0.037) & 0.217 (0.006) & 0.088 (0.003) & 0.76 (0.05) & 0.83 (0.04) & 0.48 (0.03) & 5.2 (0.3) & – & – & – & – \\
-Sigma-rule (plug-in SRI), level 2 & – & – & – & 0.29 (0.01) & 0.44 (0.01) & 0.49 (0.04) & 3.8 (0.4) & 4.2 & 8.5 (0.6) & – & – \\
-EWMA & – & – & – & 0.32 (0.02) & 0.41 (0.02) & 0.26 (0.01) & 3.7 (0.4) & 8.4 & 20.9 (0.9) & – & – \\
-CUSUM & – & – & – & 0.27 (0.03) & 0.29 (0.03) & 0.02 (0.00) & 3.1 (0.3) & 46 & 42.2 (1.6) & – & – \\
-Farrington-type threshold & – & – & – & 0.05 (0.00) & 0.15 (0.01) & 0.19 (0.02) & 4.0 (0.5) & 34 & 22.3 (1.0) & – & – \\
-\bottomrule
-\end{tabular}
-\par\vspace{3pt}{\scriptsize Stable windows are the 24 months before the change at month 60; ARL$_1$ is the delay from the change to the first (persistent) alarm.}
-\end{minipage}
-\vspace{22pt}
-\end{landscape}
-
-\begin{landscape}
-\noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S2.3. Alarm performance in the abrupt cells of Study B (four cells, 20 replications; triage at level 2; otherwise as Table 6). ARL$_0$ is pooled over replications (stable unit-months over alarm months); for the sigma-rule the event columns are at its level 2 and the run lengths at its first level, as in Table 6.}\label{tab:S2-abrupt}
-\centering\scriptsize
-\begin{tabular}{lrrrrrrrrrrr}
-\toprule
-Method & AUC-PR & Brier & ECE & Det. $\le$1 mo & Det. $\le$3 mo & FA/item-yr & Lead & ARL$_0$ & ARL$_1$ & Set cov. & Set size \\ \midrule
-M2 (proposed) & 0.681 (0.036) & 0.192 (0.003) & 0.040 (0.002) & 0.91 (0.02) & 0.94 (0.01) & 0.46 (0.03) & 5.7 (0.4) & 40 & 7.4 (1.0) & 0.931 (0.002) & 2.67 (0.23) \\
-NB complete pooling & 0.673 (0.037) & 0.195 (0.003) & 0.043 (0.002) & 0.91 (0.02) & 0.94 (0.01) & 0.48 (0.03) & 5.5 (0.3) & 31 & 8.2 (1.2) & 0.930 (0.002) & 2.65 (0.23) \\
-NB no pooling & 0.666 (0.037) & 0.199 (0.004) & 0.064 (0.003) & 0.88 (0.02) & 0.91 (0.02) & 0.45 (0.02) & 5.1 (0.3) & 50 & 8.2 (1.3) & 0.927 (0.002) & 2.82 (0.24) \\
-Poisson M0 & 0.664 (0.036) & 0.206 (0.004) & 0.085 (0.006) & 0.90 (0.02) & 0.93 (0.01) & 0.42 (0.03) & 5.2 (0.3) & 180 & 16.1 (1.4) & 0.912 (0.002) & 2.12 (0.16) \\
-XGBoost & 0.627 (0.038) & 0.218 (0.003) & 0.115 (0.004) & 0.83 (0.04) & 0.87 (0.03) & 0.43 (0.03) & 5.1 (0.3) & – & – & – & – \\
-LSTM & 0.615 (0.041) & 0.217 (0.003) & 0.094 (0.008) & 0.90 (0.02) & 0.93 (0.02) & 0.42 (0.03) & 5.3 (0.3) & – & – & – & – \\
-TFT & 0.599 (0.038) & 0.227 (0.003) & 0.121 (0.004) & 0.78 (0.04) & 0.85 (0.03) & 0.53 (0.04) & 4.5 (0.2) & – & – & – & – \\
-Sigma-rule (plug-in SRI), level 2 & – & – & – & 0.26 (0.01) & 0.40 (0.01) & 0.51 (0.04) & 3.3 (0.4) & 4.4 & 3.2 (0.2) & – & – \\
-EWMA & – & – & – & 0.44 (0.02) & 0.54 (0.02) & 0.26 (0.01) & 3.2 (0.3) & 9.9 & 10.9 (0.9) & – & – \\
-CUSUM & – & – & – & 0.44 (0.03) & 0.45 (0.03) & 0.01 (0.00) & 2.4 (0.2) & 71 & 31.0 (2.5) & – & – \\
-Farrington-type threshold & – & – & – & 0.05 (0.00) & 0.15 (0.01) & 0.20 (0.01) & 3.3 (0.4) & 37 & 13.6 (0.9) & – & – \\
-\bottomrule
-\end{tabular}
-\par\vspace{3pt}{\scriptsize Stable windows are the 24 months before the change at month 60; ARL$_1$ is the delay from the change to the first (persistent) alarm.}
-\end{minipage}
-\vspace{22pt}
-\end{landscape}
-
-
-\noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S2.4. How the pooled ARL$_0$ of Table 6(b) arises from the regimes: stable-window unit-months / alarm months = ARL$_0$ for each change channel and regime, and their sums over the twelve cells. Unit-months are groups $\times$ stable decision months $\times$ replications for the q channels (3 $\times$ 82 $\times$ 20 in the stable cells, 3 $\times$ 24 $\times$ 25 and 3 $\times$ 24 $\times$ 20 in the gradual and abrupt cells) and items $\times$ months $\times$ replications (30 $\times$ …) for the item-level charts; the pooled value is the ratio of the summed unit-months to the summed alarm months, i.e. the unit-month-weighted harmonic mean of the regime values, not their arithmetic mean.}\label{tab:S2-4}
-\centering\scriptsize
-\begin{tabular}{lrrrr}
-\toprule
-Channel & Stable (u-mo / alarm-mo) & Gradual & Abrupt & All twelve cells (Table 6(b)) \\ \midrule
-q channel, M2 & 4920 / 176 = 28.0 & 1800 / 23 = 78.3 & 1440 / 36 = 40.0 & 8160 / 235 = 34.7 \\
-q channel, NB complete pooling & 4920 / 186 = 26.5 & 1800 / 29 = 62.1 & 1440 / 46 = 31.3 & 8160 / 261 = 31.3 \\
-q channel, NB no pooling & 4920 / 205 = 24.0 & 1800 / 29 = 62.1 & 1440 / 29 = 49.7 & 8160 / 263 = 31.0 \\
-q channel, Poisson M0 & 4920 / 94 = 52.3 & 1800 / 11 = 163.6 & 1440 / 8 = 180.0 & 8160 / 113 = 72.2 \\
-Sigma-rule, level 1 & 49200 / 10071 = 4.9 & 18000 / 4270 = 4.2 & 14400 / 3276 = 4.4 & 81600 / 17617 = 4.6 \\
-EWMA & 49200 / 5583 = 8.8 & 18000 / 2137 = 8.4 & 14400 / 1457 = 9.9 & 81600 / 9177 = 8.9 \\
-CUSUM & 49200 / 4332 = 11.4 & 18000 / 388 = 46.4 & 14400 / 204 = 70.6 & 81600 / 4924 = 16.6 \\
-Farrington-type threshold & 49200 / 1332 = 36.9 & 18000 / 523 = 34.4 & 14400 / 389 = 37.0 & 81600 / 2244 = 36.4 \\
+ & \multicolumn{4}{c}{Stable} & \multicolumn{4}{c}{Gradual} & \multicolumn{4}{c}{Abrupt} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}\cmidrule(lr){10-13}
+Method & AUC-PR & ECE & Det. & ARL$_0$ & AUC-PR & ECE & Det. & ARL$_1$ & AUC-PR & ECE & Det. & ARL$_1$ \\ \midrule
+M2 (proposed) & 0.474 & 0.028 & 0.74 & 28 & 0.642 & 0.037 & 0.87 & 31.6 & 0.681 & 0.040 & 0.91 & 7.4 \\
+NB complete pooling & 0.467 & 0.030 & 0.74 & 26 & 0.638 & 0.035 & 0.88 & 32.2 & 0.673 & 0.043 & 0.91 & 8.2 \\
+NB no pooling & 0.466 & 0.042 & 0.73 & 24 & 0.631 & 0.055 & 0.85 & 29.4 & 0.666 & 0.064 & 0.88 & 8.2 \\
+Poisson M0 & 0.471 & 0.045 & 0.77 & 52 & 0.637 & 0.049 & 0.87 & 37.0 & 0.664 & 0.085 & 0.90 & 16.1 \\
+XGBoost & 0.437 & 0.025 & 0.75 & -- & 0.588 & 0.084 & 0.78 & -- & 0.627 & 0.115 & 0.83 & -- \\
+LSTM & 0.429 & 0.033 & 0.78 & -- & 0.578 & 0.074 & 0.85 & -- & 0.615 & 0.094 & 0.90 & -- \\
+TFT & 0.403 & 0.048 & 0.70 & -- & 0.559 & 0.088 & 0.76 & -- & 0.599 & 0.121 & 0.78 & -- \\
+Sigma-rule (plug-in SRI), level 2 & -- & -- & 0.21 & 4.9 & -- & -- & 0.29 & 8.5 & -- & -- & 0.26 & 3.2 \\
+EWMA & -- & -- & 0.15 & 8.8 & -- & -- & 0.32 & 20.9 & -- & -- & 0.44 & 10.9 \\
+CUSUM & -- & -- & 0.12 & 11 & -- & -- & 0.27 & 42.2 & -- & -- & 0.44 & 31.0 \\
+Farrington-type threshold & -- & -- & 0.04 & 37 & -- & -- & 0.05 & 22.3 & -- & -- & 0.05 & 13.6 \\
 \bottomrule
 \end{tabular}
 \end{minipage}
-\vspace{22pt}
+\vspace{8pt}
 
-
-
+\vspace{6pt}
 \noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S3.1. AUC-PR of the event probabilities by cell of Study B (mean over the replications of the cell; n = replications). The event share is the share of item-months with at least one shock within three months (not the base rate $\bar{\mu}$ of Table 4).}\label{tab:S3a}
-\centering\footnotesize
-\begin{tabular}{lrrrrrrrrr}
-\toprule
-Cell & n & Event share & M2 & NB compl. & NB none & M0 & XGBoost & LSTM & TFT \\ \midrule
-abrupt, $\alpha'$ = 0.5, $\bar{\mu}$ = 0.05 & 5 & 0.31 & 0.501 & 0.488 & 0.480 & 0.481 & 0.439 & 0.406 & 0.410 \\
-abrupt, $\alpha'$ = 0.5, $\bar{\mu}$ = 0.2 & 5 & 0.59 & 0.780 & 0.776 & 0.758 & 0.759 & 0.732 & 0.732 & 0.698 \\
-abrupt, $\alpha'$ = 2, $\bar{\mu}$ = 0.05 & 5 & 0.33 & 0.563 & 0.554 & 0.550 & 0.549 & 0.496 & 0.480 & 0.469 \\
-abrupt, $\alpha'$ = 2, $\bar{\mu}$ = 0.2 & 5 & 0.69 & 0.881 & 0.874 & 0.875 & 0.866 & 0.842 & 0.841 & 0.818 \\
-gradual, $\alpha'$ = 0.5, $\bar{\mu}$ = 0.05 & 5 & 0.24 & 0.422 & 0.424 & 0.407 & 0.424 & 0.359 & 0.356 & 0.330 \\
-gradual, $\alpha'$ = 0.5, $\bar{\mu}$ = 0.2 & 5 & 0.52 & 0.712 & 0.709 & 0.698 & 0.709 & 0.650 & 0.652 & 0.632 \\
-gradual, $\alpha'$ = 2, $\bar{\mu}$ = 0.05 & 5 & 0.25 & 0.455 & 0.449 & 0.443 & 0.447 & 0.400 & 0.358 & 0.360 \\
-gradual, $\alpha'$ = 2, $\bar{\mu}$ = 0.2 & 10 & 0.58 & 0.810 & 0.803 & 0.805 & 0.803 & 0.765 & 0.762 & 0.735 \\
-stable, $\alpha'$ = 0.5, $\bar{\mu}$ = 0.05 & 5 & 0.16 & 0.274 & 0.275 & 0.261 & 0.279 & 0.232 & 0.233 & 0.225 \\
-stable, $\alpha'$ = 0.5, $\bar{\mu}$ = 0.2 & 5 & 0.41 & 0.605 & 0.597 & 0.596 & 0.602 & 0.558 & 0.552 & 0.518 \\
-stable, $\alpha'$ = 2, $\bar{\mu}$ = 0.05 & 5 & 0.17 & 0.318 & 0.307 & 0.312 & 0.313 & 0.295 & 0.278 & 0.258 \\
-stable, $\alpha'$ = 2, $\bar{\mu}$ = 0.2 & 5 & 0.46 & 0.698 & 0.689 & 0.694 & 0.690 & 0.663 & 0.654 & 0.610 \\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\vspace{22pt}
-
-
-
-\noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S3.2. Triage at level 2 by cell of Study B: share of shocks flagged within one month / false alarms per item-year in the stable windows (means over the replications of the cell).}\label{tab:S3b}
+\captionof{table}{Table S4. Triage at level 2 by cell of Study B. Each entry gives the share of shocks flagged within one month and, after the slash, the false alarms per item-year in the stable windows (means over the replications of the cell).}
 \centering\scriptsize
 \begin{tabular}{lrrrrrrr}
 \toprule
@@ -241,12 +145,11 @@ stable, $\alpha'$ = 2, $\bar{\mu}$ = 0.2 & 0.96 / 0.22 & 0.96 / 0.20 & 0.95 / 0.
 \bottomrule
 \end{tabular}
 \end{minipage}
-\vspace{22pt}
+\vspace{8pt}
 
-
-
+\vspace{6pt}
 \noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S4. Study A, hierarchical model (538 fits): realised coverage of 90\% posterior intervals and RMSE by factor level (all fits of the level, including the 4.6\% that failed a convergence check; n = fits). Table 5 of the main text gives the same quantities by problem size.}\label{tab:S4}
+\captionof{table}{Table S5. Study A, hierarchical model (538 fits): realised coverage of the 90\% posterior intervals and RMSE by factor level. All fits of a level are included, also the 4.6\% that failed a convergence check ($n$ = number of fits; Failed = share of failed fits).}
 \centering\scriptsize
 \begin{tabular}{lrrrrrrrrrrr}
 \toprule
@@ -274,236 +177,448 @@ T = 240 & 108 & 0.111 & 0.95 & 0.89 & 0.89 & 0.98 & 0.89 & 0.93 & 0.98 & 0.123 &
 \bottomrule
 \end{tabular}
 \end{minipage}
-\vspace{22pt}
+\vspace{8pt}
 
-
-
+\vspace{6pt}
 \noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S5. Pooling comparison of Section 5.2 (i) and Fig. 4 (gradual regime, $\alpha'$ = 2): posterior median of $\alpha'$ (geometric mean over replications and, for the hierarchical and no-pooling variants, over groups or items; truth 2), its relative error, realised coverage of the 90\% interval, mean log-scale interval width, and coverage and RMSE of $\log C_i$, by base rate, size and variant (n = replications; the reference cell has 20).}\label{tab:S5}
+\captionof{table}{Table S6. Alarm metrics of M2 in the robustness arms of Section 5.4 (five replications each; the first row is the reference cell of Study B with ten replications). The columns give the AUC-PR, the Brier score and the ECE of the three-month event probability, the detection rate within one month at triage levels 2 and 3 (L2, L3), the false alarms per item-year in the stable windows at level 2, the mean delay of the $q$ channel after the change in months, the posterior median of $\alpha'$ (truth 2) and the RMSE of $\log C_i$.}
 \centering\scriptsize
-\begin{tabular}{lrrrrrrrr}
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.4cm}rrrrrrrrrr}
 \toprule
-Cell, variant & n & $\alpha'$ median & Rel. error & $\alpha'$ coverage & log width & log C coverage & RMSE log C & Failed fits \\ \midrule
-\multicolumn{9}{l}{\itshape (I, T) = (10, 60)} \\
-$\bar{\mu}$ = 0.05, hierarchical & 10 & 2.69 & +34\% & 1.00 & 3.06 & 0.86 & 0.294 & 0 \\
-$\bar{\mu}$ = 0.05, complete pooling & 10 & 2.45 & +22\% & 1.00 & 2.74 & 0.49 & 0.310 & 0 \\
-$\bar{\mu}$ = 0.05, no pooling & 10 & 2.07 & +4\% & 1.00 & 3.19 & 0.92 & 0.421 & 0 \\
-$\bar{\mu}$ = 0.2, hierarchical & 10 & 2.61 & +31\% & 0.97 & 2.09 & 0.92 & 0.175 & 0 \\
-$\bar{\mu}$ = 0.2, complete pooling & 10 & 2.25 & +13\% & 0.90 & 1.67 & 0.49 & 0.242 & 0 \\
-$\bar{\mu}$ = 0.2, no pooling & 10 & 2.18 & +9\% & 0.99 & 2.77 & 0.92 & 0.234 & 0 \\
-$\bar{\mu}$ = 0.5, hierarchical & 10 & 2.44 & +22\% & 0.93 & 1.22 & 0.93 & 0.132 & 0 \\
-$\bar{\mu}$ = 0.5, complete pooling & 10 & 2.17 & +8\% & 0.90 & 0.84 & 0.38 & 0.199 & 0 \\
-$\bar{\mu}$ = 0.5, no pooling & 10 & 2.40 & +20\% & 0.97 & 2.24 & 0.98 & 0.152 & 1 \\
-\multicolumn{9}{l}{\itshape (I, T) = (30, 120)} \\
-$\bar{\mu}$ = 0.05, hierarchical & 10 & 2.52 & +26\% & 1.00 & 1.93 & 0.90 & 0.210 & 0 \\
-$\bar{\mu}$ = 0.05, complete pooling & 10 & 2.14 & +7\% & 1.00 & 1.48 & 0.27 & 0.275 & 0 \\
-$\bar{\mu}$ = 0.05, no pooling & 10 & 2.09 & +4\% & 1.00 & 3.01 & 0.93 & 0.298 & 0 \\
-$\bar{\mu}$ = 0.2, hierarchical & 20 & 2.02 & +1\% & 0.95 & 0.71 & 0.91 & 0.148 & 0 \\
-$\bar{\mu}$ = 0.2, complete pooling & 20 & 1.70 & −15\% & 0.75 & 0.44 & 0.20 & 0.275 & 0 \\
-$\bar{\mu}$ = 0.2, no pooling & 20 & 2.21 & +11\% & 0.97 & 2.33 & 0.91 & 0.173 & 0 \\
-$\bar{\mu}$ = 0.5, hierarchical & 10 & 1.98 & −1\% & 1.00 & 0.39 & 0.89 & 0.116 & 1 \\
-$\bar{\mu}$ = 0.5, complete pooling & 10 & 1.67 & −17\% & 0.20 & 0.25 & 0.13 & 0.287 & 0 \\
-$\bar{\mu}$ = 0.5, no pooling & 10 & 2.18 & +9\% & 0.95 & 1.67 & 0.90 & 0.123 & 0 \\
+Arm & n & AUC-PR & Brier & ECE & DR $\le$ 1 m, L2 & DR $\le$ 1 m, L3 & FA (stable), L2 & $q$ ARL$_1$ & $\alpha'$ median & RMSE $\log C$ \\ \midrule
+reference cell (Study B) & 10 & 0.810 & 0.201 & 0.041 & 0.98 & 0.71 & 0.39 & 25.5 & – & – \\
+measurement error in $\mathbf{z}$ ($\varsigma$ = 0.5) & 5 & 0.803 & 0.203 & 0.042 & 0.98 & 0.70 & 0.34 & 25.9 & 2.15 & 0.14 \\
+15\% missing indicators, latent AR(1) & 5 & 0.825 & 0.193 & 0.041 & 0.98 & 0.73 & 0.45 & 30.5 & 2.12 & 0.14 \\
+15\% missing indicators, last value carried forward & 5 & 0.825 & 0.192 & 0.041 & 0.98 & 0.73 & 0.45 & 28.9 & 2.01 & 0.15 \\
+Pareto severity & 5 & 0.814 & 0.197 & 0.031 & 0.98 & 0.57 & 0.34 & 27.1 & 1.97 & 0.13 \\
+20\% cold-start items & 5 & 0.825 & 0.195 & 0.045 & 0.98 & 0.74 & 0.41 & 24.6 & 2.09 & 0.16 \\
+indicator lag 2 in the truth, 1 in the model & 5 & 0.802 & 0.201 & 0.030 & 0.98 & 0.72 & 0.42 & 28.7 & 1.62 & 0.15 \\
 \bottomrule
 \end{tabular}
 \end{minipage}
-\vspace{22pt}
+\vspace{8pt}
 
+\textbf{Supplementary Note 5. Expected cost of the alarm policies (Section 5.6).}
+\textit{Inputs.} All quantities come from the archived results of Study B. For method $m$ at level $k$ in replication $j$, the first quantity is the detection rate within one month, $\mathrm{DR}_{mkj}$. The second is the share of decision item-months in which the level is in force. This share gives the alarm months per item-year, $\mathrm{AM}_{mkj}$. The number of shock months per item-year, $E_j$, is counted by regenerating each simulated panel from its archived seed.
 
-\clearpage
-\begin{landscape}
+\textit{Cost model.} The expected cost is $\mathrm{EC}_{mkj}(r) = \mathrm{AM}_{mkj} + r\,(1-\mathrm{DR}_{mkj})\,E_{j}$, which is (18) of the main text. Never acting costs $rE_{j}$, and always acting costs 12. A method with several levels is reported at its cheapest level at each $r$.
+
+\textit{Tables.} Table S7 gives the saving of M2 relative to each policy, with a sign test over the replications. Table S8 gives the values of $r$ at which the cheapest level of M2 switches, together with its value of monitoring and its break-even ratios. Table S9 gives the value of monitoring by method, and Table S10 compares the methods at a similar alarm budget.
+
+\textit{Sensitivity.} Suppose that a shock counts as detected when the level was in force at any time in the three months before it. The cost of every alarm policy then falls, by 1\% to 16\% at $r = 5$ and by 1\% to 21\% at $r = 20$. Even so, every ordering of the main text stays in place. Weighting the loss by the mean loss fraction rescales $r$ and leaves the curves otherwise unchanged.
+
+\vspace{6pt}
 \noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S6. Prior sensitivity (Section 5.4): the hierarchical model refitted to the data of replications 0–4 of the reference cell ($\alpha'$ = 2, $\bar{\mu}$ = 0.2, gradual, I = 30, T = 120) under five alternative priors; everything else as in Study A. Posterior medians averaged over replications ($\alpha'$ as a geometric mean over replications and groups), realised coverage of 90\% intervals, mean log-scale width of the $\alpha'$ interval, mean bias of $\beta$, RMSE and coverage of $\log C_i$ and of the level path $m_t$, and posterior medians of $\sigma_\eta$ and $\tau_\zeta$. Truth: $\alpha'$ = 2, $\beta$ = (0.4, 0.3, 0.2), w = (0.5, 0.3), $\kappa_w$ = 0.8.}\label{tab:S6}
+\captionof{table}{Table S7. Saving of M2 relative to each policy in Study B (all twelve cells): $1 - \mathrm{EC}_{\mathrm{M2}}/\mathrm{EC}_{m}$ on the means, each method at its cheapest level. The brackets give the share of the 65 replications in which M2 is cheaper and the $p$-value of a two-sided sign test (ties excluded). The last row takes the cheaper of never acting and always acting in each replication.}
 \centering\scriptsize
-\begin{tabular}{lrrrrrrrrrrrrrrrr}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llllll}
 \toprule
-Arm & n & Failed & $\alpha'$ & $\alpha'$ cov. & $\alpha'$ log width & w & w cov. & $\kappa_w$ & $\beta$ bias & $\beta$ cov. & RMSE log C & log C cov. & RMSE $m_t$ & $m_t$ cov. & $\sigma_\eta$ & $\tau_\zeta$ \\ \midrule
-baseline (manuscript priors) & 5 & 0 & 2.15 & 1.00 & 0.73 & (0.53, 0.31) & 0.90 & 0.84 & −0.001 & 0.93 & 0.147 & 0.91 & 0.103 & 0.96 & 0.037 & 0.0025 \\
-$m_\alpha$ centred at log 1 & 5 & 0 & 2.12 & 1.00 & 0.73 & (0.53, 0.31) & 0.90 & 0.85 & −0.001 & 0.93 & 0.147 & 0.90 & 0.103 & 0.96 & 0.037 & 0.0025 \\
-$m_\alpha$ centred at log 5 & 5 & 0 & 2.19 & 0.93 & 0.76 & (0.53, 0.31) & 0.90 & 0.84 & −0.001 & 0.93 & 0.147 & 0.91 & 0.103 & 0.95 & 0.036 & 0.0025 \\
-innovation scales $\times$ 2 (half-N(0, 0.2)) & 5 & 0 & 2.15 & 0.93 & 0.74 & (0.53, 0.31) & 0.90 & 0.84 & −0.001 & 0.93 & 0.147 & 0.90 & 0.103 & 0.96 & 0.039 & 0.0024 \\
-innovation scales $\times$ 5 (half-N(0, 0.5)) & 5 & 0 & 2.16 & 1.00 & 0.74 & (0.53, 0.31) & 0.90 & 0.84 & −0.002 & 0.93 & 0.147 & 0.91 & 0.104 & 0.96 & 0.038 & 0.0024 \\
-AHP prior reversed, $w^{\mathrm{AHP}}$ = (0.375, 0.625) & 5 & 0 & 2.15 & 1.00 & 0.74 & (0.47, 0.39) & 0.70 & 0.89 & −0.002 & 0.93 & 0.155 & 0.89 & 0.103 & 0.96 & 0.036 & 0.0025 \\
+Compared with & $r = 2$ & $r = 5$ & $r = 10$ & $r = 20$ & $r = 50$ \\ \midrule
+NB complete pooling & +1.4\% (85\%; $<$0.001) & +0.6\% (63\%; 0.05) & +0.5\% (65\%; 0.02) & -0.0\% (52\%; 0.88) & -0.2\% (48\%; 0.88) \\
+NB no pooling & +1.4\% (77\%; $<$0.001) & +0.8\% (68\%; 0.01) & +0.2\% (46\%; 0.62) & -0.7\% (32\%; 0.01) & +2.0\% (65\%; 0.03) \\
+Poisson M0 & +4.3\% (82\%; $<$0.001) & +1.4\% (69\%; 0.00) & +0.7\% (66\%; 0.02) & -0.0\% (44\%; 0.47) & -0.1\% (46\%; 0.67) \\
+XGBoost & -5.5\% (15\%; $<$0.001) & +8.3\% (91\%; $<$0.001) & +3.0\% (88\%; $<$0.001) & +1.4\% (88\%; $<$0.001) & +0.3\% (60\%; 0.19) \\
+LSTM & -2.7\% (26\%; $<$0.001) & +8.6\% (95\%; $<$0.001) & +4.4\% (95\%; $<$0.001) & +1.3\% (90\%; $<$0.001) & +1.2\% (71\%; 0.01) \\
+TFT & -4.0\% (20\%; $<$0.001) & +10.5\% (97\%; $<$0.001) & +5.5\% (97\%; $<$0.001) & +1.4\% (80\%; $<$0.001) & +2.0\% (67\%; 0.02) \\
+Sigma-rule (plug-in SRI) & -2.7\% (43\%; 0.32) & +20.1\% (100\%; $<$0.001) & +38.3\% (97\%; $<$0.001) & +60.9\% (98\%; $<$0.001) & +82.1\% (100\%; $<$0.001) \\
+EWMA & +6.8\% (54\%; 0.62) & +18.4\% (100\%; $<$0.001) & +38.4\% (94\%; $<$0.001) & +61.6\% (100\%; $<$0.001) & +82.6\% (100\%; $<$0.001) \\
+CUSUM & -0.1\% (46\%; 0.62) & +15.2\% (100\%; $<$0.001) & +37.0\% (92\%; $<$0.001) & +61.1\% (100\%; $<$0.001) & +82.5\% (100\%; $<$0.001) \\
+CUSUM, negative-binomial design & -2.1\% (48\%; 0.80) & +17.4\% (98\%; $<$0.001) & +40.1\% (91\%; $<$0.001) & +63.5\% (100\%; $<$0.001) & +83.7\% (100\%; $<$0.001) \\
+Farrington-type threshold & -11.7\% (28\%; $<$0.001) & +26.7\% (100\%; $<$0.001) & +51.3\% (92\%; $<$0.001) & +71.8\% (100\%; $<$0.001) & +87.8\% (100\%; $<$0.001) \\
+Never act & -16.7\% (0\%; $<$0.001) & +27.7\% (94\%; $<$0.001) & +52.9\% (91\%; $<$0.001) & +72.9\% (100\%; $<$0.001) & +88.4\% (100\%; $<$0.001) \\
+Always act & +56.8\% (100\%; $<$0.001) & +33.1\% (100\%; $<$0.001) & +12.8\% (82\%; $<$0.001) & -0.1\% (42\%; 0.21) & -7.6\% (6\%; $<$0.001) \\
+Cheaper of never act and always act, in each replication & -16.7\% (0\%) & +10.3\% (94\%) & +6.0\% (72\%) & -0.1\% (42\%) & -7.6\% (6\%) \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{minipage}
-\vspace{22pt}
-\end{landscape}
+\vspace{8pt}
 
-\clearpage
-
+\vspace{6pt}
 \noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S7. Complete pooling and the item-effect scale $\tau_C$ (Section 5.2 (i)): replications 0–4 of the reference cell re-drawn with the item effects scaled to $\tau_C$ $\in$ \{0, 0.6\} ($\tau_C$ = 0.3 is the Study A design), fitted with complete pooling and with the hierarchical model. Posterior median of $\alpha'$ (geometric mean over replications and, for the hierarchical model, groups; truth 2), its range, 90\% coverage and log-scale width, and coverage and RMSE of $\log C_i$. The last column is the pseudo-true dispersion of complete pooling — the value that maximises the expected log-likelihood of the misspecified model under the true process on the item means of the cell, with the level free (1.56 and 0.87 by variance matching).}\label{tab:S7}
+\captionof{table}{Table S8. M2 in Study B, for all cells and for the two base rates: the values of $r$ at which the cheapest level switches from 3 to 2 and from 2 to 1, the value of monitoring $1 - \mathrm{EC}_{\mathrm{M2}}/\min(rE, 12)$ (its maximum and the range of $r$ over which it exceeds 10\%), and the break-even ratios $r^{*}$ at which the cost curve of M2 crosses that of never acting, of always acting, of XGBoost, of the LSTM and of the CUSUM (`none' = no crossing on $[1, 100]$).}
 \centering\scriptsize
-\begin{tabular}{lrrrrrrrrrrr}
+\begin{tabular}{lrrrllrrrrr}
 \toprule
-Model & $\tau_C$ & n & Failed & $\alpha'$ median & Rel. error & Range & $\alpha'$ coverage & log width & log C coverage & RMSE log C & Pseudo-true $\alpha'$ \\ \midrule
-complete pooling & 0.0 & 5 & 0 & 2.34 & +17\% & 1.91–2.93 & 0.80 & 0.55 & 0.78 & 0.04 & 2.00 \\
-complete pooling & 0.3 & 5 & 0 & 1.87 & −7\% & 1.52–2.29 & 0.80 & 0.44 & 0.22 & 0.25 & 1.61 \\
-complete pooling & 0.6 & 5 & 0 & 1.27 & −36\% & 1.11–1.44 & 0.00 & 0.34 & 0.09 & 0.49 & 1.00 \\
-hierarchical & 0.3 & 5 & 0 & 2.15 & +7\% & 1.61–3.24 & 1.00 & 0.73 & 0.91 & 0.15 & – \\
-hierarchical & 0.6 & 5 & 0 & 1.90 & −5\% & 1.52–2.44 & 0.93 & 0.61 & 0.91 & 0.18 & – \\
+Subset & n & L3$\to$L2 & L2$\to$L1 & Max value & Value $>$ 10\% & $r^{*}$ never & $r^{*}$ always & $r^{*}$ XGBoost & $r^{*}$ LSTM & $r^{*}$ CUSUM \\ \midrule
+All cells & 65 & 7.0 & 18.4 & 30\% at $r$ = 5.4 & 3.1–11.8 & 2.6 & 19.4 & 2.8, 59.7 & 2.5 & 2.0 \\
+$\bar{\mu}$ = 0.05 & 30 & 8.4 & 19.3 & 25\% at $r$ = 10.6 & 6.8–16.5 & 3.4 & 33.1 & 3.5, 61.4 & 3.2 & none \\
+$\bar{\mu}$ = 0.2 & 35 & 6.2 & 14.6 & 23\% at $r$ = 3.8 & 3.0–5.4 & 2.5 & 11.7 & 2.6, 37.0 & 2.2 & 2.4 \\
+Stable & 20 & 7.5 & 21.2 & 26\% at $r$ = 8.0 & 4.2–16.4 & 3.0 & 26.4 & 44.2 & 76.2 & 1.9 \\
+Gradual & 25 & 6.9 & 17.1 & 29\% at $r$ = 5.0 & 3.1–9.7 & 2.5 & 16.8 & 2.8, 6.7, 8.2, 52.3 & 2.5 & 2.2 \\
+Abrupt & 20 & 6.7 & 15.9 & 29\% at $r$ = 4.4 & 3.0–7.9 & 2.5 & 15.9 & 3.0 & 2.9 & 1.8 \\
+$\alpha'$ = 0.5 & 30 & 7.3 & 18.6 & 26\% at $r$ = 6.2 & 3.7–12.4 & 2.9 & 21.2 & 3.0, 49.8 & 2.6 & 1.6 \\
+$\alpha'$ = 2 & 35 & 6.8 & 18.1 & 31\% at $r$ = 4.8 & 2.9–11.3 & 2.4 & 18.1 & 2.7, 73.3 & 2.3 & 2.2 \\
 \bottomrule
 \end{tabular}
 \end{minipage}
-\vspace{22pt}
+\vspace{8pt}
 
-
-
+\vspace{6pt}
 \noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S8. Indicators without information (Section 5.4): the robustness protocol (recovery fit, M2 alarm pipeline, EWMA and CUSUM) on the reference design with $\beta$ = 0 in the truth, five replications, against the Study B reference cell ($\beta$ = (0.4, 0.3, 0.2), ten replications). Means over replications with Monte Carlo standard errors in brackets; the recovery rows of the reference column are the Study A hierarchical fits of replications 0–4 of the reference cell (the baseline of Table S6).}\label{tab:S8}
-\centering\footnotesize
-\begin{tabular}{lll}
-\toprule
-Quantity & $\beta$ = 0 (5 replications) & Reference ($\beta$ = (0.4, 0.3, 0.2)) \\ \midrule
-$\beta$ posterior median (truth 0) & (+0.025, −0.013, −0.004) & (0.405, 0.302, 0.190) for a truth of (0.4, 0.3, 0.2) \\
-90\% intervals of $\beta$ covering the truth & 0.93 & 0.93 \\
-w posterior median (truth (0.5, 0.3)) & (0.49, 0.33) & (0.53, 0.31) \\
-$\kappa_w$ posterior median (truth 0.8) & 0.81 & 0.84 \\
-Recovery fits failed & 0 of 5 & 0 of 5 \\
-\midrule
-AUC-PR & 0.804 (0.010) & 0.810 (0.007) \\
-Brier score & 0.203 (0.004) & 0.201 (0.002) \\
-ECE & 0.039 (0.003) & 0.041 (0.003) \\
-Event share & 0.583 (0.005) & 0.579 (0.005) \\
-Detected $\le$ 1 month (level 2) & 0.98 (0.00) & 0.98 (0.00) \\
-Detected $\le$ 3 months & 1.00 (0.00) & 0.99 (0.00) \\
-False alarms per item-year & 0.31 (0.04) & 0.39 (0.03) \\
-Lead time (median, months) & 4.5 (0.7) & 4.7 (0.3) \\
-ARL$_0$ of the q channel (pooled, 90\% interval) & 180 (90–360) & 51 (31–120) \\
-ARL$_1$ of the q channel & 29.5 (2.7) & 25.5 (3.3) \\
-\midrule
-EWMA: detected $\le$ 1 month / false alarms / ARL$_0$ & 0.30 / 0.21 / 12.2 & 0.39 / 0.24 / 7.9 \\
-CUSUM: detected $\le$ 1 month / false alarms / ARL$_0$ & 0.29 / 0.01 / 109.1 & 0.39 / 0.02 / 32.0 \\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\vspace{22pt}
-
-
-
-\noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S9. Farrington-type threshold (Section 5.1, Table 6) by cell of Study B: a rolling 36-month quasi-Poisson regression per item (intercept and a linear trend retained when significant at 5\%, one Anscombe down-weighting of past outliers), a negative-binomial predictive with the estimated dispersion, and an alarm when the current month's count exceeds its (1 − 1/24) quantile. Detection shares, false alarms per item-year, median lead time (mean of the replication quartiles in brackets), pooled ARL$_0$ with its 90\% bootstrap interval, ARL$_1$, and the mean threshold and fitted mean.}\label{tab:S9}
-\centering\scriptsize
-\begin{tabular}{lrrrrrrrrr}
-\toprule
-Cell & n & Det. $\le$ 1 mo & Det. $\le$ 3 mo & FA / item-year & Lead (IQR) & ARL$_0$ (90\%) & ARL$_1$ & Threshold & Fitted $\mu$ \\ \midrule
-abrupt, $\alpha'$ = 0.5, $\bar{\mu}$ = 0.05 & 5 & 0.05 (0.00) & 0.14 (0.01) & 0.24 (0.01) & 4.9 (2.4–10.0) & 39.6 (37.9–41.4) & 14.7 (1.8) & 1.05 & 0.175 \\
-abrupt, $\alpha'$ = 0.5, $\bar{\mu}$ = 0.2 & 5 & 0.06 (0.00) & 0.18 (0.01) & 0.21 (0.02) & 2.0 (1.1–4.0) & 29.5 (26.9–32.7) & 10.2 (1.6) & 3.15 & 0.697 \\
-abrupt, $\alpha'$ = 2, $\bar{\mu}$ = 0.05 & 5 & 0.04 (0.01) & 0.12 (0.01) & 0.22 (0.01) & 4.6 (2.0–9.9) & 46.8 (42.4–52.2) & 18.5 (0.7) & 0.96 & 0.164 \\
-abrupt, $\alpha'$ = 2, $\bar{\mu}$ = 0.2 & 5 & 0.06 (0.01) & 0.16 (0.01) & 0.12 (0.02) & 1.7 (1.0–3.0) & 36.4 (33.6–39.6) & 11.2 (0.7) & 2.67 & 0.714 \\
-gradual, $\alpha'$ = 0.5, $\bar{\mu}$ = 0.05 & 5 & 0.04 (0.00) & 0.13 (0.01) & 0.23 (0.03) & 6.2 (2.8–12.9) & 38.3 (32.4–46.8) & 23.7 (1.3) & 0.77 & 0.105 \\
-gradual, $\alpha'$ = 0.5, $\bar{\mu}$ = 0.2 & 5 & 0.05 (0.01) & 0.17 (0.01) & 0.22 (0.03) & 2.8 (1.3–5.2) & 28.8 (26.5–32.1) & 16.9 (1.0) & 2.14 & 0.426 \\
-gradual, $\alpha'$ = 2, $\bar{\mu}$ = 0.05 & 5 & 0.04 (0.00) & 0.11 (0.01) & 0.26 (0.02) & 7.2 (2.8–14.1) & 36.7 (33.3–40.4) & 28.2 (1.4) & 0.71 & 0.101 \\
-gradual, $\alpha'$ = 2, $\bar{\mu}$ = 0.2 & 10 & 0.06 (0.00) & 0.16 (0.00) & 0.13 (0.01) & 2.0 (1.0–3.9) & 35.0 (31.4–39.1) & 21.4 (1.2) & 1.97 & 0.462 \\
-stable, $\alpha'$ = 0.5, $\bar{\mu}$ = 0.05 & 5 & 0.03 (0.01) & 0.09 (0.01) & 0.21 (0.01) & 7.6 (3.3–15.8) & 43.2 (40.9–46.1) & – & 0.60 & 0.075 \\
-stable, $\alpha'$ = 0.5, $\bar{\mu}$ = 0.2 & 5 & 0.05 (0.00) & 0.13 (0.01) & 0.20 (0.02) & 3.4 (1.6–8.1) & 28.9 (27.8–30.1) & – & 1.67 & 0.295 \\
-stable, $\alpha'$ = 2, $\bar{\mu}$ = 0.05 & 5 & 0.02 (0.00) & 0.09 (0.00) & 0.19 (0.00) & 8.2 (3.2–15.6) & 47.5 (46.8–48.2) & – & 0.62 & 0.075 \\
-stable, $\alpha'$ = 2, $\bar{\mu}$ = 0.2 & 5 & 0.04 (0.00) & 0.11 (0.01) & 0.15 (0.01) & 2.6 (1.1–7.2) & 33.9 (32.0–36.1) & – & 1.55 & 0.308 \\
-\midrule
-All twelve cells & 65 & 0.05 (0.00) & 0.13 (0.00) & 0.19 (0.01) & 4.2 (1.9–8.7) & 36.4 (34.6–38.2) & 18.5 (0.9) & 1.53 & 0.312 \\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\vspace{22pt}
-
-
-
-\noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S10.1. Refit schedule (Section 5.3 (iv)): M2 refitted every 24 months (origins 36, 60, 84, 108, the schedule of the model-based baselines) against the six-month schedule of Table 6, on the same 65 Study B replications (same data and same origin-36 fit; the particle filter propagates the posterior between refits). Means over replications with Monte Carlo standard errors; the last column is the mean paired difference (24-month minus six-month) with its standard error.}\label{tab:S10a}
+\captionof{table}{Table S9. Value of monitoring by method: the largest saving of each policy relative to the better of never acting and always acting, $\max_r\,[1 - \mathrm{EC}_m(r)/\min(rE, 12)]$, and the $r$ at which it occurs, for all cells and for the two base rates.}
 \centering\footnotesize
 \begin{tabular}{llll}
 \toprule
-Quantity & 24-month refit & Six-month refit (Table 6) & Paired difference \\ \midrule
-AUC-PR & 0.600 (0.024) & 0.602 (0.024) & −0.002 (0.001) \\
-Brier score & 0.187 (0.004) & 0.186 (0.004) & +0.001 (0.000) \\
-ECE & 0.038 (0.001) & 0.035 (0.001) & +0.002 (0.001) \\
-Detected $\le$ 1 month (level 2) & 0.845 (0.020) & 0.847 (0.020) & −0.002 (0.001) \\
-Detected $\le$ 3 months & 0.887 (0.016) & 0.888 (0.016) & 0.000 (0.001) \\
-False alarms per item-year & 0.415 (0.015) & 0.420 (0.016) & −0.005 (0.004) \\
-Lead time (median, months) & 5.9 (0.2) & 6.0 (0.2) & −0.1 (0.1) \\
-ARL$_1$ of the q channel & 20.6 (2.2) & 20.8 (2.2) & −0.3 (0.3) \\
-Conformal coverage & 0.918 (0.002) & 0.918 (0.002) & 0.000 (0.000) \\
-Conformal set size & 2.03 (0.10) & 2.03 (0.10) & 0.00 (0.01) \\
-ARL$_0$ of the q channel (pooled, 90\% interval) & 32 (21–60) & 35 (23–64) & – \\
-Origin fits that failed after the refit & 3.1\% & 3.7\% & – \\
-Fitting time per replication (s) & 185 & 773 & – \\
+Method & All cells & $\bar{\mu}$ = 0.05 & $\bar{\mu}$ = 0.2 \\ \midrule
+M2 (proposed) & 29.8\% at $r$ = 5.4 & 24.9\% at $r$ = 10.6 & 23.4\% at $r$ = 3.8 \\
+NB complete pooling & 29.4\% at $r$ = 5.4 & 24.1\% at $r$ = 10.6 & 22.7\% at $r$ = 3.8 \\
+NB no pooling & 29.2\% at $r$ = 5.4 & 23.9\% at $r$ = 10.6 & 22.7\% at $r$ = 3.8 \\
+Poisson M0 & 29.0\% at $r$ = 5.4 & 24.2\% at $r$ = 10.6 & 21.6\% at $r$ = 3.8 \\
+XGBoost & 22.7\% at $r$ = 5.4 & 20.3\% at $r$ = 10.6 & 18.7\% at $r$ = 3.8 \\
+LSTM & 22.5\% at $r$ = 5.4 & 18.8\% at $r$ = 10.6 & 17.9\% at $r$ = 3.8 \\
+TFT & 20.7\% at $r$ = 5.4 & 17.8\% at $r$ = 10.6 & 16.5\% at $r$ = 3.8 \\
+Sigma-rule (plug-in SRI) & 11.5\% at $r$ = 5.4 & 12.2\% at $r$ = 10.6 & 10.9\% at $r$ = 3.8 \\
+EWMA & 13.1\% at $r$ = 5.4 & 9.8\% at $r$ = 10.6 & 11.2\% at $r$ = 3.8 \\
+CUSUM & 16.2\% at $r$ = 5.4 & 9.7\% at $r$ = 10.6 & 13.1\% at $r$ = 3.8 \\
+CUSUM, negative-binomial design & 13.7\% at $r$ = 5.4 & 9.3\% at $r$ = 10.6 & 11.2\% at $r$ = 3.8 \\
+Farrington-type threshold & 1.6\% at $r$ = 5.4 & 1.1\% at $r$ = 10.5 & 1.3\% at $r$ = 3.8 \\
 \bottomrule
 \end{tabular}
 \end{minipage}
-\vspace{22pt}
+\vspace{8pt}
 
-
-
+\vspace{6pt}
 \noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S10.2. Refit schedule by regime: the 24-month (24) and six-month (6) schedules of Table S10.1 within the stable, gradual and abrupt cells (means over the replications of the regime; ARL$_0$ pooled with its 90\% interval).}\label{tab:S10b}
-\centering\scriptsize
-\begin{tabular}{lrrrrrrrrrrr}
+\captionof{table}{Table S10. Alarm budget and detection in Study B (all cells, means over the 65 replications): alarm months per item-year, the share of decision item-months in which the level is in force, the detection rate within one month, and the ratio of this rate to the share in force. The ratio compares the alarm with one that is switched on at random for the same share of months (1 = no skill).}
+\centering\footnotesize
+\begin{tabular}{lrrrr}
 \toprule
-Regime & n & AUC-PR 24 & AUC-PR 6 & Det. $\le$1 mo 24 & Det. $\le$1 mo 6 & FA 24 & FA 6 & ARL$_0$ 24 & ARL$_0$ 6 & ARL$_1$ 24 & ARL$_1$ 6 \\ \midrule
-stable & 20 & 0.473 & 0.474 & 0.744 & 0.744 & 0.350 & 0.352 & 27 (16–66) & 28 (17–67) & – & – \\
-gradual & 25 & 0.640 & 0.642 & 0.873 & 0.875 & 0.437 & 0.443 & 78 (42–257) & 78 (49–164) & 30.9 & 31.6 \\
-abrupt & 20 & 0.677 & 0.681 & 0.911 & 0.915 & 0.452 & 0.459 & 31 (16–120) & 40 (21–144) & 7.6 & 7.4 \\
+Policy and level & Alarm months / item-year & Share in force & Detected $\le$ 1 month & Ratio to random \\ \midrule
+M2, level 1 & 11.42 & 95\% & 98\% & 1.03 \\
+M2, level 2 & 8.66 & 72\% & 85\% & 1.17 \\
+M2, level 3 & 3.29 & 27\% & 43\% & 1.57 \\
+NB complete pooling, level 3 & 3.38 & 28\% & 43\% & 1.54 \\
+NB no pooling, level 3 & 3.36 & 28\% & 44\% & 1.56 \\
+Poisson M0, level 3 & 3.59 & 30\% & 45\% & 1.52 \\
+XGBoost, level 3 & 2.35 & 20\% & 30\% & 1.51 \\
+LSTM, level 3 & 2.56 & 21\% & 31\% & 1.47 \\
+TFT, level 3 & 2.32 & 19\% & 28\% & 1.46 \\
+Sigma-rule, limit 2 & 2.09 & 17\% & 26\% & 1.47 \\
+Sigma-rule, limit 3 & 1.33 & 11\% & 17\% & 1.50 \\
+EWMA & 2.70 & 23\% & 30\% & 1.34 \\
+CUSUM & 2.32 & 19\% & 28\% & 1.44 \\
+CUSUM, negative-binomial design & 1.98 & 17\% & 24\% & 1.43 \\
+Farrington-type threshold & 0.43 & 4\% & 5\% & 1.31 \\
 \bottomrule
 \end{tabular}
 \end{minipage}
-\vspace{22pt}
+\vspace{8pt}
 
+\textbf{Supplementary Note 6. The backtest on public trade data (Section 5.5).}
+\textit{Data.} The panel holds the monthly imports of the Republic of Korea by partner at the six-digit HS level. We extracted them from the UN Comtrade data API on 26 October 2026 for the 65 items of Table S11. One item, unwrought molybdenum (HS 810291), returned no records, which leaves 64 items. Quantities are net weights in kilograms. They begin in January 2014, because the records of 2013 carry no weights, and the panel begins in February 2014. Decisions are made from month 36 (February 2017) to December 2025, which gives 107 months.
 
-\clearpage
-\begin{landscape}
+\textit{An item whose code changed.} Bismuth (HS 810600) has no record under this code after December 2021, because the 2022 edition of the Harmonized System divides heading 81.06 into two subheadings. The panel therefore shows zero imports of bismuth in 2022 and has no row for it from January 2023. Seven of its 21 trade interruptions fall in 2022, and they result from the change of code, not from a change in supply. Bismuth stays in every table, because dropping it changes the results little. Without bismuth, the AUC-PR of M2 is 0.611 instead of 0.600, and its calibration error is 0.024 instead of 0.029. Its detection rate within one month at level 2 stays at 0.91.
+
+\textit{Events.} A trade interruption (E1) concerns a partner that supplied at least a quarter of the imports of an item over the trailing twelve months. It is recorded when this partner ships less than half of its own median over the same months. An export-restriction implementation (E2) is recorded when a partner with a trailing share of at least 5\% implements a measure whose HS scope covers the item. The first version of the plan used a share threshold of 5\% for E1 as well. On the panel, that definition fired in 37\% of the decision item-months, which is outside the range of the simulation design. We therefore raised the threshold to 25\% before the main run and fixed it. Table S14 reports two alternative definitions of E1 as sensitivity runs, in which the shipments of the largest partner halve or the total imports of the item halve.
+
+\textit{Measures.} The export-restriction measures come from three sources. The first is the OECD Inventory of Export Restrictions on Industrial Raw Materials (2009--2021), and the second is the Global Trade Alert database (extracted on 26 October 2026). The third is a list of eleven documented measures whose dates were checked against the Global Trade Alert records. From the Global Trade Alert records, we keep the interventions of five export types whose affected jurisdictions include the Republic of Korea. The five types are export bans, export licensing requirements, export quotas, export taxes and other export-related non-tariff measures. We drop measures that list more than 100 six-digit codes, because they are economy-wide frameworks. A measure that appears in more than one source is counted once per partner and month. The resulting table holds 307 measures.
+
+\textit{Suspended measures.} The list of documented measures dates the October 2025 extension of China's rare-earth controls to November 2025, and this entry gives three of the 64 events of Section 5.5. China suspended the extension on 7 November 2025 until 10 November 2026, and the Global Trade Alert records as extracted carry the later date. The tables keep the three events, and Section 5.5 also gives the shares without them.
+
+\textit{Fits.} The protocol is that of Section 5.3, with refits at 18 origins. Each fit uses two chains with 500 warm-up and 600 sampling iterations. A fit was repeated once with 1,000 warm-up and 1,000 sampling iterations when $\widehat{R}$ reached 1.05 or the bulk effective sample size fell below 100 on any stored quantity. Six of the 18 fits of M2 were repeated, and none of the Poisson fits. The fits in use have $\widehat{R} \leq 1.043$ and effective sample sizes of at least 56. XGBoost is pooled across the items. A second variant recalibrates its probabilities by isotonic regression on the twelve labelled months before each origin. Tables S12 and S13 give the alarm metrics at every level for E1 and E2.
+
+\vspace{6pt}
 \noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S11. Abrupt changes (Section 5.2 (iii)): ten replications of the two strong-data abrupt cells fitted with Gaussian innovations, with the regularised horseshoe of Study A (four chains of 400 warm-up and 500 draws, target acceptance 0.95) and with the same horseshoe prior reparameterised as $\lambda = z\sqrt{\nu}$ (z half-normal, $\nu$ inverse-gamma(1/2, 1/2)) and sampled with 1,000 warm-up and 1,000 draws per chain at target acceptance 0.99, tree depth 10, refit at the same settings. Fits failing the convergence check after the refit, by reason ($\hat{R}$ $\ge$ 1.01, bulk or tail ESS $\le$ 400, divergent transitions), median of the worst $\hat{R}$ and of the minimum ESS; change-date statistics (mean absolute error of the posterior median date in months, coverage of the 90\% interval, mean and range over replications of the posterior probability of the true month in the best-identified group); RMSE and coverage of the level path; median leapfrog steps per iteration.}\label{tab:S11}
-\centering\scriptsize
-\begin{tabular}{lrrrrrrrrrrrrr}
+\captionof{table}{Table S11. The 65 items: six-digit code of HS 2017, description, group, months with positive imports (February 2014 to December 2025), and the item-months with E1 and E2 in the decision window.}
+\centering\tiny
+\begin{tabular}{llp{3.2cm}rrrl}
 \toprule
-Innovations and sampler & n & Failed & $\hat{R}$ & ESS & Div. & $\hat{R}$ max (med.) & ESS min (med.) & |Date error| & Date cov. & P(true month) & RMSE $m_t$ & $m_t$ cov. & Steps \\ \midrule
-\multicolumn{14}{l}{\itshape abrupt, $\alpha'$ = 2, $\bar{\mu}$ = 0.2, (I, T) = (30, 120)} \\
-Gaussian innovations (Study A) & 10 & 0 & 0 & 0 & 0 & 1.0066 & 942 & 0.77 & 1.00 & 0.06 (0.02–0.10) & 0.184 & 0.90 & 79 \\
-horseshoe, 2,000 draws, target 0.95 (Study A) & 10 & 8 & 6 & 4 & 2 & 1.0107 & 494 & 0.73 & 1.00 & 0.65 (0.12–0.99) & 0.144 & 0.93 & 79 \\
-horseshoe, reparameterised, 4,000 draws, target 0.99 & 10 & 7 & 7 & 6 & 0 & 1.0128 & 333 & 0.70 & 1.00 & 0.66 (0.11–0.97) & 0.145 & 0.94 & 129 \\
-\multicolumn{14}{l}{\itshape abrupt, $\alpha'$ = 2, $\bar{\mu}$ = 0.5, (I, T) = (30, 120)} \\
-Gaussian innovations (Study A) & 10 & 1 & 0 & 0 & 1 & 1.0057 & 953 & 0.37 & 1.00 & 0.10 (0.04–0.20) & 0.146 & 0.91 & 87 \\
-horseshoe, 2,000 draws, target 0.95 (Study A) & 10 & 10 & 9 & 10 & 2 & 1.0151 & 187 & 0.10 & 1.00 & 0.90 (0.69–1.00) & 0.089 & 0.95 & 111 \\
-horseshoe, reparameterised, 4,000 draws, target 0.99 & 10 & 10 & 8 & 10 & 0 & 1.0149 & 189 & 0.10 & 1.00 & 0.91 (0.76–1.00) & 0.088 & 0.95 & 189 \\
+HS6 & Item & Group & Months & E1 & E2 & Note \\ \midrule
+281111 & Hydrogen fluoride (hydrofluoric acid) & Semiconductor chemicals & 143 & 5 & 2 &  \\
+370790 & Chemical preparations for photographic uses, other (incl. ph & Semiconductor chemicals & 143 & 0 & 1 &  \\
+381800 & Chemical elements doped for use in electronics (wafers) & Semiconductor chemicals & 131 & 6 & 4 &  \\
+280461 & Silicon, >= 99.99\% Si (polysilicon) & Semiconductor chemicals & 131 & 26 & 1 &  \\
+280469 & Silicon, other & Semiconductor chemicals & 143 & 1 & 0 &  \\
+280429 & Rare gases other than argon (neon, krypton, xenon) & Semiconductor chemicals & 143 & 10 & 0 &  \\
+280421 & Argon & Semiconductor chemicals & 80 & 2 & 0 &  \\
+284700 & Hydrogen peroxide & Semiconductor chemicals & 143 & 49 & 1 &  \\
+281410 & Ammonia, anhydrous & Semiconductor chemicals & 143 & 34 & 0 &  \\
+280610 & Hydrogen chloride (hydrochloric acid) & Semiconductor chemicals & 143 & 2 & 0 &  \\
+280800 & Nitric acid; sulphonitric acids & Semiconductor chemicals & 143 & 39 & 0 &  \\
+280700 & Sulphuric acid; oleum & Semiconductor chemicals & 131 & 48 & 0 &  \\
+280920 & Phosphoric acid and polyphosphoric acids & Semiconductor chemicals & 143 & 5 & 0 &  \\
+282619 & Fluorides, other (incl. tungsten hexafluoride) & Semiconductor chemicals & 131 & 4 & 2 &  \\
+285000 & Hydrides, nitrides, azides, silicides and borides (incl. sil & Semiconductor chemicals & 131 & 17 & 2 &  \\
+281290 & Halides and halide oxides of non-metals, other (incl. NF3) & Semiconductor chemicals & 143 & 21 & 1 &  \\
+283691 & Lithium carbonates & Battery materials & 143 & 6 & 1 &  \\
+282520 & Lithium oxide and hydroxide & Battery materials & 143 & 10 & 1 &  \\
+282690 & Complex fluorine salts, other (incl. LiPF6) & Battery materials & 131 & 0 & 0 &  \\
+282200 & Cobalt oxides and hydroxides & Battery materials & 131 & 21 & 1 &  \\
+810520 & Cobalt mattes and intermediate products; unwrought cobalt; p & Battery materials & 131 & 21 & 1 &  \\
+283324 & Nickel sulphates & Battery materials & 143 & 34 & 0 &  \\
+750210 & Nickel, unwrought, not alloyed & Battery materials & 143 & 14 & 0 &  \\
+750400 & Nickel powders and flakes & Battery materials & 143 & 20 & 0 &  \\
+260400 & Nickel ores and concentrates & Battery materials & 131 & 15 & 0 &  \\
+250410 & Natural graphite, powder or flakes & Battery materials & 143 & 3 & 1 &  \\
+380110 & Artificial graphite & Battery materials & 131 & 0 & 2 &  \\
+282010 & Manganese dioxide & Battery materials & 143 & 25 & 0 &  \\
+811100 & Manganese; articles thereof; waste and scrap & Battery materials & 143 & 1 & 1 &  \\
+850760 & Lithium-ion accumulators & Battery materials & 143 & 2 & 0 &  \\
+811292 & Unwrought gallium, germanium, indium, niobium, vanadium (HS2 & Refractory and minor metals & 143 & 17 & 3 &  \\
+282560 & Germanium oxides and zirconium dioxide & Refractory and minor metals & 131 & 8 & 1 &  \\
+811010 & Antimony, unwrought; powders & Refractory and minor metals & 143 & 50 & 1 &  \\
+282580 & Antimony oxides & Refractory and minor metals & 143 & 12 & 2 &  \\
+810194 & Tungsten, unwrought & Refractory and minor metals & 143 & 19 & 1 &  \\
+284180 & Tungstates & Refractory and minor metals & 143 & 49 & 1 &  \\
+261100 & Tungsten ores and concentrates & Refractory and minor metals & 116 & 23 & 1 &  \\
+810320 & Tantalum, unwrought; powders & Refractory and minor metals & 140 & 24 & 0 &  \\
+261590 & Niobium, tantalum or vanadium ores and concentrates & Refractory and minor metals & 90 & 9 & 1 &  \\
+810291 & Molybdenum, unwrought; powders & Refractory and minor metals & -- & -- & -- & dropped: no data \\
+282570 & Molybdenum oxides and hydroxides & Refractory and minor metals & 143 & 39 & 0 &  \\
+261310 & Molybdenum ores and concentrates, roasted & Refractory and minor metals & 143 & 5 & 0 &  \\
+282530 & Vanadium oxides and hydroxides & Refractory and minor metals & 143 & 31 & 0 &  \\
+810411 & Magnesium, unwrought, >= 99.8\% & Refractory and minor metals & 143 & 1 & 1 &  \\
+810419 & Magnesium, unwrought, other & Refractory and minor metals & 143 & 7 & 0 &  \\
+810600 & Bismuth and articles thereof & Refractory and minor metals & 95 & 21 & 0 & no record after 2021-12 \\
+280450 & Boron; tellurium & Refractory and minor metals & 143 & 51 & 2 &  \\
+280490 & Selenium & Refractory and minor metals & 143 & 34 & 0 &  \\
+810820 & Titanium, unwrought; powders & Refractory and minor metals & 143 & 36 & 0 &  \\
+282300 & Titanium oxides & Refractory and minor metals & 143 & 15 & 0 &  \\
+811221 & Chromium, unwrought; powders & Refractory and minor metals & 143 & 36 & 0 &  \\
+720241 & Ferro-chromium, > 4\% carbon & Ferroalloys & 143 & 19 & 0 &  \\
+720249 & Ferro-chromium, other & Ferroalloys & 143 & 24 & 5 &  \\
+720260 & Ferro-nickel & Ferroalloys & 143 & 41 & 1 &  \\
+720280 & Ferro-tungsten and ferro-silico-tungsten & Ferroalloys & 119 & 27 & 2 &  \\
+720270 & Ferro-molybdenum & Ferroalloys & 96 & 38 & 2 &  \\
+720292 & Ferro-vanadium & Ferroalloys & 143 & 9 & 2 &  \\
+720293 & Ferro-niobium & Ferroalloys & 143 & 4 & 0 &  \\
+720221 & Ferro-silicon, > 55\% silicon & Ferroalloys & 143 & 17 & 5 &  \\
+720230 & Ferro-silico-manganese & Ferroalloys & 143 & 13 & 0 &  \\
+280530 & Rare-earth metals, scandium and yttrium & Rare earths and magnets & 131 & 30 & 4 &  \\
+284610 & Cerium compounds & Rare earths and magnets & 143 & 34 & 0 &  \\
+284690 & Rare-earth compounds, other & Rare earths and magnets & 143 & 24 & 4 &  \\
+850511 & Permanent magnets of metal (incl. NdFeB) & Rare earths and magnets & 131 & 3 & 3 &  \\
+850519 & Permanent magnets, other & Rare earths and magnets & 131 & 2 & 0 &  \\
 \bottomrule
 \end{tabular}
 \end{minipage}
-\vspace{22pt}
-\end{landscape}
+\vspace{8pt}
 
-\clearpage
-
+\vspace{6pt}
 \noindent\begin{minipage}{\linewidth}
-\captionof{table}{Table S12. Fit diagnostics (Section 5.4) by study and model: number of fits, share passing the convergence check at the first attempt, share of the failed first attempts with each reason (a fit can have several), share still failing after the one refit, mean leapfrog steps per iteration, and median seconds of a first fit and of a refit on one CPU core. Study B counts origin fits.}\label{tab:S12}
-\centering\scriptsize
-\begin{tabular}{lrrrrrrrrr}
+\captionof{table}{Table S12. Alarm performance on the Korean import panel for trade interruptions (E1): event probabilities for `at least one event within three months' and the alarm at each level. The columns give the events flagged within one and within three months before they occur, the false alarm onsets per item-year, the alarm months per item-year and the lead time in months (median and quartiles). The last rows give the $q$ channel and the headline level of the two models.}
+\centering\tiny
+\begin{tabular}{lrrrrrrrl}
 \toprule
-Group & Fits & Pass 1st & $\hat{R}$ & ESS & Div. & Final fail & Steps & s / fit & s / refit \\ \midrule
-A I10-T60 complete & 30 & 0.67 & 0.80 & 0.00 & 0.20 & 0.000 & 32 & 8 & 19 \\
-A I10-T60 hier & 210 & 0.67 & 0.96 & 0.10 & 0.04 & 0.010 & 37 & 15 & 35 \\
-A I10-T60 horseshoe & 30 & 0.87 & 0.75 & 0.25 & 0.00 & 0.000 & 47 & 25 & 57 \\
-A I10-T60 none & 30 & 0.70 & 0.56 & 0.11 & 0.44 & 0.033 & 45 & 19 & 62 \\
-A I30-T120 complete & 40 & 0.72 & 1.00 & 0.00 & 0.00 & 0.000 & 50 & 32 & 75 \\
-A I30-T120 hier & 220 & 0.54 & 0.88 & 0.16 & 0.21 & 0.050 & 55 & 48 & 118 \\
-A I30-T120 horseshoe & 30 & 0.23 & 1.00 & 0.91 & 0.04 & 0.633 & 83 & 88 & 187 \\
-A I30-T120 none & 40 & 0.40 & 0.88 & 0.21 & 0.12 & 0.000 & 64 & 52 & 134 \\
-A I30-T240 hier & 108 & 0.49 & 0.95 & 0.09 & 0.15 & 0.111 & 97 & 97 & 198 \\
-B M0 & 260 & 0.88 & – & – & – & 0.000 & – & 14 (per origin, incl. refits) & – \\
-B M2 & 910 & 0.67 & – & – & – & 0.037 & – & 51 (per origin, incl. refits) & – \\
-B NBcomplete & 260 & 0.82 & – & – & – & 0.000 & – & 28 (per origin, incl. refits) & – \\
-B NBnone & 260 & 0.63 & – & – & – & 0.012 & – & 60 (per origin, incl. refits) & – \\
-R recovery latent & 70 & 0.64 & 0.80 & 0.00 & 0.24 & 0.029 & 62 & 68 & 169 \\
-R recovery locf & 5 & 0.20 & 0.75 & 0.00 & 0.25 & 0.000 & 50 & 34 & 62 \\
+Method & AUC-PR & Brier & ECE & Det.\ $\leq$1 m & Det.\ $\leq$3 m & False alarms & Alarm months & Lead \\ \midrule
+M2 (proposed), level 1 & -- & -- & -- & 0.98 & 0.99 & 0.18 & 11.3 & 12.0 (4.0--38.0) \\
+M2 (proposed), level 2 & 0.600 & 0.184 & 0.029 & 0.91 & 0.93 & 0.20 & 8.2 & 8.0 (3.0--18.0) \\
+M2 (proposed), level 3 & -- & -- & -- & 0.54 & 0.60 & 0.13 & 3.4 & 3.0 (1.0--6.0) \\
+M2 (proposed), $q$ channel & -- & -- & -- & 0.00 & 0.00 & -- & 0.0 & -- \\
+M2 (proposed), headline (max of level 2 and $q$) & -- & -- & -- & 0.91 & -- & 0.20 & 8.2 & -- \\
+Poisson M0, level 1 & -- & -- & -- & 0.99 & 1.00 & 0.12 & 11.7 & 12.0 (3.0--39.0) \\
+Poisson M0, level 2 & 0.603 & 0.187 & 0.064 & 0.93 & 0.94 & 0.12 & 8.6 & 6.0 (2.5--13.0) \\
+Poisson M0, level 3 & -- & -- & -- & 0.64 & 0.68 & 0.10 & 4.3 & 3.0 (2.0--6.5) \\
+Poisson M0, $q$ channel & -- & -- & -- & 0.00 & 0.00 & -- & 0.0 & -- \\
+Poisson M0, headline (max of level 2 and $q$) & -- & -- & -- & 0.93 & -- & 0.12 & 8.6 & -- \\
+XGBoost (pooled), level 1 & -- & -- & -- & 0.98 & 1.00 & 0.22 & 10.5 & 11.0 (4.0--34.0) \\
+XGBoost (pooled), level 2 & 0.661 & 0.167 & 0.022 & 0.88 & 0.91 & 0.25 & 6.8 & 6.0 (2.0--14.0) \\
+XGBoost (pooled), level 3 & -- & -- & -- & 0.57 & 0.66 & 0.15 & 3.1 & 2.0 (1.0--5.0) \\
+XGBoost, recalibrated, level 1 & -- & -- & -- & 0.98 & 0.99 & 0.25 & 10.3 & 11.0 (3.0--33.0) \\
+XGBoost, recalibrated, level 2 & 0.641 & 0.172 & 0.027 & 0.87 & 0.91 & 0.26 & 7.0 & 6.0 (2.0--16.0) \\
+XGBoost, recalibrated, level 3 & -- & -- & -- & 0.55 & 0.65 & 0.16 & 3.1 & 2.0 (1.0--5.0) \\
+Sigma-rule (plug-in SRI), level 1 & -- & -- & -- & 0.42 & 0.47 & 0.14 & 3.3 & 2.0 (1.0--6.0) \\
+Sigma-rule (plug-in SRI), level 2 & -- & -- & -- & 0.30 & 0.35 & 0.14 & 2.0 & 2.0 (1.0--6.2) \\
+Sigma-rule (plug-in SRI), level 3 & -- & -- & -- & 0.19 & 0.24 & 0.13 & 1.2 & 2.0 (1.0--5.0) \\
+EWMA & -- & -- & -- & 0.24 & 0.29 & 0.11 & 1.4 & 2.0 (1.0--5.0) \\
+CUSUM & -- & -- & -- & 0.18 & 0.19 & 0.02 & 1.4 & 1.0 (1.0--4.0) \\
+Farrington-type threshold & -- & -- & -- & 0.03 & 0.06 & 0.07 & 0.2 & 2.0 (1.0--12.0) \\
 \bottomrule
 \end{tabular}
 \end{minipage}
-\vspace{22pt}
+\vspace{8pt}
+
+\vspace{6pt}
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S13. Alarm performance on the Korean import panel for export-restriction implementations (E2). The columns are those of Table S12.}
+\centering\tiny
+\begin{tabular}{lrrrrrrrl}
+\toprule
+Method & AUC-PR & Brier & ECE & Det.\ $\leq$1 m & Det.\ $\leq$3 m & False alarms & Alarm months & Lead \\ \midrule
+M2 (proposed), level 1 & -- & -- & -- & 0.91 & 0.91 & 0.22 & 11.3 & 58.0 (14.5--80.0) \\
+M2 (proposed), level 2 & 0.025 & 0.205 & 0.341 & 0.61 & 0.66 & 0.26 & 8.2 & 52.0 (15.2--78.0) \\
+M2 (proposed), level 3 & -- & -- & -- & 0.22 & 0.30 & 0.32 & 3.4 & 31.0 (10.5--59.0) \\
+M2 (proposed), $q$ channel & -- & -- & -- & 0.00 & 0.00 & -- & 0.0 & -- \\
+M2 (proposed), headline (max of level 2 and $q$) & -- & -- & -- & 0.61 & -- & 0.26 & 8.2 & -- \\
+Poisson M0, level 1 & -- & -- & -- & 0.94 & 0.94 & 0.15 & 11.7 & 61.0 (14.5--91.0) \\
+Poisson M0, level 2 & 0.029 & 0.235 & 0.378 & 0.69 & 0.69 & 0.17 & 8.6 & 58.0 (12.8--91.0) \\
+Poisson M0, level 3 & -- & -- & -- & 0.33 & 0.36 & 0.19 & 4.3 & 53.0 (11.0--84.8) \\
+Poisson M0, $q$ channel & -- & -- & -- & 0.00 & 0.00 & -- & 0.0 & -- \\
+Poisson M0, headline (max of level 2 and $q$) & -- & -- & -- & 0.69 & -- & 0.17 & 8.6 & -- \\
+XGBoost (pooled), level 1 & -- & -- & -- & 0.92 & 0.95 & 0.26 & 10.5 & 43.0 (11.0--78.0) \\
+XGBoost (pooled), level 2 & 0.028 & 0.196 & 0.314 & 0.48 & 0.61 & 0.36 & 6.8 & 40.5 (11.5--77.8) \\
+XGBoost (pooled), level 3 & -- & -- & -- & 0.23 & 0.30 & 0.41 & 3.1 & 33.5 (11.0--58.0) \\
+XGBoost, recalibrated, level 1 & -- & -- & -- & 0.92 & 0.95 & 0.31 & 10.3 & 59.0 (13.0--78.0) \\
+XGBoost, recalibrated, level 2 & 0.026 & 0.196 & 0.319 & 0.48 & 0.62 & 0.39 & 7.0 & 36.0 (12.0--69.0) \\
+XGBoost, recalibrated, level 3 & -- & -- & -- & 0.25 & 0.31 & 0.46 & 3.1 & 34.0 (11.0--58.0) \\
+Sigma-rule (plug-in SRI), level 1 & -- & -- & -- & 0.20 & 0.30 & 0.34 & 3.3 & 34.0 (14.0--69.5) \\
+Sigma-rule (plug-in SRI), level 2 & -- & -- & -- & 0.16 & 0.22 & 0.33 & 2.0 & 35.5 (13.5--61.8) \\
+Sigma-rule (plug-in SRI), level 3 & -- & -- & -- & 0.09 & 0.12 & 0.29 & 1.2 & 27.0 (11.5--58.5) \\
+EWMA & -- & -- & -- & 0.11 & 0.14 & 0.29 & 1.4 & 31.5 (11.0--57.5) \\
+CUSUM & -- & -- & -- & 0.12 & 0.12 & 0.07 & 1.4 & 29.0 (21.0--36.8) \\
+Farrington-type threshold & -- & -- & -- & 0.00 & 0.03 & 0.15 & 0.2 & 33.0 (13.0--59.0) \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{8pt}
+
+\vspace{6pt}
+\noindent\begin{minipage}{\linewidth}
+\captionof{table}{Table S14. Sensitivity of the backtest to the event definitions, at level 2 of the probability-based methods and of the sigma-rule. The first block uses the strict list of E2 (new export controls only, without the annual renewals of catalogues and quotas), evaluated with the fits of the main run. The other blocks use the two alternative definitions of E1, each as a separate run on the same 64 items. AUC-PR and ECE refer to the E1 probabilities and are not reported for the E2 rows. The last column gives the event item-months in the decision window.}
+\centering\tiny
+\begin{tabular}{llrrrrrrr}
+\toprule
+Variant & Method & AUC-PR & ECE & Det.\ $\leq$1 m & Det.\ $\leq$3 m & False alarms & Alarm months & Events \\ \midrule
+E2 strict (new controls only), main fits & M2 (proposed) & -- & -- & 0.65 & 0.65 & 0.26 & 8.2 & 31 \\
+E2 strict (new controls only), main fits & Poisson M0 & -- & -- & 0.65 & 0.65 & 0.17 & 8.6 & 31 \\
+E2 strict (new controls only), main fits & XGBoost (pooled) & -- & -- & 0.42 & 0.55 & 0.36 & 6.8 & 31 \\
+E2 strict (new controls only), main fits & XGBoost, recalibrated & -- & -- & 0.42 & 0.58 & 0.40 & 7.0 & 31 \\
+E2 strict (new controls only), main fits & Sigma-rule (plug-in SRI) & -- & -- & 0.16 & 0.23 & 0.33 & 2.0 & 31 \\
+E2 strict (new controls only), main fits & EWMA & -- & -- & 0.10 & 0.13 & 0.30 & 1.4 & 31 \\
+E2 strict (new controls only), main fits & CUSUM & -- & -- & 0.23 & 0.23 & 0.07 & 1.4 & 31 \\
+E2 strict (new controls only), main fits & Farrington-type threshold & -- & -- & 0.00 & 0.03 & 0.15 & 0.2 & 31 \\
+E1 = largest partner halves & M2 (proposed) & 0.510 & 0.033 & 0.86 & 0.89 & 0.17 & 7.0 & 926 \\
+E1 = largest partner halves & Poisson M0 & 0.517 & 0.040 & 0.88 & 0.90 & 0.11 & 7.5 & 926 \\
+E1 = largest partner halves & XGBoost (pooled) & 0.569 & 0.024 & 0.83 & 0.87 & 0.24 & 6.2 & 926 \\
+E1 = largest partner halves & XGBoost, recalibrated & 0.555 & 0.025 & 0.81 & 0.87 & 0.30 & 6.2 & 926 \\
+E1 = largest partner halves & Sigma-rule (plug-in SRI) & -- & -- & 0.27 & 0.32 & 0.16 & 1.8 & 926 \\
+E1 = largest partner halves & EWMA & -- & -- & 0.21 & 0.26 & 0.13 & 1.2 & 926 \\
+E1 = largest partner halves & CUSUM & -- & -- & 0.08 & 0.09 & 0.02 & 0.7 & 926 \\
+E1 = largest partner halves & Farrington-type threshold & -- & -- & 0.02 & 0.05 & 0.08 & 0.2 & 926 \\
+E1 = total imports halve & M2 (proposed) & 0.573 & 0.016 & 0.83 & 0.86 & 0.16 & 5.1 & 750 \\
+E1 = total imports halve & Poisson M0 & 0.585 & 0.016 & 0.85 & 0.86 & 0.11 & 5.4 & 750 \\
+E1 = total imports halve & XGBoost (pooled) & 0.587 & 0.025 & 0.77 & 0.82 & 0.26 & 4.1 & 750 \\
+E1 = total imports halve & XGBoost, recalibrated & 0.570 & 0.020 & 0.77 & 0.84 & 0.33 & 4.4 & 750 \\
+E1 = total imports halve & Sigma-rule (plug-in SRI) & -- & -- & 0.26 & 0.32 & 0.16 & 1.7 & 750 \\
+E1 = total imports halve & EWMA & -- & -- & 0.23 & 0.29 & 0.14 & 1.2 & 750 \\
+E1 = total imports halve & CUSUM & -- & -- & 0.15 & 0.15 & 0.01 & 0.7 & 750 \\
+E1 = total imports halve & Farrington-type threshold & -- & -- & 0.02 & 0.04 & 0.09 & 0.1 & 750 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\vspace{8pt}
+
+\textbf{Supplementary Note 7. The rare arm (Sections 5.1, 5.3 and 5.6).}
+\textit{Design.} The rare arm has three cells at a base rate of $\bar{\mu} = 0.02$ shocks per item-month, with $I = 100$ items, $T = 120$ months, three groups and $\alpha' = 2$. The cells differ in the regime: stable, gradual ($+2\%$ per month from $t_0 = 60$) and abrupt ($+\log 3$ at $t_0 = 60$). Each cell has five replications, and everything else follows the protocol of Study B. The realised three-month prevalence of events is 8.2\%, 12.4\% and 16.7\% in the stable, gradual and abrupt cells, and the number of shock months per item-year is 0.34, 0.53 and 0.74. The methods are M2, the Poisson model M0, XGBoost, the sigma-rule, EWMA and CUSUM. All 210 origin fits of M2 passed the convergence check, 106 of them after the one refit.
+
+\textit{Results.} Table S15 gives the metrics of Table 4 of the main text by cell and pooled, and Table S16 gives the expected cost of Section 5.6. The $q$ channel of M2 reached the 24-month target in all fifteen bootstrap calibrations, and the Poisson channel reached it in nine. In the ten replications with a regime change, neither channel raised an alarm in the 24 months before the change. In the stable cell, however, both channels raised alarms more often over the 82 decision months than the bootstrap had predicted.
+
+\vspace{6pt}
+\captionof{table}{Table S15. Alarm performance in the rare arm ($\bar{\mu} = 0.02$, $I = 100$, $T = 120$, $\alpha' = 2$; five replications per cell), by cell and pooled, evaluated as Table 4 of the main text. (a) Event probabilities for `at least one shock within three months' and triage at level 2: detection in the month before the shock and within three months, false alarm onsets per item-year in the stable windows, alarm months per item-year and lead time in months. (b) Change channels: the calibrations that reached the 24-month target in the 200 bootstrap paths, the ARL$_0$ that the bootstrap predicted, the realised ARL$_0$ (median and range over the replications) and ARL$_1$ (mean and range). The ARL$_0$ of the $q$ channels is in group-months (three groups), and that of EWMA and CUSUM is in item-months (100 items). The values 72, 246 and 2400 therefore mean that no alarm occurred in the window.}
+{\scriptsize\centering
+(a) Event probabilities and triage at level 2\\[2pt]
+\begin{tabular}{llrrrrrrrl}
+\toprule
+Cell & Method & AUC-PR & Brier & ECE & Det.\ $\le$1 m & Det.\ $\le$3 m & FA / item-yr & Alarm-mo / item-yr & Lead, median (IQR) \\
+\midrule
+Stable & M2 (proposed) & 0.164 & 0.073 & 0.011 & 0.20 & 0.26 & 0.18 & 0.9 & 9.2 (3.4--18.1) \\
+ & Poisson M0 & 0.168 & 0.073 & 0.010 & 0.20 & 0.25 & 0.16 & 0.8 & 8.8 (3.2--17.2) \\
+ & XGBoost & 0.138 & 0.074 & 0.010 & 0.07 & 0.10 & 0.09 & 0.3 & 10.6 (4.0--20.9) \\
+ & Sigma-rule, level 2 & -- & -- & -- & 0.23 & 0.37 & 0.69 & 1.7 & 12.5 (4.8--25.4) \\
+ & EWMA & -- & -- & -- & 0.11 & 0.16 & 0.18 & 0.9 & 10.4 (4.5--20.2) \\
+ & CUSUM & -- & -- & -- & 0.03 & 0.03 & 0.01 & 0.2 & 7.2 (4.8--10.7) \\
+\addlinespace
+Gradual & M2 (proposed) & 0.278 & 0.101 & 0.012 & 0.42 & 0.48 & 0.29 & 2.1 & 7.4 (3.2--15.9) \\
+ & Poisson M0 & 0.281 & 0.101 & 0.017 & 0.38 & 0.45 & 0.26 & 1.8 & 7.0 (3.2--15.2) \\
+ & XGBoost & 0.223 & 0.107 & 0.045 & 0.10 & 0.14 & 0.09 & 0.4 & 6.9 (3.0--17.9) \\
+ & Sigma-rule, level 2 & -- & -- & -- & 0.32 & 0.47 & 0.83 & 2.4 & 10.5 (4.4--22.6) \\
+ & EWMA & -- & -- & -- & 0.19 & 0.25 & 0.25 & 1.3 & 8.7 (4.0--18.3) \\
+ & CUSUM & -- & -- & -- & 0.06 & 0.06 & 0.01 & 0.2 & 5.6 (3.9--8.1) \\
+\addlinespace
+Abrupt & M2 (proposed) & 0.340 & 0.128 & 0.019 & 0.63 & 0.69 & 0.38 & 4.0 & 7.4 (3.0--13.8) \\
+ & Poisson M0 & 0.326 & 0.130 & 0.027 & 0.57 & 0.63 & 0.36 & 3.7 & 7.1 (3.0--13.8) \\
+ & XGBoost & 0.299 & 0.135 & 0.063 & 0.25 & 0.30 & 0.16 & 1.2 & 5.4 (2.6--11.2) \\
+ & Sigma-rule, level 2 & -- & -- & -- & 0.29 & 0.45 & 0.75 & 2.4 & 9.2 (3.8--19.6) \\
+ & EWMA & -- & -- & -- & 0.25 & 0.33 & 0.31 & 1.8 & 7.1 (3.0--15.3) \\
+ & CUSUM & -- & -- & -- & 0.12 & 0.12 & 0.02 & 0.5 & 4.4 (1.9--7.8) \\
+\addlinespace
+Pooled & M2 (proposed) & 0.261 & 0.101 & 0.014 & 0.42 & 0.48 & 0.28 & 2.3 & 8.0 (3.2--16.0) \\
+ & Poisson M0 & 0.258 & 0.101 & 0.018 & 0.39 & 0.44 & 0.26 & 2.1 & 7.6 (3.1--15.4) \\
+ & XGBoost & 0.220 & 0.106 & 0.039 & 0.14 & 0.18 & 0.12 & 0.7 & 7.6 (3.2--16.7) \\
+ & Sigma-rule, level 2 & -- & -- & -- & 0.28 & 0.43 & 0.76 & 2.2 & 10.7 (4.3--22.6) \\
+ & EWMA & -- & -- & -- & 0.18 & 0.25 & 0.25 & 1.3 & 8.7 (3.9--17.9) \\
+ & CUSUM & -- & -- & -- & 0.07 & 0.07 & 0.01 & 0.3 & 5.7 (3.5--8.8) \\
+\bottomrule
+\end{tabular}
+
+\vspace{4pt}
+(b) Change channels\\[2pt]
+\begin{tabular}{llcccc}
+\toprule
+Cell & Channel & Calibrated & Predicted ARL$_0$ & Realised ARL$_0$, median (range) & ARL$_1$, mean (range) \\
+\midrule
+Stable & $q$ channel, M2 & 5/5 & 25--37 & 15 (7--246) & -- \\
+ & $q$ channel, Poisson M0 & 4/5 & 14--29 & 12 (4--246) & -- \\
+ & EWMA & -- & 24 (nominal) & 14 (12--17) & -- \\
+ & CUSUM & -- & 24 (nominal) & 76 (52--117) & -- \\
+\addlinespace
+Gradual & $q$ channel, M2 & 5/5 & 27--35 & 72 (72--72) & 33.5 (28--49) \\
+ & $q$ channel, Poisson M0 & 1/5 & 15--25 & 72 (72--72) & 43.7 (35--57) \\
+ & EWMA & -- & 24 (nominal) & 17 (14--23) & 31.9 (30--35) \\
+ & CUSUM & -- & 24 (nominal) & 2400 (2400--2400) & 56.5 (56--57) \\
+\addlinespace
+Abrupt & $q$ channel, M2 & 5/5 & 24--33 & 72 (72--72) & 9.5 (4--22) \\
+ & $q$ channel, Poisson M0 & 4/5 & 13--27 & 72 (72--72) & 17.8 (11--36) \\
+ & EWMA & -- & 24 (nominal) & 16 (15--23) & 22.2 (18--27) \\
+ & CUSUM & -- & 24 (nominal) & 2400 (2400--2400) & 54.2 (53--55) \\
+\addlinespace
+Pooled & $q$ channel, M2 & 15/15 & 24--37 & 72 (7--246) & 21.5 (4--49) \\
+ & $q$ channel, Poisson M0 & 9/15 & 13--29 & 72 (4--246) & 30.7 (11--57) \\
+ & EWMA & -- & 24 (nominal) & 16 (12--23) & 27.1 (18--35) \\
+ & CUSUM & -- & 24 (nominal) & 2400 (52--2400) & 55.3 (53--57) \\
+\bottomrule
+\end{tabular}
+
+}
+\vspace{8pt}
+
+\captionof{table}{Table S16. Expected cost per item-year in the rare arm (units of one alarm-month), by cell and pooled over the fifteen replications, computed as in Table 6 of the main text: for each policy the mean cost at its cheapest level, with the standard error in brackets. The last three columns give the band of $r$ in which the policy is cheaper than the better of never acting and always acting, its largest saving against that policy, which lies at $r = 12/E$ (34.9, 22.6 and 16.2 by cell; 22.3 pooled), and the range of $r$ over which the saving exceeds 10\%. Never acting costs $rE$ per item-year ($E$ = 0.34, 0.53 and 0.74 by cell; 0.54 pooled), and always acting costs 12.}
+{\scriptsize\centering
+\begin{tabular}{llrrrrrccc}
+\toprule
+Cell & Method & $r=2$ & $r=5$ & $r=10$ & $r=20$ & $r=50$ & Band of $r$ & Largest saving & Saving $>$ 10\% \\
+\midrule
+Stable & M2 (proposed) & 0.69 (0.02) & 1.72 (0.05) & 3.44 (0.10) & 6.36 (0.09) & 10.42 (0.16) & 4.1--72 & 22\% & 25--55 \\
+ & Poisson M0 & 0.69 (0.02) & 1.72 (0.05) & 3.44 (0.10) & 6.28 (0.09) & 10.39 (0.11) & 4.3--72 & 23\% & 22--56 \\
+ & XGBoost & 0.69 (0.02) & 1.72 (0.05) & 3.44 (0.10) & 6.74 (0.16) & 11.23 (0.14) & 14.0--62 & 15\% & 33--43 \\
+ & Sigma-rule (3 limits) & 1.72 (0.06) & 2.60 (0.07) & 4.05 (0.11) & 6.96 (0.20) & 13.96 (0.31) & 21.3--41 & 12\% & 31--36 \\
+ & EWMA & 1.47 (0.06) & 2.38 (0.07) & 3.90 (0.11) & 6.95 (0.19) & 16.09 (0.43) & 21.7--37 & 4\% & -- \\
+ & CUSUM & 0.83 (0.04) & 1.83 (0.06) & 3.49 (0.10) & 6.81 (0.17) & 16.79 (0.40) & 14.1--36 & 2\% & -- \\
+ & Never act & 0.69 (0.02) & 1.72 (0.05) & 3.44 (0.10) & 6.88 (0.20) & 17.21 (0.50) & -- & -- & -- \\
+ & Always act & 12.00 & 12.00 & 12.00 & 12.00 & 12.00 & -- & -- & -- \\
+\addlinespace
+Gradual & M2 (proposed) & 1.08 (0.02) & 2.62 (0.06) & 5.16 (0.17) & 8.25 (0.27) & 11.23 (0.12) & 3.3--64 & 24\% & 12--42 \\
+ & Poisson M0 & 1.08 (0.02) & 2.62 (0.06) & 5.05 (0.16) & 8.32 (0.24) & 11.26 (0.19) & 3.2--62 & 24\% & 12--43 \\
+ & XGBoost & 1.06 (0.02) & 2.65 (0.06) & 5.14 (0.16) & 9.89 (0.38) & 12.36 (0.14) & $<$1--45$^{a}$ & 15\% & 21--31 \\
+ & Sigma-rule (3 limits) & 2.44 (0.07) & 3.66 (0.09) & 5.69 (0.13) & 9.40 (0.16) & 18.35 (0.26) & 13.1--29 & 15\% & 19--25 \\
+ & EWMA & 2.19 (0.08) & 3.48 (0.11) & 5.63 (0.17) & 9.93 (0.31) & 22.83 (0.76) & 13.3--25 & 8\% & -- \\
+ & CUSUM & 1.21 (0.02) & 2.71 (0.06) & 5.21 (0.14) & 10.21 (0.29) & 25.20 (0.73) & 7.1--24 & 4\% & -- \\
+ & Never act & 1.06 (0.02) & 2.65 (0.06) & 5.30 (0.12) & 10.60 (0.23) & 26.50 (0.58) & -- & -- & -- \\
+ & Always act & 12.00 & 12.00 & 12.00 & 12.00 & 12.00 & -- & -- & -- \\
+\addlinespace
+Abrupt & M2 (proposed) & 1.59 (0.05) & 3.60 (0.08) & 6.77 (0.09) & 9.51 (0.12) & 11.73 (0.16) & 3.7--57 & 29\% & 10--26 \\
+ & Poisson M0 & 1.62 (0.06) & 3.65 (0.08) & 6.87 (0.11) & 10.03 (0.20) & 11.96 (0.22) & 4.3--51 & 26\% & 11--25 \\
+ & XGBoost & 1.49 (0.04) & 3.68 (0.08) & 6.77 (0.12) & 10.70 (0.15) & 12.32 (0.17) & 3.3--44 & 15\% & 11--22 \\
+ & Sigma-rule (3 limits) & 2.80 (0.06) & 4.55 (0.10) & 7.47 (0.16) & 12.10 (0.18) & 25.16 (0.38) & 10.5--20 & 13\% & 15--17 \\
+ & EWMA & 2.92 (0.07) & 4.58 (0.08) & 7.36 (0.10) & 12.92 (0.15) & 29.61 (0.35) & 9.9--18 & 10\% & -- \\
+ & CUSUM & 1.83 (0.07) & 3.79 (0.08) & 7.06 (0.11) & 13.58 (0.21) & 33.16 (0.51) & 6.2--18 & 7\% & -- \\
+ & Never act & 1.48 (0.03) & 3.69 (0.08) & 7.39 (0.17) & 14.77 (0.33) & 36.94 (0.84) & -- & -- & -- \\
+ & Always act & 12.00 & 12.00 & 12.00 & 12.00 & 12.00 & -- & -- & -- \\
+\addlinespace
+Pooled & M2 (proposed) & 1.12 (0.10) & 2.65 (0.21) & 5.19 (0.35) & 8.04 (0.36) & 11.12 (0.16) & 3.6--66 & 27\% & 12--44 \\
+ & Poisson M0 & 1.13 (0.10) & 2.66 (0.21) & 5.16 (0.37) & 8.21 (0.42) & 11.20 (0.20) & 4.0--63 & 26\% & 12--43 \\
+ & XGBoost & 1.08 (0.09) & 2.68 (0.22) & 5.15 (0.36) & 9.64 (0.63) & 11.97 (0.16) & 3.6--50 & 16\% & 19--32 \\
+ & Sigma-rule (3 limits) & 2.32 (0.12) & 3.60 (0.22) & 5.74 (0.38) & 9.53 (0.55) & 19.16 (1.24) & 13.2--28 & 14\% & 19--24 \\
+ & EWMA & 2.19 (0.16) & 3.48 (0.24) & 5.63 (0.38) & 9.94 (0.66) & 22.84 (1.50) & 12.4--25 & 9\% & -- \\
+ & CUSUM & 1.29 (0.11) & 2.78 (0.22) & 5.25 (0.39) & 10.20 (0.75) & 25.05 (1.81) & 7.1--24 & 5\% & -- \\
+ & Never act & 1.08 (0.09) & 2.69 (0.22) & 5.38 (0.44) & 10.75 (0.87) & 26.88 (2.18) & -- & -- & -- \\
+ & Always act & 12.00 & 12.00 & 12.00 & 12.00 & 12.00 & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+
+}
+\vspace{2pt}{\footnotesize $^{a}$ XGBoost in the gradual cell: the level-3 alarm is almost never in force, so that the policy costs less than never acting from $r = 1$ by under 1\%; its saving exceeds 1\% for $r$ between 8 and 44.}
 
 
-\clearpage
-\input{supplementary_extra}
-\input{supplementary_part2}
-\clearpage
-\textbf{Result files and scripts.} Study A, B and robustness results are the replication-level files \path{results/A/}, \path{results/B/} and \path{results/R/} (\path{<cell>__<variant>.jsonl}, one line per replication), summarised by \path{tools/analyze.py} into \path{analysis/A_replications.csv}, \path{B_replications.csv}, \path{R_replications.csv} and \path{A_hier_by_*.csv}; Table 6 and Tables S1--S2 come from \path{tools/table5b.py} and the fit diagnostics from \path{tools/fitstats.py}. The follow-up arms are \path{followup/a1_priors.py} (Table S6; \path{A1_priors.jsonl}), \path{followup/a7_tauC.py} (Table S7; \path{A7_tauC.jsonl}), \path{followup/a3_farrington.py} (Table S9; \path{A3_farrington_replications.csv}) and \path{followup/mac_arms.py} with its arms \texttt{a2}, \texttt{a5} and \texttt{a6} (Tables S8, S10 and S11; \path{R/R-beta0__latent.jsonl}, \path{B24/<cell>__M2.jsonl}, \path{A6/<cell>__horseshoe2.jsonl}). The remaining arms are \path{followup/b1_nbcharts.py} and \path{b1_diag.py} (Table S14; \path{B1_nbcharts_replications_group.csv}, \path{_panel.csv}, \path{B1_nbcharts_diag.csv}), \path{followup/b2_alpha_groups.py} (Table S13; \path{B2_alpha_groups.jsonl}), \path{followup/b5_severity.py} (Table S15; \path{B5/R/<cell>__latent.jsonl}) and \path{followup/b3_lognormal.py} (Table S16; \path{B3/R/R-lognormal__latent.jsonl}; the \texttt{frailty} argument of \path{dgp.simulate}). The expected-cost analysis (Section 5.6; Tables S19--S22) uses \path{tools/extract_alarm_share.py} (alarm shares and onset counts from the Study B JSONL files), \path{tools/validate_regen.py} (exact regeneration of the simulated panels from their seeds, checked against the archived metrics), \path{tools/cost_curves.py} (cost curves, savings, sign tests, break-even ratios, sensitivity; outputs under \path{results/analysis/cost/}) and \path{tools/cost_tail.py} (Table S21.4). The backtest (Section 5.5; Note 14) is run by \path{backtest/backtest_multi.py} on the panel \path{backtest/panel_410.csv}, with outputs under \path{results/backtest/}. The rare arm (Note 17) is run by \path{run_rare_full.py}; its replication-level files are \path{results_rare/B/B-a2-mu0.02-<regime>-I100__all.jsonl}, in the Study B record format, and its tables and statements are computed by the scripts of \path{rare_arm/}: \path{rare_cost.py} (expected cost, bands, savings and paired comparisons with the definitions of Section 5.6), \path{tables_full.py} and \path{analyze_full.py} (the Table 6 metrics and the replication-level detail). This document and the CSV form of every table are produced by \path{supplementary/make_supp.py} (Tables S1--S12), \path{supplementary/make_supp_extra.py} (Tables S13--S16), \path{supplementary/gen_supp_part2.py} (Notes 7--13, 15 and 16; Tables S17--S24), \path{supplementary/gen_supp_backtest.py} (Note 14, Tables S25--S28) and \path{rare_arm/gen_note17.py} (Note 17, Tables S29.1--S29.4).
 \end{document}

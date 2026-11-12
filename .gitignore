@@ -10,6 +10,8 @@ jax_cache/
 *.log
 supplementary/supplementary.pdf
 supplementary/supplementary.out
+extended_results/supplementary.pdf
+extended_results/supplementary.out
 
 # written by the scripts, not archived (paths from the repository root)
 /out/

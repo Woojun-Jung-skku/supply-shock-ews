@@ -3,7 +3,7 @@
 from the outputs of backtest/backtest_multi.py, plus the main-text Table 7 (table7.md) and the numbers the text quotes
 (key_numbers.json).
 
-usage: python supplementary/gen_supp_backtest.py MAIN_OUT PANEL_CSV RESTRICTIONS_CSV ITEMS_CSV SUPP_DIR
+usage: python extended_results/gen_supp_backtest.py MAIN_OUT PANEL_CSV RESTRICTIONS_CSV ITEMS_CSV SUPP_DIR
                                    [--strict-out DIR] [--top-out DIR] [--total-out DIR] [--dropped CSV]
   MAIN_OUT     backtest_multi.py output folder of the main run (E1: partner share >= 0.25; E2: all measures)
   --strict-out the same fits evaluated on the strict E2 list (new controls only)

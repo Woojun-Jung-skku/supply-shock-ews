@@ -1,8 +1,9 @@
 """ARL0 of Poisson-calibrated and dispersion-corrected two-sigma count limits under NB counts.
 
-Reproduces the Fig. 2 numbers in Section 4.4 (Poisson-calibrated limit: inflation 4.8 at mu=1,
-ARL0 about 7-57 over the five base rates) and the sentence on dispersion-corrected limits
-(NB variance at the true alpha': ARL0 about 10-57 over the same grid).
+Reproduces the run-length numbers of Section 4.3 of the manuscript, paragraph "Why not a sigma-rule?"
+(Poisson-calibrated limit: ARL0 about 7-57 over the five base rates) and the sentence on dispersion-corrected limits
+(NB variance at the true alpha': ARL0 about 10-57 over the same grid). It also prints the inflation of the
+false-alarm rate (4.8 at mu=1), which figures/out_final/extra_sigma_rule shows.
 """
 import numpy as np
 from scipy.stats import nbinom, poisson

@@ -1,6 +1,6 @@
-"""Supplementary Note 17 (the rare arm) with Tables S29.1-S29.4, in the style of supplementary/make_supp.py. Writes the body
+"""Supplementary Note 17 (the rare arm) with Tables S29.1-S29.4, in the style of extended_results/make_supp.py. Writes the body
 of the note, which supplementary_part2.tex inputs after Supplementary Note 16 (no preamble: build supplementary.tex).
-Usage: python rare_arm/gen_note17.py <repo root> <results_rare dir> supplementary/supplementary_note17_rare_arm.tex
+Usage: python rare_arm/gen_note17.py <repo root> <results_rare dir> extended_results/supplementary_note17_rare_arm.tex
 
 Costs follow Section 5.6 of the manuscript exactly as Table 8 and Tables S21.1-S21.2 do (see rare_cost.py):
 the cost of a policy at ratio r is the lower envelope of its level-wise MEAN cost lines over the replications of the

@@ -5,13 +5,13 @@ analysis of Section 5.6, the Hawkes verification, the robustness arms, the model
 the Hawkes derivation) and the reference list. Writes supplementary_part2.tex (input by supplementary.tex), which in
 turn inputs supplementary_backtest.tex (Note 14, gen_supp_backtest.py) and supplementary_note17_rare_arm.tex (Note 17,
 rare_arm/gen_note17.py), and the CSV form of Tables S17–S24. Figures S1–S4 are copied from figures/out_final/ to
-supplementary/figs/.
+extended_results/figs/.
 
 usage: python3 gen_supp_part2.py COST_OUT_DIR SUPP_DIR [FIG_DIR] [ANALYSIS_DIR]
   COST_OUT_DIR  results/analysis/cost (cost_table_A.csv, cost_savings_A.csv, cost_levels_A.csv, cost_breakeven_A.csv,
                 cost_table_B.csv, cost_sensitivity_A.csv, cost_curves_grid_A.csv, cost_inputs_by_replication.csv,
                 cost_tail_A.csv, cost_tail_bands.csv)
-  SUPP_DIR      repository supplementary/ (writes supplementary_part2.tex and tables/S17..S24 csv)
+  SUPP_DIR      repository extended_results/ (writes supplementary_part2.tex and tables/S17..S24 csv)
 """
 import os, sys, shutil
 import pandas as pd

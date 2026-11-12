@@ -33,8 +33,9 @@ standard errors, paired differences and sign tests at the envelope level of each
 1 - EC_M2 / EC_m on the means, value of monitoring 1 - EC_M2 / min(never, always), break-even r*.
 
 usage: python -I cost_curves.py CODE_DIR ANALYSIS_DIR JSONL_EXTRACT_CSV OUT_DIR [FIGURES_DIR]
-  FIGURES_DIR  the repository's figures/ folder (style module figstyle.py); if given, Fig. 7 is written to
-               FIGURES_DIR/out/Fig7_cost_curves.pdf and .png
+  FIGURES_DIR  the repository's figures/ folder (style module figstyle.py); if given, the figure of the cost curves is
+               written to FIGURES_DIR/out/Fig5_cost_curves.pdf and .png (Fig. 5 of the manuscript; Fig. 7 in the
+               numbering of this header, see the README of the repository)
 """
 import os
 import sys
@@ -389,5 +390,5 @@ if STYLE:
     hs.append(Line2D([], [], color=RF.MUTED, lw=0.9, ls=(0, (4, 2)), label="Always act (12 alarm-months)"))
     fig.legend(handles=hs, loc="upper center", ncol=3, bbox_to_anchor=(0.5, 1.10), frameon=False)
     FIGOUT = os.path.join(STYLE, "out"); os.makedirs(FIGOUT, exist_ok=True)
-    RF.save(fig, os.path.join(FIGOUT, "Fig7_cost_curves"), tight=True)
-    print("figure written:", os.path.join(FIGOUT, "Fig7_cost_curves.pdf/.png"))
+    RF.save(fig, os.path.join(FIGOUT, "Fig5_cost_curves"), tight=True)
+    print("figure written:", os.path.join(FIGOUT, "Fig5_cost_curves.pdf/.png"))

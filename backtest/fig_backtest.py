@@ -1,12 +1,12 @@
-"""fig_backtest.py - Fig. 6 of the manuscript: the backtest on the Korean import panel.
+"""fig_backtest.py - Fig. 4 of the manuscript: the backtest on the Korean import panel.
 (a) three-month shock probability p_it(3) of M2 for six items with documented export controls, against the caution,
-    alert and severe ranges of (19); trade events (E1) as ticks on the base line, export-restriction implementations
+    alert and severe ranges of (16); trade events (E1) as ticks on the base line, export-restriction implementations
     (E2) as vertical lines, their announcement months dotted;
 (b) the level-shift statistic q_t of each group with the bootstrap threshold and the persistent q-alarm months;
 (c) operating points at triage level 2 on the two event definitions: shocks flagged a month ahead against alarm
-    months per item-year, every method (Fig. 5c of the simulation study drawn for the real panel).
+    months per item-year, every method (Fig. 3c of the simulation study drawn for the real panel).
 usage: python fig_backtest.py OUT_DIR PANEL_CSV FIG_OUT [--items 281111,811292,...]
-       e.g. python backtest/fig_backtest.py results/backtest/main backtest/panel_410.csv figures/out/Fig6_backtest
+       e.g. python backtest/fig_backtest.py results/backtest/main backtest/panel_410.csv figures/out/Fig4_backtest
 """
 import argparse, csv, json, os, sys
 import numpy as np

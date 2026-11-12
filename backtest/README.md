@@ -1,4 +1,4 @@
-# backtest/ — the backtest on public trade data (Section 5.5; Supplementary Note 14)
+# backtest/ — the backtest on public trade data (Section 5.5; Supplementary Note 6)
 
 This folder holds the rolling-origin backtest of the alarm and its baselines. The data are the monthly imports of the Republic of Korea (UN Comtrade reporter 410) for 64 critical-material items in five groups, from 2014 to 2025. The alarms are evaluated against two event series: trade interruptions (E1, `N1` in the files) and export-restriction implementations (E2, `N2`). `N3` is the union of the two.
 
@@ -14,11 +14,11 @@ This folder holds the rolling-origin backtest of the alarm and its baselines. Th
 | `gp_ews.py` | Self-contained implementation of the model (fit, particle propagation, two-channel alarm) used by the backtest. |
 | `backtest_multi.py`, `mcmc_diag.py` | The backtest: M2 and the Poisson model refitted at 18 origins and propagated month by month, the sigma-rule, EWMA, CUSUM, the Farrington-type threshold and XGBoost (plain and recalibrated) at the same decision months; metrics, costs and the restriction detail for each event series; convergence check of every fit. |
 | `report_backtest.py` | A markdown summary of an output folder (`../results/backtest/main/report.md`). |
-| `drop_item.py` | The main run evaluated without one item, from the archived alarm paths and without refitting. It is used for bismuth (see Conventions and Supplementary Note 14). |
-| `fig_backtest.py` | Fig. 6. |
+| `drop_item.py` | The main run evaluated without one item, from the archived alarm paths and without refitting. It is used for bismuth (see Conventions and Supplementary Note 6). |
+| `fig_backtest.py` | Fig. 4. |
 | `make_synthetic_panel.py`, `test_report_synthetic.md` | A synthetic panel for testing the pipeline without trade data, and the report of such a run (the numbers have no meaning). |
 
-Supplementary Note 14 and Tables S25–S28 are written by `../supplementary/gen_supp_backtest.py`, which also writes the main-text Table 7 (`../results/backtest/main/table7.md`) and the numbers quoted in the text (`key_numbers.json`).
+`../extended_results/gen_supp_backtest.py` writes Note 14 and Tables S25–S28 of the extended results. Supplementary Note 6 and Tables S11–S14 of the manuscript are taken from them (`../supplementary/README.md`). The script also writes Table 5 of the main text (`../results/backtest/main/table7.md`, a working name) and the numbers quoted in the text (`key_numbers.json`). The headers of the scripts in this folder cite Supplementary Note 14, which is the number of the note in the extended results.
 
 ## Reproducing
 
@@ -74,8 +74,8 @@ The model is refitted by MCMC with fixed seeds, but the draws depend on the JAX 
 ```bash
 mkdir -p out figures/out
 python backtest/report_backtest.py results/backtest/main out/report.md
-python backtest/fig_backtest.py results/backtest/main backtest/panel_410.csv figures/out/Fig6_backtest
-python supplementary/gen_supp_backtest.py results/backtest/main backtest/panel_410.csv backtest/restrictions.csv backtest/items_hs6.csv supplementary \
+python backtest/fig_backtest.py results/backtest/main backtest/panel_410.csv figures/out/Fig4_backtest
+python extended_results/gen_supp_backtest.py results/backtest/main backtest/panel_410.csv backtest/restrictions.csv backtest/items_hs6.csv extended_results \
        --strict-out results/backtest/strict --top-out results/backtest/top --total-out results/backtest/total --dropped backtest/panel_410_dropped.csv
 ```
 
