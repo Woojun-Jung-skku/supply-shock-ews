@@ -1,6 +1,6 @@
 # Early warning of supply shocks with a hierarchical gamma–Poisson model: code, results and supplementary material
 
-Code, results and supplementary material for a manuscript on a hierarchical gamma–Poisson early-warning model of supply shocks with cost-based alarms (Sungjin Jeon and Woojun Jung, equal contribution; under review, 2026).
+This repository holds the code, the results and the supplementary material of a manuscript on a hierarchical gamma–Poisson early-warning model of supply shocks with cost-based alarms (Sungjin Jeon and Woojun Jung, equal contribution; under review, 2026).
 
 Everything the manuscript reports in Section 5, its figures and the supplementary material can be regenerated from this repository. The archived result files are the ones the manuscript uses.
 
@@ -60,7 +60,7 @@ pip install -r code/requirements.txt          # numpy, scipy, pandas, jax, numpy
 
 The commands below write to new folders (`results_new/`, `results_rare_new/`, `figures/out/`, `out/`) unless the text says that they rewrite an archived file.
 
-**Simulation studies** (Sections 5.1–5.4). The archived results were run with the `t4_min` profile (`design` field `v1.4-t4_min` in every record). The runner appends to existing result files and resumes with the same command.
+**Simulation studies** (Sections 5.1–5.4). The archived results were run with the `t4_min` profile (`design` field `v1.4-t4_min` in every record). The runner appends to existing result files, so the same command resumes an interrupted run.
 
 ```bash
 cd code
@@ -76,14 +76,14 @@ python followup/b3_lognormal.py ../results_new/followup/B3                  # B3
 python followup/b5_severity.py ../results_new/followup/B5                   # B5 (Table S15)
 ```
 
-**Tables of Sections 5.2–5.4.** From the archived results this reproduces every file in `results/analysis/` (the folder `cost/` apart) byte for byte:
+**Tables of Sections 5.2–5.4.** From the archived results, this command reproduces every file in `results/analysis/` byte for byte, except the folder `cost/`:
 
 ```bash
 cd code
 bash tools/analysis_all.sh ../results_new/analysis ../results               # ANALYSIS_DIR first, then the result folder(s)
 ```
 
-**Expected cost** (Section 5.6; Table 8, Fig. 7, Supplementary Note 10). From the archived Study B results; no model is refitted. The four commands reproduce the files of `results/analysis/cost/` (the CSV files of the first three byte for byte, those of `cost_tail.py` to the last digits of the floating-point output).
+**Expected cost** (Section 5.6; Table 8, Fig. 7, Supplementary Note 10). The evaluation uses the archived Study B results, so no model is refitted. The four commands reproduce the files of `results/analysis/cost/`. The CSV files of the first three commands are reproduced byte for byte, and those of `cost_tail.py` up to the last digits of the floating-point output.
 
 ```bash
 cd code && mkdir -p ../results_new/cost
@@ -93,7 +93,7 @@ python tools/cost_curves.py . ../results/analysis ../results_new/cost/B_jsonl_ex
 python tools/cost_tail.py ../results_new/cost/cost_inputs_by_replication.csv ../results_new/cost        # 90th percentile and CVaR of cost (Table S21.4)
 ```
 
-**Rare arm** (Sections 5.1, 5.3 and 5.6; Supplementary Note 17). The first command reruns the arm (about 6 CPU-hours per regime); the others recompute the archived summaries from the archived records. Details in `rare_arm/README.md`.
+**Rare arm** (Sections 5.1, 5.3 and 5.6; Supplementary Note 17). The first command reruns the arm, which takes about 6 CPU-hours per regime. The other commands recompute the archived summaries from the archived records. See `rare_arm/README.md` for details.
 
 ```bash
 python run_rare_full.py --out results_rare_new --reps 5 --no-nets
@@ -103,9 +103,9 @@ python rare_arm/tables_full.py . results_rare                # prints Table S29.
 python rare_arm/analyze_full.py . results_rare               # prints Table S29.3 (archived as results_rare/per_rep_detail.txt)
 ```
 
-**Backtest on public trade data** (Section 5.5). `backtest/README.md` gives the commands. The restriction table and the panels are rebuilt exactly from the archived extracts and the UN Comtrade records (a free API key is needed for the records); the main run takes about two hours on two cores.
+**Backtest on public trade data** (Section 5.5). `backtest/README.md` gives the commands. The restriction table and the panels can be rebuilt exactly from the archived extracts and the UN Comtrade records, for which a free API key is needed. The main run of the backtest takes about two hours on two cores.
 
-**Figures.** Figs. 1–4 and S1–S4 were rendered with Matplotlib 3.10.9 and Fig. 5 with 3.11.2; with these versions the two scripts below reproduce the archived PNG files pixel for pixel. Other versions draw the same figures with small differences in text rendering, as do the scripts of Figs. 6 and 7.
+**Figures.** Figs. 1–4 and S1–S4 were rendered with Matplotlib 3.10.9, and Fig. 5 with Matplotlib 3.11.2. With these versions, the first two scripts below reproduce the archived PNG files pixel for pixel. With other versions, the scripts draw the same figures but render the text slightly differently. The scripts of Figs. 6 and 7 also redraw the archived figures with small differences in layout.
 
 ```bash
 cd figures
@@ -115,7 +115,7 @@ cd ..
 python backtest/fig_backtest.py results/backtest/main backtest/panel_410.csv figures/out/Fig6_backtest      # Fig. 6
 ```
 
-**Supplementary material.** The five scripts rewrite the LaTeX sources and the CSV tables in `supplementary/` from the archived results; the sources in the repository are their output.
+**Supplementary material.** The five scripts below rewrite the LaTeX sources and the CSV tables in `supplementary/` from the archived results. The sources in the repository are the output of these scripts, so rerunning them changes nothing.
 
 ```bash
 cd supplementary
@@ -135,7 +135,12 @@ cd supplementary && xelatex supplementary.tex && xelatex supplementary.tex
 
 ## Names and numbers inside `code/`
 
-The simulation code keeps its working names. `tools/table5b.py` writes Table 6 and Tables S1–S2 (`results/analysis/table5b_*`); `tools/fig6_final.py` and `tools/fig7_final.py` are monochrome drafts of Figs. 4 and 5 that `analysis_all.sh` runs for the numbers they print (`results/analysis/fig6_numbers.txt`, `fig7_numbers.txt`); labels such as `v1.4` in comments and in the `design` field of the records are versions of the simulation design. Comments in the simulation code cite sections, equations, tables and figures by the numbers of the draft that was current when the code was written; where they differ from the manuscript, the tables above and the headers of the scripts outside `code/` give the manuscript's numbering.
+The simulation code keeps its working names, so some names and numbers differ from the manuscript:
+
+- `tools/table5b.py` writes Table 6 and Tables S1–S2 (`results/analysis/table5b_*`).
+- `tools/fig6_final.py` and `tools/fig7_final.py` draw monochrome drafts of Figs. 4 and 5. `analysis_all.sh` runs them because they print the numbers archived in `results/analysis/fig6_numbers.txt` and `fig7_numbers.txt`.
+- Labels such as `v1.4` are versions of the simulation design. They appear in comments and in the `design` field of the records.
+- Comments in the simulation code cite sections, equations, tables and figures by the numbers of an earlier draft. Where these numbers differ from the manuscript, use the tables above and the headers of the scripts outside `code/`, which follow the manuscript.
 
 ## Citation
 
@@ -145,4 +150,8 @@ See `CITATION.cff`. Please cite the paper once it is published; until then cite 
 
 Code: MIT (see `LICENSE`). Simulation results, tables and figures: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
 
-Data from third parties keep their own terms: the extract of the Global Trade Alert database in `data/` is CC BY-NC 4.0 (Global Trade Alert); the extract of the OECD Inventory of Export Restrictions on Industrial Raw Materials is subject to the OECD terms and conditions; UN Comtrade records are not redistributed and are retrieved by `backtest/pull_comtrade_multi.py` with the user's own API key.
+Data from third parties keep their own terms:
+
+- The extract of the Global Trade Alert database in `data/` is licensed CC BY-NC 4.0 (Global Trade Alert).
+- The extract of the OECD Inventory of Export Restrictions on Industrial Raw Materials is subject to the OECD terms and conditions.
+- UN Comtrade records are not redistributed. `backtest/pull_comtrade_multi.py` retrieves them with the user's own API key.

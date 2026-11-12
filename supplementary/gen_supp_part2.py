@@ -32,7 +32,7 @@ for src, dst in (("FigS1_lineages.pdf", "FigS1_lineages.pdf"), ("FigS2_industry_
 
 LABEL = {"M2": "M2 (proposed)", "NBcomplete": "NB complete pooling", "NBnone": "NB no pooling", "M0": "Poisson M0", "xgb": "XGBoost", "lstm": "LSTM",
          "tft": "TFT", "sigma": "Sigma-rule (plug-in SRI)", "ewma": "EWMA", "cusum": "CUSUM", "nbcusum": "CUSUM, negative-binomial design",
-         "farr": "Farrington-type threshold", "never": "Never act", "always": "Always act", "trivial": "Better of never and always act, by replication"}
+         "farr": "Farrington-type threshold", "never": "Never act", "always": "Always act", "trivial": "Cheaper of never act and always act, in each replication"}
 ORDER = ["M2", "NBcomplete", "NBnone", "M0", "xgb", "lstm", "tft", "sigma", "ewma", "cusum", "nbcusum", "farr", "never", "always"]
 R = [2, 5, 10, 20, 50]
 
@@ -172,7 +172,7 @@ for m in ORDER[1:] + ["trivial"]:
         cells.append(f"{100 * t.loc[r, 'saving']:+.1f}\\% ({100 * t.loc[r, 'M2_cheaper_share']:.0f}\\%" + (("; $<$0.001)" if p < 0.001 else f"; {p:.2f})") if pd.notna(p) else ")"))
     rows.append([LABEL[m]] + cells)
 P(r"\begin{landscape}")
-table_env("tab:S20", "Table S20. Saving of M2 relative to each policy, all twelve cells (Model A): $1 - \\mathrm{EC}_{\\mathrm{M2}}/\\mathrm{EC}_{m}$ on the means (share of the 65 replications in which M2 is cheaper; two-sided sign-test p-value, ties excluded), each method at its cheapest level. The last row prices the better trivial policy replication by replication, the mean of $\\min(rE_j, 12)$, which is a cheaper benchmark than the $\\min(rE, 12)$ at the mean shock frequency of the subset that Table S21.1 and the main text use for the value of monitoring.",
+table_env("tab:S20", "Table S20. Saving of M2 relative to each policy, all twelve cells (Model A): $1 - \\mathrm{EC}_{\\mathrm{M2}}/\\mathrm{EC}_{m}$ on the means (share of the 65 replications in which M2 is cheaper; two-sided sign-test p-value, ties excluded), each method at its cheapest level. The last row takes the cheaper of never acting and always acting in each replication, so its benchmark is the mean of $\\min(rE_j, 12)$. This benchmark never costs more than $\\min(rE, 12)$ at the mean shock frequency of the subset, which Table S21.1 and the main text use for the value of monitoring. The savings in the last row are therefore never larger than the value of monitoring.",
           ["Compared with"] + [f"$r = {r}$" for r in R], rows, "l" + "l" * len(R), size=r"\scriptsize")
 csv_out("S20_savings_vs_M2.csv", ["Compared with"] + [f"r={r}" for r in R], rows)
 P(r"\end{landscape}")

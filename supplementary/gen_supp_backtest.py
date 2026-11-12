@@ -10,9 +10,12 @@ usage: python supplementary/gen_supp_backtest.py MAIN_OUT PANEL_CSV RESTRICTIONS
   --top-out, --total-out  runs on the E1 sensitivity panels (largest partner; total imports)
 Writes SUPP_DIR/supplementary_backtest.tex, SUPP_DIR/tables/S25..S28 csv, MAIN_OUT/table7.md and MAIN_OUT/key_numbers.json.
 """
-import argparse, csv, json, os
+import argparse, csv, json, os, sys
 import numpy as np
 import pandas as pd
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "backtest"))
+import drop_item                                     # the run evaluated without an item, from the archived alarm paths
 
 ap = argparse.ArgumentParser()
 ap.add_argument("out"); ap.add_argument("panel"); ap.add_argument("restrictions"); ap.add_argument("items"); ap.add_argument("supp")
@@ -88,6 +91,46 @@ KEY.update(items=tot_items, groups=5, item_months_decision=tot_im, e1_item_month
            e2_item_months=tot_e2, e2a_item_months=tot_e2a, decision_months=len(dec.period.unique()),
            first_decision_month=dec.period.min(), last_month=dec.period.max(), item_years=S["item_years"])
 
+# items whose Comtrade records stop more than a year before the end of the panel (a code that a later HS edition divides)
+ym = lambda per: per[:4] + "-" + per[4:]
+CODE_NOTE = {"810600": "the 2022 edition of the Harmonized System, which has been in force since January 2022 and divides heading 81.06 into subheadings 8106.10 and 8106.90"}
+all_periods = sorted(panel.period.unique()); GAP = {}
+for code in sorted(panel.cmd.unique()):
+    sub = panel[panel.cmd == code]; last_rec = sub[sub.total_qty_kg > 0].period.max()
+    if all_periods.index(all_periods[-1]) - all_periods.index(last_rec) > 12:
+        e1 = dec[(dec.cmd == code) & (dec.N1 > 0)]
+        GAP[code] = dict(last_record=last_rec, last_row=sub.period.max(), e1=len(e1), e1_after=int((e1.period > last_rec).sum()))
+GAP_PARAGRAPH = ""
+if GAP:
+    if list(GAP) != ["810600"]:
+        sys.exit(f"items without records at the end of the panel: {list(GAP)}; the paragraph of Note 14 is written for 810600 only")
+    g = GAP["810600"]; n_dec = len(dec.period.unique()); grid = tot_items * n_dec
+    full, wo, _ = drop_item.compare(a.out, a.panel, ["810600"])
+    m0, m1 = full["methods"]["M2"], wo["methods"]["M2"]; b0, b1 = m0["band"], m1["band"]
+    KEY["without_810600"] = dict(last_record=g["last_record"], last_row=g["last_row"], e1=g["e1"], e1_after_last_record=g["e1_after"], grid_item_months=grid,
+                                 M2_all={k: m0[2][k] for k in ("aucpr", "brier", "ece", "dr_h1", "dr_h3", "fa_per_itemyear", "alarm_months_per_itemyear")}, band_all=b0,
+                                 M2_without={k: m1[2][k] for k in ("aucpr", "brier", "ece", "dr_h1", "dr_h3", "fa_per_itemyear", "alarm_months_per_itemyear")}, band_without=b1)
+
+    def versus(key, d, plural=False):
+        """'is X instead of Y', or 'stays at X' when the two values print alike"""
+        x1, x0 = f(m1[2][key], d), f(m0[2][key], d)
+        if x1 == x0:
+            return ("stay at " if plural else "stays at ") + x1
+        return ("are " if plural else "is ") + x1 + " instead of " + x0
+    band = lambda b: f(b["band_lo"], 1) + " and " + f(b["band_hi"], 0)
+    year_gap = g["last_row"][:4]; first_missing = all_periods[all_periods.index(g["last_row"]) + 1]
+    GAP_PARAGRAPH = (
+        r"\textit{An item whose code changed.} Bismuth (HS 810600) has no record under this code after " + ym(g["last_record"]) + r". The reason is "
+        + CODE_NOTE["810600"] + r". Because the records were extracted in the classification as reported, code 810600 does not occur in them from January 2022. "
+        r"As a result, the panel shows zero imports of bismuth in every month of " + year_gap + r" and has no row for it from " + ym(first_missing) + r". It therefore has a row for "
+        + f"{tot_im:,}" + r" of the " + f"{grid:,}" + r" item-months of the evaluation grid (" + str(tot_items) + r" items $\times$ " + str(n_dec) + r" decision months; Table S25.1). "
+        r"Bismuth has " + str(g["e1"]) + r" trade interruptions (E1 item-months) in the decision window. Of these, " + str(g["e1_after"]) + r" fall in " + year_gap
+        + r", and they result from the change of code, not from a change in supply. Bismuth nevertheless stays in every table, because dropping it "
+        r"changes the results little. We checked this by evaluating the archived alarm paths without bismuth, with no model refitted (\path{backtest/drop_item.py}). "
+        r"Without bismuth, the AUC-PR of M2 " + versus("aucpr", 3) + r" and its calibration error " + versus("ece", 3) + r". Its detection rate within one month at level 2 "
+        + versus("dr_h1", 2) + r", and its alarm months per item-year " + versus("alarm_months_per_itemyear", 1, plural=True) + r". M2 also remains cheaper than both never acting and "
+        r"always acting for $r$ between " + (band(b1) if band(b1) == band(b0) else band(b1) + " instead of " + band(b0)) + r".")
+
 P(r"\textbf{Supplementary Note 14. The backtest on public trade data (Section 5.5 of the main text).}")
 P("")
 P(r"\textit{Data.} Monthly imports of the Republic of Korea (UN Comtrade reporter 410) by partner at the six-digit HS level, "
@@ -115,6 +158,8 @@ P(r"\textit{Data.} Monthly imports of the Republic of Korea (UN Comtrade reporte
   r"legal basis. A measure recorded by more than one source counts once per partner and month. The resulting table holds " + str(len(restr)) +
   r" measures by " + str(restr.partner_iso3.nunique()) + r" implementing jurisdictions, an EU measure counted once per member state "
   r"(Table S27 lists those that became events).")
+if GAP_PARAGRAPH:
+    P(""); P(GAP_PARAGRAPH)
 M = {t: pd.read_csv(os.path.join(a.out, f"metrics_{t}.csv")) for t in ("N1", "N2", "N3")}
 _m2 = M["N1"][(M["N1"].method == "M2") & (M["N1"].level == 2)].iloc[0]
 KEY["base_rate_3m"] = float(_m2["base_rate"])
@@ -212,8 +257,9 @@ for g in ["semiconductor_chemicals", "battery_materials", "refractory_minor_meta
         if sub.empty:
             it_rows.append([code, esc(meta["name"]), GROUP_LAB[g], "--", "--", "--", "dropped: no data"]); it_csv.append([code, meta["name"], g, "", "", "", "dropped: no data"]); continue
         pos = int((panel[panel.cmd == code].total_qty_kg > 0).sum())
-        it_rows.append([code, esc(meta["name"][:60]), GROUP_LAB[g].split(",")[0], pos, int((sub.N1 > 0).sum()), int((sub.N2 > 0).sum()), ""])
-        it_csv.append([code, meta["name"], g, pos, int((sub.N1 > 0).sum()), int((sub.N2 > 0).sum()), ""])
+        note = ("no record after " + ym(GAP[code]["last_record"])) if code in GAP else ""
+        it_rows.append([code, esc(meta["name"][:60]), GROUP_LAB[g].split(",")[0], pos, int((sub.N1 > 0).sum()), int((sub.N2 > 0).sum()), note])
+        it_csv.append([code, meta["name"], g, pos, int((sub.N1 > 0).sum()), int((sub.N2 > 0).sum()), note])
 table_env("tab:S25_2", r"Table S25.2. The 65 items: HS 2017 six-digit code, description, group, months with positive imports (2014-02 to 2025-12), "
           r"and E1 and E2 item-months in the decision window.", ["HS6", "Item", "Group", "Months", "E1", "E2", "Note"], it_rows, "llp{3.2cm}rrrl", r"\tiny")
 csv_out("S25_2_items.csv", ["hs6", "name", "group", "months_with_imports", "E1", "E2", "note"], it_csv)
